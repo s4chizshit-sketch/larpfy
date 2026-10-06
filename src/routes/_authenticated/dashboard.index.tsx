@@ -1,0 +1,46 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Instagram, Music2 } from "lucide-react";
+import { PageHeader, StatCard } from "@/components/app/AppShell";
+import { NewProjectButton, ProjectGrid } from "@/components/app/ProjectGrid";
+import { useProfile } from "@/lib/auth";
+import { useProjects } from "@/lib/projects";
+import { useAffiliateStats } from "@/lib/affiliate";
+
+export const Route = createFileRoute("/_authenticated/dashboard/")({
+  component: Overview,
+});
+
+function Overview() {
+  const { data } = useProfile();
+  const { data: projects } = useProjects();
+  const { data: aff } = useAffiliateStats();
+  const plan = (data?.profile as any)?.plans?.name ?? "Free";
+  const status = data?.profile?.subscription_status ?? "free";
+  return (
+    <>
+      <PageHeader title={`Welcome${data?.profile?.name ? `, ${data.profile.name.split(" ")[0]}` : ""}`} sub="Here's what's happening in your workspace." action={<NewProjectButton />} />
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+        <StatCard label="Current plan" value={plan} />
+        <StatCard label="Subscription" value={<span className="capitalize">{status}</span>} />
+        <StatCard label="Projects created" value={projects?.length ?? "—"} />
+        <StatCard label="Affiliate earnings" value={`$${(aff?.earned ?? 0).toFixed(2)}`} />
+      </div>
+      <h2 className="mb-4 mt-10 text-lg font-semibold">Quick launch</h2>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Link to="/dashboard/instagram" className="flex items-center gap-4 rounded-2xl border border-border bg-card/60 p-5 hover:border-primary/40">
+          <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent text-primary"><Instagram className="h-5 w-5" /></span>
+          <div><p className="font-semibold">Instagram Editor</p><p className="text-sm text-muted-foreground">Customize Instagram insight demos</p></div>
+        </Link>
+        <Link to="/dashboard/tiktok" className="flex items-center gap-4 rounded-2xl border border-border bg-card/60 p-5 hover:border-primary/40">
+          <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent text-primary"><Music2 className="h-5 w-5" /></span>
+          <div><p className="font-semibold">TikTok Editor</p><p className="text-sm text-muted-foreground">Customize TikTok insight demos</p></div>
+        </Link>
+      </div>
+      <div className="mb-4 mt-10 flex items-center justify-between">
+        <h2 className="text-lg font-semibold">Recent projects</h2>
+        <Link to="/dashboard/projects" className="text-sm text-muted-foreground hover:text-foreground">View all</Link>
+      </div>
+      <ProjectGrid limit={3} />
+    </>
+  );
+}
