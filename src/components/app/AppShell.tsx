@@ -1,0 +1,120 @@
+import { Link, useNavigate } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
+import { useState, type ReactNode } from "react";
+import { LogOut, Menu, Shield, X, type LucideIcon } from "lucide-react";
+import { Logo } from "@/components/site/Logo";
+import { supabase } from "@/integrations/supabase/client";
+import { useProfile } from "@/lib/auth";
+
+export type NavItem = { to: string; label: string; icon: LucideIcon; exact?: boolean };
+
+export function AppShell({ nav, children, title }: { nav: NavItem[]; children: ReactNode; title: string }) {
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const qc = useQueryClient();
+  const { data } = useProfile();
+
+  const signOut = async () => {
+    await qc.cancelQueries();
+    qc.clear();
+    await supabase.auth.signOut();
+    navigate({ to: "/login", replace: true });
+  };
+
+  const sidebar = (
+    <div className="flex h-full flex-col">
+      <div className="flex h-16 items-center px-5"><Logo to="/dashboard" /></div>
+      <p className="px-5 pb-2 pt-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">{title}</p>
+      <nav className="flex-1 space-y-0.5 px-3">
+        {nav.map((n) => (
+          <Link
+            key={n.to}
+            to={n.to}
+            onClick={() => setOpen(false)}
+            activeOptions={{ exact: !!n.exact }}
+            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-foreground"
+            activeProps={{ className: "bg-sidebar-accent !text-foreground" }}
+          >
+            <n.icon className="h-4 w-4" /> {n.label}
+          </Link>
+        ))}
+        {data?.isAdmin && (
+          <Link
+            to={title === "Admin" ? "/dashboard" : "/admin"}
+            onClick={() => setOpen(false)}
+            className="mt-4 flex items-center gap-3 rounded-lg border border-border px-3 py-2.5 text-sm text-muted-foreground hover:text-foreground"
+          >
+            <Shield className="h-4 w-4 text-primary" /> {title === "Admin" ? "Back to app" : "Admin panel"}
+          </Link>
+        )}
+      </nav>
+      <div className="border-t border-sidebar-border p-3">
+        <div className="px-3 pb-2 text-xs">
+          <p className="truncate font-medium">{data?.profile?.name ?? "—"}</p>
+          <p className="truncate text-muted-foreground">{data?.profile?.email}</p>
+        </div>
+        <button onClick={signOut} className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-muted-foreground hover:bg-sidebar-accent hover:text-foreground">
+          <LogOut className="h-4 w-4" /> Logout
+        </button>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="min-h-screen lg:grid lg:grid-cols-[256px_1fr]">
+      <aside className="sticky top-0 hidden h-screen border-r border-sidebar-border bg-sidebar lg:block">{sidebar}</aside>
+      {open && (
+        <div className="fixed inset-0 z-50 lg:hidden">
+          <div className="absolute inset-0 bg-background/70 backdrop-blur-sm" onClick={() => setOpen(false)} />
+          <aside className="absolute inset-y-0 left-0 w-72 border-r border-sidebar-border bg-sidebar">
+            <button className="absolute right-3 top-4 p-2" onClick={() => setOpen(false)} aria-label="Close menu"><X className="h-5 w-5" /></button>
+            {sidebar}
+          </aside>
+        </div>
+      )}
+      <div className="min-w-0">
+        <header className="sticky top-0 z-40 flex h-16 items-center gap-3 border-b border-border bg-background/80 px-4 backdrop-blur-xl lg:hidden">
+          <button onClick={() => setOpen(true)} className="rounded-lg border border-border p-2" aria-label="Open menu"><Menu className="h-5 w-5" /></button>
+          <Logo to="/dashboard" />
+        </header>
+        {data?.profile?.status === "suspended" && (
+          <div className="bg-destructive/15 px-6 py-3 text-sm text-destructive">Your account is suspended. You can view your work but can't save changes. Contact support for help.</div>
+        )}
+        <main className="mx-auto max-w-6xl px-4 py-8 sm:px-8">{children}</main>
+      </div>
+    </div>
+  );
+}
+
+export function PageHeader({ title, sub, action }: { title: string; sub?: string; action?: ReactNode }) {
+  return (
+    <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <h1 className="text-2xl font-semibold sm:text-3xl">{title}</h1>
+        {sub && <p className="mt-1.5 text-sm text-muted-foreground">{sub}</p>}
+      </div>
+      {action}
+    </div>
+  );
+}
+
+export function StatCard({ label, value, hint }: { label: string; value: ReactNode; hint?: string }) {
+  return (
+    <div className="rounded-2xl border border-border bg-card/60 p-5">
+      <p className="text-xs text-muted-foreground">{label}</p>
+      <p className="mt-2 font-display text-2xl font-semibold">{value}</p>
+      {hint && <p className="mt-1 text-xs text-muted-foreground">{hint}</p>}
+    </div>
+  );
+}
+
+export function EmptyState({ icon: Icon, title, sub, action }: { icon: LucideIcon; title: string; sub?: string; action?: ReactNode }) {
+  return (
+    <div className="flex flex-col items-center rounded-2xl border border-dashed border-border px-6 py-14 text-center">
+      <Icon className="h-8 w-8 text-primary" />
+      <p className="mt-3 font-medium">{title}</p>
+      {sub && <p className="mt-1 max-w-sm text-sm text-muted-foreground">{sub}</p>}
+      {action && <div className="mt-5">{action}</div>}
+    </div>
+  );
+}
