@@ -47,10 +47,10 @@ function VideosAdmin() {
     if (!edit?.title.trim()) return toast.error("Title is required");
     setBusy(true);
     try {
-      const row = { ...edit };
+      const row: any = { ...edit };
       if (files.video) row.video_url = await upload(files.video, "videos");
       if (files.thumb) row.thumbnail_url = await upload(files.thumb, "thumbnails");
-      const { id, ...rest } = row as Video & { thumb?: string };
+      const { id, ...rest } = row;
       delete (rest as any).thumb; delete (rest as any).created_at;
       const { error } = id ? await supabase.from("demo_videos").update(rest).eq("id", id) : await supabase.from("demo_videos").insert({ ...rest, sort_order: (data?.length ?? 0) + 1 });
       if (error) throw error;

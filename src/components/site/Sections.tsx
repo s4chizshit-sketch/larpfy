@@ -191,7 +191,7 @@ export function DemoVideos() {
         {isLoading ? (
           <Skeleton className="aspect-video rounded-3xl" />
         ) : !main ? (
-          <div className="flex aspect-video flex-col items-center justify-center rounded-3xl border border-dashed border-border bg-card/40 text-center">
+          <div className="flex h-64 flex-col items-center justify-center rounded-3xl border border-dashed border-border bg-card/40 text-center">
             <Sparkles className="h-8 w-8 text-primary" />
             <p className="mt-3 font-medium">Demo videos are on the way</p>
             <p className="mt-1 text-sm text-muted-foreground">Check back soon for a full walkthrough.</p>
