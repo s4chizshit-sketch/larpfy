@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { BatteryFull, Pause, Play, Signal, Wifi } from "lucide-react";
+import { BatteryFull, Play, Signal, Wifi } from "lucide-react";
 import clip1 from "@/assets/customize-1.mp4.asset.json";
 import clip2 from "@/assets/customize-2.mp4.asset.json";
 import clip3 from "@/assets/customize-3.mp4.asset.json";
@@ -94,11 +94,7 @@ export function CustomizeVideoSeries() {
               >
                 {!playing && (
                   <span className="flex h-16 w-16 items-center justify-center rounded-full bg-brand shadow-glow">
-                    {started ? (
-                      <Pause className="h-7 w-7 text-primary-foreground" fill="currentColor" />
-                    ) : (
-                      <Play className="ml-1 h-7 w-7 text-primary-foreground" fill="currentColor" />
-                    )}
+                    <Play className="ml-1 h-7 w-7 text-primary-foreground" fill="currentColor" />
                   </span>
                 )}
               </button>
