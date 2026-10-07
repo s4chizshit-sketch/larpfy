@@ -12,6 +12,7 @@ const recordings = [
   { label: "Open app home feed", url: homeVideo.url, webm: homeWebm.url },
   { label: "inbox", url: inboxVideo.url, webm: inboxWebm.url },
   { label: "Profile/reels", url: profileVideo.url, webm: profileWebm.url },
+  { label: "Video analysis", url: analysisVideo.url, webm: analysisWebm.url },
 ];
 
 export function TiktokVideoShowcase() {
