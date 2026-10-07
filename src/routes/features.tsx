@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CtaBand, FeaturesGrid, HowItWorks, PlatformSection, PublicLayout } from "@/components/site/Sections";
+import { CtaBand, HowItWorks, PlatformSection, PublicLayout } from "@/components/site/Sections";
 
 export const Route = createFileRoute("/features")({
   head: () => ({
@@ -12,7 +12,6 @@ export const Route = createFileRoute("/features")({
   }),
   component: () => (
     <PublicLayout>
-      <FeaturesGrid />
       <PlatformSection platform="instagram" />
       <PlatformSection platform="tiktok" reverse />
       <HowItWorks />
