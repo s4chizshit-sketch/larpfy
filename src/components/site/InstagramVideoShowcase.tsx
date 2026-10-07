@@ -30,22 +30,27 @@ export function InstagramVideoShowcase() {
     dragThreshold: 5,
   });
 
+  // Once the user swipes or taps a dot, auto-advance stays off so they can watch the chosen video.
+  const userControlled = useRef(false);
+
   useEffect(() => {
     if (!carouselApi) return;
     let timer: number | undefined;
     const stop = () => window.clearTimeout(timer);
     const schedule = () => {
       stop();
+      if (userControlled.current) return;
       timer = window.setTimeout(() => {
+        if (userControlled.current) return;
         if (carouselApi.canScrollNext()) carouselApi.scrollNext();
         else carouselApi.scrollTo(0);
       }, 7000);
     };
+    const takeControl = () => { userControlled.current = true; stop(); };
     const sync = () => setActive(carouselApi.selectedScrollSnap());
     const reinitialize = () => { sync(); schedule(); };
     carouselApi.on("select", sync);
-    carouselApi.on("pointerDown", stop);
-    carouselApi.on("pointerUp", schedule);
+    carouselApi.on("pointerDown", takeControl);
     carouselApi.on("settle", schedule);
     carouselApi.on("reInit", reinitialize);
     sync();
@@ -53,8 +58,7 @@ export function InstagramVideoShowcase() {
     return () => {
       stop();
       carouselApi.off("select", sync);
-      carouselApi.off("pointerDown", stop);
-      carouselApi.off("pointerUp", schedule);
+      carouselApi.off("pointerDown", takeControl);
       carouselApi.off("settle", schedule);
       carouselApi.off("reInit", reinitialize);
     };
