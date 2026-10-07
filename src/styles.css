@@ -127,22 +127,24 @@
 .instagram-video-window {
   overflow: hidden;
   padding: 12px 0 28px;
+  touch-action: pan-y pinch-zoom;
+  cursor: grab;
+  user-select: none;
+}
+.instagram-video-window:active {
+  cursor: grabbing;
 }
 .instagram-video-track {
   display: flex;
   gap: 24px;
-  padding-left: calc((100% - 70%) / 2);
-  transition: transform 1100ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-.instagram-video-track-profile {
-  transform: translateX(calc(-70% - 24px));
+  touch-action: pan-y pinch-zoom;
 }
 .instagram-video-slide {
   flex: 0 0 70%;
   min-width: 0;
   opacity: 0.5;
   transform: scale(0.94);
-  transition: opacity 1100ms ease, transform 1100ms ease;
+  transition: opacity 300ms ease, transform 300ms ease;
 }
 .instagram-video-slide.is-active {
   opacity: 1;
