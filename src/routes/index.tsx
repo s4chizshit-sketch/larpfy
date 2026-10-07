@@ -7,10 +7,10 @@ import { useSiteContent } from "@/lib/content";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "LARP Insight — Customize Your Social Insights. Your Way." },
-      { name: "description", content: "Create polished, customizable Instagram and TikTok insight demos for presentations, content, showcases, and entertainment." },
-      { property: "og:title", content: "LARP Insight — Customize Your Social Insights" },
-      { property: "og:description", content: "Customizable Instagram and TikTok insight demo visuals for presentations and content." },
+      { title: "Larp Insight — Your Social Analytics, Your Way" },
+      { name: "description", content: "Powerful tools by Larp Insight to customize, manage, and transform your social media insights." },
+      { property: "og:title", content: "Larp Insight — Your Social Analytics, Your Way" },
+      { property: "og:description", content: "Powerful tools by Larp Insight to customize, manage, and transform your social media insights." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
