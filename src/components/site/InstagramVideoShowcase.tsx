@@ -78,9 +78,19 @@ export function RecordingVideoShowcase({ title, platform, recordings }: {
     };
   }, [carouselApi]);
 
+  const accent = title.match(/^(.*?)\s*(App UI)$/i);
   return (
     <div className="min-w-0 py-4">
-      <h3 className="mb-7 text-center text-xl font-semibold tracking-normal sm:text-2xl">{title}</h3>
+      <h3 className="mb-7 text-center font-display text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">
+        {accent ? (
+          <>
+            {accent[1]}{" "}
+            <span className="font-premium font-normal italic text-gradient">App UI</span>
+          </>
+        ) : (
+          title
+        )}
+      </h3>
       <div ref={carouselRef} className="instagram-video-window" role="region" aria-label={`${platform} recordings`} aria-roledescription="carousel">
         <div className="instagram-video-track">
           {recordings.map((recording, index) => (
