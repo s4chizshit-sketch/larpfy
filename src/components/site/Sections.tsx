@@ -52,15 +52,11 @@ export function Masthead() {
           Larp Insight
         </span>
         <h1
-          className="masthead-in mt-7 font-display text-5xl font-semibold leading-[1.04] tracking-tight sm:text-7xl"
+          className="title-gradient masthead-in mt-7 font-sans text-5xl font-extrabold leading-[1.06] tracking-tight sm:text-7xl"
           style={{ animationDelay: "90ms" }}
         >
           <span className="block">{lead}</span>
-          {tail && (
-            <span className="mt-3 block font-premium text-6xl font-normal italic leading-[1.02] text-gradient sm:text-8xl">
-              {tail}
-            </span>
-          )}
+          {tail && <span className="mt-2 block text-6xl sm:text-8xl">{tail}</span>}
         </h1>
         <p
           className="masthead-in mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl"
@@ -125,9 +121,8 @@ export function PlatformSection({ platform, reverse }: { platform: "instagram" |
             <span className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary backdrop-blur-sm">
               {ig ? <Instagram className="h-3.5 w-3.5" /> : <Music2 className="h-3.5 w-3.5" />} {ig ? "Instagram" : "TikTok"}
             </span>
-            <h2 className="mt-5 font-display text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl">
-              {titleLead}{" "}
-              <span className="font-premium font-normal italic text-gradient">{titleAccent}</span>
+            <h2 className="title-gradient mt-5 font-sans text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl">
+              {titleLead} {titleAccent}
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
               {ig ? (
