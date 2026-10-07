@@ -5,10 +5,16 @@ import homeVideo from "@/assets/instagram-home.mp4.asset.json";
 import profileVideo from "@/assets/instagram-profile.mp4.asset.json";
 import homeWebm from "@/assets/instagram-home.webm.asset.json";
 import profileWebm from "@/assets/instagram-profile.webm.asset.json";
+import feedVideo from "@/assets/instagram-feed.mp4.asset.json";
+import feedWebm from "@/assets/instagram-feed.webm.asset.json";
+import insightVideo from "@/assets/instagram-insight.mp4.asset.json";
+import insightWebm from "@/assets/instagram-insight.webm.asset.json";
 
 const recordings = [
   { label: "Home interface", url: homeVideo.url, webm: homeWebm.url },
+  { label: "Scrolling feed", url: feedVideo.url, webm: feedWebm.url },
   { label: "Profile", url: profileVideo.url, webm: profileWebm.url },
+  { label: "View insight", url: insightVideo.url, webm: insightWebm.url },
 ];
 
 export function InstagramVideoShowcase() {
