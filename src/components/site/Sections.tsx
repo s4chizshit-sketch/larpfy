@@ -152,11 +152,19 @@ export function PlatformSection({ platform, reverse }: { platform: "instagram" |
               ))}
             </ul>
             <Reveal delay={bullets.length * 70}>
-              <div className="group relative mt-9 inline-block">
-                <div className="absolute -inset-1.5 rounded-2xl bg-brand opacity-35 blur-xl transition-opacity duration-300 group-hover:opacity-60" aria-hidden="true" />
-                <Button asChild size="lg" className="relative bg-brand shadow-glow transition-transform duration-200 hover:scale-[1.02]">
-                  <Link to={ig ? "/dashboard/instagram" : "/dashboard/tiktok"}>Try {ig ? "Instagram" : "TikTok"} Editor</Link>
-                </Button>
+              <div className="relative mt-9 w-full max-w-md">
+                <div
+                  className="absolute -inset-2.5 rounded-full opacity-45 blur-2xl transition-opacity duration-300 hover:opacity-70"
+                  style={{ background: "linear-gradient(100deg, #0a7bff, #5ec8ff)" }}
+                  aria-hidden="true"
+                />
+                <Link
+                  to="/pricing"
+                  className="btn-plan relative flex h-14 w-full items-center justify-center gap-3 text-sm font-bold uppercase tracking-[0.12em]"
+                >
+                  <span className="relative z-[2]">Get Plan</span>
+                  <ArrowRight className="relative z-[2] h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                </Link>
               </div>
             </Reveal>
           </div>
