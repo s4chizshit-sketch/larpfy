@@ -28,6 +28,14 @@ const recordings = [
 ];
 
 export function InstagramVideoShowcase() {
+  return <RecordingVideoShowcase title="Instagram Larp Insight App UI" platform="Instagram" recordings={recordings} />;
+}
+
+export function RecordingVideoShowcase({ title, platform, recordings }: {
+  title: string;
+  platform: string;
+  recordings: { label: string; url: string; webm: string }[];
+}) {
   const [active, setActive] = useState(0);
   const [carouselRef, carouselApi] = useEmblaCarousel({
     align: "center",
@@ -72,8 +80,8 @@ export function InstagramVideoShowcase() {
 
   return (
     <div className="min-w-0 py-4">
-      <h3 className="mb-7 text-center text-xl font-semibold tracking-normal sm:text-2xl">Instagram Larp Insight App UI</h3>
-      <div ref={carouselRef} className="instagram-video-window" role="region" aria-label="Instagram recordings" aria-roledescription="carousel">
+      <h3 className="mb-7 text-center text-xl font-semibold tracking-normal sm:text-2xl">{title}</h3>
+      <div ref={carouselRef} className="instagram-video-window" role="region" aria-label={`${platform} recordings`} aria-roledescription="carousel">
         <div className="instagram-video-track">
           {recordings.map((recording, index) => (
             <figure key={recording.label} className={`instagram-video-slide ${active === index ? "is-active" : ""}`}>
