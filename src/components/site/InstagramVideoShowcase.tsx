@@ -22,7 +22,7 @@ export function InstagramVideoShowcase() {
 
   useEffect(() => {
     if (!carouselApi) return;
-    let timer: ReturnType<typeof setTimeout> | undefined;
+    let timer: number | undefined;
     const stop = () => window.clearTimeout(timer);
     const schedule = () => {
       stop();
