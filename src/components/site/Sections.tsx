@@ -13,7 +13,7 @@ import { InstagramVideoShowcase } from "./InstagramVideoShowcase";
 import { TiktokVideoShowcase } from "./TiktokVideoShowcase";
 import { CustomizeVideoSeries } from "./CustomizeVideoSeries";
 import { TiktokCustomizeVideoSeries } from "./TiktokCustomizeVideoSeries";
-import { usePlans, usePublishedVideos, useSiteContent, type FaqItem } from "@/lib/content";
+import { DEFAULT_HERO, usePlans, usePublishedVideos, useSiteContent, type FaqItem, type Hero } from "@/lib/content";
 
 export function PublicLayout({ children }: { children: ReactNode }) {
   return (
@@ -35,7 +35,42 @@ export function SectionHeading({ eyebrow, title, sub, center = true }: { eyebrow
   );
 }
 
-export const Disclaimer = () => (
+export function Masthead() {
+  const { data } = useSiteContent();
+  const hero: Hero = { ...DEFAULT_HERO, ...(data?.hero ?? {}) };
+  const comma = hero.title.lastIndexOf(",");
+  const lead = comma > 0 ? hero.title.slice(0, comma + 1) : hero.title;
+  const tail = comma > 0 ? hero.title.slice(comma + 1).trim() : "";
+  return (
+    <section className="relative isolate overflow-hidden">
+      <div className="hero-bg absolute inset-0 -z-10" aria-hidden />
+      <div className="absolute inset-x-0 top-0 -z-10 h-px bg-brand opacity-70" aria-hidden />
+      <div className="mx-auto max-w-4xl px-4 pb-16 pt-16 text-center sm:px-6 sm:pb-24 sm:pt-24">
+        <span className="masthead-in inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.28em] text-muted-foreground backdrop-blur">
+          <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+          Larp Insight
+        </span>
+        <h1
+          className="masthead-in mt-7 font-display text-4xl font-semibold leading-[1.06] sm:text-6xl"
+          style={{ animationDelay: "90ms" }}
+        >
+          <span className="block">{lead}</span>
+          {tail && (
+            <span className="mt-2 block font-premium text-5xl font-normal italic leading-[1.02] text-gradient sm:text-7xl">
+              {tail}
+            </span>
+          )}
+        </h1>
+        <p
+          className="masthead-in mx-auto mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
+          style={{ animationDelay: "180ms" }}
+        >
+          {hero.description}
+        </p>
+      </div>
+    </section>
+  );
+}
   <p className="text-xs leading-relaxed text-muted-foreground">
     Demo visuals are for presentation, entertainment, and customization purposes only and are not official Instagram or
     TikTok analytics.
