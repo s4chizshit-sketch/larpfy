@@ -9,11 +9,11 @@ import tiktokCustomize5 from "@/assets/tiktok-customize-5.mp4.asset.json";
 // TikTok customize-series clips — appended in order as recordings arrive
 // (with their length in seconds and the caption shown below the seek bar).
 const tiktokClipList: CustomizeClip[] = [
-  { url: tiktokCustomize1.url, duration: 49.807, caption: "" },
-  { url: tiktokCustomize2.url, duration: 78.933, caption: "" },
-  { url: tiktokCustomize3.url, duration: 65.4, caption: "" },
-  { url: tiktokCustomize4.url, duration: 81.367, caption: "" },
-  { url: tiktokCustomize5.url, duration: 61.733, caption: "" },
+  { url: tiktokCustomize1.url, duration: 49.807, caption: "Click Edit, enter the username of any TikTok account, and click Clone." },
+  { url: tiktokCustomize2.url, duration: 78.933, caption: "Open More Insights on any TikTok video, then customize the Video Analytics as needed." },
+  { url: tiktokCustomize3.url, duration: 65.4, caption: "Click Video Analytics, then activate Edit Mode and continue customizing the analytics." },
+  { url: tiktokCustomize4.url, duration: 81.367, caption: "Customize all sections according to your preferences." },
+  { url: tiktokCustomize5.url, duration: 61.733, caption: "Customize all sections according to your preferences." },
 ];
 
 export function TiktokCustomizeVideoSeries() {
