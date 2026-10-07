@@ -11,6 +11,7 @@ import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { InsightPreview } from "@/components/InsightPreview";
 import { defaultInsight } from "@/lib/insight";
+import { InstagramVideoShowcase } from "./InstagramVideoShowcase";
 import { usePlans, usePublishedVideos, useSiteContent, type FaqItem } from "@/lib/content";
 
 export function PublicLayout({ children }: { children: ReactNode }) {
@@ -98,10 +99,10 @@ export function PlatformSection({ platform, reverse }: { platform: "instagram" |
             <Link to={ig ? "/dashboard/instagram" : "/dashboard/tiktok"}>Try {ig ? "Instagram" : "TikTok"} Editor</Link>
           </Button>
         </div>
-        <div className="relative rounded-3xl border border-border bg-card/40 p-6 sm:p-10">
+        {ig ? <InstagramVideoShowcase /> : <div className="relative rounded-3xl border border-border bg-card/40 p-6 sm:p-10">
           <div className="hero-bg absolute inset-0 rounded-3xl opacity-60" />
           <div className="relative"><InsightPreview platform={platform} data={defaultInsight(platform)} /></div>
-        </div>
+        </div>}
       </div>
     </section>
   );
