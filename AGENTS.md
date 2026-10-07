@@ -11,3 +11,4 @@
 - Editable site content (hero, FAQ, announcement, affiliate %) lives in the site_content table keyed by name; pricing in plans — never hardcode them in the frontend, so admins can edit live.
 - Uploaded Instagram showcase recordings use asset pointers and a dedicated browser-side carousel so playback stays independent of editor previews.
 - The Instagram recording carousel uses Embla for touch dragging and snapping; automatic advancement pauses during gestures to avoid fighting manual swipes.
+- The shared showcase device shell replaces only the recordings' system-bar margins with device chrome, preserving uploaded app content and playback.

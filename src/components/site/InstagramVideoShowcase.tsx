@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import { BatteryFull, Signal, Wifi } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import homeVideo from "@/assets/instagram-home.mp4.asset.json";
 import profileVideo from "@/assets/instagram-profile.mp4.asset.json";
@@ -73,6 +74,17 @@ export function InstagramVideoShowcase() {
             <figure key={recording.label} className={`instagram-video-slide ${active === index ? "is-active" : ""}`}>
               <figcaption className="mb-3 text-center text-xs font-medium text-muted-foreground">{recording.label}</figcaption>
               <div className="instagram-video-phone">
+                <span aria-hidden="true" className="instagram-iphone-button silent" />
+                <span aria-hidden="true" className="instagram-iphone-button volume-up" />
+                <span aria-hidden="true" className="instagram-iphone-button volume-down" />
+                <span aria-hidden="true" className="instagram-iphone-button power" />
+                <div className="instagram-iphone-screen">
+                  <div className="instagram-iphone-status" aria-hidden="true">
+                    <span>9:41</span>
+                    <span className="instagram-iphone-island" />
+                    <span className="instagram-iphone-status-icons"><Signal /><Wifi /><BatteryFull /></span>
+                  </div>
+                  <div className="instagram-iphone-recording">
                 <video
                   aria-label={`${recording.label} screen recording`}
                   autoPlay
@@ -82,11 +94,14 @@ export function InstagramVideoShowcase() {
                   preload="auto"
                   disablePictureInPicture
                   onCanPlay={(event) => { void event.currentTarget.play().catch(() => undefined); }}
-                  className="pointer-events-none block aspect-[1732/3840] w-full object-contain"
+                   className="pointer-events-none"
                 >
                   <source src={recording.webm} type="video/webm" />
                   <source src={recording.url} type="video/mp4" />
                 </video>
+                  </div>
+                  <div className="instagram-iphone-home" aria-hidden="true" />
+                </div>
               </div>
             </figure>
           ))}
