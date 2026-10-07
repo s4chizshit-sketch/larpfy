@@ -184,8 +184,22 @@ export function CustomizeSeriesPlayer({ title, subtitle, clipList }: { title: st
 
   return (
     <div className="min-w-0 py-4">
-      <h3 className="text-center text-xl font-semibold tracking-normal sm:text-2xl">{title}</h3>
-      <p className="mb-7 mt-1 text-center text-sm text-muted-foreground">{subtitle}</p>
+      {(() => {
+        const accent = title.match(/^(.*?)\s*(App UI)$/i);
+        return (
+          <h3 className="text-center font-display text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">
+            {accent ? (
+              <>
+                {accent[1]}{" "}
+                <span className="font-premium font-normal italic text-gradient">App UI</span>
+              </>
+            ) : (
+              title
+            )}
+          </h3>
+        );
+      })()}
+      <p className="mb-7 mt-2 text-center text-sm text-muted-foreground sm:text-base">{subtitle}</p>
       <div className="mx-auto w-[70%]">
         <div className="instagram-video-phone" style={{ pointerEvents: "auto" }}>
           <span aria-hidden="true" className="instagram-iphone-button silent" />
