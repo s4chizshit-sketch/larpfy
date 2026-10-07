@@ -9,6 +9,7 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
+import { Reveal } from "./Reveal";
 import { InstagramVideoShowcase } from "./InstagramVideoShowcase";
 import { TiktokVideoShowcase } from "./TiktokVideoShowcase";
 import { CustomizeVideoSeries } from "./CustomizeVideoSeries";
@@ -114,29 +115,52 @@ export function PlatformSection({ platform, reverse }: { platform: "instagram" |
   const bullets = ig
     ? ["Edit supported audience insights", "Customize country/source display", "Adjust engagement metrics", "Customize graph values", "Edit supported professional dashboard metrics", "Customize date ranges", "Save customized projects", "Export/share your customized demo visual"]
     : ["Customize audience information", "Customize country/source display", "Edit supported engagement metrics", "Customize graph values", "Customize supported dashboard metrics", "Customize date ranges", "Save projects", "Export/share customized demo visuals"];
+  const titleLead = ig ? "Instagram Insight" : "TikTok Insight";
+  const titleAccent = "Editor";
   return (
     <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
       <div className={`grid items-center gap-12 lg:grid-cols-2 ${reverse ? "lg:[&>*:first-child]:order-2" : ""}`}>
-        <div>
-          <span className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">
-            {ig ? <Instagram className="h-3.5 w-3.5" /> : <Music2 className="h-3.5 w-3.5" />} {ig ? "Instagram" : "TikTok"}
-          </span>
-          <h2 className="mt-4 text-3xl font-semibold sm:text-4xl">{ig ? "Instagram" : "TikTok"} Insight Editor</h2>
-          <p className="mt-4 text-lg text-muted-foreground">
-            {ig ? "Customize your Instagram insight visuals with an easy-to-use editing interface." : "Create customized TikTok insight demos with the same simple workflow."}
-          </p>
-          <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-            {bullets.map((b) => (
-              <li key={b} className="flex items-start gap-3 text-sm">
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-success/15 text-success"><Check className="h-3 w-3" /></span>
-                {b}
-              </li>
-            ))}
-          </ul>
-          <Button asChild size="lg" className="mt-8 bg-brand shadow-glow">
-            <Link to={ig ? "/dashboard/instagram" : "/dashboard/tiktok"}>Try {ig ? "Instagram" : "TikTok"} Editor</Link>
-          </Button>
-        </div>
+        <Reveal>
+          <div>
+            <span className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary backdrop-blur-sm">
+              {ig ? <Instagram className="h-3.5 w-3.5" /> : <Music2 className="h-3.5 w-3.5" />} {ig ? "Instagram" : "TikTok"}
+            </span>
+            <h2 className="mt-5 font-display text-3xl font-semibold leading-[1.12] tracking-tight sm:text-4xl">
+              {titleLead}{" "}
+              <span className="font-premium font-normal italic text-gradient">{titleAccent}</span>
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+              {ig ? (
+                <>
+                  Customize your Instagram insight visuals with an{" "}
+                  <span className="font-premium italic text-foreground/90">easy-to-use</span> editing interface.
+                </>
+              ) : (
+                "Create customized TikTok insight demos with the same simple workflow."
+              )}
+            </p>
+            <ul className="mt-8 grid gap-2.5 sm:grid-cols-2">
+              {bullets.map((b, i) => (
+                <Reveal key={b} delay={i * 70}>
+                  <li className="group flex h-full items-start gap-3 rounded-xl border border-border/70 bg-card/40 p-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:bg-primary/[0.06] hover:shadow-glow">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-primary/30 bg-primary/15 text-primary transition-colors duration-300 group-hover:bg-primary/25">
+                      <Check className="h-3 w-3" strokeWidth={3} />
+                    </span>
+                    <span className="text-[13px] font-medium leading-snug text-foreground/90">{b}</span>
+                  </li>
+                </Reveal>
+              ))}
+            </ul>
+            <Reveal delay={bullets.length * 70}>
+              <div className="group relative mt-9 inline-block">
+                <div className="absolute -inset-1.5 rounded-2xl bg-brand opacity-35 blur-xl transition-opacity duration-300 group-hover:opacity-60" aria-hidden="true" />
+                <Button asChild size="lg" className="relative bg-brand shadow-glow transition-transform duration-200 hover:scale-[1.02]">
+                  <Link to={ig ? "/dashboard/instagram" : "/dashboard/tiktok"}>Try {ig ? "Instagram" : "TikTok"} Editor</Link>
+                </Button>
+              </div>
+            </Reveal>
+          </div>
+        </Reveal>
         {ig ? (
           <div className="min-w-0 space-y-10">
             <InstagramVideoShowcase />
