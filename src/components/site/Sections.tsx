@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
 import {
-  BarChart3, CalendarRange, Check, Globe2, Heart, Instagram, LayoutDashboard, Music2, Play, Save, Sparkles,
+  ArrowRight, BarChart3, CalendarRange, Check, Globe2, Heart, Instagram, LayoutDashboard, Music2, Play, Save, Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
