@@ -11,9 +11,15 @@ import clip8 from "@/assets/customize-8.mp4.asset.json";
 import clip9 from "@/assets/customize-9.mp4.asset.json";
 import clip10 from "@/assets/customize-10-replacement.mp4.asset.json";
 
+export interface CustomizeClip {
+  url: string;
+  duration: number;
+  caption: string;
+}
+
 // Add further clips here in order (with their length in seconds); they play back-to-back
 // as if they were one recording, and the seek bar spans the combined length.
-const clipList = [
+const instagramClipList: CustomizeClip[] = [
   { url: clip1.url, duration: 53.08, caption: "Enter your Instagram account username and clone it." },
   { url: clip2.url, duration: 68.76, caption: "Go to the profile, open any Reel insight, and customize the insights according to your preferences." },
   { url: clip3.url, duration: 65.12, caption: "Click Reel Insights, activate Edit Mode, and customize it your way." },
@@ -25,12 +31,6 @@ const clipList = [
   { url: clip9.url, duration: 83, caption: "Repeat the same steps to customize another Reel." },
   { url: clip10.url, duration: 46.5, caption: "To clone another account, tap the Instagram logo, enter your username, and continue." },
 ];
-const clips = clipList.map((c) => c.url);
-const offsets = clipList.reduce<number[]>((acc, c, i) => {
-  acc.push(i === 0 ? 0 : acc[i - 1] + clipList[i - 1].duration);
-  return acc;
-}, []);
-const total = clipList.reduce((sum, c) => sum + c.duration, 0);
 
 function fmt(sec: number) {
   const t = Math.max(0, Math.floor(sec));
@@ -45,8 +45,14 @@ function fmt(sec: number) {
  * preloaded. When the playing clip ends the standby one starts instantly, so
  * there is no loading gap between clips.
  */
-export function CustomizeVideoSeries() {
-  const n = clips.length;
+export function CustomizeSeriesPlayer({ title, subtitle, clipList }: { title: string; subtitle: string; clipList: CustomizeClip[] }) {
+  const n = clipList.length;
+  const clips = clipList.map((c) => c.url);
+  const offsets = clipList.reduce<number[]>((acc, c, i) => {
+    acc.push(i === 0 ? 0 : acc[i - 1] + clipList[i - 1].duration);
+    return acc;
+  }, []);
+  const total = clipList.reduce((sum, c) => sum + c.duration, 0);
   const [slots, setSlotsState] = useState<[number, number]>([0, 1 % n]);
   const [active, setActive] = useState<0 | 1>(0);
   const [playing, setPlaying] = useState(false);
@@ -178,8 +184,8 @@ export function CustomizeVideoSeries() {
 
   return (
     <div className="min-w-0 py-4">
-      <h3 className="text-center text-xl font-semibold tracking-normal sm:text-2xl">Instagram Larp Insight App UI</h3>
-      <p className="mb-7 mt-1 text-center text-sm text-muted-foreground">How to Customize your Larp Insight</p>
+      <h3 className="text-center text-xl font-semibold tracking-normal sm:text-2xl">{title}</h3>
+      <p className="mb-7 mt-1 text-center text-sm text-muted-foreground">{subtitle}</p>
       <div className="mx-auto w-[70%]">
         <div className="instagram-video-phone" style={{ pointerEvents: "auto" }}>
           <span aria-hidden="true" className="instagram-iphone-button silent" />
@@ -287,4 +293,8 @@ export function CustomizeVideoSeries() {
       </div>
     </div>
   );
+}
+
+export function CustomizeVideoSeries() {
+  return <CustomizeSeriesPlayer title="Instagram Larp Insight App UI" subtitle="How to Customize your Larp Insight" clipList={instagramClipList} />;
 }
