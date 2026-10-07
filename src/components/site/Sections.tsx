@@ -12,6 +12,7 @@ import { Footer } from "./Footer";
 import { InstagramVideoShowcase } from "./InstagramVideoShowcase";
 import { TiktokVideoShowcase } from "./TiktokVideoShowcase";
 import { CustomizeVideoSeries } from "./CustomizeVideoSeries";
+import { TiktokCustomizeVideoSeries } from "./TiktokCustomizeVideoSeries";
 import { usePlans, usePublishedVideos, useSiteContent, type FaqItem } from "@/lib/content";
 
 export function PublicLayout({ children }: { children: ReactNode }) {
@@ -99,7 +100,17 @@ export function PlatformSection({ platform, reverse }: { platform: "instagram" |
             <Link to={ig ? "/dashboard/instagram" : "/dashboard/tiktok"}>Try {ig ? "Instagram" : "TikTok"} Editor</Link>
           </Button>
         </div>
-        {ig ? <div className="min-w-0 space-y-10"><InstagramVideoShowcase /><CustomizeVideoSeries /></div> : <TiktokVideoShowcase />}
+        {ig ? (
+          <div className="min-w-0 space-y-10">
+            <InstagramVideoShowcase />
+            <CustomizeVideoSeries />
+          </div>
+        ) : (
+          <div className="min-w-0 space-y-10">
+            <TiktokVideoShowcase />
+            <TiktokCustomizeVideoSeries />
+          </div>
+        )}
       </div>
     </section>
   );
