@@ -2,9 +2,11 @@ import { useRef, useState } from "react";
 import { BatteryFull, Play, Signal, Wifi } from "lucide-react";
 import clip1 from "@/assets/customize-1.mp4.asset.json";
 import clip2 from "@/assets/customize-2.mp4.asset.json";
+import clip3 from "@/assets/customize-3.mp4.asset.json";
+import clip4 from "@/assets/customize-4.mp4.asset.json";
 
 // Add further clips here in order; they play back-to-back in one iPhone frame.
-const clips = [clip1.url, clip2.url];
+const clips = [clip1.url, clip2.url, clip3.url, clip4.url];
 
 export function CustomizeVideoSeries() {
   const [index, setIndex] = useState(0);
