@@ -152,9 +152,9 @@ export function PlatformSection({ platform, reverse }: { platform: "instagram" |
               ))}
             </ul>
             <Reveal delay={bullets.length * 70}>
-              <div className="relative mt-9 w-full max-w-md">
+              <div className="group relative mt-9 w-full max-w-md">
                 <div
-                  className="absolute -inset-2.5 rounded-full opacity-45 blur-2xl transition-opacity duration-300 hover:opacity-70"
+                  className="absolute -inset-2.5 rounded-full opacity-45 blur-2xl transition-opacity duration-300 group-hover:opacity-70"
                   style={{ background: "linear-gradient(100deg, #0a7bff, #5ec8ff)" }}
                   aria-hidden="true"
                 />
