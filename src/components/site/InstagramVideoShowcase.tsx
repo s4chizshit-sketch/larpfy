@@ -17,6 +17,8 @@ const recordings = [
   { label: "Scrolling feed", url: feedVideo.url, webm: feedWebm.url },
   { label: "Profile", url: profileVideo.url, webm: profileWebm.url },
   { label: "View insight", url: insightVideo.url, webm: insightWebm.url },
+  { label: "Professional dashboard", url: dashboardVideo.url, webm: dashboardWebm.url },
+
 ];
 
 export function InstagramVideoShowcase() {
