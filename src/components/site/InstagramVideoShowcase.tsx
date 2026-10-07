@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import homeVideo from "@/assets/instagram-home.mp4.asset.json";
 import profileVideo from "@/assets/instagram-profile.mp4.asset.json";
+import homeWebm from "@/assets/instagram-home.webm.asset.json";
+import profileWebm from "@/assets/instagram-profile.webm.asset.json";
 
 const recordings = [
-  { label: "Home interface", url: homeVideo.url },
-  { label: "Profile", url: profileVideo.url },
+  { label: "Home interface", url: homeVideo.url, webm: homeWebm.url },
+  { label: "Profile", url: profileVideo.url, webm: profileWebm.url },
 ];
 
 export function InstagramVideoShowcase() {
@@ -26,7 +28,6 @@ export function InstagramVideoShowcase() {
               <figcaption className="mb-3 text-center text-xs font-medium text-muted-foreground">{recording.label}</figcaption>
               <div className="instagram-video-phone">
                 <video
-                  src={recording.url}
                   aria-label={`${recording.label} screen recording`}
                   autoPlay
                   muted
@@ -36,7 +37,10 @@ export function InstagramVideoShowcase() {
                   disablePictureInPicture
                   onCanPlay={(event) => { void event.currentTarget.play().catch(() => undefined); }}
                   className="block aspect-[1732/3840] w-full object-contain"
-                />
+                >
+                  <source src={recording.webm} type="video/webm" />
+                  <source src={recording.url} type="video/mp4" />
+                </video>
               </div>
             </figure>
           ))}
