@@ -5,9 +5,9 @@ export type FaqItem = { q: string; a: string };
 export type Hero = { title: string; description: string; cta: string };
 
 export const DEFAULT_HERO: Hero = {
-  title: "Customize Your Social Insights. Your Way.",
+  title: "Your Social Analytics, Your Way",
   description:
-    "Create polished, customizable Instagram and TikTok insight demos for presentations, content, showcases, and entertainment.",
+    "Powerful tools by Larp Insight to customize, manage, and transform your social media insights.",
   cta: "Get Started",
 };
 
