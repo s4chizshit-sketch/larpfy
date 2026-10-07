@@ -109,7 +109,7 @@ export function InstagramVideoShowcase() {
       </div>
       <div className="mt-6 flex justify-center gap-2" aria-label="Recording selection">
         {recordings.map((recording, index) => (
-          <Button key={recording.label} variant="ghost" size="icon" className="h-7 w-8" aria-label={`Show ${recording.label}`} aria-pressed={active === index} onClick={() => carouselApi?.scrollTo(index)}>
+          <Button key={recording.label} variant="ghost" size="icon" className="h-7 w-8" aria-label={`Show ${recording.label}`} aria-pressed={active === index} onClick={() => { userControlled.current = true; carouselApi?.scrollTo(index); }}>
             <span className={`h-1.5 rounded-full transition-all duration-500 ${active === index ? "w-6 bg-primary" : "w-1.5 bg-muted-foreground/40"}`} />
           </Button>
         ))}
