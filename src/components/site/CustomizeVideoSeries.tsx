@@ -6,6 +6,8 @@ import clip3 from "@/assets/customize-3.mp4.asset.json";
 import clip4 from "@/assets/customize-4.mp4.asset.json";
 import clip5 from "@/assets/customize-5.mp4.asset.json";
 import clip6 from "@/assets/customize-6.mp4.asset.json";
+import clip7 from "@/assets/customize-7.mp4.asset.json";
+import clip8 from "@/assets/customize-8.mp4.asset.json";
 
 // Add further clips here in order (with their length in seconds); they play back-to-back
 // as if they were one recording, and the seek bar spans the combined length.
@@ -16,6 +18,8 @@ const clipList = [
   { url: clip4.url, duration: 79.23 },
   { url: clip5.url, duration: 63.3 },
   { url: clip6.url, duration: 58.63 },
+  { url: clip7.url, duration: 57.67 },
+  { url: clip8.url, duration: 66.83 },
 ];
 const clips = clipList.map((c) => c.url);
 const offsets = clipList.reduce<number[]>((acc, c, i) => {
