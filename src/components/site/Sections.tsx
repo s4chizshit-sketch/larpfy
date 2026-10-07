@@ -71,6 +71,8 @@ export function Masthead() {
     </section>
   );
 }
+
+export const Disclaimer = () => (
   <p className="text-xs leading-relaxed text-muted-foreground">
     Demo visuals are for presentation, entertainment, and customization purposes only and are not official Instagram or
     TikTok analytics.
