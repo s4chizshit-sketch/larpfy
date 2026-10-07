@@ -15,6 +15,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Create polished, customizable Instagram and TikTok insight demos for presentations, content, showcases, and entertainment." },
       { property: "og:title", content: "LARP Insight — Customize Your Social Insights" },
       { property: "og:description", content: "Customizable Instagram and TikTok insight demo visuals for presentations and content." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,

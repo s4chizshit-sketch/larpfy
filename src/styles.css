@@ -79,6 +79,7 @@
   --sidebar-ring: oklch(0.66 0.19 285);
   --gradient-brand: linear-gradient(135deg, var(--primary), var(--glow));
   --shadow-glow: 0 10px 40px -10px oklch(0.66 0.19 285 / 55%);
+  --shadow-phone: 0 16px 48px -18px var(--primary);
 }
 
 @utility glass {
@@ -120,5 +121,42 @@
   h1, h2, h3, h4 {
     font-family: var(--font-display);
     letter-spacing: -0.02em;
+  }
+}
+
+.instagram-video-window {
+  overflow: hidden;
+  padding: 12px 0 28px;
+}
+.instagram-video-track {
+  display: flex;
+  gap: 24px;
+  padding-left: calc((100% - 70%) / 2);
+  transition: transform 1100ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.instagram-video-track-profile {
+  transform: translateX(calc(-70% - 24px));
+}
+.instagram-video-slide {
+  flex: 0 0 70%;
+  min-width: 0;
+  opacity: 0.5;
+  transform: scale(0.94);
+  transition: opacity 1100ms ease, transform 1100ms ease;
+}
+.instagram-video-slide.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+.instagram-video-phone {
+  overflow: hidden;
+  border: 6px solid var(--secondary);
+  border-radius: 36px;
+  background: var(--background);
+  box-shadow: var(--shadow-phone);
+}
+@media (prefers-reduced-motion: reduce) {
+  .instagram-video-track, .instagram-video-slide {
+    transition: none;
   }
 }
