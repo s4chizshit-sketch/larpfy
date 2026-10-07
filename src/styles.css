@@ -101,6 +101,13 @@
   background-clip: text;
   color: transparent;
 }
+/* Screenshot-style headline: white fading into bright blue, top to bottom */
+@utility title-gradient {
+  background: linear-gradient(180deg, #ffffff 0%, #e9f2ff 32%, #a9d0ff 64%, #4da3ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 @utility bg-brand {
   background: var(--gradient-brand);
 }
