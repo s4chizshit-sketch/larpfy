@@ -286,9 +286,12 @@ export function CustomizeSeriesPlayer({ title, subtitle, clipList }: { title: st
             <span>{fmt(shown)}</span>
             <span>{fmt(total)}</span>
           </div>
-          <p className="mt-3 min-h-20 text-center text-xs leading-relaxed text-muted-foreground" aria-live="polite">
-            {clipList[captionIndex].caption}
-          </p>
+          <div className="caption-glass mt-4 min-h-24 px-5 py-4" aria-live="polite">
+            <p key={captionIndex} className="text-center text-sm font-medium leading-relaxed text-foreground/90 sm:text-[0.95rem]">
+              {clipList[captionIndex].caption}
+            </p>
+          </div>
+
         </div>
       </div>
     </div>
