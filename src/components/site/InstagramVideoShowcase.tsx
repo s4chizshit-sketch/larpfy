@@ -9,6 +9,8 @@ import feedVideo from "@/assets/instagram-feed.mp4.asset.json";
 import feedWebm from "@/assets/instagram-feed.webm.asset.json";
 import insightVideo from "@/assets/instagram-insight.mp4.asset.json";
 import insightWebm from "@/assets/instagram-insight.webm.asset.json";
+import dashboardVideo from "@/assets/instagram-dashboard.mp4.asset.json";
+import dashboardWebm from "@/assets/instagram-dashboard.webm.asset.json";
 
 const recordings = [
   { label: "Home interface", url: homeVideo.url, webm: homeWebm.url },
