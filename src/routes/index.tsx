@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
-  CtaBand, FaqList, HowItWorks, PlatformSection, PricingGrid, PublicLayout, SectionHeading,
+  CtaBand, FaqList, PlatformSection, PricingGrid, PublicLayout, SectionHeading,
 } from "@/components/site/Sections";
 import { useSiteContent } from "@/lib/content";
 
@@ -24,7 +24,6 @@ function Index() {
     <PublicLayout>
       <PlatformSection platform="instagram" />
       <PlatformSection platform="tiktok" reverse />
-      <HowItWorks />
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
         <SectionHeading eyebrow="Pricing" title="Simple plans, everything included" />
         <div className="mt-12"><PricingGrid /></div>
