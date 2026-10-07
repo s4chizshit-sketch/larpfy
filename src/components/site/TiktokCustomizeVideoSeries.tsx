@@ -1,9 +1,14 @@
 import { Sparkles } from "lucide-react";
 import { CustomizeSeriesPlayer, type CustomizeClip } from "./CustomizeVideoSeries";
+import tiktokCustomize1 from "@/assets/tiktok-customize-1.mp4.asset.json";
+import tiktokCustomize2 from "@/assets/tiktok-customize-2.mp4.asset.json";
 
 // TikTok customize-series clips — appended in order as recordings arrive
 // (with their length in seconds and the caption shown below the seek bar).
-const tiktokClipList: CustomizeClip[] = [];
+const tiktokClipList: CustomizeClip[] = [
+  { url: tiktokCustomize1.url, duration: 49.807, caption: "" },
+  { url: tiktokCustomize2.url, duration: 78.933, caption: "" },
+];
 
 export function TiktokCustomizeVideoSeries() {
   if (tiktokClipList.length === 0) {
