@@ -9,21 +9,21 @@ import clip6 from "@/assets/customize-6.mp4.asset.json";
 import clip7 from "@/assets/customize-7.mp4.asset.json";
 import clip8 from "@/assets/customize-8.mp4.asset.json";
 import clip9 from "@/assets/customize-9.mp4.asset.json";
-import clip10 from "@/assets/customize-10.mp4.asset.json";
+import clip10 from "@/assets/customize-10-replacement.mp4.asset.json";
 
 // Add further clips here in order (with their length in seconds); they play back-to-back
 // as if they were one recording, and the seek bar spans the combined length.
 const clipList = [
-  { url: clip1.url, duration: 53.08 },
-  { url: clip2.url, duration: 68.76 },
-  { url: clip3.url, duration: 65.12 },
-  { url: clip4.url, duration: 79.23 },
-  { url: clip5.url, duration: 63.3 },
-  { url: clip6.url, duration: 58.63 },
-  { url: clip7.url, duration: 57.67 },
-  { url: clip8.url, duration: 66.83 },
-  { url: clip9.url, duration: 83 },
-  { url: clip10.url, duration: 98.57 },
+  { url: clip1.url, duration: 53.08, caption: "Enter your Instagram account username and clone it." },
+  { url: clip2.url, duration: 68.76, caption: "Go to the profile, open any Reel insight, and customize the insights according to your preferences." },
+  { url: clip3.url, duration: 65.12, caption: "Click Reel Insights, activate Edit Mode, and customize it your way." },
+  { url: clip4.url, duration: 79.23, caption: "Click Reel Insights, activate Edit Mode, and customize it your way." },
+  { url: clip5.url, duration: 63.3, caption: "Click Reel Insights, activate Edit Mode, and customize it your way." },
+  { url: clip6.url, duration: 58.63, caption: "Go to Edit Profile and customize your Followers, Following, Dark Mode, Story, Notes, Bio, and Link." },
+  { url: clip7.url, duration: 57.67, caption: "Press and hold the search icon for 2 seconds to activate Dark Mode." },
+  { url: clip8.url, duration: 66.83, caption: "Press and hold Professional Dashboard to customize it, then tap Insight to edit its content." },
+  { url: clip9.url, duration: 83, caption: "Repeat the same steps to customize another Reel." },
+  { url: clip10.url, duration: 46.5, caption: "To clone another account, tap the Instagram logo, enter your username, and continue." },
 ];
 const clips = clipList.map((c) => c.url);
 const offsets = clipList.reduce<number[]>((acc, c, i) => {
@@ -156,6 +156,7 @@ export function CustomizeVideoSeries() {
     }
     activeRef.current = nextSlot;
     setActive(nextSlot);
+    setCurrent(offsets[nextIdx]);
     // Preload the clip after next into the slot that just finished.
     updateSlots((prev) => {
       const copy: [number, number] = [prev[0], prev[1]];
@@ -172,6 +173,8 @@ export function CustomizeVideoSeries() {
 
   const shown = Math.min(current, total);
   const pct = (shown / total) * 100;
+  let captionIndex = 0;
+  while (captionIndex < n - 1 && shown >= offsets[captionIndex + 1]) captionIndex++;
 
   return (
     <div className="min-w-0 py-4">
@@ -277,6 +280,9 @@ export function CustomizeVideoSeries() {
             <span>{fmt(shown)}</span>
             <span>{fmt(total)}</span>
           </div>
+          <p className="mt-3 min-h-20 text-center text-xs leading-relaxed text-muted-foreground" aria-live="polite">
+            {clipList[captionIndex].caption}
+          </p>
         </div>
       </div>
     </div>
