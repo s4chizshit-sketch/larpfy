@@ -3,7 +3,7 @@
 - [x] Match the View Pricing box style and animation to the Get Plan pill.
 - [x] Show the matching homepage App UI recordings and customization tutorials on each non-admin platform Editor page.
 - [x] Premium glass auth card on signup, login, forgot-password and reset-password (readable placeholders, lit edges, focus glow, working eye toggle).
-- [x] Join Telegram section on dashboard settings, verified on phone and wide screens.
+- [x] Telegram Updates card with logo in the dashboard sidebar, directly under Settings (removed from the Settings page).
 - [ ] Add the show/hide password eye toggle to the login page (waiting on user's go-ahead).
 - [ ] Put the real Instagram link on the About page (placeholder used until then).
 - [ ] Confirm the admin price editor saves correctly (needs one price changed and saved by the user).
