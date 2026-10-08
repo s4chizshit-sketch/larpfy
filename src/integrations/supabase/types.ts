@@ -142,8 +142,13 @@ export type Database = {
           created_at: string
           email: string | null
           id: string
+          last_country: string | null
+          last_ip: string | null
+          last_seen_at: string | null
           name: string | null
           plan_id: string | null
+          signup_country: string | null
+          signup_ip: string | null
           status: string
           subscription_status: string
         }
@@ -151,8 +156,13 @@ export type Database = {
           created_at?: string
           email?: string | null
           id: string
+          last_country?: string | null
+          last_ip?: string | null
+          last_seen_at?: string | null
           name?: string | null
           plan_id?: string | null
+          signup_country?: string | null
+          signup_ip?: string | null
           status?: string
           subscription_status?: string
         }
@@ -160,8 +170,13 @@ export type Database = {
           created_at?: string
           email?: string | null
           id?: string
+          last_country?: string | null
+          last_ip?: string | null
+          last_seen_at?: string | null
           name?: string | null
           plan_id?: string | null
+          signup_country?: string | null
+          signup_ip?: string | null
           status?: string
           subscription_status?: string
         }
