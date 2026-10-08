@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Reveal } from "@/components/site/Reveal";
 import {
   CtaBand, FaqList, Masthead, PlatformSection, PublicLayout, SectionHeading,
 } from "@/components/site/Sections";
