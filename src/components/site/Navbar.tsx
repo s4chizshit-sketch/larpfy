@@ -67,7 +67,7 @@ export function Navbar() {
             )}
           </div>
           <button
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-border/70 bg-foreground/5 backdrop-blur-md transition-colors hover:bg-foreground/10"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-border/70 bg-foreground/5 backdrop-blur-md transition-colors hover:bg-foreground/10 md:hidden"
             onClick={() => setOpen(!open)}
             aria-label="Menu"
           >
