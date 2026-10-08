@@ -603,6 +603,22 @@
 .payment-title { font-family: "Sora", var(--font-display, sans-serif); font-size: 26px; line-height: 1.3; letter-spacing: 0; }
 .payment-plan-line { font-size: 15px; line-height: 1.6; margin-top: 9px; color: color-mix(in oklab, var(--muted-foreground) 78%, var(--foreground)); }
 .payment-body { padding: 18px 20px 22px; }
+.payment-countdown { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
+.payment-countdown-line { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.payment-countdown-line span { display: flex; align-items: center; gap: 8px; color: var(--muted-foreground); font-size: 13px; }
+.payment-countdown-line svg { color: var(--glow); }
+.payment-countdown-line strong { font-family: var(--font-display); font-size: 25px; font-variant-numeric: tabular-nums; color: var(--foreground); }
+.payment-countdown progress { appearance: none; display: block; width: 100%; height: 4px; margin-top: 12px; border: 0; border-radius: 4px; overflow: hidden; background: var(--muted); }
+.payment-countdown progress::-webkit-progress-bar { background: var(--muted); }
+.payment-countdown progress::-webkit-progress-value { background: var(--gradient-brand); transition: width 1s linear; }
+.payment-countdown progress::-moz-progress-bar { background: var(--gradient-brand); }
+.payment-expired { padding: 16px 0 8px; text-align: center; animation: payment-reveal 480ms ease-out both; }
+.payment-telegram-logo { width: 64px; height: 64px; object-fit: contain; margin: 0 auto 18px; }
+.payment-expired-label { font-size: 12px; color: var(--glow); font-weight: 600; }
+.payment-expired h3 { margin-top: 8px; font-family: var(--font-display); font-size: 21px; font-weight: 600; }
+.payment-expired h3 + p { margin-top: 12px; font-size: 15px; line-height: 1.7; color: color-mix(in oklab, var(--muted-foreground) 80%, var(--foreground)); }
+.payment-verification-note { margin-top: 12px; font-size: 12px; color: var(--muted-foreground); }
+@media (prefers-reduced-motion: reduce) { .payment-expired { animation: none; } .payment-countdown progress::-webkit-progress-value { transition: none; } }
 .payment-methods { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .payment-method {
   position: relative; height: auto; min-height: 76px; justify-content: flex-start; gap: 10px; padding: 12px;
