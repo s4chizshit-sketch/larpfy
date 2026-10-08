@@ -30,7 +30,7 @@ function AboutPage() {
           <SectionHeading
             eyebrow="About"
             title="Larp Insight"
-            description="Premium insight demo editors for Instagram and TikTok. Follow us on our official channels for updates, tips and new features."
+            sub="Premium insight demo editors for Instagram and TikTok. Follow us on our official channels for updates, tips and new features."
           />
           <div className="mx-auto mt-14 grid max-w-3xl gap-5 sm:grid-cols-2">
             <a

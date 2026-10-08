@@ -9,7 +9,8 @@ import { useSiteContent } from "@/lib/content";
 const links = [
   { to: "/", label: "Home" },
   { to: "/features", label: "Features" },
-  { to: "/pricing", label: "Pricing" },
+  { to: "/pricing", label: "Pricing", hash: "plans" },
+  { to: "/about", label: "About" },
   { to: "/faq", label: "FAQ" },
 ] as const;
 
