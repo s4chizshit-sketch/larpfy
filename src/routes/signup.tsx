@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
-import { Loader2, MailCheck } from "lucide-react";
+import { Eye, EyeOff, Loader2, MailCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -38,6 +38,7 @@ function Signup() {
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
   const [serverError, setServerError] = useState("");
+  const [shown, setShown] = useState<Record<string, boolean>>({});
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -78,13 +79,29 @@ function Signup() {
       </AuthShell>
     );
 
-  const field = (k: keyof typeof form, label: string, type = "text", auto?: string) => (
-    <div>
-      <Label htmlFor={k}>{label}</Label>
-      <Input id={k} type={type} autoComplete={auto} className="mt-2 h-11" value={form[k]} onChange={(e) => setForm({ ...form, [k]: e.target.value })} />
-      <FieldError msg={errors[k]} />
-    </div>
-  );
+  const field = (k: keyof typeof form, label: string, type = "text", auto?: string) => {
+    const isPw = type === "password";
+    const visible = !!shown[k];
+    return (
+      <div>
+        <Label htmlFor={k}>{label}</Label>
+        <div className="relative mt-2">
+          <Input id={k} type={isPw && visible ? "text" : type} autoComplete={auto} className={`h-11 ${isPw ? "pr-11" : ""}`} value={form[k]} onChange={(e) => setForm({ ...form, [k]: e.target.value })} />
+          {isPw && (
+            <button
+              type="button"
+              onClick={() => setShown({ ...shown, [k]: !visible })}
+              aria-label={visible ? "Hide password" : "Show password"}
+              className="absolute right-0 top-0 flex h-11 w-11 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {visible ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            </button>
+          )}
+        </div>
+        <FieldError msg={errors[k]} />
+      </div>
+    );
+  };
 
   return (
     <AuthShell title="Create your account" sub="Start customizing insight demos in minutes." footer={<>Already have an account? <Link to="/login" search={redirect ? { redirect } : {}} className="text-foreground underline-offset-4 hover:underline">Login</Link></>}>
