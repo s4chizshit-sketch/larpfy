@@ -84,7 +84,7 @@ export function PlanHistory() {
                   ? "Your lifetime access never expires."
                   : expired
                     ? `Ended on ${fmtDate(p.expires_at!)}`
-                    : `${used} of ${total} days used · renews/ends ${fmtDate(p.expires_at!)}`}
+                    : `${used} of ${total} days used · ends on ${fmtDate(p.expires_at!)}`}
               </p>
             </div>
           );
