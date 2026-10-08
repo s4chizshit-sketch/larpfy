@@ -16,3 +16,4 @@
 
 - [x] Refine payment dialog typography and download placement; remove bottom shadows from plan and subscription instruction boxes.
 - [x] Add a 02:00 QR countdown and show Telegram screenshot submission only after expiry; verify the transition.
+- [ ] Add amount-prefilled Android UPI payment links for all four payment app logos with Google Play fallbacks; verify generated links.
