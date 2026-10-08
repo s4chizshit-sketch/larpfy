@@ -98,6 +98,45 @@ export type Database = {
         }
         Relationships: []
       }
+      plan_purchases: {
+        Row: {
+          billing_period: string
+          created_at: string
+          duration_days: number | null
+          expires_at: string | null
+          id: string
+          plan_id: string | null
+          plan_name: string
+          price: number
+          started_at: string
+          user_id: string
+        }
+        Insert: {
+          billing_period: string
+          created_at?: string
+          duration_days?: number | null
+          expires_at?: string | null
+          id?: string
+          plan_id?: string | null
+          plan_name: string
+          price?: number
+          started_at?: string
+          user_id: string
+        }
+        Update: {
+          billing_period?: string
+          created_at?: string
+          duration_days?: number | null
+          expires_at?: string | null
+          id?: string
+          plan_id?: string | null
+          plan_name?: string
+          price?: number
+          started_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       plans: {
         Row: {
           active: boolean
