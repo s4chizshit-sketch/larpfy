@@ -1,14 +1,15 @@
 // Sends private admin alerts to the owner's chat with the bot. Never throws.
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-export async function sendSignupAlert(info: { email: string | null; ip: string | null; country: string | null }) {
+export async function sendSignupAlert(info: { name?: string | null; email: string | null; ip: string | null; country: string | null }) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_OWNER_CHAT_ID || process.env.TELEGRAM_CHAT_ID;
   if (!token || !chatId) return;
   const time = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata", dateStyle: "medium", timeStyle: "medium" });
   const text =
     `🆕 <b>New account</b>\n` +
-    `📧 ${esc(info.email ?? "unknown")}\n` +
+    `👤 Name: ${esc(info.name ?? "unknown")}\n` +
+    `📧 ${esc(info.email ?? "unknown")} — ❌ No subscription\n` +
     `🌐 IP: <code>${esc(info.ip ?? "unknown")}</code>\n` +
     `🏳️ Country: ${esc(info.country ?? "unknown")}\n` +
     `🕒 ${esc(time)} IST`;
