@@ -29,11 +29,11 @@ export function Navbar() {
       <div className="px-3 pt-3 sm:px-4">
         <div className="nav-shell mx-auto flex h-16 max-w-7xl items-center justify-between rounded-full px-4 sm:px-6">
           <Logo />
-          <span className="nav-brand-text md:hidden">
+          <span className="nav-brand-text lg:hidden">
             <span className="nav-brand-dot" />
             Larp Insight
           </span>
-          <div className="hidden items-center gap-1 md:flex">
+          <div className="hidden items-center gap-1 lg:flex">
             {links.map((l) => (
               <Link
                 key={l.to}
@@ -52,7 +52,7 @@ export function Navbar() {
               </Link>
             )}
           </div>
-          <div className="hidden items-center gap-2 md:flex">
+          <div className="hidden items-center gap-2 lg:flex">
             {user ? (
               <Button asChild className="rounded-full bg-brand shadow-glow">
                 <Link to="/dashboard" className="gap-2">
@@ -73,7 +73,7 @@ export function Navbar() {
             )}
           </div>
           <button
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-border/70 bg-foreground/5 backdrop-blur-md transition-colors hover:bg-foreground/10 md:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-border/70 bg-foreground/5 backdrop-blur-md transition-colors hover:bg-foreground/10 lg:hidden"
             onClick={() => setOpen(!open)}
             aria-label="Menu"
           >
@@ -81,7 +81,7 @@ export function Navbar() {
           </button>
         </div>
         {open && (
-          <div className="nav-shell mx-auto mt-2 max-w-7xl rounded-[1.75rem] px-4 pb-6 pt-2 md:hidden">
+          <div className="nav-shell mx-auto mt-2 max-w-7xl rounded-[1.75rem] px-4 pb-6 pt-2 lg:hidden">
             {links.map((l) => (
               <Link key={l.to} to={l.to} hash={"hash" in l ? l.hash : undefined} onClick={() => setOpen(false)} className="block border-b border-border/60 py-4 text-[17px] font-medium tracking-[-0.01em]">
                 {l.label}
