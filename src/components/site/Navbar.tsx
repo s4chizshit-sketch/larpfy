@@ -9,7 +9,8 @@ import { useSiteContent } from "@/lib/content";
 const links = [
   { to: "/", label: "Home" },
   { to: "/features", label: "Features" },
-  { to: "/pricing", label: "Pricing" },
+  { to: "/pricing", label: "Pricing", hash: "plans" },
+  { to: "/about", label: "About" },
   { to: "/faq", label: "FAQ" },
 ] as const;
 
@@ -37,6 +38,7 @@ export function Navbar() {
               <Link
                 key={l.to}
                 to={l.to}
+                hash={"hash" in l ? l.hash : undefined}
                 className="nav-link rounded-lg px-3.5 py-2"
                 activeProps={{ className: "is-active" }}
                 activeOptions={{ exact: true }}
@@ -81,7 +83,7 @@ export function Navbar() {
         {open && (
           <div className="nav-shell mx-auto mt-2 max-w-7xl rounded-[1.75rem] px-4 pb-6 pt-2 md:hidden">
             {links.map((l) => (
-              <Link key={l.to} to={l.to} onClick={() => setOpen(false)} className="block border-b border-border/60 py-4 text-[17px] font-medium tracking-[-0.01em]">
+              <Link key={l.to} to={l.to} hash={"hash" in l ? l.hash : undefined} onClick={() => setOpen(false)} className="block border-b border-border/60 py-4 text-[17px] font-medium tracking-[-0.01em]">
                 {l.label}
               </Link>
             ))}
