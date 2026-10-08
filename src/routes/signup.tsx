@@ -17,6 +17,7 @@ export const Route = createFileRoute("/signup")({
       { property: "og:description", content: "Create your LARP Insight account in seconds." },
     ],
   }),
+  validateSearch: (s: Record<string, unknown>): { redirect?: "billing" } => (s.redirect === "billing" ? { redirect: "billing" } : {}),
   component: Signup,
 });
 
@@ -31,6 +32,7 @@ const schema = z
 
 function Signup() {
   const navigate = useNavigate();
+  const { redirect } = Route.useSearch();
   const [form, setForm] = useState({ name: "", email: "", password: "", confirm: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
@@ -60,7 +62,7 @@ function Signup() {
     setLoading(false);
     if (error) return setServerError(/registered|exists/i.test(error.message) ? "An account with this email already exists. Please log in." : error.message);
     if (data.user && data.user.identities?.length === 0) return setServerError("An account with this email already exists. Please log in.");
-    if (data.session) return navigate({ to: "/dashboard" });
+    if (data.session) return navigate({ to: redirect === "billing" ? "/dashboard/billing" : "/dashboard" });
     setDone(true);
   };
 
@@ -85,7 +87,7 @@ function Signup() {
   );
 
   return (
-    <AuthShell title="Create your account" sub="Start customizing insight demos in minutes." footer={<>Already have an account? <Link to="/login" className="text-foreground underline-offset-4 hover:underline">Login</Link></>}>
+    <AuthShell title="Create your account" sub="Start customizing insight demos in minutes." footer={<>Already have an account? <Link to="/login" search={redirect ? { redirect } : {}} className="text-foreground underline-offset-4 hover:underline">Login</Link></>}>
       <form onSubmit={submit} className="space-y-4" noValidate>
         {field("name", "Name", "text", "name")}
         {field("email", "Email", "email", "email")}
