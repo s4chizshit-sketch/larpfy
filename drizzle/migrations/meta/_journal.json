@@ -36,6 +36,13 @@
       "when": 1791460123171,
       "tag": "0004_custom_day_plans",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1791479080973,
+      "tag": "0005_oxapay_orders",
+      "breakpoints": true
     }
   ]
 }

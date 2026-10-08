@@ -68,6 +68,39 @@ export type Database = {
         }
         Relationships: []
       }
+      payment_orders: {
+        Row: {
+          amount: number
+          created_at: string
+          id: string
+          paid_at: string | null
+          plan_id: string
+          status: string
+          track_id: string | null
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          id?: string
+          paid_at?: string | null
+          plan_id: string
+          status?: string
+          track_id?: string | null
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          id?: string
+          paid_at?: string | null
+          plan_id?: string
+          status?: string
+          track_id?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       payouts: {
         Row: {
           amount: number
