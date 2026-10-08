@@ -1,5 +1,5 @@
-import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
-import { CreditCard, LayoutGrid, Settings, FileText, Film, Loader2, ShieldAlert, Tags, Users } from "lucide-react";
+import { createFileRoute, Navigate, Outlet } from "@tanstack/react-router";
+import { CreditCard, LayoutGrid, Settings, FileText, Film, Loader2, Tags, Users } from "lucide-react";
 import { AppShell, type NavItem } from "@/components/app/AppShell";
 import { useProfile } from "@/lib/auth";
 
@@ -24,14 +24,7 @@ export const Route = createFileRoute("/_authenticated/admin")({
 function AdminLayout() {
   const { data, isLoading } = useProfile();
   if (isLoading) return <div className="flex min-h-screen items-center justify-center"><Loader2 className="h-6 w-6 animate-spin text-primary" /></div>;
-  if (!data?.isAdmin)
-    return (
-      <div className="flex min-h-screen flex-col items-center justify-center gap-3 px-4 text-center">
-        <ShieldAlert className="h-10 w-10 text-destructive" />
-        <h1 className="text-xl font-semibold">Admins only</h1>
-        <Link to="/dashboard" className="text-sm text-primary">Back to dashboard</Link>
-      </div>
-    );
+  if (!data?.isAdmin) return <Navigate to="/dashboard" replace />;
   return (
     <AppShell nav={nav} title="Admin" secondary={{ title: "Workspace", nav: workspace }}>
       <Outlet />
