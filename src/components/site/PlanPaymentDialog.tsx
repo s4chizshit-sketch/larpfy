@@ -113,7 +113,7 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
         }}>
         <div className="payment-dialog-head">
           <p className="payment-kicker">Secure payment</p>
-          <DialogTitle className="payment-title">{expired ? "Send your payment screenshot" : "Choose how to pay"}</DialogTitle>
+          <DialogTitle className={`payment-title${expired ? " payment-title-expired" : ""}`}>{expired ? "If you haven't paid on the QR, your time is up. If you already paid and we made a mistake, please message us on Telegram." : "Choose how to pay"}</DialogTitle>
           <DialogDescription className="payment-plan-line">
             {plan.name} · ${plan.price} {plan.billingPeriod === "once" ? "lifetime" : plan.billingPeriod}
           </DialogDescription>
@@ -123,11 +123,8 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
           {expired ? (
             <div className="payment-expired" role="status">
               <img src={telegramLogo.url} alt="Telegram" className="payment-telegram-logo" />
-              <p className="payment-expired-label">Payment window ended</p>
-              <h3>Paid for your plan?</h3>
-              <p>Send your payment screenshot to @larpinght on Telegram to request your APK and API access key.</p>
-              <p className="payment-verification-note">Access is provided after your payment is verified.</p>
-              <Button asChild className="btn-plan mt-5 gap-2">
+              <p className="payment-verification-note">Attach your payment screenshot in the chat — access is provided after your payment is verified.</p>
+              <Button asChild className="btn-plan mt-4 gap-2">
                 <a href={telegramUrl} target="_blank" rel="noopener noreferrer">Send screenshot <ArrowUpRight className="size-4" /></a>
               </Button>
             </div>
