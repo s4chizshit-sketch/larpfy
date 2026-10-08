@@ -19,6 +19,7 @@ function UsersAdmin() {
   const [q, setQ] = useState("");
   const { data, isLoading } = useQuery({
     queryKey: ["admin", "users"],
+    refetchInterval: 10000,
     queryFn: async () => {
       const [{ data: users, error }, { data: plans }, { data: counts }] = await Promise.all([
         supabase.from("profiles").select("*").order("created_at", { ascending: false }),
@@ -47,7 +48,7 @@ function UsersAdmin() {
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <StatCard label="Total users" value={data?.users.length ?? "—"} />
         <StatCard label="Active subscriptions" value={data?.users.filter((u) => u.subscription_status === "active").length ?? "—"} />
-        <StatCard label="Suspended" value={data?.users.filter((u) => u.status === "suspended").length ?? "—"} />
+        <StatCard label="Signups today" value={data?.users.filter((u) => new Date(u.created_at).toDateString() === new Date().toDateString()).length ?? "—"} />
         <StatCard label="Projects" value={Object.values(data?.pc ?? {}).reduce((a, b) => a + b, 0)} />
       </div>
       <div className="relative mt-8 max-w-sm">
@@ -60,13 +61,16 @@ function UsersAdmin() {
         ) : (
           <Table>
             <TableHeader>
-              <TableRow><TableHead>User</TableHead><TableHead>Joined</TableHead><TableHead>Projects</TableHead><TableHead>Plan</TableHead><TableHead>Subscription</TableHead><TableHead>Status</TableHead></TableRow>
+              <TableRow><TableHead>User</TableHead><TableHead>Signed up</TableHead><TableHead>IP</TableHead><TableHead>Country</TableHead><TableHead>Last seen</TableHead><TableHead>Projects</TableHead><TableHead>Plan</TableHead><TableHead>Subscription</TableHead><TableHead>Status</TableHead></TableRow>
             </TableHeader>
             <TableBody>
               {users.map((u) => (
                 <TableRow key={u.id}>
                   <TableCell><p className="font-medium">{u.name}</p><p className="text-xs text-muted-foreground">{u.email}</p></TableCell>
-                  <TableCell className="text-sm text-muted-foreground">{new Date(u.created_at).toLocaleDateString()}</TableCell>
+                  <TableCell className="whitespace-nowrap text-sm text-muted-foreground">{new Date(u.created_at).toLocaleString()}</TableCell>
+                  <TableCell className="font-mono text-xs">{u.signup_ip ?? "—"}{u.last_ip && u.last_ip !== u.signup_ip && <p className="text-muted-foreground">now: {u.last_ip}</p>}</TableCell>
+                  <TableCell className="text-sm">{u.signup_country ?? u.last_country ?? "—"}</TableCell>
+                  <TableCell className="whitespace-nowrap text-xs text-muted-foreground">{u.last_seen_at ? new Date(u.last_seen_at).toLocaleString() : "—"}</TableCell>
                   <TableCell>{data?.pc[u.id] ?? 0}</TableCell>
                   <TableCell>
                     <select className="h-8 rounded-md border border-input bg-transparent px-2 text-sm" value={u.plan_id ?? ""} onChange={(e) => update.mutate({ id: u.id, patch: { plan_id: e.target.value || null } })}>
@@ -86,7 +90,7 @@ function UsersAdmin() {
                   </TableCell>
                 </TableRow>
               ))}
-              {!users.length && <TableRow><TableCell colSpan={6} className="py-10 text-center text-muted-foreground">No users found.</TableCell></TableRow>}
+              {!users.length && <TableRow><TableCell colSpan={9} className="py-10 text-center text-muted-foreground">No users found.</TableCell></TableRow>}
             </TableBody>
           </Table>
         )}

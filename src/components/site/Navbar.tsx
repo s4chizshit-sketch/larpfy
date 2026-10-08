@@ -3,7 +3,7 @@ import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Logo } from "./Logo";
-import { useAuth } from "@/lib/auth";
+import { useAuth, useProfile } from "@/lib/auth";
 import { useSiteContent } from "@/lib/content";
 
 const links = [
@@ -16,6 +16,8 @@ const links = [
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const { user } = useAuth();
+  const { data: prof } = useProfile();
+  const isAdmin = !!prof?.isAdmin;
   const { data } = useSiteContent();
   const ann = data?.announcement;
   return (
@@ -38,6 +40,11 @@ export function Navbar() {
                 {l.label}
               </Link>
             ))}
+            {isAdmin && (
+              <Link to="/admin" className="rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground" activeProps={{ className: "text-foreground" }}>
+                Admin
+              </Link>
+            )}
           </div>
           <div className="hidden items-center gap-2 md:flex">
             {user ? (
@@ -66,6 +73,11 @@ export function Navbar() {
                 {l.label}
               </Link>
             ))}
+            {isAdmin && (
+              <Link to="/admin" onClick={() => setOpen(false)} className="block border-b border-border py-4 text-base">
+                Admin
+              </Link>
+            )}
             <div className="mt-5 grid gap-3">
               {user ? (
                 <Button asChild size="lg" className="bg-brand">
