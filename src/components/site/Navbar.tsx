@@ -33,15 +33,15 @@ export function Navbar() {
               <Link
                 key={l.to}
                 to={l.to}
-                className="rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-                activeProps={{ className: "text-foreground" }}
+                className="nav-link rounded-lg px-3.5 py-2"
+                activeProps={{ className: "is-active" }}
                 activeOptions={{ exact: true }}
               >
                 {l.label}
               </Link>
             ))}
             {isAdmin && (
-              <Link to="/admin" className="rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground" activeProps={{ className: "text-foreground" }}>
+              <Link to="/admin" className="nav-link rounded-lg px-3.5 py-2" activeProps={{ className: "is-active" }}>
                 Admin
               </Link>
             )}
@@ -69,12 +69,12 @@ export function Navbar() {
         {open && (
           <div className="border-t border-border px-4 pb-6 md:hidden">
             {links.map((l) => (
-              <Link key={l.to} to={l.to} onClick={() => setOpen(false)} className="block border-b border-border py-4 text-base">
+              <Link key={l.to} to={l.to} onClick={() => setOpen(false)} className="block border-b border-border py-4 text-[17px] font-medium tracking-[-0.01em]">
                 {l.label}
               </Link>
             ))}
             {isAdmin && (
-              <Link to="/admin" onClick={() => setOpen(false)} className="block border-b border-border py-4 text-base">
+              <Link to="/admin" onClick={() => setOpen(false)} className="block border-b border-border py-4 text-[17px] font-medium tracking-[-0.01em]">
                 Admin
               </Link>
             )}
