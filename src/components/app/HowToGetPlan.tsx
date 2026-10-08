@@ -13,18 +13,19 @@ const steps = [
 
 export function HowToGetPlan() {
   return (
-    <section className="howto-box mt-8 p-7 sm:p-9" aria-labelledby="howto-title">
-      <p className="howto-eyebrow">Getting started</p>
-      <h2 id="howto-title" className="pro-title mt-2 text-2xl sm:text-[28px]">
-        How to Get Subscription (Plan)
-      </h2>
-      <p className="mt-2 text-[15px] text-muted-foreground">Four simple steps from picking a plan to using the app.</p>
-      <ol className="mt-7 space-y-3">
+    <section className="howto-box mt-6 p-5 sm:p-6" aria-labelledby="howto-title">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+        <h2 id="howto-title" className="pro-title text-lg sm:text-xl">
+          How to Get Subscription (Plan)
+        </h2>
+        <p className="howto-eyebrow">Getting started</p>
+      </div>
+      <ol className="mt-4 grid gap-2 sm:grid-cols-2">
         {steps.map((s, i) => (
-          <li key={s.t} className="howto-step" style={{ animationDelay: `${i * 90}ms` }}>
+          <li key={s.t} className="howto-step" style={{ animationDelay: `${i * 70}ms` }}>
             <span className="howto-num" aria-hidden>{String(i + 1).padStart(2, "0")}</span>
             <span className="howto-icon" aria-hidden>
-              <s.icon className="h-5 w-5" />
+              <s.icon className="h-4 w-4" />
             </span>
             <span className="min-w-0 flex-1">
               <span className="howto-title">{s.t}</span>
