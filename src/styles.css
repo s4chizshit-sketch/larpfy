@@ -649,11 +649,10 @@
 .payment-countdown progress::-webkit-progress-bar { background: var(--muted); }
 .payment-countdown progress::-webkit-progress-value { background: var(--gradient-brand); transition: width 1s linear; }
 .payment-countdown progress::-moz-progress-bar { background: var(--gradient-brand); }
-.payment-expired { padding: 16px 0 8px; text-align: center; animation: payment-reveal 480ms ease-out both; }
-.payment-telegram-logo { width: 64px; height: 64px; object-fit: contain; margin: 0 auto 18px; }
-.payment-expired-label { font-size: 12px; color: var(--glow); font-weight: 600; }
-.payment-expired h3 { margin-top: 8px; font-family: var(--font-display); font-size: 21px; font-weight: 600; }
-.payment-expired h3 + p { margin-top: 12px; font-size: 15px; line-height: 1.7; color: color-mix(in oklab, var(--muted-foreground) 80%, var(--foreground)); }
+.payment-expired { padding: 10px 0 4px; text-align: center; animation: payment-reveal 480ms ease-out both; }
+.payment-title-expired { font-size: 18px; line-height: 1.5; letter-spacing: -0.01em; text-wrap: balance; }
+.payment-telegram-logo { width: 52px; height: 52px; object-fit: contain; margin: 0 auto 14px; }
+.payment-expired .payment-verification-note { margin-top: 10px; font-size: 13px; line-height: 1.6; }
 .payment-verification-note { margin-top: 12px; font-size: 12px; color: var(--muted-foreground); }
 @media (prefers-reduced-motion: reduce) { .payment-expired { animation: none; } .payment-countdown progress::-webkit-progress-value { transition: none; } }
 .payment-methods { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
