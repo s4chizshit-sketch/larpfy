@@ -14,6 +14,11 @@ export const Route = createFileRoute("/_authenticated/admin/")({
   component: UsersAdmin,
 });
 
+function fmtTime(s: number) {
+  const h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60);
+  return h ? `${h}h ${m}m` : `${m}m`;
+}
+
 function UsersAdmin() {
   const qc = useQueryClient();
   const [q, setQ] = useState("");
@@ -61,7 +66,7 @@ function UsersAdmin() {
         ) : (
           <Table>
             <TableHeader>
-              <TableRow><TableHead>User</TableHead><TableHead>Signed up</TableHead><TableHead>IP</TableHead><TableHead>Country</TableHead><TableHead>Last seen</TableHead><TableHead>Projects</TableHead><TableHead>Plan</TableHead><TableHead>Subscription</TableHead><TableHead>Status</TableHead></TableRow>
+              <TableRow><TableHead>User</TableHead><TableHead>Signed up</TableHead><TableHead>IP</TableHead><TableHead>Country</TableHead><TableHead>Last seen</TableHead><TableHead>Logins</TableHead><TableHead>Time on site</TableHead><TableHead>Projects</TableHead><TableHead>Plan</TableHead><TableHead>Subscription</TableHead><TableHead>Status</TableHead></TableRow>
             </TableHeader>
             <TableBody>
               {users.map((u) => (
@@ -71,6 +76,8 @@ function UsersAdmin() {
                   <TableCell className="font-mono text-xs">{u.signup_ip ?? "—"}{u.last_ip && u.last_ip !== u.signup_ip && <p className="text-muted-foreground">now: {u.last_ip}</p>}</TableCell>
                   <TableCell className="text-sm">{u.signup_country ?? u.last_country ?? "—"}</TableCell>
                   <TableCell className="whitespace-nowrap text-xs text-muted-foreground">{u.last_seen_at ? new Date(u.last_seen_at).toLocaleString() : "—"}</TableCell>
+                  <TableCell className="text-sm">{u.visit_count ?? 0}</TableCell>
+                  <TableCell className="whitespace-nowrap text-sm">{fmtTime(u.total_seconds ?? 0)}</TableCell>
                   <TableCell>{data?.pc[u.id] ?? 0}</TableCell>
                   <TableCell>
                     <select className="h-8 rounded-md border border-input bg-transparent px-2 text-sm" value={u.plan_id ?? ""} onChange={(e) => update.mutate({ id: u.id, patch: { plan_id: e.target.value || null } })}>
@@ -90,7 +97,7 @@ function UsersAdmin() {
                   </TableCell>
                 </TableRow>
               ))}
-              {!users.length && <TableRow><TableCell colSpan={9} className="py-10 text-center text-muted-foreground">No users found.</TableCell></TableRow>}
+              {!users.length && <TableRow><TableCell colSpan={11} className="py-10 text-center text-muted-foreground">No users found.</TableCell></TableRow>}
             </TableBody>
           </Table>
         )}

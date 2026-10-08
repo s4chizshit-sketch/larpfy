@@ -29,6 +29,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     sessionStorage.setItem(k, "1");
     recordVisit().catch(() => sessionStorage.removeItem(k));
   }, [uid]);
+  // Time-on-site: add 30s every 30s while the tab is visible.
+  useEffect(() => {
+    if (!uid) return;
+    const t = setInterval(() => {
+      if (document.visibilityState === "visible") supabase.rpc("add_visit_time", { _seconds: 30 }).then(() => {});
+    }, 30000);
+    return () => clearInterval(t);
+  }, [uid]);
   return <Ctx.Provider value={{ session, user: session?.user ?? null, loading }}>{children}</Ctx.Provider>;
 }
 
