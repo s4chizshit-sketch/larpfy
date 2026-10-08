@@ -14,6 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AuthProvider } from "@/lib/auth";
 import { Toaster } from "@/components/ui/sonner";
+import { ContentGuard } from "@/components/site/ContentGuard";
 import { supabase } from "@/integrations/supabase/client";
 
 function NotFoundComponent() {
@@ -118,6 +119,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <Outlet />
+        <ContentGuard />
         <Toaster theme="dark" position="top-center" />
       </AuthProvider>
     </QueryClientProvider>
