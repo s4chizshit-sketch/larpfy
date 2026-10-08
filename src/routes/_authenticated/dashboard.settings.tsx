@@ -2,12 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
+import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PageHeader } from "@/components/app/AppShell";
 import { useProfile } from "@/lib/auth";
 import { supabase } from "@/integrations/supabase/client";
+import telegramLogo from "@/assets/telegram-about.png.asset.json";
+
+const TELEGRAM_URL = "https://t.me/+HAwfutUg1gNlZDZl";
 
 export const Route = createFileRoute("/_authenticated/dashboard/settings")({
   component: Settings,
@@ -56,6 +60,31 @@ function Settings() {
           </div>
         </section>
       </div>
+
+      <section className="settings-telegram mt-6">
+        <img
+          src={telegramLogo.url}
+          alt="Telegram logo"
+          draggable={false}
+          className="settings-telegram-logo"
+        />
+        <div className="min-w-0 flex-1">
+          <h2 className="font-display text-xl font-bold sm:text-2xl">Join Telegram Updates</h2>
+          <p className="mt-2 max-w-xl text-sm text-muted-foreground sm:text-base">
+            Get new feature drops, UI updates and early access announcements straight from the
+            Larp Insight channel.
+          </p>
+        </div>
+        <a
+          href={TELEGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-plan group inline-flex h-11 shrink-0 items-center gap-2 px-7 text-xs font-bold uppercase tracking-[0.12em]"
+        >
+          <span className="relative z-[2]">Join Telegram</span>
+          <ArrowUpRight className="relative z-[2] h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        </a>
+      </section>
     </>
   );
 }
