@@ -47,7 +47,6 @@ export function Masthead() {
   return (
     <section className="relative isolate overflow-hidden">
       <div className="hero-bg absolute inset-0 -z-10" aria-hidden />
-      <div className="absolute inset-x-0 top-0 -z-10 h-px bg-brand opacity-70" aria-hidden />
       <div className="mx-auto max-w-4xl px-4 pb-16 pt-16 text-center sm:px-6 sm:pb-24 sm:pt-24">
         <span className="masthead-in inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.32em] text-muted-foreground">
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
