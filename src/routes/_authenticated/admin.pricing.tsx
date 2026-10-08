@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { Pencil, Plus, Tags, Trash2 } from "lucide-react";
+import { Pencil, Plus, Save, Tags, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -29,6 +29,15 @@ function PricingAdmin() {
       return data as (Plan & { id: string })[];
     },
   });
+  const [drafts, setDrafts] = useState<Record<string, string>>({});
+  const savePrice = async (id: string) => {
+    const v = Number(drafts[id]);
+    if (drafts[id] === undefined || drafts[id] === "" || !(v >= 0)) return toast.error("Enter a valid price");
+    const { error } = await supabase.from("plans").update({ price: v }).eq("id", id);
+    if (error) return toast.error(error.message);
+    toast.success("Price saved — all users now see the new price");
+    setDrafts((d) => { const n = { ...d }; delete n[id]; return n; }); refresh();
+  };
   const [edit, setEdit] = useState<(Plan & { featuresText: string }) | null>(null);
   const refresh = () => { qc.invalidateQueries({ queryKey: ["admin", "plans"] }); qc.invalidateQueries({ queryKey: ["plans"] }); };
 
@@ -51,7 +60,7 @@ function PricingAdmin() {
     const { error } = await supabase.from("plans").delete().eq("id", id);
     if (error) toast.error(error.message); else refresh();
   };
-  const blank: Plan & { featuresText: string } = { name: "", price: 0, billing_period: "month", features: [], featuresText: "", cta: "Get Started", popular: false, active: true, sort_order: (data?.length ?? 0) + 1 };
+  const blank: Plan & { featuresText: string } = { name: "", price: 0, billing_period: "month", features: [], featuresText: "", cta: "Get Plan", popular: false, active: true, sort_order: (data?.length ?? 0) + 1 };
 
   return (
     <>
@@ -65,6 +74,11 @@ function PricingAdmin() {
                 <Switch checked={p.active} onCheckedChange={(c) => toggle(p.id, c)} />
               </div>
               <p className="mt-2 font-display text-3xl font-semibold">${Number(p.price)}<span className="text-sm text-muted-foreground"> / {p.billing_period}</span></p>
+              <div className="mt-3 flex items-center gap-2">
+                <span className="text-sm text-muted-foreground">$</span>
+                <Input type="number" min={0} step="0.01" aria-label="Price" className="h-9 w-28" value={drafts[p.id] ?? String(Number(p.price))} onChange={(e) => setDrafts({ ...drafts, [p.id]: e.target.value })} />
+                <Button size="sm" className="bg-brand" disabled={drafts[p.id] === undefined || Number(drafts[p.id]) === Number(p.price)} onClick={() => savePrice(p.id)}><Save className="h-4 w-4" /> Save</Button>
+              </div>
               <ul className="mt-3 space-y-1 text-sm text-muted-foreground">{p.features.map((f) => <li key={f}>• {f}</li>)}</ul>
               <div className="mt-4 flex gap-2">
                 <Button size="sm" variant="outline" onClick={() => setEdit({ ...p, featuresText: p.features.join("\n") })}><Pencil className="h-4 w-4" /> Edit</Button>
@@ -79,9 +93,19 @@ function PricingAdmin() {
           <DialogHeader><DialogTitle>{edit?.id ? "Edit plan" : "New plan"}</DialogTitle></DialogHeader>
           {edit && (
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="sm:col-span-2"><Label>Plan name</Label><Input className="mt-2" value={edit.name} onChange={(e) => setEdit({ ...edit, name: e.target.value })} /></div>
+              <div className="sm:col-span-2"><Label>Plan name</Label><p className="mt-1 text-xs text-muted-foreground">Start with "Instagram" or "TikTok" so it shows in that platform box, e.g. "Instagram 10 Day Plan".</p><Input className="mt-2" value={edit.name} onChange={(e) => setEdit({ ...edit, name: e.target.value })} /></div>
               <div><Label>Price (USD)</Label><Input type="number" min={0} step="0.01" className="mt-2" value={edit.price} onChange={(e) => setEdit({ ...edit, price: Number(e.target.value) })} /></div>
-              <div><Label>Billing period</Label><Input className="mt-2" placeholder="month, year, once" value={edit.billing_period} onChange={(e) => setEdit({ ...edit, billing_period: e.target.value })} /></div>
+              <div><Label>Plan length</Label>
+                <select className="mt-2 h-10 w-full rounded-md border border-input bg-background px-3 text-sm" value={/days?$/.test(edit.billing_period) ? "days" : edit.billing_period} onChange={(e) => setEdit({ ...edit, billing_period: e.target.value === "days" ? "10 days" : e.target.value })}>
+                  <option value="month">Monthly (30 days)</option>
+                  <option value="year">Yearly (365 days)</option>
+                  <option value="once">Lifetime</option>
+                  <option value="days">Custom days</option>
+                </select>
+                {/days?$/.test(edit.billing_period) && (
+                  <Input type="number" min={1} className="mt-2" aria-label="Number of days" value={parseInt(edit.billing_period) || 1} onChange={(e) => { const n = Math.max(1, Number(e.target.value) || 1); setEdit({ ...edit, billing_period: `${n} ${n === 1 ? "day" : "days"}` }); }} />
+                )}
+              </div>
               <div className="sm:col-span-2"><Label>Features (one per line)</Label><Textarea rows={5} className="mt-2" value={edit.featuresText} onChange={(e) => setEdit({ ...edit, featuresText: e.target.value })} /></div>
               <div><Label>Button text</Label><Input className="mt-2" value={edit.cta} onChange={(e) => setEdit({ ...edit, cta: e.target.value })} /></div>
               <div><Label>Order</Label><Input type="number" className="mt-2" value={edit.sort_order} onChange={(e) => setEdit({ ...edit, sort_order: Number(e.target.value) })} /></div>
