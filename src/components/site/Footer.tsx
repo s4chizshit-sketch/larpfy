@@ -16,9 +16,9 @@ export function Footer() {
           </p>
         </div>
         {cols.map((c) => (
-          <div key={c.title} className="md:text-right">
+          <div key={c.title}>
             <h4 className="text-sm font-semibold">{c.title}</h4>
-            <ul className="mt-4 flex flex-wrap gap-x-7 gap-y-2.5 md:justify-end">
+            <ul className="mt-4 flex flex-wrap gap-x-7 gap-y-2.5">
               {c.links.map(([to, label]) => (
                 <li key={to}>
                   <Link to={to} className="text-sm text-muted-foreground hover:text-foreground">{label}</Link>
