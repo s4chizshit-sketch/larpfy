@@ -432,3 +432,24 @@
     transition: none;
   }
 }
+
+/* ============ Official brand marks (Instagram gradient glyph + TikTok note) ============ */
+.glyph-ig {
+  filter: drop-shadow(0 0 5px rgb(219 45 120 / 0.55)) drop-shadow(0 0 16px rgb(138 58 185 / 0.4));
+}
+.glyph-tt {
+  filter: drop-shadow(0 0 5px rgb(37 244 238 / 0.5)) drop-shadow(0 0 16px rgb(254 44 85 / 0.35));
+}
+.word-ig {
+  font-family: "Grand Hotel", "Instrument Serif", cursive;
+  background: linear-gradient(100deg, #ffdd55 0%, #ff543e 26%, #db2d78 52%, #8a3ab9 76%, #2f5ea8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 12px rgb(219 45 120 / 0.35));
+}
+.word-tt {
+  font-family: "Poppins", "Manrope", sans-serif;
+  color: #fff;
+  text-shadow: -1.2px 0 0 rgb(37 244 238 / 0.75), 1.2px 0 0 rgb(254 44 85 / 0.75);
+}
