@@ -41,12 +41,22 @@ function Login() {
     if (!r.success) return setErrors(Object.fromEntries(r.error.issues.map((i) => [i.path[0], i.message])));
     setErrors({});
     setLoading(true);
-    const { data: signIn, error } = await supabase.auth.signInWithPassword(r.data);
-    setLoading(false);
-    if (error) return setServerError(error.message === "Invalid login credentials" ? "Incorrect email or password." : error.message);
-    const { data: roles } = await supabase.from("user_roles").select("role").eq("user_id", signIn.user!.id);
-    if (redirect === "billing") return navigate({ to: "/dashboard/billing" });
-    navigate({ to: roles?.some((x) => x.role === "admin") ? "/" : "/dashboard" });
+    try {
+      const creds = { email: r.data.email.toLowerCase(), password: r.data.password };
+      let { data: signIn, error } = await supabase.auth.signInWithPassword(creds);
+      if (error && /fetch|network/i.test(error.message)) ({ data: signIn, error } = await supabase.auth.signInWithPassword(creds));
+      if (error || !signIn.user) {
+        setLoading(false);
+        const m = error?.message ?? "";
+        return setServerError(/invalid login/i.test(m) ? "Incorrect email or password." : /fetch|network/i.test(m) ? "Network issue — please check your connection and try again." : m || "Login failed, please try again.");
+      }
+      if (redirect === "billing") return navigate({ to: "/dashboard/billing" });
+      const { data: roles } = await supabase.from("user_roles").select("role").eq("user_id", signIn.user.id);
+      navigate({ to: roles?.some((x) => x.role === "admin") ? "/" : "/dashboard" });
+    } catch {
+      setLoading(false);
+      setServerError("Network issue — please check your connection and try again.");
+    }
   };
 
   return (
