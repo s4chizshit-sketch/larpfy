@@ -691,16 +691,19 @@ video::-internal-media-controls-download-button { display: none; }
   overflow: hidden;
   padding: 34px 28px;
   border-radius: 30px;
-  border: 1px solid color-mix(in oklab, var(--foreground) 11%, transparent);
+  border: 1px solid color-mix(in oklab, var(--foreground) 16%, transparent);
   background:
-    linear-gradient(180deg, color-mix(in oklab, var(--foreground) 6%, transparent), color-mix(in oklab, var(--foreground) 2%, transparent)),
-    color-mix(in oklab, var(--card) 60%, transparent);
-  backdrop-filter: blur(30px) saturate(170%);
-  -webkit-backdrop-filter: blur(30px) saturate(170%);
+    radial-gradient(120% 90% at 12% 0%, color-mix(in oklab, var(--primary) 20%, transparent), transparent 62%),
+    radial-gradient(90% 70% at 100% 100%, color-mix(in oklab, var(--glow) 14%, transparent), transparent 60%),
+    linear-gradient(180deg, color-mix(in oklab, var(--foreground) 9%, transparent), color-mix(in oklab, var(--foreground) 3%, transparent)),
+    color-mix(in oklab, var(--card) 72%, transparent);
+  backdrop-filter: blur(34px) saturate(180%);
+  -webkit-backdrop-filter: blur(34px) saturate(180%);
   box-shadow:
-    inset 0 1px 0 color-mix(in oklab, var(--foreground) 10%, transparent),
+    inset 0 1px 0 color-mix(in oklab, var(--foreground) 18%, transparent),
+    inset 0 0 44px -18px color-mix(in oklab, var(--glow) 45%, transparent),
     0 40px 90px -40px rgb(0 0 0 / 85%),
-    0 0 70px -30px color-mix(in oklab, var(--primary) 55%, transparent);
+    0 0 90px -30px color-mix(in oklab, var(--primary) 65%, transparent);
   animation: auth-rise 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 @keyframes auth-rise {
@@ -712,9 +715,16 @@ video::-internal-media-controls-download-button { display: none; }
   content: "";
   position: absolute;
   top: 0;
-  inset-inline: 12%;
+  inset-inline: 8%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--foreground) 45%, transparent), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in oklab, var(--glow) 75%, transparent) 42%,
+    color-mix(in oklab, var(--foreground) 80%, transparent) 56%,
+    transparent
+  );
+  box-shadow: 0 0 16px 1px color-mix(in oklab, var(--glow) 45%, transparent);
 }
 .auth-title {
   font-family: var(--font-display);
@@ -750,20 +760,22 @@ video::-internal-media-controls-download-button { display: none; }
   height: 50px;
   padding: 0 16px;
   border-radius: 14px;
-  border: 1px solid color-mix(in oklab, var(--foreground) 10%, transparent);
-  background: color-mix(in oklab, var(--foreground) 4%, transparent);
+  border: 1px solid color-mix(in oklab, var(--foreground) 15%, transparent);
+  background: color-mix(in oklab, var(--foreground) 5%, transparent);
   color: var(--foreground);
   font-size: 15px;
+  box-shadow: inset 0 1px 0 color-mix(in oklab, var(--foreground) 8%, transparent);
   transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 }
-.auth-field::placeholder { color: color-mix(in oklab, var(--muted-foreground) 55%, transparent); }
+.auth-field::placeholder { color: color-mix(in oklab, var(--muted-foreground) 78%, var(--foreground)); }
 .auth-field:focus {
   outline: none;
-  border-color: color-mix(in oklab, var(--glow) 55%, transparent);
-  background: color-mix(in oklab, var(--foreground) 6%, transparent);
+  border-color: color-mix(in oklab, var(--glow) 65%, transparent);
+  background: color-mix(in oklab, var(--foreground) 7%, transparent);
   box-shadow:
-    0 0 0 4px color-mix(in oklab, var(--primary) 14%, transparent),
-    0 0 22px -6px color-mix(in oklab, var(--glow) 45%, transparent);
+    inset 0 1px 0 color-mix(in oklab, var(--foreground) 12%, transparent),
+    0 0 0 4px color-mix(in oklab, var(--primary) 20%, transparent),
+    0 0 26px -6px color-mix(in oklab, var(--glow) 60%, transparent);
 }
 .auth-field:disabled { opacity: 0.6; }
 .auth-eye {
@@ -775,10 +787,10 @@ video::-internal-media-controls-download-button { display: none; }
   width: 46px;
   align-items: center;
   justify-content: center;
-  color: var(--muted-foreground);
+  color: color-mix(in oklab, var(--muted-foreground) 70%, var(--foreground));
   transition: color 0.2s ease;
 }
-.auth-eye:hover { color: var(--foreground); }
+.auth-eye:hover { color: var(--glow); }
 .auth-legal {
   text-align: center;
   font-size: 12px;
