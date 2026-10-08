@@ -128,10 +128,13 @@ export function PlatformSection({ platform, reverse }: { platform: "instagram" |
               {ig ? (
                 <>
                   Customize your Instagram insight visuals with an{" "}
-                  <span className="font-premium italic text-foreground/90">easy-to-use</span> editing interface.
+                  <span className="font-premium italic whitespace-nowrap text-foreground/90">easy-to-use</span> editing interface.
                 </>
               ) : (
-                "Create customized TikTok insight demos with the same simple workflow."
+                <>
+                  Create customized TikTok insight demos with the same{" "}
+                  <span className="font-premium italic whitespace-nowrap text-foreground/90">simple workflow</span>.
+                </>
               )}
             </p>
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">
