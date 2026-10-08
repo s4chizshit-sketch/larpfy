@@ -29,6 +29,13 @@
       "when": 1791453388705,
       "tag": "0003_plan_purchases_history",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1791460123171,
+      "tag": "0004_custom_day_plans",
+      "breakpoints": true
     }
   ]
 }
