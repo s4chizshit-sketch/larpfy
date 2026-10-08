@@ -25,3 +25,14 @@ export async function sendSignupAlert(info: { name?: string | null; email: strin
     console.error("Telegram alert error", e instanceof Error ? e.message : "unknown");
   }
 }
+
+export async function sendPlanAlert(info: { name: string | null; email: string | null; plan: string; amount: number }) {
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_OWNER_CHAT_ID || process.env.TELEGRAM_CHAT_ID;
+  if (!token || !chatId) return;
+  const time = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata", dateStyle: "medium", timeStyle: "short" });
+  const text = `💎 <b>Plan purchased</b>\n👤 Name: ${esc(info.name ?? "unknown")}\n📧 ${esc(info.email ?? "unknown")} — ✅ ${esc(info.plan)} ($${info.amount})\n🕒 ${esc(time)} IST`;
+  try {
+    await fetch(`https://api.telegram.org/bot${token}/sendMessage`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ chat_id: chatId, text, parse_mode: "HTML" }), signal: AbortSignal.timeout(4000) });
+  } catch { /* ignore */ }
+}
