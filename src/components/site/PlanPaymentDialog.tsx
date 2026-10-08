@@ -68,6 +68,7 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
   }, [open, deadline]);
 
   // One-time gentle "peek" scroll after the QR appears, hinting there is more below.
+  // Cancels immediately on any user gesture so it never fights the user's scrolling.
   useEffect(() => {
     if (!open) return;
     if (method !== "upi" || loadingQr || peekedRef.current) return;
@@ -78,9 +79,40 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
     const start = el.scrollTop;
     const max = Math.min(110, el.scrollHeight - el.clientHeight - start);
     if (max <= 8) return;
-    const t1 = window.setTimeout(() => el.scrollTo({ top: start + max, behavior: "smooth" }), 700);
-    const t2 = window.setTimeout(() => el.scrollTo({ top: start, behavior: "smooth" }), 1600);
-    return () => { window.clearTimeout(t1); window.clearTimeout(t2); };
+    let raf = 0;
+    let cancelled = false;
+    const once = { passive: true, once: true } as AddEventListenerOptions;
+    const cleanup = () => {
+      el.removeEventListener("wheel", cancel, once);
+      el.removeEventListener("touchstart", cancel, once);
+      el.removeEventListener("pointerdown", cancel, once);
+    };
+    const cancel = () => { cancelled = true; cancelAnimationFrame(raf); cleanup(); };
+    el.addEventListener("wheel", cancel, once);
+    el.addEventListener("touchstart", cancel, once);
+    el.addEventListener("pointerdown", cancel, once);
+    const easeOut = (x: number) => 1 - Math.pow(1 - x, 3);
+    const easeInOut = (x: number) => (x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
+    const t0 = performance.now() + 550;
+    const DOWN = 800;
+    const UP = 800;
+    const tick = (now: number) => {
+      if (cancelled) return;
+      const t = now - t0;
+      if (t < 0) { raf = requestAnimationFrame(tick); return; }
+      if (t < DOWN) {
+        el.scrollTo({ top: start + max * easeOut(t / DOWN) });
+      } else if (t < DOWN + UP) {
+        el.scrollTo({ top: start + max * (1 - easeInOut((t - DOWN) / UP)) });
+      } else {
+        el.scrollTo({ top: start });
+        cleanup();
+        return;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => { cancelled = true; cancelAnimationFrame(raf); cleanup(); };
   }, [open, method, loadingQr]);
 
   // Show a scroll hint chip while the timer / UPI ID sit below the fold.
