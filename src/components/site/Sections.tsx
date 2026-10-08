@@ -124,7 +124,7 @@ export function PlatformSection({ platform, reverse }: { platform: "instagram" |
             <h2 className="title-gradient mt-5 font-sans text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl">
               {titleLead} {titleAccent}
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+            <p className="mt-5 text-lg font-medium leading-relaxed text-foreground/80 sm:text-xl">
               {ig ? (
                 <>
                   Customize your Instagram insight visuals with an{" "}
