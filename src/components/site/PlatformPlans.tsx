@@ -49,7 +49,7 @@ export function PlatformPlans() {
   ];
 
   return (
-    <div className="mx-auto max-w-5xl" aria-label="Instagram and TikTok plans">
+    <div className="mx-auto max-w-4xl" aria-label="Instagram and TikTok plans">
       <div ref={viewportRef} className="platform-plans-window"
         onPointerDown={(event) => { pointerStart.current = { x: event.clientX, y: event.clientY }; }}
         onPointerMove={(event) => {
@@ -70,9 +70,9 @@ export function PlatformPlans() {
                   <img src={platform.logo} alt={`${platform.name} logo`} draggable={false} className={`h-14 w-14 shrink-0 object-contain ${platform.glowClass}`} />
                   <h3 className={`${platform.wordClass} text-3xl leading-tight`}>{platform.name}</h3>
                 </header>
-                <div className="mt-8 divide-y divide-border">
+                <div className="mt-7 plan-tiers">
                   {plans.map((plan) => (
-                    <div key={plan.id} className="py-6 first:pt-0 last:pb-0">
+                    <div key={plan.id} className="plan-tier py-6 first:pt-0 last:pb-0">
                       <div className="flex flex-wrap items-center justify-between gap-3">
                         <h4 className="font-display text-lg font-semibold">{plan.name.replace(new RegExp(`^${platform.name}\\s*`, "i"), "")}</h4>
                         <p className="flex items-baseline gap-1 font-display">
