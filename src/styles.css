@@ -174,9 +174,9 @@
   align-items: center;
   gap: 10px;
   font-family: var(--font-sans);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
   white-space: nowrap;
   color: color-mix(in oklab, #d6e9fb 90%, transparent);
