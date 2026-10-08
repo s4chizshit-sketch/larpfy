@@ -652,6 +652,7 @@ video::-internal-media-controls-download-button { display: none; }
   box-shadow: inset 0 1px 0 color-mix(in oklab, #9cc8ff 22%, transparent), 0 26px 58px -28px color-mix(in oklab, #2aabee 70%, transparent);
 }
 .settings-telegram-logo {
+  grid-area: logo;
   width: 54px;
   height: 54px;
   flex-shrink: 0;
