@@ -194,6 +194,12 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
                     </div>
                   </div>
                   <p className="payment-scan-label">Scan Payment · ₹{amount.toLocaleString("en-IN")}</p>
+                  {showScrollHint && (
+                    <button type="button" className="payment-scroll-hint" onClick={() => { setShowScrollHint(false); timerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" }); }} aria-label="Scroll to payment timer and UPI ID">
+                      <ChevronDown className="size-3.5" />
+                      <span>Scroll for timer & UPI ID</span>
+                    </button>
+                  )}
                   <div className="payment-upi-copy">
                     <span><small>UPI ID</small><strong>{UPI_ID}</strong></span>
                     <Button type="button" variant="ghost" size="icon" onClick={copyUpiId} aria-label="Copy UPI ID" title="Copy UPI ID"><Copy /></Button>
