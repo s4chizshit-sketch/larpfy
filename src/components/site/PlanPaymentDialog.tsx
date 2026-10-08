@@ -227,7 +227,17 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
                   </div>
                   <p className="payment-scan-label">Scan Payment · ₹{amount.toLocaleString("en-IN")}</p>
                   {showScrollHint && (
-                    <button type="button" className="payment-scroll-hint" onClick={() => { setShowScrollHint(false); timerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" }); }} aria-label="Scroll to payment timer and UPI ID">
+                    <button type="button" className="payment-scroll-hint" onClick={() => {
+                      setShowScrollHint(false);
+                      const el = scrollRef.current;
+                      const target = timerRef.current;
+                      if (el && target) {
+                        const top = target.offsetTop - (el.clientHeight - target.offsetHeight) / 2;
+                        el.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+                      } else {
+                        target?.scrollIntoView({ behavior: "smooth", block: "center" });
+                      }
+                    }} aria-label="Scroll to payment timer and UPI ID">
                       <ChevronDown className="size-3.5" />
                       <span>Scroll for timer & UPI ID</span>
                     </button>
