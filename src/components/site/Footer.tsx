@@ -8,7 +8,7 @@ const cols = [
 export function Footer() {
   return (
     <footer className="mt-24 border-t border-border">
-      <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 py-14 sm:px-6 md:flex-row md:items-start md:justify-between">
+      <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 py-14 sm:px-6 md:flex-row md:items-center md:justify-between">
         <div>
           <Logo />
           <p className="mt-4 max-w-xs text-sm text-muted-foreground">
