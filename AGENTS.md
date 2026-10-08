@@ -18,3 +18,4 @@
 - Global media rules must not override component-defined heights; explicit logo dimensions prevent header overflow and layout shifts.
 - Plan checkout is a shared presentation component opened from database-backed plan rows, so editable prices remain synchronized with the displayed payment amount.
 - Manual UPI checkout uses an absolute client deadline and a Telegram draft link after expiry; countdown expiry never verifies payment or activates access.
+- Payment dialogs use native vertical overflow for touch swipes, mouse wheels and scrollbar dragging; no automatic scrolling competes with the user's gestures.
