@@ -28,7 +28,7 @@ function Billing() {
       {data?.isAdmin && <PlanPriceEditor />}
       <h2 className="pro-title mb-6 mt-12 text-xl">Available plans</h2>
       <PlatformPlans />
-      <p className="billing-payment-note">UPI payments are available now. USD checkout is coming soon.</p>
+      <p className="billing-payment-note">UPI payments are available now. USD crypto checkout via OxaPay is available too.</p>
     </>
   );
 }

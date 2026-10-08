@@ -10,8 +10,11 @@ import paytmLogo from "@/assets/pay-paytm.png.asset.json";
 import bhimLogo from "@/assets/pay-bhim.png.asset.json";
 import telegramLogo from "@/assets/telegram-about.png.asset.json";
 import { upiPaymentIntent } from "@/lib/upi-payment-links";
+import { useServerFn } from "@tanstack/react-start";
+import { createOxapayInvoice } from "@/lib/oxapay.functions";
 
 type SelectedPlan = {
+  id?: string;
   name: string;
   price: number;
   billingPeriod: string;
@@ -36,6 +39,8 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
   const [deadline, setDeadline] = useState<number | null>(null);
   const [secondsLeft, setSecondsLeft] = useState(PAYMENT_WINDOW_SECONDS);
   const [showScrollHint, setShowScrollHint] = useState(false);
+  const [usdLoading, setUsdLoading] = useState(false);
+  const createInvoice = useServerFn(createOxapayInvoice);
   const scrollRef = useRef<HTMLDivElement>(null);
   const timerRef = useRef<HTMLDivElement>(null);
 
@@ -94,6 +99,18 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
     else setLoadingQr(false);
   };
 
+  const payUsd = async () => {
+    if (!plan.id) return;
+    setUsdLoading(true);
+    try {
+      const { url } = await createInvoice({ data: { planId: plan.id, origin: window.location.origin } });
+      window.location.assign(url);
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "Could not start payment");
+      setUsdLoading(false);
+    }
+  };
+
   const copyUpiId = async () => {
     try {
       await navigator.clipboard.writeText(UPI_ID);
@@ -146,7 +163,14 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
           {method === "usd" && (
             <div className="payment-soon" role="status">
               <Landmark />
-              <div><strong>USD payment gateway is coming soon.</strong><p>UPI is available now.</p></div>
+              <div className="flex-1">
+                <strong>Pay ${plan.price} with crypto via OxaPay</strong>
+                <p>Access is activated automatically after payment confirms.</p>
+                <Button type="button" className="btn-plan mt-3 gap-2" disabled={usdLoading || !plan.id} onClick={payUsd}>
+                  {usdLoading ? <LoaderCircle className="size-4 animate-spin" /> : <ArrowUpRight className="size-4" />}
+                  {usdLoading ? "Opening checkout…" : "Pay with OxaPay"}
+                </Button>
+              </div>
             </div>
           )}
 
