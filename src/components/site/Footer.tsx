@@ -18,7 +18,7 @@ export function Footer() {
         {cols.map((c) => (
           <div key={c.title} className="md:text-right">
             <h4 className="text-sm font-semibold">{c.title}</h4>
-            <ul className="mt-4 flex flex-col gap-2.5 md:items-end">
+            <ul className="mt-4 flex flex-wrap gap-x-7 gap-y-2.5 md:justify-end">
               {c.links.map(([to, label]) => (
                 <li key={to}>
                   <Link to={to} className="text-sm text-muted-foreground hover:text-foreground">{label}</Link>
@@ -29,14 +29,14 @@ export function Footer() {
         ))}
       </div>
       <div className="border-t border-border">
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-          <p className="text-xs leading-relaxed text-muted-foreground">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-8 sm:flex-row sm:items-end sm:justify-between sm:px-6">
+          <p className="max-w-3xl text-xs leading-relaxed text-muted-foreground">
             LARP Insight is an independent third-party tool. It is not affiliated with, endorsed by, or officially
             connected to Instagram, TikTok, Meta, or ByteDance. Customized visuals are intended for demonstration,
             presentation, entertainment, and creative purposes and should not be represented as authentic platform
             analytics.
           </p>
-          <p className="mt-4 text-xs text-muted-foreground">© {new Date().getFullYear()} LARP Insight</p>
+          <p className="shrink-0 text-xs text-muted-foreground">© {new Date().getFullYear()} LARP Insight</p>
         </div>
       </div>
     </footer>
