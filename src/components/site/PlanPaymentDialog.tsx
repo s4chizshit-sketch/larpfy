@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
-import { Check, Copy, Landmark, LoaderCircle, QrCode, WalletCards } from "lucide-react";
+import { Check, Copy, Download, Landmark, LoaderCircle, QrCode, WalletCards } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
-import qrAsset from "@/assets/larp-insight-upi-qr.png.asset.json";
+import qrAsset from "@/assets/larp-insight-upi-qr-clean.png.asset.json";
+import gpayLogo from "@/assets/pay-gpay.png.asset.json";
+import phonepeLogo from "@/assets/pay-phonepe.png.asset.json";
+import paytmLogo from "@/assets/pay-paytm.png.asset.json";
+import bhimLogo from "@/assets/pay-bhim.png.asset.json";
 
 type SelectedPlan = {
   name: string;
