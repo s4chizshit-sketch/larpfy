@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import type { Session, User } from "@supabase/supabase-js";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { recordVisit } from "./visit.functions";
+import { recordVisit, trackSiteVisit } from "./visit.functions";
 
 type AuthCtx = { session: Session | null; user: User | null; loading: boolean };
 const Ctx = createContext<AuthCtx>({ session: null, user: null, loading: true });
@@ -20,6 +20,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setLoading(false);
     });
     return () => data.subscription.unsubscribe();
+  }, []);
+  // Count every browser session once (anonymous visitors included).
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem("site-visit")) return;
+      sessionStorage.setItem("site-visit", "1");
+      const t = setTimeout(() => trackSiteVisit().catch(() => {}), 1500);
+      return () => clearTimeout(t);
+    } catch {}
   }, []);
   const uid = session?.user?.id;
   useEffect(() => {

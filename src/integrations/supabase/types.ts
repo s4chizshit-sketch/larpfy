@@ -364,6 +364,24 @@ export type Database = {
         }
         Relationships: []
       }
+      site_visits: {
+        Row: {
+          country: string | null
+          created_at: string
+          id: string
+        }
+        Insert: {
+          country?: string | null
+          created_at?: string
+          id?: string
+        }
+        Update: {
+          country?: string | null
+          created_at?: string
+          id?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
@@ -388,6 +406,7 @@ export type Database = {
     }
     Functions: {
       add_visit_time: { Args: { _seconds: number }; Returns: undefined }
+      admin_stats: { Args: never; Returns: Json }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]

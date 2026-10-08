@@ -6,12 +6,11 @@ import { supabase } from "@/integrations/supabase/client";
 export function ProSubscribersAdmin() {
   const { data } = useQuery({
     queryKey: ["admin", "pro-subscribers"],
-    refetchInterval: 10000,
+    refetchInterval: 15000,
     queryFn: async () => {
-      const [{ data: buys }, { data: profiles }] = await Promise.all([
-        supabase.from("plan_purchases").select("*").order("started_at", { ascending: false }),
-        supabase.from("profiles").select("id,email,name"),
-      ]);
+      const { data: buys } = await supabase.from("plan_purchases").select("*").order("started_at", { ascending: false }).limit(200);
+      const ids = [...new Set((buys ?? []).map((b) => b.user_id))];
+      const { data: profiles } = ids.length ? await supabase.from("profiles").select("id,email,name").in("id", ids) : { data: [] };
       const map = new Map((profiles ?? []).map((p) => [p.id, p]));
       return (buys ?? []).map((b) => ({ ...b, email: map.get(b.user_id)?.email ?? "—", name: map.get(b.user_id)?.name }));
     },
