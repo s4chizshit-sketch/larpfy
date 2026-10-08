@@ -155,7 +155,7 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
             </Button>
             <Button type="button" variant="outline" onClick={() => chooseMethod("usd")} aria-pressed={method === "usd"} className={`payment-method ${method === "usd" ? "is-selected" : ""}`}>
               <span className="payment-method-icon"><WalletCards /></span>
-              <span><strong>USD</strong><small>Card gateway</small></span>
+              <span><strong>USD</strong><small>Crypto gateway</small></span>
               {method === "usd" && <Check className="payment-method-check" />}
             </Button>
           </div>
