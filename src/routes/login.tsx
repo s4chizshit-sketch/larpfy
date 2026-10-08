@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
-import { Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -33,6 +33,7 @@ function Login() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [serverError, setServerError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [shown, setShown] = useState(false);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,24 +61,75 @@ function Login() {
   };
 
   return (
-    <AuthShell title="Welcome back" sub="Log in with the email and password you registered with." footer={<>New here? <Link to="/signup" search={redirect ? { redirect } : {}} className="text-foreground underline-offset-4 hover:underline">Create an account</Link></>}>
-      <form onSubmit={submit} className="space-y-4" noValidate>
+    <AuthShell
+      title="Welcome back"
+      sub={
+        <>
+          Log in with the <em>email and password</em> you registered with.
+        </>
+      }
+      footer={
+        <>
+          New here?{" "}
+          <Link to="/signup" search={redirect ? { redirect } : {}}>
+            Create an account
+          </Link>
+        </>
+      }
+    >
+      <form onSubmit={submit} className="space-y-5" noValidate>
         <div>
-          <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" autoComplete="email" className="mt-2 h-11" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+          <Label htmlFor="email" className="auth-label">
+            Email
+          </Label>
+          <div className="relative mt-2">
+            <Input
+              id="email"
+              type="email"
+              autoComplete="email"
+              placeholder="you@email.com"
+              className="auth-field"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+            />
+          </div>
           <FieldError msg={errors.email} />
         </div>
         <div>
           <div className="flex items-center justify-between">
-            <Label htmlFor="password">Password</Label>
-            <Link to="/forgot-password" className="text-xs text-muted-foreground hover:text-foreground">Forgot password?</Link>
+            <Label htmlFor="password" className="auth-label">
+              Password
+            </Label>
+            <Link to="/forgot-password" className="auth-link">
+              Forgot password?
+            </Link>
           </div>
-          <Input id="password" type="password" autoComplete="current-password" className="mt-2 h-11" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
+          <div className="relative mt-2">
+            <Input
+              id="password"
+              type={shown ? "text" : "password"}
+              autoComplete="current-password"
+              placeholder="Your password"
+              className="auth-field pr-12"
+              value={form.password}
+              onChange={(e) => setForm({ ...form, password: e.target.value })}
+            />
+            <button
+              type="button"
+              onClick={() => setShown(!shown)}
+              aria-label={shown ? "Hide password" : "Show password"}
+              className="auth-eye"
+            >
+              {shown ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            </button>
+          </div>
           <FieldError msg={errors.password} />
         </div>
-        {serverError && <p className="rounded-lg bg-destructive/10 p-3 text-sm text-destructive">{serverError}</p>}
-        <Button type="submit" size="lg" className="w-full bg-brand" disabled={loading}>
-          {loading && <Loader2 className="h-4 w-4 animate-spin" />} Login
+        {serverError && <p className="rounded-xl bg-destructive/10 p-3 text-sm text-destructive">{serverError}</p>}
+        <Button type="submit" size="lg" className="btn-plan mt-1 h-[50px] w-full text-sm font-semibold" disabled={loading}>
+          <span className="relative z-[2] inline-flex items-center gap-2">
+            {loading && <Loader2 className="h-4 w-4 animate-spin" />} Login
+          </span>
         </Button>
       </form>
     </AuthShell>

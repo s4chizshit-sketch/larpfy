@@ -79,20 +79,30 @@ function Signup() {
       </AuthShell>
     );
 
-  const field = (k: keyof typeof form, label: string, type = "text", auto?: string) => {
+  const field = (k: keyof typeof form, label: string, type = "text", auto?: string, placeholder?: string) => {
     const isPw = type === "password";
     const visible = !!shown[k];
     return (
       <div>
-        <Label htmlFor={k}>{label}</Label>
+        <Label htmlFor={k} className="auth-label">
+          {label}
+        </Label>
         <div className="relative mt-2">
-          <Input id={k} type={isPw && visible ? "text" : type} autoComplete={auto} className={`h-11 ${isPw ? "pr-11" : ""}`} value={form[k]} onChange={(e) => setForm({ ...form, [k]: e.target.value })} />
+          <Input
+            id={k}
+            type={isPw && visible ? "text" : type}
+            autoComplete={auto}
+            placeholder={placeholder}
+            className={`auth-field ${isPw ? "pr-12" : ""}`}
+            value={form[k]}
+            onChange={(e) => setForm({ ...form, [k]: e.target.value })}
+          />
           {isPw && (
             <button
               type="button"
               onClick={() => setShown({ ...shown, [k]: !visible })}
               aria-label={visible ? "Hide password" : "Show password"}
-              className="absolute right-0 top-0 flex h-11 w-11 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
+              className="auth-eye"
             >
               {visible ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
@@ -104,18 +114,35 @@ function Signup() {
   };
 
   return (
-    <AuthShell title="Create your account" sub="Start customizing insight demos in minutes." footer={<>Already have an account? <Link to="/login" search={redirect ? { redirect } : {}} className="text-foreground underline-offset-4 hover:underline">Login</Link></>}>
-      <form onSubmit={submit} className="space-y-4" noValidate>
-        {field("name", "Name", "text", "name")}
-        {field("email", "Email", "email", "email")}
-        {field("password", "Password", "password", "new-password")}
-        {field("confirm", "Confirm Password", "password", "new-password")}
-        {serverError && <p className="rounded-lg bg-destructive/10 p-3 text-sm text-destructive">{serverError}</p>}
-        <Button type="submit" size="lg" className="w-full bg-brand" disabled={loading}>
-          {loading && <Loader2 className="h-4 w-4 animate-spin" />} Create Account
+    <AuthShell
+      title="Create your account"
+      sub={
+        <>
+          Start customizing <em>insight demos</em> in minutes.
+        </>
+      }
+      footer={
+        <>
+          Already have an account?{" "}
+          <Link to="/login" search={redirect ? { redirect } : {}}>
+            Login
+          </Link>
+        </>
+      }
+    >
+      <form onSubmit={submit} className="space-y-5" noValidate>
+        {field("name", "Name", "text", "name", "Your name")}
+        {field("email", "Email", "email", "email", "you@email.com")}
+        {field("password", "Password", "password", "new-password", "At least 6 characters")}
+        {field("confirm", "Confirm Password", "password", "new-password", "Repeat your password")}
+        {serverError && <p className="rounded-xl bg-destructive/10 p-3 text-sm text-destructive">{serverError}</p>}
+        <Button type="submit" size="lg" className="btn-plan mt-1 h-[50px] w-full text-sm font-semibold" disabled={loading}>
+          <span className="relative z-[2] inline-flex items-center gap-2">
+            {loading && <Loader2 className="h-4 w-4 animate-spin" />} Create Account
+          </span>
         </Button>
-        <p className="text-center text-xs text-muted-foreground">
-          By continuing you agree to our <Link to="/terms" className="underline">Terms</Link> and <Link to="/privacy" className="underline">Privacy Policy</Link>.
+        <p className="auth-legal">
+          By continuing you agree to our <Link to="/terms">Terms</Link> and <Link to="/privacy">Privacy Policy</Link>.
         </p>
       </form>
     </AuthShell>
