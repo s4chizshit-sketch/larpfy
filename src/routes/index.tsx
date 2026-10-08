@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Reveal } from "@/components/site/Reveal";
 import {
   CtaBand, FaqList, Masthead, PlatformSection, PublicLayout, SectionHeading,
 } from "@/components/site/Sections";
@@ -26,7 +27,9 @@ function Index() {
       <PlatformSection platform="instagram" />
       <PlatformSection platform="tiktok" reverse />
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow="Questions" title="What people ask us" />
+        <Reveal>
+          <SectionHeading eyebrow="Questions" title="What people ask us" />
+        </Reveal>
         <div className="mt-10"><FaqList /></div>
       </section>
       <CtaBand />
