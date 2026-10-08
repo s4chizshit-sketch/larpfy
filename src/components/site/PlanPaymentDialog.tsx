@@ -9,6 +9,7 @@ import phonepeLogo from "@/assets/pay-phonepe.png.asset.json";
 import paytmLogo from "@/assets/pay-paytm.png.asset.json";
 import bhimLogo from "@/assets/pay-bhim.png.asset.json";
 import telegramLogo from "@/assets/telegram-about.png.asset.json";
+import { upiPaymentIntent } from "@/lib/upi-payment-links";
 
 type SelectedPlan = {
   name: string;
@@ -208,12 +209,27 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
                         { name: "BHIM", logo: bhimLogo, packageId: "in.org.npci.upiapp" },
                       ].map((app) => (
                         <Button key={app.packageId} asChild variant="ghost" className="payment-app-chip">
-                          <a href={`https://play.google.com/store/apps/details?id=${app.packageId}`} target="_blank" rel="noopener noreferrer" aria-label={`Get ${app.name} on Google Play`} title={`Download ${app.name} from Google Play`}>
+                          <a href={`https://play.google.com/store/apps/details?id=${app.packageId}`} target="_blank" rel="noopener noreferrer" aria-label={`Pay ₹${amount.toLocaleString("en-IN")} with ${app.name}`} title={`Pay with ${app.name}`}
+                            onClick={(event) => {
+                              if (!/Android/i.test(navigator.userAgent)) {
+                                toast.info("App payments require an Android phone. You can also scan the QR code.");
+                                return;
+                              }
+                              event.preventDefault();
+                              if (deadline === null || Date.now() >= deadline) return;
+                              const intent = upiPaymentIntent(app.packageId, amount, plan.name);
+                              if (!intent) {
+                                toast.error("Payment amount is unavailable. Please choose your plan again.");
+                                return;
+                              }
+                              window.location.assign(intent);
+                            }}>
                             <img src={app.logo.url} alt={app.name} draggable={false} />
                           </a>
                         </Button>
                       ))}
                     </div>
+                    <p className="payment-verification-note">Confirm the amount in your app and approve with your UPI PIN. Never share your PIN.</p>
                   </div>
                   <div ref={timerRef} className="payment-countdown" role="timer" aria-label={`Payment time remaining ${countdown}`}>
                     <div className="payment-countdown-line"><span><Timer className="size-4" />Time remaining</span><strong>{countdown}</strong></div>
