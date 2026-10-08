@@ -4,6 +4,7 @@ import { PlatformPlans } from "@/components/site/PlatformPlans";
 import { useProfile } from "@/lib/auth";
 import { PlanPriceEditor } from "@/components/app/PlanPriceEditor";
 import { PlanHistory } from "@/components/app/PlanHistory";
+import { HowToGetPlan } from "@/components/app/HowToGetPlan";
 
 export const Route = createFileRoute("/_authenticated/dashboard/billing")({
   component: Billing,
