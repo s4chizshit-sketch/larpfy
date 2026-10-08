@@ -39,10 +39,11 @@ function Login() {
     if (!r.success) return setErrors(Object.fromEntries(r.error.issues.map((i) => [i.path[0], i.message])));
     setErrors({});
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword(r.data);
+    const { data: signIn, error } = await supabase.auth.signInWithPassword(r.data);
     setLoading(false);
     if (error) return setServerError(error.message === "Invalid login credentials" ? "Incorrect email or password." : error.message);
-    navigate({ to: "/dashboard" });
+    const { data: roles } = await supabase.from("user_roles").select("role").eq("user_id", signIn.user!.id);
+    navigate({ to: roles?.some((x) => x.role === "admin") ? "/" : "/dashboard" });
   };
 
   return (
