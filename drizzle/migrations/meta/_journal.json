@@ -15,6 +15,13 @@
       "when": 1791450608522,
       "tag": "0001_owner_admin_and_visit_time",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791453203773,
+      "tag": "0002_migration",
+      "breakpoints": true
     }
   ]
 }
