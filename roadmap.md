@@ -1,2 +1,3 @@
 - [x] Replace old plan presentation with two premium Instagram/TikTok swipe boxes.
 - [x] Store new prices, add PNG logos, and verify pricing and touch interaction.
+- [x] Match the View Pricing box style and animation to the Get Plan pill.

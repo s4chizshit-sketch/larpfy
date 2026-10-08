@@ -212,24 +212,43 @@ export function PricingGrid() {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <div className="pricing-gate mx-auto max-w-xl rounded-[28px] p-8 text-center sm:p-10">
-        <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-border/60 bg-foreground/5">
-          <Lock className="h-5 w-5 text-primary" aria-hidden />
+      <Reveal>
+        <div className="pricing-gate mx-auto max-w-xl rounded-[28px] p-8 text-center sm:p-10">
+          <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-border/60 bg-foreground/5">
+            <Lock className="h-5 w-5 text-primary" aria-hidden />
+          </div>
+          <h3 className="font-display text-2xl font-bold tracking-tight">Plans for Instagram &amp; TikTok</h3>
+          <p className="mx-auto mt-3 max-w-sm text-muted-foreground">
+            Plan prices are shown inside your account. Sign up or log in to view them.
+          </p>
+          <div className="group relative mt-8 inline-flex">
+            <div
+              className="absolute -inset-2 rounded-full opacity-40 blur-xl transition-opacity duration-300 group-hover:opacity-70"
+              style={{ background: "linear-gradient(100deg, #0a7bff, #5ec8ff)" }}
+              aria-hidden="true"
+            />
+            {user ? (
+              <Link
+                to="/dashboard/billing"
+                className="btn-plan relative inline-flex h-11 w-auto items-center justify-center gap-2.5 px-7 text-xs font-bold uppercase tracking-[0.12em]"
+              >
+                <span className="relative z-[2]">View Pricing</span>
+                <ArrowRight className="relative z-[2] h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setOpen(true)}
+                className="btn-plan relative inline-flex h-11 w-auto items-center justify-center gap-2.5 px-7 text-xs font-bold uppercase tracking-[0.12em]"
+              >
+                <span className="relative z-[2]">View Pricing</span>
+                <ArrowRight className="relative z-[2] h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </button>
+            )}
+          </div>
         </div>
-        <h3 className="font-display text-2xl font-bold tracking-tight">Plans for Instagram &amp; TikTok</h3>
-        <p className="mx-auto mt-3 max-w-sm text-muted-foreground">
-          Plan prices are shown inside your account. Sign up or log in to view them.
-        </p>
-        {user ? (
-          <Button asChild size="lg" className="mt-7 rounded-full bg-brand px-8 shadow-glow">
-            <Link to="/dashboard/billing">View Pricing <ArrowRight className="h-4 w-4" /></Link>
-          </Button>
-        ) : (
-          <Button size="lg" className="mt-7 rounded-full bg-brand px-8 shadow-glow" onClick={() => setOpen(true)}>
-            View Pricing <ArrowRight className="h-4 w-4" />
-          </Button>
-        )}
-      </div>
+      </Reveal>
+
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="max-w-md rounded-3xl text-center">
           <DialogTitle className="font-display text-2xl font-bold">Log in to get a plan</DialogTitle>
