@@ -615,3 +615,7 @@
 .pro-title{font-family:"Sora",var(--font-display,sans-serif);font-weight:700;letter-spacing:-.02em;background:linear-gradient(180deg,var(--foreground) 30%,color-mix(in oklab,var(--primary) 60%,var(--foreground)));-webkit-background-clip:text;background-clip:text;color:transparent}
 .pro-panel{border-radius:1.25rem;border:1px solid color-mix(in oklab,var(--primary) 18%,var(--border));background:linear-gradient(160deg,color-mix(in oklab,var(--card) 85%,transparent),color-mix(in oklab,var(--card) 50%,transparent));box-shadow:inset 0 1px 0 color-mix(in oklab,var(--foreground) 6%,transparent),0 18px 40px -24px color-mix(in oklab,var(--primary) 45%,transparent);transition:transform .25s ease,box-shadow .25s ease}
 .pro-panel:hover{transform:translateY(-2px)}
+
+video, img { -webkit-user-drag: none; user-select: none; -webkit-touch-callout: none; }
+video::-internal-media-controls-download-button { display: none; }
+@media print { body { display: none !important; } }
