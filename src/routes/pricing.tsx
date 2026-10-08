@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { FaqList, PricingGrid, PublicLayout, SectionHeading } from "@/components/site/Sections";
 
@@ -12,12 +13,21 @@ export const Route = createFileRoute("/pricing")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: () => (
+  component: PricingPage,
+});
+
+function PricingPage() {
+  useEffect(() => {
+    if (window.location.hash !== "#plans") return;
+    const target = document.getElementById("plans");
+    target?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
+  return (
     <PublicLayout>
       <section className="hero-bg">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
           <SectionHeading eyebrow="Pricing" title="Instagram & TikTok Plans" />
-          <div className="mt-14"><PricingGrid /></div>
+          <div className="mt-14 scroll-mt-28" id="plans"><PricingGrid /></div>
         </div>
       </section>
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
@@ -25,5 +35,5 @@ export const Route = createFileRoute("/pricing")({
         <div className="mt-10"><FaqList /></div>
       </section>
     </PublicLayout>
-  ),
-});
+  );
+}
