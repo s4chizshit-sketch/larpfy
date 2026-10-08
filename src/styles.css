@@ -592,7 +592,15 @@
 
 /* ===== Plan payment ===== */
 .payment-dialog {
-  overflow: hidden;
+  max-height: 92vh;
+  max-height: 92dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y pinch-zoom;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) var(--card);
   border: 1px solid color-mix(in oklab, var(--glow) 34%, var(--border));
   border-radius: 22px;
   background: linear-gradient(155deg, color-mix(in oklab, var(--glow) 9%, var(--card)), var(--background) 62%);
@@ -623,16 +631,15 @@
   cursor: pointer;
   box-shadow: 0 0 18px -6px color-mix(in oklab, var(--glow) 55%, transparent);
   transition: color 0.2s ease, border-color 0.2s ease;
-  animation: payment-hint-bounce 1.9s ease-in-out infinite;
 }
 .payment-scroll-hint:hover { color: var(--foreground); border-color: color-mix(in oklab, var(--primary) 55%, transparent); }
-.payment-scroll-hint svg { color: var(--glow); }
+.payment-scroll-hint svg { color: var(--glow); animation: payment-hint-bounce 1.9s ease-in-out infinite; }
 @keyframes payment-hint-bounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(4px); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .payment-scroll-hint { animation: none; }
+  .payment-scroll-hint svg { animation: none; }
 }
 .payment-countdown-line { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .payment-countdown-line span { display: flex; align-items: center; gap: 8px; color: var(--muted-foreground); font-size: 13px; }
