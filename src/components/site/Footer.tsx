@@ -11,17 +11,21 @@ export function Footer() {
       <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 py-14 sm:px-6 md:flex-row md:items-center md:justify-between">
         <div>
           <Logo />
-          <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-            Visual insight customization for Instagram and TikTok demos.
-          </p>
         </div>
         {cols.map((c) => (
           <div key={c.title}>
-            <h4 className="text-sm font-semibold">{c.title}</h4>
-            <ul className="mt-4 flex flex-wrap gap-x-7 gap-y-2.5">
+            <h4 className="text-xs font-semibold uppercase tracking-[0.22em] text-muted-foreground">{c.title}</h4>
+            <ul className="mt-4 flex flex-wrap gap-x-8 gap-y-3">
               {c.links.map(([to, label]) => (
                 <li key={to}>
-                  <Link to={to} className="text-sm text-muted-foreground hover:text-foreground">{label}</Link>
+                  <Link
+                    to={to}
+                    className="footer-link"
+                    activeProps={{ className: "is-active" }}
+                    activeOptions={{ exact: true }}
+                  >
+                    {label}
+                  </Link>
                 </li>
               ))}
             </ul>
