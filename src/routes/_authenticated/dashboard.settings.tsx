@@ -2,12 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
+import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PageHeader } from "@/components/app/AppShell";
 import { useProfile } from "@/lib/auth";
 import { supabase } from "@/integrations/supabase/client";
+import telegramLogo from "@/assets/telegram-about.png.asset.json";
+
+const TELEGRAM_URL = "https://t.me/+HAwfutUg1gNlZDZl";
 
 export const Route = createFileRoute("/_authenticated/dashboard/settings")({
   component: Settings,
