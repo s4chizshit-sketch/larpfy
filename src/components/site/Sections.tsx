@@ -218,10 +218,12 @@ export function FaqList() {
   return (
     <Accordion type="single" collapsible defaultValue="0" className="mx-auto max-w-3xl">
       {faq.map((f, i) => (
-        <AccordionItem key={i} value={String(i)}>
-          <AccordionTrigger className="text-left text-base">{f.q}</AccordionTrigger>
-          <AccordionContent className="text-muted-foreground">{f.a}</AccordionContent>
-        </AccordionItem>
+        <Reveal key={i} delay={i * 80}>
+          <AccordionItem value={String(i)}>
+            <AccordionTrigger className="text-left text-base">{f.q}</AccordionTrigger>
+            <AccordionContent className="text-muted-foreground">{f.a}</AccordionContent>
+          </AccordionItem>
+        </Reveal>
       ))}
     </Accordion>
   );
