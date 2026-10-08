@@ -7,6 +7,7 @@
 - [x] Keep workspace menus content-height, hide project sections from non-admin users, and style Logout red.
 - [x] Fix oversized public header logos caused by the global media height override; verify mobile/desktop sizing and menu interaction.
 - [x] Plan boxes: soft 24px rounded corners, narrower card, hover lift, lit hairline top edge, refined tier divider (diagonal light-cut sweep removed at the user's request; Get Plan shine kept).
+- [x] "How to Get Subscription (Plan)" glass box on the Pricing/Subscription page, under the Current plan / Status / Price cards, with the four steps.
 - [ ] Add the show/hide password eye toggle to the login page (waiting on user's go-ahead).
 - [ ] Put the real Instagram link on the About page (placeholder used until then).
 - [ ] Confirm the admin price editor saves correctly (needs one price changed and saved by the user).
