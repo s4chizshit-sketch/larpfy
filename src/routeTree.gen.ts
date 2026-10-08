@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AboutRouteImport } from './routes/about'
-import { Route as AffiliateRouteImport } from './routes/affiliate'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as FeaturesRouteImport } from './routes/features'
@@ -27,12 +26,10 @@ import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as RCodeRouteImport } from './routes/r.$code'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
-import { Route as AuthenticatedAdminAffiliateRouteImport } from './routes/_authenticated/admin.affiliate'
 import { Route as AuthenticatedAdminContentRouteImport } from './routes/_authenticated/admin.content'
 import { Route as AuthenticatedAdminPricingRouteImport } from './routes/_authenticated/admin.pricing'
 import { Route as AuthenticatedAdminVideosRouteImport } from './routes/_authenticated/admin.videos'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
-import { Route as AuthenticatedDashboardAffiliateRouteImport } from './routes/_authenticated/dashboard.affiliate'
 import { Route as AuthenticatedDashboardBillingRouteImport } from './routes/_authenticated/dashboard.billing'
 import { Route as AuthenticatedDashboardInstagramRouteImport } from './routes/_authenticated/dashboard.instagram'
 import { Route as AuthenticatedDashboardProjectsRouteImport } from './routes/_authenticated/dashboard.projects'
@@ -52,11 +49,6 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AffiliateRoute = AffiliateRouteImport.update({
-  id: '/affiliate',
-  path: '/affiliate',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -129,12 +121,6 @@ const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedAdminRoute,
 } as any)
-const AuthenticatedAdminAffiliateRoute =
-  AuthenticatedAdminAffiliateRouteImport.update({
-    id: '/affiliate',
-    path: '/affiliate',
-    getParentRoute: () => AuthenticatedAdminRoute,
-  } as any)
 const AuthenticatedAdminContentRoute =
   AuthenticatedAdminContentRouteImport.update({
     id: '/content',
@@ -157,12 +143,6 @@ const AuthenticatedDashboardIndexRoute =
   AuthenticatedDashboardIndexRouteImport.update({
     id: '/',
     path: '/',
-    getParentRoute: () => AuthenticatedDashboardRoute,
-  } as any)
-const AuthenticatedDashboardAffiliateRoute =
-  AuthenticatedDashboardAffiliateRouteImport.update({
-    id: '/affiliate',
-    path: '/affiliate',
     getParentRoute: () => AuthenticatedDashboardRoute,
   } as any)
 const AuthenticatedDashboardBillingRoute =
@@ -205,7 +185,6 @@ const AuthenticatedDashboardEditorIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/affiliate': typeof AffiliateRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/features': typeof FeaturesRoute
@@ -219,11 +198,9 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRouteWithChildren
   '/r/$code': typeof RCodeRoute
-  '/admin/affiliate': typeof AuthenticatedAdminAffiliateRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
   '/admin/pricing': typeof AuthenticatedAdminPricingRoute
   '/admin/videos': typeof AuthenticatedAdminVideosRoute
-  '/dashboard/affiliate': typeof AuthenticatedDashboardAffiliateRoute
   '/dashboard/billing': typeof AuthenticatedDashboardBillingRoute
   '/dashboard/instagram': typeof AuthenticatedDashboardInstagramRoute
   '/dashboard/projects': typeof AuthenticatedDashboardProjectsRoute
@@ -236,7 +213,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/affiliate': typeof AffiliateRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/features': typeof FeaturesRoute
@@ -248,11 +224,9 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
   '/r/$code': typeof RCodeRoute
-  '/admin/affiliate': typeof AuthenticatedAdminAffiliateRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
   '/admin/pricing': typeof AuthenticatedAdminPricingRoute
   '/admin/videos': typeof AuthenticatedAdminVideosRoute
-  '/dashboard/affiliate': typeof AuthenticatedDashboardAffiliateRoute
   '/dashboard/billing': typeof AuthenticatedDashboardBillingRoute
   '/dashboard/instagram': typeof AuthenticatedDashboardInstagramRoute
   '/dashboard/projects': typeof AuthenticatedDashboardProjectsRoute
@@ -267,7 +241,6 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
-  '/affiliate': typeof AffiliateRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/features': typeof FeaturesRoute
@@ -281,11 +254,9 @@ export interface FileRoutesById {
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteWithChildren
   '/r/$code': typeof RCodeRoute
-  '/_authenticated/admin/affiliate': typeof AuthenticatedAdminAffiliateRoute
   '/_authenticated/admin/content': typeof AuthenticatedAdminContentRoute
   '/_authenticated/admin/pricing': typeof AuthenticatedAdminPricingRoute
   '/_authenticated/admin/videos': typeof AuthenticatedAdminVideosRoute
-  '/_authenticated/dashboard/affiliate': typeof AuthenticatedDashboardAffiliateRoute
   '/_authenticated/dashboard/billing': typeof AuthenticatedDashboardBillingRoute
   '/_authenticated/dashboard/instagram': typeof AuthenticatedDashboardInstagramRoute
   '/_authenticated/dashboard/projects': typeof AuthenticatedDashboardProjectsRoute
@@ -300,7 +271,6 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
-    | '/affiliate'
     | '/contact'
     | '/faq'
     | '/features'
@@ -314,11 +284,9 @@ export interface FileRouteTypes {
     | '/admin'
     | '/dashboard'
     | '/r/$code'
-    | '/admin/affiliate'
     | '/admin/content'
     | '/admin/pricing'
     | '/admin/videos'
-    | '/dashboard/affiliate'
     | '/dashboard/billing'
     | '/dashboard/instagram'
     | '/dashboard/projects'
@@ -331,7 +299,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
-    | '/affiliate'
     | '/contact'
     | '/faq'
     | '/features'
@@ -343,11 +310,9 @@ export interface FileRouteTypes {
     | '/signup'
     | '/terms'
     | '/r/$code'
-    | '/admin/affiliate'
     | '/admin/content'
     | '/admin/pricing'
     | '/admin/videos'
-    | '/dashboard/affiliate'
     | '/dashboard/billing'
     | '/dashboard/instagram'
     | '/dashboard/projects'
@@ -361,7 +326,6 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/about'
-    | '/affiliate'
     | '/contact'
     | '/faq'
     | '/features'
@@ -375,11 +339,9 @@ export interface FileRouteTypes {
     | '/_authenticated/admin'
     | '/_authenticated/dashboard'
     | '/r/$code'
-    | '/_authenticated/admin/affiliate'
     | '/_authenticated/admin/content'
     | '/_authenticated/admin/pricing'
     | '/_authenticated/admin/videos'
-    | '/_authenticated/dashboard/affiliate'
     | '/_authenticated/dashboard/billing'
     | '/_authenticated/dashboard/instagram'
     | '/_authenticated/dashboard/projects'
@@ -394,7 +356,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
-  AffiliateRoute: typeof AffiliateRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
   FeaturesRoute: typeof FeaturesRoute
@@ -429,13 +390,6 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/affiliate': {
-      id: '/affiliate'
-      path: '/affiliate'
-      fullPath: '/affiliate'
-      preLoaderRoute: typeof AffiliateRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -536,13 +490,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
-    '/_authenticated/admin/affiliate': {
-      id: '/_authenticated/admin/affiliate'
-      path: '/affiliate'
-      fullPath: '/admin/affiliate'
-      preLoaderRoute: typeof AuthenticatedAdminAffiliateRouteImport
-      parentRoute: typeof AuthenticatedAdminRoute
-    }
     '/_authenticated/admin/content': {
       id: '/_authenticated/admin/content'
       path: '/content'
@@ -569,13 +516,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/dashboard/'
       preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
-      parentRoute: typeof AuthenticatedDashboardRoute
-    }
-    '/_authenticated/dashboard/affiliate': {
-      id: '/_authenticated/dashboard/affiliate'
-      path: '/affiliate'
-      fullPath: '/dashboard/affiliate'
-      preLoaderRoute: typeof AuthenticatedDashboardAffiliateRouteImport
       parentRoute: typeof AuthenticatedDashboardRoute
     }
     '/_authenticated/dashboard/billing': {
@@ -624,7 +564,6 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedAdminRouteChildren {
-  AuthenticatedAdminAffiliateRoute: typeof AuthenticatedAdminAffiliateRoute
   AuthenticatedAdminContentRoute: typeof AuthenticatedAdminContentRoute
   AuthenticatedAdminPricingRoute: typeof AuthenticatedAdminPricingRoute
   AuthenticatedAdminVideosRoute: typeof AuthenticatedAdminVideosRoute
@@ -632,7 +571,6 @@ interface AuthenticatedAdminRouteChildren {
 }
 
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
-  AuthenticatedAdminAffiliateRoute: AuthenticatedAdminAffiliateRoute,
   AuthenticatedAdminContentRoute: AuthenticatedAdminContentRoute,
   AuthenticatedAdminPricingRoute: AuthenticatedAdminPricingRoute,
   AuthenticatedAdminVideosRoute: AuthenticatedAdminVideosRoute,
@@ -643,7 +581,6 @@ const AuthenticatedAdminRouteWithChildren =
   AuthenticatedAdminRoute._addFileChildren(AuthenticatedAdminRouteChildren)
 
 interface AuthenticatedDashboardRouteChildren {
-  AuthenticatedDashboardAffiliateRoute: typeof AuthenticatedDashboardAffiliateRoute
   AuthenticatedDashboardBillingRoute: typeof AuthenticatedDashboardBillingRoute
   AuthenticatedDashboardInstagramRoute: typeof AuthenticatedDashboardInstagramRoute
   AuthenticatedDashboardProjectsRoute: typeof AuthenticatedDashboardProjectsRoute
@@ -655,7 +592,6 @@ interface AuthenticatedDashboardRouteChildren {
 
 const AuthenticatedDashboardRouteChildren: AuthenticatedDashboardRouteChildren =
   {
-    AuthenticatedDashboardAffiliateRoute: AuthenticatedDashboardAffiliateRoute,
     AuthenticatedDashboardBillingRoute: AuthenticatedDashboardBillingRoute,
     AuthenticatedDashboardInstagramRoute: AuthenticatedDashboardInstagramRoute,
     AuthenticatedDashboardProjectsRoute: AuthenticatedDashboardProjectsRoute,
@@ -687,7 +623,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
-  AffiliateRoute: AffiliateRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
   FeaturesRoute: FeaturesRoute,
