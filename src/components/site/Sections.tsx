@@ -124,14 +124,17 @@ export function PlatformSection({ platform, reverse }: { platform: "instagram" |
             <h2 className="title-gradient mt-5 font-sans text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl">
               {titleLead} {titleAccent}
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+            <p className="mt-5 text-lg font-semibold leading-relaxed text-foreground/85 sm:text-xl">
               {ig ? (
                 <>
                   Customize your Instagram insight visuals with an{" "}
-                  <span className="font-premium italic text-foreground/90">easy-to-use</span> editing interface.
+                  <span className="font-premium italic whitespace-nowrap text-foreground/90">easy-to-use</span> editing interface.
                 </>
               ) : (
-                "Create customized TikTok insight demos with the same simple workflow."
+                <>
+                  Create customized TikTok insight demos with the same{" "}
+                  <span className="font-premium italic whitespace-nowrap text-foreground/90">simple workflow</span>.
+                </>
               )}
             </p>
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">
