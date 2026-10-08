@@ -1,14 +1,14 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState, type ReactNode } from "react";
-import { LogOut, Menu, Shield, X, type LucideIcon } from "lucide-react";
+import { Globe, LogOut, Menu, Shield, X, type LucideIcon } from "lucide-react";
 import { Logo } from "@/components/site/Logo";
 import { supabase } from "@/integrations/supabase/client";
 import { useProfile } from "@/lib/auth";
 
 export type NavItem = { to: string; label: string; icon: LucideIcon; exact?: boolean };
 
-export function AppShell({ nav, children, title }: { nav: NavItem[]; children: ReactNode; title: string }) {
+export function AppShell({ nav, children, title, secondary }: { nav: NavItem[]; children: ReactNode; title: string; secondary?: { title: string; nav: NavItem[] } }) {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const qc = useQueryClient();
@@ -38,13 +38,28 @@ export function AppShell({ nav, children, title }: { nav: NavItem[]; children: R
             <n.icon className="h-4 w-4" /> {n.label}
           </Link>
         ))}
-        {data?.isAdmin && (
+        {secondary && (
+          <>
+            <p className="px-2 pb-2 pt-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">{secondary.title}</p>
+            {secondary.nav.map((n) => (
+              <Link key={n.to} to={n.to} onClick={() => setOpen(false)} activeOptions={{ exact: !!n.exact }}
+                className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-foreground"
+                activeProps={{ className: "bg-sidebar-accent !text-foreground" }}>
+                <n.icon className="h-4 w-4" /> {n.label}
+              </Link>
+            ))}
+          </>
+        )}
+        <Link to="/" onClick={() => setOpen(false)} className="mt-4 flex items-center gap-3 rounded-lg border border-border px-3 py-2.5 text-sm text-muted-foreground hover:text-foreground">
+          <Globe className="h-4 w-4 text-primary" /> View website
+        </Link>
+        {data?.isAdmin && title !== "Admin" && (
           <Link
-            to={title === "Admin" ? "/dashboard" : "/admin"}
+            to="/admin"
             onClick={() => setOpen(false)}
-            className="mt-4 flex items-center gap-3 rounded-lg border border-border px-3 py-2.5 text-sm text-muted-foreground hover:text-foreground"
+            className="mt-2 flex items-center gap-3 rounded-lg border border-border px-3 py-2.5 text-sm text-muted-foreground hover:text-foreground"
           >
-            <Shield className="h-4 w-4 text-primary" /> {title === "Admin" ? "Back to app" : "Admin panel"}
+            <Shield className="h-4 w-4 text-primary" /> Admin panel
           </Link>
         )}
       </nav>
