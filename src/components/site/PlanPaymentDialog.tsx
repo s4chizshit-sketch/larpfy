@@ -198,13 +198,21 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
                     <span><small>UPI ID</small><strong>{UPI_ID}</strong></span>
                     <Button type="button" variant="ghost" size="icon" onClick={copyUpiId} aria-label="Copy UPI ID" title="Copy UPI ID"><Copy /></Button>
                   </div>
-                  <div className="payment-apps" role="list" aria-label="Supported UPI apps">
+                  <div className="payment-apps" aria-label="Supported UPI apps">
                     <span className="payment-apps-label">Pay with any UPI app</span>
                     <div className="payment-apps-row">
-                      <span role="listitem" className="payment-app-chip" title="Google Pay"><img src={gpayLogo.url} alt="Google Pay" draggable={false} /></span>
-                      <span role="listitem" className="payment-app-chip" title="PhonePe"><img src={phonepeLogo.url} alt="PhonePe" draggable={false} /></span>
-                      <span role="listitem" className="payment-app-chip" title="Paytm"><img src={paytmLogo.url} alt="Paytm" draggable={false} /></span>
-                      <span role="listitem" className="payment-app-chip" title="BHIM UPI"><img src={bhimLogo.url} alt="BHIM" draggable={false} /></span>
+                      {[
+                        { name: "Google Pay", logo: gpayLogo, packageId: "com.google.android.apps.nbu.paisa.user" },
+                        { name: "PhonePe", logo: phonepeLogo, packageId: "com.phonepe.app" },
+                        { name: "Paytm", logo: paytmLogo, packageId: "net.one97.paytm" },
+                        { name: "BHIM", logo: bhimLogo, packageId: "in.org.npci.upiapp" },
+                      ].map((app) => (
+                        <Button key={app.packageId} asChild variant="ghost" className="payment-app-chip">
+                          <a href={`https://play.google.com/store/apps/details?id=${app.packageId}`} target="_blank" rel="noopener noreferrer" aria-label={`Get ${app.name} on Google Play`} title={`Download ${app.name} from Google Play`}>
+                            <img src={app.logo.url} alt={app.name} draggable={false} />
+                          </a>
+                        </Button>
+                      ))}
                     </div>
                   </div>
                   <div ref={timerRef} className="payment-countdown" role="timer" aria-label={`Payment time remaining ${countdown}`}>
