@@ -49,7 +49,7 @@ export function Masthead() {
       <div className="hero-bg absolute inset-0 -z-10" aria-hidden />
       <div className="absolute inset-x-0 top-0 -z-10 h-px bg-brand opacity-70" aria-hidden />
       <div className="mx-auto max-w-4xl px-4 pb-16 pt-16 text-center sm:px-6 sm:pb-24 sm:pt-24">
-        <span className="masthead-in inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.32em] text-muted-foreground backdrop-blur">
+        <span className="masthead-in inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.32em] text-muted-foreground">
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
           Larp Insight
         </span>
@@ -120,7 +120,7 @@ export function PlatformSection({ platform, reverse }: { platform: "instagram" |
       <div className={`grid items-center gap-12 lg:grid-cols-2 ${reverse ? "lg:[&>*:first-child]:order-2" : ""}`}>
         <Reveal>
           <div>
-            <span className="inline-flex items-center gap-3 rounded-full border border-border/70 bg-card/50 px-5 py-2.5 backdrop-blur-md">
+            <span className="inline-flex items-center gap-3 rounded-full border border-border/70 bg-card/60 px-5 py-2.5">
               {ig ? <InstagramMark /> : <TiktokMark />}
             </span>
             <h2 className="title-gradient mt-5 font-sans text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl">
