@@ -72,13 +72,13 @@ export function Navbar() {
               </>
             )}
           </div>
-          <button
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-border/70 bg-foreground/5 backdrop-blur-md transition-colors hover:bg-foreground/10 lg:hidden"
+          <Button variant="outline" size="icon"
+            className="h-11 w-11 shrink-0 rounded-full border-border/70 bg-foreground/5 transition-colors hover:bg-foreground/10 lg:hidden"
             onClick={() => setOpen(!open)}
             aria-label="Menu"
           >
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+          </Button>
         </div>
         {open && (
           <div className="nav-shell mx-auto mt-2 max-w-7xl rounded-[1.75rem] px-4 pb-6 pt-2 lg:hidden">
