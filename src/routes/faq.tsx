@@ -13,7 +13,9 @@ export const Route = createFileRoute("/faq")({
   component: () => (
     <PublicLayout>
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow="FAQ" title="What people ask us" />
+        <Reveal>
+          <SectionHeading eyebrow="FAQ" title="What people ask us" />
+        </Reveal>
         <div className="mt-12"><FaqList /></div>
       </section>
       <CtaBand />

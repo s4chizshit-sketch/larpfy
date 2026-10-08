@@ -26,7 +26,9 @@ function Index() {
       <PlatformSection platform="instagram" />
       <PlatformSection platform="tiktok" reverse />
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-        <SectionHeading eyebrow="Questions" title="What people ask us" />
+        <Reveal>
+          <SectionHeading eyebrow="Questions" title="What people ask us" />
+        </Reveal>
         <div className="mt-10"><FaqList /></div>
       </section>
       <CtaBand />
