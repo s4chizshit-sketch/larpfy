@@ -151,6 +151,8 @@ export type Database = {
           signup_ip: string | null
           status: string
           subscription_status: string
+          total_seconds: number
+          visit_count: number
         }
         Insert: {
           created_at?: string
@@ -165,6 +167,8 @@ export type Database = {
           signup_ip?: string | null
           status?: string
           subscription_status?: string
+          total_seconds?: number
+          visit_count?: number
         }
         Update: {
           created_at?: string
@@ -179,6 +183,8 @@ export type Database = {
           signup_ip?: string | null
           status?: string
           subscription_status?: string
+          total_seconds?: number
+          visit_count?: number
         }
         Relationships: [
           {
@@ -309,6 +315,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      add_visit_time: { Args: { _seconds: number }; Returns: undefined }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
