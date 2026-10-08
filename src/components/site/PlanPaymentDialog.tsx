@@ -99,21 +99,18 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
                 </div>
               ) : (
                 <div className="payment-qr-reveal">
-                  <div className="payment-amount"><span>Scan to pay</span><strong>₹{amount.toLocaleString("en-IN")}</strong></div>
+                  <div className="payment-amount">
+                    <div className="payment-amount-copy"><span>Scan to pay</span><strong>₹{amount.toLocaleString("en-IN")}</strong></div>
+                    <Button asChild variant="outline" size="icon" className="payment-download">
+                      <a href={qrAsset.url} download="larp-insight-upi-qr.png" aria-label="Download QR code" title="Download QR code">
+                        <Download />
+                      </a>
+                    </Button>
+                  </div>
                   <div className="payment-qr-wrap">
                     <div className="payment-qr-shell">
                       <img src={qrAsset.url} alt={`UPI QR code to pay ₹${amount.toLocaleString("en-IN")}`} draggable={false} />
                     </div>
-                    <a
-                      className="payment-download"
-                      href={qrAsset.url}
-                      download="larp-insight-upi-qr.png"
-                      aria-label="Download QR code"
-                      title="Download QR code"
-                      onClick={() => toast.success("QR code downloading…")}
-                    >
-                      <Download />
-                    </a>
                   </div>
                   <p className="payment-scan-label">Scan Payment · ₹{amount.toLocaleString("en-IN")}</p>
                   <div className="payment-upi-copy">
