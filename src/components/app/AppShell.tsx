@@ -32,8 +32,8 @@ export function AppShell({ nav, children, title, secondary }: { nav: NavItem[]; 
             to={n.to}
             onClick={() => setOpen(false)}
             activeOptions={{ exact: !!n.exact }}
-            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-foreground"
-            activeProps={{ className: "bg-sidebar-accent !text-foreground" }}
+            className="side-link"
+            activeProps={{ className: "is-active" }}
           >
             <n.icon className="h-4 w-4" /> {n.label}
           </Link>
@@ -43,8 +43,8 @@ export function AppShell({ nav, children, title, secondary }: { nav: NavItem[]; 
             <p className="px-2 pb-2 pt-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">{secondary.title}</p>
             {secondary.nav.map((n) => (
               <Link key={n.to} to={n.to} onClick={() => setOpen(false)} activeOptions={{ exact: !!n.exact }}
-                className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-foreground"
-                activeProps={{ className: "bg-sidebar-accent !text-foreground" }}>
+                className="side-link"
+                activeProps={{ className: "is-active" }}>
                 <n.icon className="h-4 w-4" /> {n.label}
               </Link>
             ))}
@@ -105,8 +105,8 @@ export function PageHeader({ title, sub, action }: { title: string; sub?: string
   return (
     <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div>
-        <h1 className="text-2xl font-semibold sm:text-3xl">{title}</h1>
-        {sub && <p className="mt-1.5 text-sm text-muted-foreground">{sub}</p>}
+        <h1 className="pro-title text-3xl sm:text-4xl">{title}</h1>
+        {sub && <p className="mt-2 text-[15px] text-muted-foreground">{sub}</p>}
       </div>
       {action}
     </div>
@@ -115,9 +115,9 @@ export function PageHeader({ title, sub, action }: { title: string; sub?: string
 
 export function StatCard({ label, value, hint }: { label: string; value: ReactNode; hint?: string }) {
   return (
-    <div className="rounded-2xl border border-border bg-card/60 p-5">
-      <p className="text-xs text-muted-foreground">{label}</p>
-      <p className="mt-2 font-display text-2xl font-semibold">{value}</p>
+    <div className="pro-panel p-5">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">{label}</p>
+      <p className="pro-title mt-2 text-3xl">{value}</p>
       {hint && <p className="mt-1 text-xs text-muted-foreground">{hint}</p>}
     </div>
   );
