@@ -56,7 +56,7 @@ function Signup() {
       if (saved && Date.now() - saved.at < 30 * 864e5) ref = saved.code;
     } catch {}
     const { data, error } = await supabase.auth.signUp({
-      email: r.data.email,
+      email: r.data.email.trim().toLowerCase(),
       password: r.data.password,
       options: { emailRedirectTo: `${window.location.origin}/dashboard`, data: { name: r.data.name, ...(ref ? { ref } : {}) } },
     });
