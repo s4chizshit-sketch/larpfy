@@ -13,21 +13,29 @@ export function PlatformPlans() {
   const [viewportRef, carousel] = useEmblaCarousel({ align: "center", containScroll: "trimSnaps", dragThreshold: 5 });
   const [selected, setSelected] = useState(0);
   const manual = useRef(false);
+  const pointerStart = useRef<{ x: number; y: number } | null>(null);
   const stop = useCallback(() => { manual.current = true; }, []);
 
   useEffect(() => {
     if (!carousel) return;
     const select = () => setSelected(carousel.selectedScrollSnap());
-    carousel.on("select", select).on("reInit", select).on("pointerDown", stop);
+    carousel.on("select", select).on("reInit", select);
     select();
-    const timer = window.setInterval(() => {
+    let timer: number | undefined;
+    const advance = () => {
       if (manual.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
       if (carousel.canScrollNext()) carousel.scrollNext();
       else carousel.scrollTo(0);
-    }, 7000);
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      window.clearInterval(timer);
+      if (entry?.isIntersecting) timer = window.setInterval(advance, 7000);
+    }, { threshold: 0.35 });
+    observer.observe(carousel.rootNode());
     return () => {
       window.clearInterval(timer);
-      carousel.off("select", select).off("reInit", select).off("pointerDown", stop);
+      observer.disconnect();
+      carousel.off("select", select).off("reInit", select);
     };
   }, [carousel, stop]);
 
@@ -42,7 +50,17 @@ export function PlatformPlans() {
 
   return (
     <div className="mx-auto max-w-5xl" aria-label="Instagram and TikTok plans">
-      <div ref={viewportRef} className="platform-plans-window" onFocusCapture={stop}>
+      <div ref={viewportRef} className="platform-plans-window"
+        onPointerDown={(event) => { pointerStart.current = { x: event.clientX, y: event.clientY }; }}
+        onPointerMove={(event) => {
+          const start = pointerStart.current;
+          if (!start) return;
+          const dx = Math.abs(event.clientX - start.x);
+          const dy = Math.abs(event.clientY - start.y);
+          if (dx > 10 && dx > dy) stop();
+        }}
+        onPointerUp={() => { pointerStart.current = null; }}
+        onPointerCancel={() => { pointerStart.current = null; }}>
         <div className="platform-plans-track">
           {platforms.map((platform) => {
             const plans = data.filter((plan) => plan.name.toLowerCase().startsWith(platform.name.toLowerCase()));
