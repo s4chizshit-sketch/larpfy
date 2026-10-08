@@ -59,7 +59,7 @@ export function Masthead() {
           {tail && <span className="mt-2 block text-6xl sm:text-8xl">{tail}</span>}
         </h1>
         <p
-          className="masthead-in mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl"
+          className="masthead-in mx-auto mt-8 max-w-2xl font-premium text-2xl leading-[1.4] text-foreground/80 sm:text-[30px]"
           style={{ animationDelay: "180ms" }}
         >
           {hero.description}
