@@ -5,6 +5,7 @@ import { useProfile } from "@/lib/auth";
 import { PlanPriceEditor } from "@/components/app/PlanPriceEditor";
 import { PlanHistory } from "@/components/app/PlanHistory";
 import { HowToGetPlan } from "@/components/app/HowToGetPlan";
+import { ProSubscriptionCard } from "@/components/app/ProSubscription";
 
 export const Route = createFileRoute("/_authenticated/dashboard/billing")({
   head: () => ({ meta: [
@@ -23,6 +24,7 @@ function Billing() {
   return (
     <>
       <PageHeader title="Pricing / Subscription" sub="Your current plan and available upgrades." />
+      <ProSubscriptionCard />
       <HowToGetPlan />
       <PlanHistory />
       {data?.isAdmin && <PlanPriceEditor />}

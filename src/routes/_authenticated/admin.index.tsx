@@ -9,6 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { PageHeader, StatCard } from "@/components/app/AppShell";
 import { supabase } from "@/integrations/supabase/client";
+import { ProSubscribersAdmin } from "@/components/app/ProSubscribersAdmin";
 
 export const Route = createFileRoute("/_authenticated/admin/")({
   component: UsersAdmin,
@@ -56,6 +57,7 @@ function UsersAdmin() {
         <StatCard label="Signups today" value={data?.users.filter((u) => new Date(u.created_at).toDateString() === new Date().toDateString()).length ?? "—"} />
         <StatCard label="Projects" value={Object.values(data?.pc ?? {}).reduce((a, b) => a + b, 0)} />
       </div>
+      <ProSubscribersAdmin />
       <div className="relative mt-8 max-w-sm">
         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input className="pl-9" placeholder="Search name or email" value={q} onChange={(e) => setQ(e.target.value)} />

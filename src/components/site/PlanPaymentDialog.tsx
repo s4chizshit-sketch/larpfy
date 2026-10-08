@@ -1,17 +1,12 @@
 import { useEffect, useState } from "react";
-import { ArrowUpRight, Check, LoaderCircle, ShieldCheck, WalletCards } from "lucide-react";
+import { ArrowRight, Clock, LoaderCircle, Lock, ShieldCheck, Zap } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { useServerFn } from "@tanstack/react-start";
 import { createOxapayInvoice } from "@/lib/oxapay.functions";
 
-type SelectedPlan = {
-  id?: string;
-  name: string;
-  price: number;
-  billingPeriod: string;
-};
+type SelectedPlan = { id?: string; name: string; price: number; billingPeriod: string };
 
 export function PlanPaymentDialog({ plan, open, onOpenChange }: {
   plan: SelectedPlan | null;
@@ -21,11 +16,10 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
   const [loading, setLoading] = useState(false);
   const createInvoice = useServerFn(createOxapayInvoice);
 
-  useEffect(() => {
-    if (!open) setLoading(false);
-  }, [open]);
-
+  useEffect(() => { if (!open) setLoading(false); }, [open]);
   if (!plan) return null;
+
+  const period = plan.billingPeriod === "once" ? "Lifetime" : plan.billingPeriod.replace(/^\w/, (c) => c.toUpperCase());
 
   const pay = async () => {
     if (!plan.id) return;
@@ -41,35 +35,39 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="payment-dialog w-[calc(100%-24px)] max-w-md p-0">
-        <div className="payment-dialog-head">
-          <p className="payment-kicker">Secure payment</p>
-          <DialogTitle className="payment-title">Pay with USDT</DialogTitle>
-          <DialogDescription className="payment-plan-line">
-            {plan.name} · ${plan.price} {plan.billingPeriod === "once" ? "lifetime" : plan.billingPeriod}
-          </DialogDescription>
+      <DialogContent className="payment-dialog checkout w-[calc(100%-24px)] max-w-md p-0">
+        <div className="checkout-head">
+          <span className="checkout-secure"><Lock /> Secure checkout</span>
+          <DialogTitle className="checkout-title">Complete your order</DialogTitle>
+          <DialogDescription className="checkout-sub">Pay with USDT. Your plan activates automatically.</DialogDescription>
         </div>
 
-        <div className="payment-body">
-          <div className="payment-methods" role="group" aria-label="Payment method">
-            <Button type="button" variant="outline" aria-pressed className="payment-method is-selected">
-              <span className="payment-method-icon"><WalletCards /></span>
-              <span><strong>USDT</strong><small>Automatic gateway</small></span>
-              <Check className="payment-method-check" />
-            </Button>
+        <div className="checkout-body">
+          <div className="checkout-summary">
+            <div className="checkout-row"><span>Plan</span><strong>{plan.name}</strong></div>
+            <div className="checkout-row"><span>Billing</span><strong>{period}</strong></div>
+            <div className="checkout-row"><span>Network fee</span><strong>Included</strong></div>
+            <div className="checkout-total"><span>Total due</span><strong>${plan.price}<small>USD</small></strong></div>
           </div>
 
-          <div className="payment-soon" role="status">
-            <ShieldCheck />
-            <div className="flex-1">
-              <strong>Pay ${plan.price} in USDT</strong>
-              <p>Your plan activates automatically as soon as the payment confirms.</p>
-              <Button type="button" className="btn-plan mt-3 gap-2" disabled={loading || !plan.id} onClick={pay}>
-                {loading ? <LoaderCircle className="size-4 animate-spin" /> : <ArrowUpRight className="size-4" />}
-                {loading ? "Opening checkout…" : "Pay with USDT"}
-              </Button>
-            </div>
+          <div className="checkout-method">
+            <span className="checkout-coin">₮</span>
+            <div className="flex-1"><strong>Tether (USDT)</strong><small>TRC20 · ERC20 · BEP20</small></div>
+            <span className="checkout-chip">Selected</span>
           </div>
+
+          <Button type="button" className="checkout-pay" disabled={loading || !plan.id} onClick={pay}>
+            {loading ? <LoaderCircle className="size-4 animate-spin" /> : <Lock className="size-4" />}
+            {loading ? "Opening secure checkout…" : `Pay $${plan.price} with USDT`}
+            {!loading && <ArrowRight className="size-4" />}
+          </Button>
+
+          <ul className="checkout-trust">
+            <li><Zap /> Instant activation</li>
+            <li><ShieldCheck /> Encrypted</li>
+            <li><Clock /> 60 min window</li>
+          </ul>
+          <p className="checkout-foot">After payment, a Telegram button appears on your Billing page to send your screenshot and receive your APK & Access API Key.</p>
         </div>
       </DialogContent>
     </Dialog>

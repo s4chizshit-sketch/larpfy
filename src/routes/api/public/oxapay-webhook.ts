@@ -38,6 +38,7 @@ export const Route = createFileRoute("/api/public/oxapay-webhook")({
             billing_period: plan.billing_period, duration_days: days,
             expires_at: days ? new Date(Date.now() + days * 86400000).toISOString() : null,
           });
+          await supabaseAdmin.from("profiles").update({ subscription_status: "active", plan_id: plan.id }).eq("id", order.user_id);
         }
         return new Response("ok");
       },
