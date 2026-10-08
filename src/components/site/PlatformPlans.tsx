@@ -49,7 +49,7 @@ export function PlatformPlans() {
   ];
 
   return (
-    <div className="mx-auto max-w-5xl" aria-label="Instagram and TikTok plans">
+    <div className="mx-auto max-w-4xl" aria-label="Instagram and TikTok plans">
       <div ref={viewportRef} className="platform-plans-window"
         onPointerDown={(event) => { pointerStart.current = { x: event.clientX, y: event.clientY }; }}
         onPointerMove={(event) => {
