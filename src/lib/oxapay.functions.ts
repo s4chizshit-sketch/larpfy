@@ -7,7 +7,7 @@ export const createOxapayInvoice = createServerFn({ method: "POST" })
   .inputValidator((d) => z.object({ planId: z.string().uuid(), origin: z.string().url() }).parse(d))
   .handler(async ({ data, context }) => {
     const key = process.env.OXAPAY_MERCHANT_API_KEY;
-    if (!key) throw new Error("USD payments are not configured yet.");
+    if (!key) throw new Error("USDT payments are not configured yet.");
     const { data: plan, error } = await context.supabase
       .from("plans").select("id,name,price,active").eq("id", data.planId).single();
     if (error || !plan || !plan.active) throw new Error("Plan not available.");
@@ -22,6 +22,7 @@ export const createOxapayInvoice = createServerFn({ method: "POST" })
       body: JSON.stringify({
         amount: Number(plan.price),
         currency: "USD",
+        to_currency: "USDT",
         lifetime: 60,
         order_id: order.id,
         description: `Larp Insight - ${plan.name}`.slice(0, 100),
