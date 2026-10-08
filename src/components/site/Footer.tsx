@@ -3,8 +3,6 @@ import { Logo } from "./Logo";
 
 const cols = [
   { title: "Product", links: [["/", "Home"], ["/features", "Features"], ["/pricing", "Pricing"], ["/faq", "FAQ"]] },
-  { title: "Account", links: [["/login", "Login"], ["/signup", "Sign Up"]] },
-  { title: "Company", links: [["/terms", "Terms"], ["/privacy", "Privacy"], ["/contact", "Contact"]] },
 ] as const;
 
 export function Footer() {
