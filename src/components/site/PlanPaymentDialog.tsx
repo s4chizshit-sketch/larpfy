@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { ArrowUpRight, Check, Copy, Download, Landmark, LoaderCircle, QrCode, Timer, WalletCards } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight, Check, ChevronDown, Copy, Download, Landmark, LoaderCircle, QrCode, Timer, WalletCards } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
@@ -34,6 +34,10 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
   const [loadingQr, setLoadingQr] = useState(false);
   const [deadline, setDeadline] = useState<number | null>(null);
   const [secondsLeft, setSecondsLeft] = useState(PAYMENT_WINDOW_SECONDS);
+  const [showScrollHint, setShowScrollHint] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const timerRef = useRef<HTMLDivElement>(null);
+  const peekedRef = useRef(false);
 
   useEffect(() => {
     if (!open) {
@@ -41,6 +45,8 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
       setLoadingQr(false);
       setDeadline(null);
       setSecondsLeft(PAYMENT_WINDOW_SECONDS);
+      setShowScrollHint(false);
+      peekedRef.current = false;
     }
   }, [open]);
 
