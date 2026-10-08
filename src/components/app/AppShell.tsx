@@ -1,10 +1,13 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState, type ReactNode } from "react";
-import { Globe, LogOut, Menu, Shield, X, type LucideIcon } from "lucide-react";
+import { ArrowUpRight, Globe, LogOut, Menu, Shield, X, type LucideIcon } from "lucide-react";
 import { Logo } from "@/components/site/Logo";
 import { supabase } from "@/integrations/supabase/client";
 import { useProfile } from "@/lib/auth";
+import telegramLogo from "@/assets/telegram-about.png.asset.json";
+
+const TELEGRAM_URL = "https://t.me/+HAwfutUg1gNlZDZl";
 
 export type NavItem = { to: string; label: string; icon: LucideIcon; exact?: boolean };
 
@@ -50,7 +53,21 @@ export function AppShell({ nav, children, title, secondary }: { nav: NavItem[]; 
             ))}
           </>
         )}
-        <Link to="/" onClick={() => setOpen(false)} className="mt-4 flex items-center gap-3 rounded-lg border border-border px-3 py-2.5 text-sm text-muted-foreground hover:text-foreground">
+        <a
+          href={TELEGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => setOpen(false)}
+          className="side-telegram mt-4"
+        >
+          <img src={telegramLogo.url} alt="Telegram logo" draggable={false} className="side-telegram-logo" />
+          <span className="min-w-0 flex-1">
+            <span className="side-telegram-title">Telegram Updates</span>
+            <span className="side-telegram-sub">New feature drops and UI updates.</span>
+          </span>
+          <ArrowUpRight className="side-telegram-arrow h-4 w-4 shrink-0" />
+        </a>
+        <Link to="/" onClick={() => setOpen(false)} className="mt-2 flex items-center gap-3 rounded-lg border border-border px-3 py-2.5 text-sm text-muted-foreground hover:text-foreground">
           <Globe className="h-4 w-4 text-primary" /> View website
         </Link>
         {data?.isAdmin && title !== "Admin" && (
