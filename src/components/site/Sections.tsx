@@ -30,7 +30,7 @@ export function SectionHeading({ eyebrow, title, sub, center = true }: { eyebrow
   return (
     <div className={center ? "mx-auto max-w-2xl text-center" : "max-w-xl"}>
       {eyebrow && <p className="text-xs font-semibold uppercase tracking-[0.22em] text-primary">{eyebrow}</p>}
-      <h2 className="mt-3 text-3xl font-semibold leading-tight sm:text-4xl">{title}</h2>
+      <h2 className="title-gradient mt-3 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">{title}</h2>
       {sub && <p className="mt-4 text-base text-muted-foreground sm:text-lg">{sub}</p>}
     </div>
   );
