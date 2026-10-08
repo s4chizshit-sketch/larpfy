@@ -8,7 +8,7 @@ const cols = [
 export function Footer() {
   return (
     <footer className="mt-24 border-t border-border">
-      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.5fr_1fr]">
+      <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 py-14 sm:px-6 md:flex-row md:items-start md:justify-between">
         <div>
           <Logo />
           <p className="mt-4 max-w-xs text-sm text-muted-foreground">
@@ -16,9 +16,9 @@ export function Footer() {
           </p>
         </div>
         {cols.map((c) => (
-          <div key={c.title}>
+          <div key={c.title} className="md:text-right">
             <h4 className="text-sm font-semibold">{c.title}</h4>
-            <ul className="mt-4 space-y-2.5">
+            <ul className="mt-4 flex flex-col gap-2.5 md:items-end">
               {c.links.map(([to, label]) => (
                 <li key={to}>
                   <Link to={to} className="text-sm text-muted-foreground hover:text-foreground">{label}</Link>
