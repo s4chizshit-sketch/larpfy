@@ -19,6 +19,7 @@ type SelectedPlan = {
 type PaymentMethod = "upi" | "usd" | null;
 
 const UPI_ID = "millionairskumar@fam";
+const PAYMENT_WINDOW_SECONDS = 120;
 
 function inrAmount(price: number) {
   return Math.max(1, Math.round(price * 100) - 1);
@@ -32,14 +33,14 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
   const [method, setMethod] = useState<PaymentMethod>(null);
   const [loadingQr, setLoadingQr] = useState(false);
   const [deadline, setDeadline] = useState<number | null>(null);
-  const [secondsLeft, setSecondsLeft] = useState(179);
+  const [secondsLeft, setSecondsLeft] = useState(PAYMENT_WINDOW_SECONDS);
 
   useEffect(() => {
     if (!open) {
       setMethod(null);
       setLoadingQr(false);
       setDeadline(null);
-      setSecondsLeft(179);
+      setSecondsLeft(PAYMENT_WINDOW_SECONDS);
     }
   }, [open]);
 
@@ -47,7 +48,7 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
     if (!open || method !== "upi" || !loadingQr) return;
     const timeout = window.setTimeout(() => {
       setLoadingQr(false);
-      setDeadline((current) => current ?? Date.now() + 179000);
+      setDeadline((current) => current ?? Date.now() + PAYMENT_WINDOW_SECONDS * 1000);
     }, 1350);
     return () => window.clearTimeout(timeout);
   }, [open, method, loadingQr]);
@@ -168,7 +169,7 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
                   </div>
                   <div className="payment-countdown" role="timer" aria-label={`Payment time remaining ${countdown}`}>
                     <div className="payment-countdown-line"><span><Timer className="size-4" />Time remaining</span><strong>{countdown}</strong></div>
-                    <progress value={secondsLeft} max={179} aria-label="Payment time remaining" />
+                    <progress value={secondsLeft} max={PAYMENT_WINDOW_SECONDS} aria-label="Payment time remaining" />
                   </div>
                 </div>
               )}
