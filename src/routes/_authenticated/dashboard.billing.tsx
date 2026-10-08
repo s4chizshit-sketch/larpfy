@@ -20,6 +20,7 @@ function Billing() {
         <StatCard label="Status" value={<span className="capitalize">{data?.profile?.subscription_status ?? "free"}</span>} />
         <StatCard label="Price" value={plan ? `$${Number(plan.price)} / ${plan.billing_period}` : "$0"} />
       </div>
+      <HowToGetPlan />
       <PlanHistory />
       {data?.isAdmin && <PlanPriceEditor />}
       <h2 className="pro-title mb-6 mt-12 text-xl">Available plans</h2>
