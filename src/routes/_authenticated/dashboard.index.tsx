@@ -4,6 +4,7 @@ import { PageHeader, StatCard } from "@/components/app/AppShell";
 import { NewProjectButton, ProjectGrid } from "@/components/app/ProjectGrid";
 import { useProfile } from "@/lib/auth";
 import { useProjects } from "@/lib/projects";
+import { ProSubscriptionCard } from "@/components/app/ProSubscription";
 
 export const Route = createFileRoute("/_authenticated/dashboard/")({
   head: () => ({ meta: [
@@ -30,6 +31,7 @@ function Overview() {
         <StatCard label="Subscription" value={<span className="capitalize">{status}</span>} />
         {data?.isAdmin && <StatCard label="Projects created" value={projects?.length ?? "—"} />}
       </div>
+      <ProSubscriptionCard />
       <h2 className="mb-4 mt-10 text-lg font-semibold">Quick launch</h2>
       <div className="grid gap-4 sm:grid-cols-2">
         <Link to="/dashboard/instagram" className="flex items-center gap-4 rounded-2xl border border-border bg-card/60 p-5 hover:border-primary/40">

@@ -1101,3 +1101,38 @@ img, video { max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
 }
+
+/* Professional checkout */
+.checkout-head { padding: 22px 22px 16px; border-bottom: 1px solid var(--border); }
+.checkout-secure { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--glow); }
+.checkout-secure svg { width: 12px; height: 12px; }
+.checkout-title { margin-top: 8px; font-family: "Sora", var(--font-display, sans-serif); font-size: 22px; font-weight: 700; }
+.checkout-sub { margin-top: 4px; font-size: 13.5px; color: var(--muted-foreground); }
+.checkout-body { padding: 18px 22px 22px; display: grid; gap: 14px; }
+.checkout-summary { border: 1px solid var(--border); border-radius: 14px; padding: 6px 14px; background: color-mix(in oklab, var(--foreground) 3%, transparent); }
+.checkout-row { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; font-size: 13.5px; border-bottom: 1px dashed var(--border); }
+.checkout-row span { color: var(--muted-foreground); }
+.checkout-row strong { font-weight: 600; text-align: right; }
+.checkout-total { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 0 8px; }
+.checkout-total span { font-weight: 600; }
+.checkout-total strong { font-family: "Sora", var(--font-display, sans-serif); font-size: 26px; font-variant-numeric: tabular-nums; }
+.checkout-total small { margin-left: 5px; font-size: 11px; color: var(--muted-foreground); }
+.checkout-method { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; border: 1px solid color-mix(in oklab, var(--primary) 50%, var(--border)); background: color-mix(in oklab, var(--primary) 8%, transparent); }
+.checkout-method strong { display: block; font-size: 14px; }
+.checkout-method small { font-size: 11.5px; color: var(--muted-foreground); }
+.checkout-coin { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: oklch(0.65 0.14 165); color: var(--background); font-weight: 800; font-size: 17px; }
+.checkout-chip { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--glow); }
+.checkout-pay { height: 48px; width: 100%; gap: 8px; border-radius: 12px; font-size: 15px; font-weight: 700; background: linear-gradient(135deg, var(--primary), var(--glow)); color: var(--primary-foreground); }
+.checkout-pay:hover { filter: brightness(1.08); }
+.checkout-trust { display: flex; justify-content: space-between; gap: 8px; font-size: 11.5px; color: var(--muted-foreground); }
+.checkout-trust li { display: flex; align-items: center; gap: 5px; }
+.checkout-trust svg { width: 13px; height: 13px; color: var(--glow); }
+.checkout-foot { font-size: 11.5px; line-height: 1.55; color: var(--muted-foreground); text-align: center; }
+
+.pro-sub-card { margin-top: 24px; display: grid; gap: 14px; padding: 18px; border-radius: 18px; border: 1px solid color-mix(in oklab, var(--primary) 45%, var(--border)); background: linear-gradient(145deg, color-mix(in oklab, var(--primary) 12%, var(--card)), var(--card)); }
+.pro-sub-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 12px; background: color-mix(in oklab, var(--primary) 20%, transparent); color: var(--glow); flex-shrink: 0; }
+.pro-sub-kicker { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--glow); }
+.pro-sub-plan { margin-top: 2px; font-family: "Sora", var(--font-display, sans-serif); font-size: 18px; font-weight: 700; }
+.pro-sub-text { margin-top: 4px; font-size: 13px; color: var(--muted-foreground); }
+.pro-sub-tg { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 44px; border-radius: 12px; font-weight: 700; font-size: 14px; background: oklch(0.62 0.15 235); color: var(--primary-foreground); }
+.pro-sub-tg:hover { filter: brightness(1.1); }

@@ -1,0 +1,46 @@
+import { useQuery } from "@tanstack/react-query";
+import { BadgeCheck, Send } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/lib/auth";
+
+const TELEGRAM_DM = `https://t.me/larpinght?text=${encodeURIComponent(
+  "Hi! I purchased my plan via USDT (OxaPay). Here is my payment screenshot. Please send me the APK and my Access API Key.",
+)}`;
+
+/** Paid purchases for the signed-in user; polls so the card appears right after OxaPay confirms. */
+export function usePaidPurchases() {
+  const { user } = useAuth();
+  return useQuery({
+    queryKey: ["plan-purchases", user?.id],
+    enabled: !!user,
+    refetchInterval: 15000,
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("plan_purchases").select("*").eq("user_id", user!.id)
+        .order("started_at", { ascending: false });
+      if (error) throw error;
+      return data ?? [];
+    },
+  });
+}
+
+export function ProSubscriptionCard() {
+  const { data } = usePaidPurchases();
+  const active = data?.find((p) => !p.expires_at || new Date(p.expires_at).getTime() > Date.now());
+  if (!active) return null;
+  return (
+    <section className="pro-sub-card">
+      <div className="flex items-start gap-3">
+        <span className="pro-sub-icon"><BadgeCheck /></span>
+        <div className="min-w-0 flex-1">
+          <p className="pro-sub-kicker">Pro subscription active</p>
+          <p className="pro-sub-plan">{active.plan_name}</p>
+          <p className="pro-sub-text">Payment confirmed. Send your payment screenshot on Telegram to receive your APK and Access API Key.</p>
+        </div>
+      </div>
+      <a href={TELEGRAM_DM} target="_blank" rel="noopener noreferrer" className="pro-sub-tg">
+        <Send className="size-4" /> Send screenshot on Telegram
+      </a>
+    </section>
+  );
+}
