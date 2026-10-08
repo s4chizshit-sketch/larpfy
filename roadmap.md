@@ -5,6 +5,7 @@
 - [x] Premium glass auth card on signup, login, forgot-password and reset-password (readable placeholders, lit edges, focus glow, working eye toggle).
 - [x] Telegram Updates card with logo in the dashboard sidebar, directly under Settings (removed from the Settings page).
 - [x] Keep workspace menus content-height, hide project sections from non-admin users, and style Logout red.
+- [x] Fix oversized public header logos caused by the global media height override; verify mobile/desktop sizing and menu interaction.
 - [x] Plan boxes: soft 24px rounded corners, narrower card, hover lift, lit hairline top edge, refined tier divider (diagonal light-cut sweep removed at the user's request; Get Plan shine kept).
 - [ ] Add the show/hide password eye toggle to the login page (waiting on user's go-ahead).
 - [ ] Put the real Instagram link on the About page (placeholder used until then).
