@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PageHeader, StatCard } from "@/components/app/AppShell";
+import { PageHeader } from "@/components/app/AppShell";
 import { PlatformPlans } from "@/components/site/PlatformPlans";
 import { useProfile } from "@/lib/auth";
 import { PlanPriceEditor } from "@/components/app/PlanPriceEditor";
@@ -12,15 +12,9 @@ export const Route = createFileRoute("/_authenticated/dashboard/billing")({
 
 function Billing() {
   const { data } = useProfile();
-  const plan = (data?.profile as any)?.plans;
   return (
     <>
       <PageHeader title="Pricing / Subscription" sub="Your current plan and available upgrades." />
-      <div className="grid gap-4 sm:grid-cols-3">
-        <StatCard label="Current plan" value={plan?.name ?? "Free"} />
-        <StatCard label="Status" value={<span className="capitalize">{data?.profile?.subscription_status ?? "free"}</span>} />
-        <StatCard label="Price" value={plan ? `$${Number(plan.price)} / ${plan.billing_period}` : "$0"} />
-      </div>
       <HowToGetPlan />
       <PlanHistory />
       {data?.isAdmin && <PlanPriceEditor />}
