@@ -620,10 +620,13 @@ video::-internal-media-controls-download-button { display: none; }
 
 /* ===== Settings: Join Telegram Updates ===== */
 .settings-telegram {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "logo copy"
+    "cta  cta";
+  gap: 16px 18px;
   align-items: center;
-  gap: 20px;
   padding: 26px 28px;
   border-radius: 1.25rem;
   border: 1px solid color-mix(in oklab, #2aabeE 30%, transparent);
@@ -632,6 +635,16 @@ video::-internal-media-controls-download-button { display: none; }
     linear-gradient(160deg, color-mix(in oklab, var(--card) 88%, transparent), color-mix(in oklab, var(--card) 55%, transparent));
   box-shadow: inset 0 1px 0 color-mix(in oklab, #9cc8ff 16%, transparent), 0 22px 52px -30px color-mix(in oklab, #2aabee 60%, transparent);
   transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+.settings-telegram-copy { grid-area: copy; min-width: 0; }
+.settings-telegram-cta { grid-area: cta; justify-self: stretch; }
+@media (min-width: 780px) {
+  .settings-telegram {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas: "logo copy cta";
+    gap: 22px;
+  }
+  .settings-telegram-cta { justify-self: end; }
 }
 .settings-telegram:hover {
   transform: translateY(-2px);
