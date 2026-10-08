@@ -6,7 +6,7 @@ const nav: NavItem[] = [
   { to: "/dashboard", label: "Overview", icon: LayoutGrid, exact: true },
   { to: "/dashboard/instagram", label: "Instagram Editor", icon: Instagram },
   { to: "/dashboard/tiktok", label: "TikTok Editor", icon: Music2 },
-  { to: "/dashboard/projects", label: "My Projects", icon: FolderKanban },
+  { to: "/dashboard/projects", label: "My Projects", icon: FolderKanban, adminOnly: true },
   { to: "/dashboard/billing", label: "Pricing / Subscription", icon: CreditCard },
   { to: "/dashboard/settings", label: "Settings", icon: Settings },
 ];

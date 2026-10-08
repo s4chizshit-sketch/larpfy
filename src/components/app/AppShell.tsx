@@ -3,13 +3,14 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useState, type ReactNode } from "react";
 import { ArrowUpRight, Globe, LogOut, Menu, Shield, X, type LucideIcon } from "lucide-react";
 import { Logo } from "@/components/site/Logo";
+import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useProfile } from "@/lib/auth";
 import telegramLogo from "@/assets/telegram-about.png.asset.json";
 
 const TELEGRAM_URL = "https://t.me/+HAwfutUg1gNlZDZl";
 
-export type NavItem = { to: string; label: string; icon: LucideIcon; exact?: boolean };
+export type NavItem = { to: string; label: string; icon: LucideIcon; exact?: boolean; adminOnly?: boolean };
 
 export function AppShell({ nav, children, title, secondary }: { nav: NavItem[]; children: ReactNode; title: string; secondary?: { title: string; nav: NavItem[] } }) {
   const [open, setOpen] = useState(false);
@@ -25,11 +26,11 @@ export function AppShell({ nav, children, title, secondary }: { nav: NavItem[]; 
   };
 
   const sidebar = (
-    <div className="flex h-full flex-col">
-      <div className="flex h-16 items-center px-5"><Logo to="/dashboard" /></div>
+    <div className="flex flex-col">
+      <div className="workspace-brand flex h-16 items-center px-5"><Logo to="/dashboard" /></div>
       <p className="px-5 pb-2 pt-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">{title}</p>
-      <nav className="flex-1 space-y-0.5 px-3">
-        {nav.map((n) => (
+      <nav className="space-y-0.5 px-3 pb-3">
+        {nav.filter((n) => !n.adminOnly || data?.isAdmin).map((n) => (
           <Link
             key={n.to}
             to={n.to}
@@ -44,7 +45,7 @@ export function AppShell({ nav, children, title, secondary }: { nav: NavItem[]; 
         {secondary && (
           <>
             <p className="px-2 pb-2 pt-5 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">{secondary.title}</p>
-            {secondary.nav.map((n) => (
+            {secondary.nav.filter((n) => !n.adminOnly || data?.isAdmin).map((n) => (
               <Link key={n.to} to={n.to} onClick={() => setOpen(false)} activeOptions={{ exact: !!n.exact }}
                 className="side-link"
                 activeProps={{ className: "is-active" }}>
@@ -85,29 +86,29 @@ export function AppShell({ nav, children, title, secondary }: { nav: NavItem[]; 
           <p className="truncate font-medium">{data?.profile?.name ?? "—"}</p>
           <p className="truncate text-muted-foreground">{data?.profile?.email}</p>
         </div>
-        <button onClick={signOut} className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-muted-foreground hover:bg-sidebar-accent hover:text-foreground">
+        <Button variant="outline" onClick={signOut} className="h-10 w-full justify-start gap-3 border-destructive/30 bg-destructive/10 px-3 text-destructive hover:border-destructive/50 hover:bg-destructive/20 hover:text-destructive">
           <LogOut className="h-4 w-4" /> Logout
-        </button>
+        </Button>
       </div>
     </div>
   );
 
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[256px_1fr]">
-      <aside className="sticky top-0 hidden h-screen border-r border-sidebar-border bg-sidebar lg:block">{sidebar}</aside>
+      <aside className="sticky top-0 hidden max-h-dvh self-start overflow-y-auto rounded-b-xl border-b border-r border-sidebar-border bg-sidebar lg:block">{sidebar}</aside>
       {open && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div className="absolute inset-0 bg-background/70 backdrop-blur-sm" onClick={() => setOpen(false)} />
-          <aside className="absolute inset-y-0 left-0 w-72 border-r border-sidebar-border bg-sidebar">
-            <button className="absolute right-3 top-4 p-2" onClick={() => setOpen(false)} aria-label="Close menu"><X className="h-5 w-5" /></button>
+          <aside className="absolute left-0 top-0 max-h-dvh w-72 max-w-[calc(100vw-1rem)] overflow-y-auto rounded-br-xl border-b border-r border-sidebar-border bg-sidebar">
+            <Button variant="ghost" size="icon" className="absolute right-3 top-3" onClick={() => setOpen(false)} aria-label="Close menu"><X className="h-5 w-5" /></Button>
             {sidebar}
           </aside>
         </div>
       )}
       <div className="min-w-0">
         <header className="sticky top-0 z-40 flex h-16 items-center gap-3 border-b border-border bg-background/80 px-4 backdrop-blur-xl lg:hidden">
-          <button onClick={() => setOpen(true)} className="rounded-lg border border-border p-2" aria-label="Open menu"><Menu className="h-5 w-5" /></button>
-          <Logo to="/dashboard" />
+          <Button variant="outline" size="icon" onClick={() => setOpen(true)} aria-label="Open menu"><Menu className="h-5 w-5" /></Button>
+          <div className="workspace-brand"><Logo to="/dashboard" /></div>
         </header>
         {data?.profile?.status === "suspended" && (
           <div className="bg-destructive/15 px-6 py-3 text-sm text-destructive">Your account is suspended. You can view your work but can't save changes. Contact support for help.</div>
