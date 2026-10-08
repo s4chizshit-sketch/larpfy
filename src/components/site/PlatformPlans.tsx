@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Link } from "@tanstack/react-router";
 import useEmblaCarousel from "embla-carousel-react";
 import { ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { usePlans } from "@/lib/content";
+import { PlanPaymentDialog } from "@/components/site/PlanPaymentDialog";
 import instagramLogo from "@/assets/instagram-plan.png.asset.json";
 import tiktokLogo from "@/assets/tiktok-plan.png.asset.json";
 
@@ -12,6 +12,7 @@ export function PlatformPlans() {
   const { data, isLoading, error } = usePlans();
   const [viewportRef, carousel] = useEmblaCarousel({ align: "center", containScroll: "trimSnaps", dragThreshold: 5 });
   const [selected, setSelected] = useState(0);
+  const [paymentPlan, setPaymentPlan] = useState<{ name: string; price: number; billingPeriod: string } | null>(null);
   const manual = useRef(false);
   const pointerStart = useRef<{ x: number; y: number } | null>(null);
   const stop = useCallback(() => { manual.current = true; }, []);
@@ -83,8 +84,8 @@ export function PlatformPlans() {
                       <ul className="mt-4 space-y-2">
                         {plan.features.map((feature) => <li key={feature} className="flex items-start gap-2 text-sm font-medium text-foreground/80"><Check className="mt-0.5 h-4 w-4 shrink-0 text-glow" />{feature}</li>)}
                       </ul>
-                      <Button asChild className="btn-plan mt-5 h-10 px-5 text-xs font-bold">
-                        <Link to="/signup">{plan.cta}<ArrowRight /></Link>
+                      <Button type="button" className="btn-plan mt-5 h-10 px-5 text-xs font-bold" onClick={() => setPaymentPlan({ name: plan.name, price: Number(plan.price), billingPeriod: plan.billing_period })}>
+                        {plan.cta}<ArrowRight />
                       </Button>
                     </div>
                   ))}
@@ -101,6 +102,7 @@ export function PlatformPlans() {
           </Button>
         ))}
       </div>
+      <PlanPaymentDialog plan={paymentPlan} open={paymentPlan !== null} onOpenChange={(open) => { if (!open) setPaymentPlan(null); }} />
     </div>
   );
 }

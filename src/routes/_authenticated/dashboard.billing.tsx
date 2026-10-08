@@ -20,7 +20,7 @@ function Billing() {
       {data?.isAdmin && <PlanPriceEditor />}
       <h2 className="pro-title mb-6 mt-12 text-xl">Available plans</h2>
       <PlatformPlans />
-      <p className="mt-6 text-center text-xs text-muted-foreground">Online checkout is being set up. Contact support to upgrade in the meantime.</p>
+      <p className="mt-6 text-center text-xs text-muted-foreground">UPI payments are available now. USD checkout is coming soon.</p>
     </>
   );
 }
