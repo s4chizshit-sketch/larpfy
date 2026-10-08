@@ -27,7 +27,7 @@ export function AppShell({ nav, children, title, secondary }: { nav: NavItem[]; 
 
   const sidebar = (
     <div className="flex flex-col">
-      <div className="flex h-16 items-center px-5 [&_img]:h-12 [&_img]:w-auto [&_img]:max-w-[180px]"><Logo to="/dashboard" /></div>
+      <div className="workspace-brand flex h-16 items-center px-5"><Logo to="/dashboard" /></div>
       <p className="px-5 pb-2 pt-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">{title}</p>
       <nav className="space-y-0.5 px-3 pb-3">
         {nav.filter((n) => !n.adminOnly || data?.isAdmin).map((n) => (
@@ -108,7 +108,7 @@ export function AppShell({ nav, children, title, secondary }: { nav: NavItem[]; 
       <div className="min-w-0">
         <header className="sticky top-0 z-40 flex h-16 items-center gap-3 border-b border-border bg-background/80 px-4 backdrop-blur-xl lg:hidden">
           <Button variant="outline" size="icon" onClick={() => setOpen(true)} aria-label="Open menu"><Menu className="h-5 w-5" /></Button>
-          <div className="[&_img]:h-12 [&_img]:w-auto [&_img]:max-w-[180px]"><Logo to="/dashboard" /></div>
+          <div className="workspace-brand"><Logo to="/dashboard" /></div>
         </header>
         {data?.profile?.status === "suspended" && (
           <div className="bg-destructive/15 px-6 py-3 text-sm text-destructive">Your account is suspended. You can view your work but can't save changes. Contact support for help.</div>
