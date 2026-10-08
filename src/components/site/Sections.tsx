@@ -15,7 +15,8 @@ import { InstagramMark, TiktokMark, InstagramGlyph, TiktokGlyph } from "./BrandM
 import { TiktokVideoShowcase } from "./TiktokVideoShowcase";
 import { CustomizeVideoSeries } from "./CustomizeVideoSeries";
 import { TiktokCustomizeVideoSeries } from "./TiktokCustomizeVideoSeries";
-import { DEFAULT_HERO, usePlans, usePublishedVideos, useSiteContent, type FaqItem, type Hero } from "@/lib/content";
+import { PlatformPlans } from "./PlatformPlans";
+import { DEFAULT_HERO, usePublishedVideos, useSiteContent, type FaqItem, type Hero } from "@/lib/content";
 
 export function PublicLayout({ children }: { children: ReactNode }) {
   return (
@@ -208,37 +209,7 @@ export function HowItWorks() {
 }
 
 export function PricingGrid() {
-  const { data, isLoading, error } = usePlans();
-  if (isLoading)
-    return <div className="grid gap-5 md:grid-cols-3">{[0, 1, 2].map((i) => <Skeleton key={i} className="h-[420px] rounded-3xl" />)}</div>;
-  if (error) return <p className="text-center text-destructive">Couldn't load pricing. Please refresh.</p>;
-  if (!data?.length) return <p className="text-center text-muted-foreground">Plans are coming soon.</p>;
-  return (
-    <div className={`mx-auto grid gap-5 ${data.length === 1 ? "max-w-md" : data.length === 2 ? "max-w-3xl md:grid-cols-2" : "md:grid-cols-3"}`}>
-      {data.map((p) => (
-        <div key={p.id} className={`relative flex flex-col rounded-3xl border p-7 ${p.popular ? "border-primary/60 bg-card shadow-glow" : "border-border bg-card/60"}`}>
-          {p.popular && (
-            <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-brand px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary-foreground">Most popular</span>
-          )}
-          <h3 className="text-lg font-semibold">{p.name}</h3>
-          <div className="mt-4 flex items-baseline gap-1.5">
-            <span className="font-display text-5xl font-semibold">${Number(p.price)}</span>
-            <span className="text-sm text-muted-foreground">/ {p.billing_period}</span>
-          </div>
-          <ul className="mt-6 flex-1 space-y-3">
-            {p.features.map((f) => (
-              <li key={f} className="flex gap-3 text-sm">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-success" /> {f}
-              </li>
-            ))}
-          </ul>
-          <Button asChild size="lg" className={`mt-8 ${p.popular ? "bg-brand" : ""}`} variant={p.popular ? "default" : "secondary"}>
-            <Link to="/signup">{p.cta}</Link>
-          </Button>
-        </div>
-      ))}
-    </div>
-  );
+  return <PlatformPlans />;
 }
 
 export function FaqList() {
@@ -342,15 +313,8 @@ export function PlatformBadge({ p }: { p: string }) {
 
 export function CtaBand() {
   return (
-    <section className="mx-auto max-w-7xl px-4 sm:px-6">
-      <div className="relative overflow-hidden rounded-3xl border border-border bg-card p-10 text-center sm:p-16">
-        <div className="hero-bg absolute inset-0" />
-        <div className="relative">
-          <h2 className="text-3xl font-semibold sm:text-4xl">Build your first demo insight today</h2>
-          <p className="mx-auto mt-4 max-w-lg text-muted-foreground">Create an account, pick a platform, and start customizing in minutes.</p>
-          <Button asChild size="lg" className="mt-8 bg-brand shadow-glow"><Link to="/signup">Get Started</Link></Button>
-        </div>
-      </div>
+    <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6" aria-label="Platform pricing">
+      <PricingGrid />
     </section>
   );
 }
