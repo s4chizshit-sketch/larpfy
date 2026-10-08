@@ -171,8 +171,16 @@
   transform: none;
   filter: none;
 }
+/* Feature bullets: slide in from the left when the section scrolls into view */
+.reveal.bullet-reveal:not(.is-visible) {
+  transform: translateX(-28px);
+}
+.reveal.bullet-reveal.is-visible {
+  transform: none;
+}
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .reveal,
+  .reveal.bullet-reveal {
     opacity: 1;
     transform: none;
     filter: none;

@@ -134,14 +134,14 @@ export function PlatformSection({ platform, reverse }: { platform: "instagram" |
                 "Create customized TikTok insight demos with the same simple workflow."
               )}
             </p>
-            <ul className="mt-8 grid gap-2.5 sm:grid-cols-2">
+            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
               {bullets.map((b, i) => (
-                <Reveal key={b} delay={i * 70}>
-                  <li className="group flex h-full items-start gap-3 rounded-xl border border-border/70 bg-card/40 p-3.5 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:bg-primary/[0.06] hover:shadow-glow">
-                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-primary/30 bg-primary/15 text-primary transition-colors duration-300 group-hover:bg-primary/25">
-                      <Check className="h-3 w-3" strokeWidth={3} />
+                <Reveal key={b} delay={i * 80} className="bullet-reveal">
+                  <li className="group flex h-full items-start gap-3.5 rounded-xl border border-border/70 bg-card/40 p-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:bg-primary/[0.06] hover:shadow-glow">
+                    <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-primary/30 bg-primary/15 text-primary transition-colors duration-300 group-hover:bg-primary/25">
+                      <Check className="h-3.5 w-3.5" strokeWidth={3} />
                     </span>
-                    <span className="text-[13px] font-medium leading-snug text-foreground/90">{b}</span>
+                    <span className="text-[15px] font-semibold leading-snug text-foreground/90 sm:text-base">{b}</span>
                   </li>
                 </Reveal>
               ))}
