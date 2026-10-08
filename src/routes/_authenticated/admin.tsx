@@ -1,5 +1,5 @@
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
-import { CreditCard, FolderKanban, Gift, Instagram, LayoutGrid, Music2, Settings, BadgeDollarSign, FileText, Film, Loader2, ShieldAlert, Tags, Users } from "lucide-react";
+import { CreditCard, LayoutGrid, Settings, FileText, Film, Loader2, ShieldAlert, Tags, Users } from "lucide-react";
 import { AppShell, type NavItem } from "@/components/app/AppShell";
 import { useProfile } from "@/lib/auth";
 
@@ -7,17 +7,12 @@ const nav: NavItem[] = [
   { to: "/admin", label: "Users", icon: Users, exact: true },
   { to: "/admin/videos", label: "Demo Videos", icon: Film },
   { to: "/admin/pricing", label: "Pricing", icon: Tags },
-  { to: "/admin/affiliate", label: "Affiliate", icon: BadgeDollarSign },
   { to: "/admin/content", label: "Website Content", icon: FileText },
 ];
 
 const workspace: NavItem[] = [
   { to: "/dashboard", label: "Overview", icon: LayoutGrid, exact: true },
-  { to: "/dashboard/instagram", label: "Instagram Editor", icon: Instagram },
-  { to: "/dashboard/tiktok", label: "TikTok Editor", icon: Music2 },
-  { to: "/dashboard/projects", label: "My Projects", icon: FolderKanban },
   { to: "/dashboard/billing", label: "Pricing / Subscription", icon: CreditCard },
-  { to: "/dashboard/affiliate", label: "Affiliate", icon: Gift },
   { to: "/dashboard/settings", label: "Settings", icon: Settings },
 ];
 

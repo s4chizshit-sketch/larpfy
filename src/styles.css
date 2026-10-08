@@ -606,3 +606,12 @@
   background: linear-gradient(160deg, color-mix(in oklab, #7db4ff 10%, transparent), color-mix(in oklab, var(--card) 70%, transparent));
   box-shadow: inset 0 1px 0 color-mix(in oklab, #fff 10%, transparent), 0 20px 60px -30px color-mix(in oklab, #4da3ff 55%, transparent);
 }
+
+/* Professional app shell */
+.side-link{display:flex;align-items:center;gap:.75rem;border-radius:.75rem;padding:.65rem .8rem;font-size:15px;font-weight:500;letter-spacing:.005em;color:var(--muted-foreground);border:1px solid transparent;transition:all .2s ease}
+.side-link:hover{color:var(--foreground);background:color-mix(in oklab,var(--primary) 8%,transparent);transform:translateX(2px)}
+.side-link.is-active{color:var(--foreground);background:linear-gradient(90deg,color-mix(in oklab,var(--primary) 22%,transparent),color-mix(in oklab,var(--primary) 4%,transparent));border-color:color-mix(in oklab,var(--primary) 30%,transparent);box-shadow:inset 3px 0 0 var(--primary),0 6px 24px -12px var(--primary)}
+.side-link.is-active svg{color:var(--primary)}
+.pro-title{font-family:"Sora",var(--font-display,sans-serif);font-weight:700;letter-spacing:-.02em;background:linear-gradient(180deg,var(--foreground) 30%,color-mix(in oklab,var(--primary) 60%,var(--foreground)));-webkit-background-clip:text;background-clip:text;color:transparent}
+.pro-panel{border-radius:1.25rem;border:1px solid color-mix(in oklab,var(--primary) 18%,var(--border));background:linear-gradient(160deg,color-mix(in oklab,var(--card) 85%,transparent),color-mix(in oklab,var(--card) 50%,transparent));box-shadow:inset 0 1px 0 color-mix(in oklab,var(--foreground) 6%,transparent),0 18px 40px -24px color-mix(in oklab,var(--primary) 45%,transparent);transition:transform .25s ease,box-shadow .25s ease}
+.pro-panel:hover{transform:translateY(-2px)}
