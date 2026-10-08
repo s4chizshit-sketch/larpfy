@@ -12,3 +12,4 @@
 - Uploaded platform showcase recordings use asset pointers and a shared browser-side carousel so playback stays independent of editor previews and both platforms retain identical device presentation.
 - Platform recording carousels use Embla for touch dragging and snapping; automatic advancement stops after manual interaction so the selected recording stays visible.
 - The shared showcase device shell replaces only the recordings' system-bar margins with device chrome, preserving uploaded app content and playback.
+- Platform pricing uses a shared Embla carousel grouping plans by their platform name prefix; this keeps homepage and pricing offers synchronized with admin-editable plan rows.

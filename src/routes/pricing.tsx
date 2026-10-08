@@ -8,13 +8,15 @@ export const Route = createFileRoute("/pricing")({
       { name: "description", content: "Simple plans for creating customizable Instagram and TikTok insight demos." },
       { property: "og:title", content: "Pricing — LARP Insight" },
       { property: "og:description", content: "Choose the LARP Insight plan that fits your workflow." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: () => (
     <PublicLayout>
       <section className="hero-bg">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow="Pricing" title="Plans for every creator" sub="Pick a plan, cancel anytime. Every plan includes the core editor." />
+          <SectionHeading eyebrow="Pricing" title="Instagram & TikTok Plans" />
           <div className="mt-14"><PricingGrid /></div>
         </div>
       </section>

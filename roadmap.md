@@ -1,0 +1,2 @@
+- [ ] Replace old plan presentation with two premium Instagram/TikTok swipe boxes.
+- [ ] Store new prices, add PNG logos, and verify pricing and touch interaction.
