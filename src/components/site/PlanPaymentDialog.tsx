@@ -232,7 +232,9 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
                       const el = scrollRef.current;
                       const target = timerRef.current;
                       if (el && target) {
-                        const top = target.offsetTop - (el.clientHeight - target.offsetHeight) / 2;
+                        const er = el.getBoundingClientRect();
+                        const tr = target.getBoundingClientRect();
+                        const top = el.scrollTop + (tr.top - er.top) - (el.clientHeight - tr.height) / 2;
                         el.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
                       } else {
                         target?.scrollIntoView({ behavior: "smooth", block: "center" });
