@@ -35,6 +35,7 @@ import { Route as AuthenticatedDashboardInstagramRouteImport } from './routes/_a
 import { Route as AuthenticatedDashboardProjectsRouteImport } from './routes/_authenticated/dashboard.projects'
 import { Route as AuthenticatedDashboardSettingsRouteImport } from './routes/_authenticated/dashboard.settings'
 import { Route as AuthenticatedDashboardTiktokRouteImport } from './routes/_authenticated/dashboard.tiktok'
+import { Route as ApiPublicOxapayWebhookRouteImport } from './routes/api/public/oxapay-webhook'
 import { Route as AuthenticatedDashboardEditorIdRouteImport } from './routes/_authenticated/dashboard.editor.$id'
 
 const IndexRoute = IndexRouteImport.update({
@@ -175,6 +176,11 @@ const AuthenticatedDashboardTiktokRoute =
     path: '/tiktok',
     getParentRoute: () => AuthenticatedDashboardRoute,
   } as any)
+const ApiPublicOxapayWebhookRoute = ApiPublicOxapayWebhookRouteImport.update({
+  id: '/api/public/oxapay-webhook',
+  path: '/api/public/oxapay-webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedDashboardEditorIdRoute =
   AuthenticatedDashboardEditorIdRouteImport.update({
     id: '/editor/$id',
@@ -206,6 +212,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/projects': typeof AuthenticatedDashboardProjectsRoute
   '/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
   '/dashboard/tiktok': typeof AuthenticatedDashboardTiktokRoute
+  '/api/public/oxapay-webhook': typeof ApiPublicOxapayWebhookRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/dashboard/editor/$id': typeof AuthenticatedDashboardEditorIdRoute
@@ -232,6 +239,7 @@ export interface FileRoutesByTo {
   '/dashboard/projects': typeof AuthenticatedDashboardProjectsRoute
   '/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
   '/dashboard/tiktok': typeof AuthenticatedDashboardTiktokRoute
+  '/api/public/oxapay-webhook': typeof ApiPublicOxapayWebhookRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
   '/dashboard/editor/$id': typeof AuthenticatedDashboardEditorIdRoute
@@ -262,6 +270,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/projects': typeof AuthenticatedDashboardProjectsRoute
   '/_authenticated/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
   '/_authenticated/dashboard/tiktok': typeof AuthenticatedDashboardTiktokRoute
+  '/api/public/oxapay-webhook': typeof ApiPublicOxapayWebhookRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/_authenticated/dashboard/editor/$id': typeof AuthenticatedDashboardEditorIdRoute
@@ -292,6 +301,7 @@ export interface FileRouteTypes {
     | '/dashboard/projects'
     | '/dashboard/settings'
     | '/dashboard/tiktok'
+    | '/api/public/oxapay-webhook'
     | '/admin/'
     | '/dashboard/'
     | '/dashboard/editor/$id'
@@ -318,6 +328,7 @@ export interface FileRouteTypes {
     | '/dashboard/projects'
     | '/dashboard/settings'
     | '/dashboard/tiktok'
+    | '/api/public/oxapay-webhook'
     | '/admin'
     | '/dashboard'
     | '/dashboard/editor/$id'
@@ -347,6 +358,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/projects'
     | '/_authenticated/dashboard/settings'
     | '/_authenticated/dashboard/tiktok'
+    | '/api/public/oxapay-webhook'
     | '/_authenticated/admin/'
     | '/_authenticated/dashboard/'
     | '/_authenticated/dashboard/editor/$id'
@@ -367,6 +379,7 @@ export interface RootRouteChildren {
   SignupRoute: typeof SignupRoute
   TermsRoute: typeof TermsRoute
   RCodeRoute: typeof RCodeRoute
+  ApiPublicOxapayWebhookRoute: typeof ApiPublicOxapayWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -553,6 +566,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardTiktokRouteImport
       parentRoute: typeof AuthenticatedDashboardRoute
     }
+    '/api/public/oxapay-webhook': {
+      id: '/api/public/oxapay-webhook'
+      path: '/api/public/oxapay-webhook'
+      fullPath: '/api/public/oxapay-webhook'
+      preLoaderRoute: typeof ApiPublicOxapayWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/dashboard/editor/$id': {
       id: '/_authenticated/dashboard/editor/$id'
       path: '/editor/$id'
@@ -634,6 +654,7 @@ const rootRouteChildren: RootRouteChildren = {
   SignupRoute: SignupRoute,
   TermsRoute: TermsRoute,
   RCodeRoute: RCodeRoute,
+  ApiPublicOxapayWebhookRoute: ApiPublicOxapayWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

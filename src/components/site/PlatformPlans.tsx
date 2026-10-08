@@ -12,7 +12,7 @@ export function PlatformPlans() {
   const { data, isLoading, error } = usePlans();
   const [viewportRef, carousel] = useEmblaCarousel({ align: "center", containScroll: "trimSnaps", dragThreshold: 5 });
   const [selected, setSelected] = useState(0);
-  const [paymentPlan, setPaymentPlan] = useState<{ name: string; price: number; billingPeriod: string } | null>(null);
+  const [paymentPlan, setPaymentPlan] = useState<{ id: string; name: string; price: number; billingPeriod: string } | null>(null);
   const manual = useRef(false);
   const pointerStart = useRef<{ x: number; y: number } | null>(null);
   const stop = useCallback(() => { manual.current = true; }, []);
@@ -84,7 +84,7 @@ export function PlatformPlans() {
                       <ul className="mt-4 space-y-2">
                         {plan.features.map((feature) => <li key={feature} className="flex items-start gap-2 text-sm font-medium text-foreground/80"><Check className="mt-0.5 h-4 w-4 shrink-0 text-glow" />{feature}</li>)}
                       </ul>
-                      <Button type="button" className="btn-plan mt-5 h-10 px-5 text-xs font-bold" onClick={() => setPaymentPlan({ name: plan.name, price: Number(plan.price), billingPeriod: plan.billing_period })}>
+                      <Button type="button" className="btn-plan mt-5 h-10 px-5 text-xs font-bold" onClick={() => setPaymentPlan({ id: plan.id, name: plan.name, price: Number(plan.price), billingPeriod: plan.billing_period })}>
                         {plan.cta}<ArrowRight />
                       </Button>
                     </div>
