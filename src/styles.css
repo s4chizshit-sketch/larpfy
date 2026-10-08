@@ -667,6 +667,49 @@ video::-internal-media-controls-download-button { display: none; }
   .settings-telegram, .settings-telegram:hover { transform: none; }
 }
 
+/* ===== Sidebar Telegram card ===== */
+.side-telegram {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 13px;
+  border-radius: 14px;
+  border: 1px solid color-mix(in oklab, #2aabee 34%, transparent);
+  background:
+    radial-gradient(120% 150% at 0% 0%, color-mix(in oklab, #2aabee 20%, transparent), transparent 62%),
+    linear-gradient(160deg, color-mix(in oklab, var(--card) 92%, transparent), color-mix(in oklab, var(--card) 58%, transparent));
+  box-shadow: inset 0 1px 0 color-mix(in oklab, #9cc8ff 18%, transparent), 0 18px 40px -26px color-mix(in oklab, #2aabee 70%, transparent);
+  transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+}
+.side-telegram:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in oklab, #2aabee 58%, transparent);
+  box-shadow: inset 0 1px 0 color-mix(in oklab, #9cc8ff 26%, transparent), 0 22px 46px -24px color-mix(in oklab, #2aabee 80%, transparent);
+}
+.side-telegram-logo {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 6px 14px color-mix(in oklab, #2aabee 55%, transparent));
+}
+.side-telegram-title {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+}
+.side-telegram-sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  line-height: 1.45;
+  color: color-mix(in oklab, var(--muted-foreground) 72%, var(--foreground));
+}
+.side-telegram-arrow { color: color-mix(in oklab, #2aabee 85%, var(--foreground)); opacity: .8; transition: transform .28s ease; }
+.side-telegram:hover .side-telegram-arrow { transform: translate(2px, -2px); opacity: 1; }
+
 /* ===== Premium auth card (signup / login / reset) ===== */
 .auth-shell {
   position: relative;
