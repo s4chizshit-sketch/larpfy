@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader, StatCard } from "@/components/app/AppShell";
-import { PricingGrid } from "@/components/site/Sections";
+import { PlatformPlans } from "@/components/site/PlatformPlans";
 import { useProfile } from "@/lib/auth";
 
 export const Route = createFileRoute("/_authenticated/dashboard/billing")({
@@ -19,7 +19,7 @@ function Billing() {
         <StatCard label="Price" value={plan ? `$${Number(plan.price)} / ${plan.billing_period}` : "$0"} />
       </div>
       <h2 className="mb-6 mt-12 text-lg font-semibold">Available plans</h2>
-      <PricingGrid />
+      <PlatformPlans />
       <p className="mt-6 text-center text-xs text-muted-foreground">Online checkout is being set up. Contact support to upgrade in the meantime.</p>
     </>
   );

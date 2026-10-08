@@ -17,6 +17,7 @@ export const Route = createFileRoute("/login")({
       { property: "og:description", content: "Log in to your LARP Insight account." },
     ],
   }),
+  validateSearch: (s: Record<string, unknown>): { redirect?: "billing" } => (s.redirect === "billing" ? { redirect: "billing" } : {}),
   component: Login,
 });
 
@@ -27,6 +28,7 @@ const schema = z.object({
 
 function Login() {
   const navigate = useNavigate();
+  const { redirect } = Route.useSearch();
   const [form, setForm] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [serverError, setServerError] = useState("");
@@ -43,11 +45,12 @@ function Login() {
     setLoading(false);
     if (error) return setServerError(error.message === "Invalid login credentials" ? "Incorrect email or password." : error.message);
     const { data: roles } = await supabase.from("user_roles").select("role").eq("user_id", signIn.user!.id);
+    if (redirect === "billing") return navigate({ to: "/dashboard/billing" });
     navigate({ to: roles?.some((x) => x.role === "admin") ? "/" : "/dashboard" });
   };
 
   return (
-    <AuthShell title="Welcome back" sub="Log in with the email and password you registered with." footer={<>New here? <Link to="/signup" className="text-foreground underline-offset-4 hover:underline">Create an account</Link></>}>
+    <AuthShell title="Welcome back" sub="Log in with the email and password you registered with." footer={<>New here? <Link to="/signup" search={redirect ? { redirect } : {}} className="text-foreground underline-offset-4 hover:underline">Create an account</Link></>}>
       <form onSubmit={submit} className="space-y-4" noValidate>
         <div>
           <Label htmlFor="email">Email</Label>

@@ -15,7 +15,7 @@ import { InstagramMark, TiktokMark, InstagramGlyph, TiktokGlyph } from "./BrandM
 import { TiktokVideoShowcase } from "./TiktokVideoShowcase";
 import { CustomizeVideoSeries } from "./CustomizeVideoSeries";
 import { TiktokCustomizeVideoSeries } from "./TiktokCustomizeVideoSeries";
-import { PlatformPlans } from "./PlatformPlans";
+import { useAuth } from "@/lib/auth";
 import { DEFAULT_HERO, usePublishedVideos, useSiteContent, type FaqItem, type Hero } from "@/lib/content";
 
 export function PublicLayout({ children }: { children: ReactNode }) {
@@ -208,7 +208,46 @@ export function HowItWorks() {
 }
 
 export function PricingGrid() {
-  return <PlatformPlans />;
+  const { user } = useAuth();
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <div className="pricing-gate mx-auto max-w-xl rounded-[28px] p-8 text-center sm:p-10">
+        <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-border/60 bg-foreground/5">
+          <Lock className="h-5 w-5 text-brand-glow" aria-hidden />
+        </div>
+        <h3 className="font-display text-2xl font-bold tracking-tight">Plans for Instagram &amp; TikTok</h3>
+        <p className="mx-auto mt-3 max-w-sm text-muted-foreground">
+          Plan prices are shown inside your account. Sign up or log in to view them.
+        </p>
+        {user ? (
+          <Button asChild size="lg" className="mt-7 rounded-full bg-brand px-8 shadow-glow">
+            <Link to="/dashboard/billing">View Pricing <ArrowRight className="h-4 w-4" /></Link>
+          </Button>
+        ) : (
+          <Button size="lg" className="mt-7 rounded-full bg-brand px-8 shadow-glow" onClick={() => setOpen(true)}>
+            View Pricing <ArrowRight className="h-4 w-4" />
+          </Button>
+        )}
+      </div>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="max-w-md rounded-3xl text-center">
+          <DialogTitle className="font-display text-2xl font-bold">Log in to get a plan</DialogTitle>
+          <p className="text-sm text-muted-foreground">
+            To view and choose a plan, please create a new account or log in if you already have one.
+          </p>
+          <div className="mt-2 grid gap-3">
+            <Button asChild size="lg" className="rounded-full bg-brand shadow-glow">
+              <Link to="/signup" search={{ redirect: "billing" }}>Create new account</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="rounded-full">
+              <Link to="/login" search={{ redirect: "billing" }}>I already have an account — Log in</Link>
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
 }
 
 export function FaqList() {
