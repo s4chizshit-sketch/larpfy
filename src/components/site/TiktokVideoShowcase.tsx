@@ -16,5 +16,5 @@ const recordings = [
 ];
 
 export function TiktokVideoShowcase() {
-  return <RecordingVideoShowcase title="Tiktok Larp inght App UI" platform="TikTok" recordings={recordings} />;
+  return <RecordingVideoShowcase title="Tiktok Larp Insight App UI" platform="TikTok" recordings={recordings} />;
 }
