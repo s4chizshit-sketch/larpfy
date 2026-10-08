@@ -15,3 +15,4 @@
 - [x] Add plan checkout choices for UPI/INR and upcoming USD payments, with the uploaded QR and copyable UPI ID.
 
 - [x] Refine payment dialog typography and download placement; remove bottom shadows from plan and subscription instruction boxes.
+- [ ] Add a 02:59 QR countdown and show Telegram screenshot submission only after expiry; verify the transition.
