@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { ArrowUpRight, Check, Copy, Download, Landmark, LoaderCircle, QrCode, Timer, WalletCards } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight, Check, ChevronDown, Copy, Download, Landmark, LoaderCircle, QrCode, Timer, WalletCards } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
@@ -34,6 +34,10 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
   const [loadingQr, setLoadingQr] = useState(false);
   const [deadline, setDeadline] = useState<number | null>(null);
   const [secondsLeft, setSecondsLeft] = useState(PAYMENT_WINDOW_SECONDS);
+  const [showScrollHint, setShowScrollHint] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const timerRef = useRef<HTMLDivElement>(null);
+  const peekedRef = useRef(false);
 
   useEffect(() => {
     if (!open) {
@@ -41,6 +45,8 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
       setLoadingQr(false);
       setDeadline(null);
       setSecondsLeft(PAYMENT_WINDOW_SECONDS);
+      setShowScrollHint(false);
+      peekedRef.current = false;
     }
   }, [open]);
 
@@ -60,6 +66,67 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
     const interval = window.setInterval(update, 250);
     return () => window.clearInterval(interval);
   }, [open, deadline]);
+
+  // One-time gentle "peek" scroll after the QR appears, hinting there is more below.
+  // Cancels immediately on any user gesture so it never fights the user's scrolling.
+  useEffect(() => {
+    if (!open) return;
+    if (method !== "upi" || loadingQr || peekedRef.current) return;
+    peekedRef.current = true;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const el = scrollRef.current;
+    if (!el || el.scrollHeight <= el.clientHeight + 60) return;
+    const start = el.scrollTop;
+    const max = Math.min(110, el.scrollHeight - el.clientHeight - start);
+    if (max <= 8) return;
+    let raf = 0;
+    let cancelled = false;
+    const once = { passive: true, once: true } as AddEventListenerOptions;
+    const cleanup = () => {
+      el.removeEventListener("wheel", cancel, once);
+      el.removeEventListener("touchstart", cancel, once);
+      el.removeEventListener("pointerdown", cancel, once);
+    };
+    const cancel = () => { cancelled = true; cancelAnimationFrame(raf); cleanup(); };
+    el.addEventListener("wheel", cancel, once);
+    el.addEventListener("touchstart", cancel, once);
+    el.addEventListener("pointerdown", cancel, once);
+    const easeOut = (x: number) => 1 - Math.pow(1 - x, 3);
+    const easeInOut = (x: number) => (x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
+    const t0 = performance.now() + 550;
+    const DOWN = 800;
+    const UP = 800;
+    const tick = (now: number) => {
+      if (cancelled) return;
+      const t = now - t0;
+      if (t < 0) { raf = requestAnimationFrame(tick); return; }
+      if (t < DOWN) {
+        el.scrollTo({ top: start + max * easeOut(t / DOWN) });
+      } else if (t < DOWN + UP) {
+        el.scrollTo({ top: start + max * (1 - easeInOut((t - DOWN) / UP)) });
+      } else {
+        el.scrollTo({ top: start });
+        cleanup();
+        return;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => { cancelled = true; cancelAnimationFrame(raf); cleanup(); };
+  }, [open, method, loadingQr]);
+
+  // Show a scroll hint chip while the timer / UPI ID sit below the fold.
+  useEffect(() => {
+    if (!open || method !== "upi" || loadingQr) { setShowScrollHint(false); return; }
+    const measure = () => {
+      const el = scrollRef.current;
+      if (!el) return;
+      setShowScrollHint(el.scrollHeight > el.clientHeight + 60 && el.scrollTop + el.clientHeight < el.scrollHeight - 80);
+    };
+    measure();
+    const t = window.setTimeout(measure, 600);
+    return () => window.clearTimeout(t);
+  }, [open, method, loadingQr, plan]);
 
   if (!plan) return null;
 
@@ -87,7 +154,12 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="payment-dialog max-h-[92vh] w-[calc(100%-24px)] max-w-md overflow-y-auto p-0">
+      <DialogContent ref={scrollRef} className="payment-dialog max-h-[92vh] w-[calc(100%-24px)] max-w-md overflow-y-auto p-0"
+        onScroll={() => {
+          const el = scrollRef.current;
+          if (!el) return;
+          if (el.scrollTop + el.clientHeight >= el.scrollHeight - 80) setShowScrollHint(false);
+        }}>
         <div className="payment-dialog-head">
           <p className="payment-kicker">Secure payment</p>
           <DialogTitle className="payment-title">{expired ? "Send your payment screenshot" : "Choose how to pay"}</DialogTitle>
@@ -154,6 +226,24 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
                     </div>
                   </div>
                   <p className="payment-scan-label">Scan Payment · ₹{amount.toLocaleString("en-IN")}</p>
+                  {showScrollHint && (
+                    <button type="button" className="payment-scroll-hint" onClick={() => {
+                      setShowScrollHint(false);
+                      const el = scrollRef.current;
+                      const target = timerRef.current;
+                      if (el && target) {
+                        const er = el.getBoundingClientRect();
+                        const tr = target.getBoundingClientRect();
+                        const top = el.scrollTop + (tr.top - er.top) - (el.clientHeight - tr.height) / 2;
+                        el.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+                      } else {
+                        target?.scrollIntoView({ behavior: "smooth", block: "center" });
+                      }
+                    }} aria-label="Scroll to payment timer and UPI ID">
+                      <ChevronDown className="size-3.5" />
+                      <span>Scroll for timer & UPI ID</span>
+                    </button>
+                  )}
                   <div className="payment-upi-copy">
                     <span><small>UPI ID</small><strong>{UPI_ID}</strong></span>
                     <Button type="button" variant="ghost" size="icon" onClick={copyUpiId} aria-label="Copy UPI ID" title="Copy UPI ID"><Copy /></Button>
@@ -167,7 +257,7 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
                       <span role="listitem" className="payment-app-chip" title="BHIM UPI"><img src={bhimLogo.url} alt="BHIM" draggable={false} /></span>
                     </div>
                   </div>
-                  <div className="payment-countdown" role="timer" aria-label={`Payment time remaining ${countdown}`}>
+                  <div ref={timerRef} className="payment-countdown" role="timer" aria-label={`Payment time remaining ${countdown}`}>
                     <div className="payment-countdown-line"><span><Timer className="size-4" />Time remaining</span><strong>{countdown}</strong></div>
                     <progress value={secondsLeft} max={PAYMENT_WINDOW_SECONDS} aria-label="Payment time remaining" />
                   </div>
