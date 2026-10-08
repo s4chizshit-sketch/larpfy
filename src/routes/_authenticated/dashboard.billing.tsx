@@ -11,7 +11,7 @@ export const Route = createFileRoute("/_authenticated/dashboard/billing")({
     { title: "Pricing & Subscription | Larp Insight" },
     { name: "description", content: "Choose your Larp Insight plan and view subscription history and payment options." },
     { property: "og:title", content: "Pricing & Subscription | Larp Insight" },
-    { property: "og:description", content: "Instagram and TikTok plans, subscription history, and UPI payment options." },
+    { property: "og:description", content: "Instagram and TikTok plans, subscription history, and automatic USDT payment." },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
   ] }),
@@ -28,7 +28,7 @@ function Billing() {
       {data?.isAdmin && <PlanPriceEditor />}
       <h2 className="pro-title mb-6 mt-12 text-xl">Available plans</h2>
       <PlatformPlans />
-      <p className="billing-payment-note">UPI payments are available now. USD crypto checkout via OxaPay is available too.</p>
+      <p className="billing-payment-note">Pay with USDT — your plan activates automatically after payment.</p>
     </>
   );
 }
