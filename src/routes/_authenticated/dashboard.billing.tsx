@@ -7,6 +7,14 @@ import { PlanHistory } from "@/components/app/PlanHistory";
 import { HowToGetPlan } from "@/components/app/HowToGetPlan";
 
 export const Route = createFileRoute("/_authenticated/dashboard/billing")({
+  head: () => ({ meta: [
+    { title: "Pricing & Subscription | Larp Insight" },
+    { name: "description", content: "Choose your Larp Insight plan and view subscription history and payment options." },
+    { property: "og:title", content: "Pricing & Subscription | Larp Insight" },
+    { property: "og:description", content: "Instagram and TikTok plans, subscription history, and UPI payment options." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
+  ] }),
   component: Billing,
 });
 
@@ -20,7 +28,7 @@ function Billing() {
       {data?.isAdmin && <PlanPriceEditor />}
       <h2 className="pro-title mb-6 mt-12 text-xl">Available plans</h2>
       <PlatformPlans />
-      <p className="mt-6 text-center text-xs text-muted-foreground">UPI payments are available now. USD checkout is coming soon.</p>
+      <p className="billing-payment-note">UPI payments are available now. USD checkout is coming soon.</p>
     </>
   );
 }

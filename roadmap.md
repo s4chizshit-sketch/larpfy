@@ -13,3 +13,5 @@
 - [ ] Confirm the admin price editor saves correctly (needs one price changed and saved by the user).
 - [ ] Remove or re-link the affiliate program wording still left in Terms.
 - [x] Add plan checkout choices for UPI/INR and upcoming USD payments, with the uploaded QR and copyable UPI ID.
+
+- [x] Refine payment dialog typography and download placement; remove bottom shadows from plan and subscription instruction boxes.
