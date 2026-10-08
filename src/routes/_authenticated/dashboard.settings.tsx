@@ -68,7 +68,7 @@ function Settings() {
           draggable={false}
           className="settings-telegram-logo"
         />
-        <div className="min-w-0 flex-1">
+        <div className="settings-telegram-copy">
           <h2 className="font-display text-xl font-bold sm:text-2xl">Join Telegram Updates</h2>
           <p className="mt-2 max-w-xl text-sm text-muted-foreground sm:text-base">
             Get new feature drops, UI updates and early access announcements straight from the
@@ -79,7 +79,7 @@ function Settings() {
           href={TELEGRAM_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-plan group inline-flex h-11 shrink-0 items-center gap-2 px-7 text-xs font-bold uppercase tracking-[0.12em]"
+          className="settings-telegram-cta btn-plan group inline-flex h-11 items-center justify-center gap-2 px-7 text-xs font-bold uppercase tracking-[0.12em]"
         >
           <span className="relative z-[2]">Join Telegram</span>
           <ArrowUpRight className="relative z-[2] h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

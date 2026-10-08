@@ -36,18 +36,44 @@ function Forgot() {
     setSent(true);
   };
   return (
-    <AuthShell title="Forgot password" sub="We'll email you a link to reset it." footer={<Link to="/login" className="text-foreground">Back to login</Link>}>
+    <AuthShell
+      title="Forgot password"
+      sub={
+        <>
+          We'll email you a <em>link to reset</em> it.
+        </>
+      }
+      footer={
+        <Link to="/login">Back to login</Link>
+      }
+    >
       {sent ? (
-        <p className="text-sm text-muted-foreground">If an account exists for <span className="text-foreground">{email}</span>, a reset link is on its way.</p>
+        <p className="text-sm text-muted-foreground">
+          If an account exists for <span className="text-foreground">{email}</span>, a reset link is on its way.
+        </p>
       ) : (
-        <form onSubmit={submit} className="space-y-4" noValidate>
+        <form onSubmit={submit} className="space-y-5" noValidate>
           <div>
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" type="email" className="mt-2 h-11" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <Label htmlFor="email" className="auth-label">
+              Email
+            </Label>
+            <div className="relative mt-2">
+              <Input
+                id="email"
+                type="email"
+                autoComplete="email"
+                placeholder="you@email.com"
+                className="auth-field"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
             <FieldError msg={err} />
           </div>
-          <Button type="submit" size="lg" className="w-full bg-brand" disabled={loading}>
-            {loading && <Loader2 className="h-4 w-4 animate-spin" />} Send reset link
+          <Button type="submit" size="lg" className="btn-plan mt-1 h-[50px] w-full text-sm font-semibold" disabled={loading}>
+            <span className="relative z-[2] inline-flex items-center gap-2">
+              {loading && <Loader2 className="h-4 w-4 animate-spin" />} Send reset link
+            </span>
           </Button>
         </form>
       )}
