@@ -239,6 +239,7 @@
   opacity: 1;
   transform: none;
   filter: none;
+  will-change: auto;
 }
 /* Feature bullets: slide in from the left when the section scrolls into view */
 .reveal.bullet-reveal:not(.is-visible) {
