@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
 import { Loader2, MailCheck } from "lucide-react";
@@ -24,16 +24,13 @@ const schema = z
   .object({
     name: z.string().trim().min(2, "Enter your name").max(80),
     email: z.string().trim().email("Enter a valid email").max(255),
-    password: z
-      .string()
-      .min(8, "At least 8 characters")
-      .regex(/[A-Za-z]/, "Include a letter")
-      .regex(/[0-9]/, "Include a number"),
+    password: z.string().min(6, "At least 6 characters (numbers, letters or symbols like @)").max(72),
     confirm: z.string(),
   })
   .refine((d) => d.password === d.confirm, { path: ["confirm"], message: "Passwords don't match" });
 
 function Signup() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({ name: "", email: "", password: "", confirm: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
@@ -61,8 +58,9 @@ function Signup() {
       options: { emailRedirectTo: `${window.location.origin}/dashboard`, data: { name: r.data.name, ...(ref ? { ref } : {}) } },
     });
     setLoading(false);
-    if (error) return setServerError(error.message);
+    if (error) return setServerError(/registered|exists/i.test(error.message) ? "An account with this email already exists. Please log in." : error.message);
     if (data.user && data.user.identities?.length === 0) return setServerError("An account with this email already exists. Please log in.");
+    if (data.session) return navigate({ to: "/dashboard" });
     setDone(true);
   };
 
