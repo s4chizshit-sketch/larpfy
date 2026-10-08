@@ -555,7 +555,6 @@
     0 10px 26px -22px rgb(0 0 0 / 70%),
     inset 0 1px 0 color-mix(in oklab, var(--foreground) 15%, transparent);
   --plan-shine: linear-gradient(90deg, transparent, var(--glow), var(--foreground), transparent);
-  --plan-cut: linear-gradient(105deg, transparent 0%, rgb(255 255 255 / 5%) 28%, rgb(255 255 255 / 32%) 47%, rgb(255 255 255 / 7%) 63%, transparent 100%);
 }
 .platform-plans-window { overflow: hidden; padding: 18px 0 26px; touch-action: pan-y pinch-zoom; cursor: grab; }
 .platform-plans-window:active { cursor: grabbing; }
@@ -582,16 +581,8 @@
   content: ""; position: absolute; top: 0; left: -60%; width: 60%; height: 1px; z-index: 2;
   background: var(--plan-shine); animation: plan-edge-sweep 5s ease-in-out infinite; pointer-events: none;
 }
-/* diagonal light "cut" sweeping across the whole card */
-.platform-plan-card::after {
-  content: ""; position: absolute; top: -32%; bottom: -32%; left: -72%; width: 46%; z-index: 0;
-  background: var(--plan-cut); transform: skewX(-16deg);
-  animation: plan-cut-sweep 5.6s cubic-bezier(0.45, 0, 0.25, 1) infinite; pointer-events: none;
-}
 .platform-plan-card:nth-child(2)::before { animation-delay: 1.5s; }
-.platform-plan-card:nth-child(2)::after { animation-delay: 2s; }
 @keyframes plan-edge-sweep { 0% { left: -60%; } 70%, 100% { left: 110%; } }
-@keyframes plan-cut-sweep { 0% { left: -72%; } 58%, 100% { left: 152%; } }
 .plan-tier { position: relative; }
 .plan-tier + .plan-tier::before {
   content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px;
@@ -599,8 +590,7 @@
 }
 @media (min-width: 768px) { .platform-plan-card { flex-basis: calc(50% - 10px); padding: 30px 26px; } }
 @media (prefers-reduced-motion: reduce) {
-  .platform-plan-card::before, .platform-plan-card::after { animation: none; }
-  .platform-plan-card::after { opacity: 0; }
+  .platform-plan-card::before { animation: none; }
   .platform-plan-card, .platform-plan-card:hover { transform: none; }
 }
 
