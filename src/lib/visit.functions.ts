@@ -21,7 +21,7 @@ export const recordVisit = createServerFn({ method: "POST" })
     }
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data: p } = await supabaseAdmin.from("profiles").select("signup_ip").eq("id", context.userId).maybeSingle();
-    const patch: Record<string, unknown> = { last_ip: ip, last_country: country, last_seen_at: new Date().toISOString() };
+    const patch: { last_ip: string | null; last_country: string | null; last_seen_at: string; signup_ip?: string | null; signup_country?: string | null } = { last_ip: ip, last_country: country, last_seen_at: new Date().toISOString() };
     if (!p?.signup_ip) { patch.signup_ip = ip; patch.signup_country = country; }
     await supabaseAdmin.from("profiles").update(patch).eq("id", context.userId);
     return { ok: true };
