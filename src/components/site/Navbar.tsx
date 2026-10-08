@@ -28,6 +28,7 @@ export function Navbar() {
       <div className="px-3 pt-3 sm:px-4">
         <div className="nav-shell mx-auto flex h-16 max-w-7xl items-center justify-between rounded-full px-4 sm:px-6">
           <Logo />
+          <span className="nav-brand-text md:hidden">Larp Inght</span>
           <div className="hidden items-center gap-1 md:flex">
             {links.map((l) => (
               <Link
