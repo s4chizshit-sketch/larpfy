@@ -617,3 +617,38 @@
 video, img { -webkit-user-drag: none; user-select: none; -webkit-touch-callout: none; }
 video::-internal-media-controls-download-button { display: none; }
 @media print { body { display: none !important; } }
+
+/* ===== Settings: Join Telegram Updates ===== */
+.settings-telegram {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  padding: 26px 28px;
+  border-radius: 1.25rem;
+  border: 1px solid color-mix(in oklab, #2aabeE 30%, transparent);
+  background:
+    radial-gradient(120% 140% at 0% 0%, color-mix(in oklab, #2aabe e 16%, transparent), transparent 60%),
+    linear-gradient(160deg, color-mix(in oklab, var(--card) 88%, transparent), color-mix(in oklab, var(--card) 55%, transparent));
+  box-shadow: inset 0 1px 0 color-mix(in oklab, #9cc8ff 16%, transparent), 0 22px 52px -30px color-mix(in oklab, #2aabe e 60%, transparent);
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+.settings-telegram:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in oklab, #2aabe e 52%, transparent);
+  box-shadow: inset 0 1px 0 color-mix(in oklab, #9cc8ff 22%, transparent), 0 26px 58px -28px color-mix(in oklab, #2aabe e 70%, transparent);
+}
+.settings-telegram-logo {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  object-fit: contain;
+  filter: drop-shadow(0 0 18px rgb(42 171 238 / 0.6));
+}
+@media (max-width: 640px) {
+  .settings-telegram { padding: 22px 20px; gap: 16px; }
+  .settings-telegram-logo { width: 44px; height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .settings-telegram, .settings-telegram:hover { transform: none; }
+}
