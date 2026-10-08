@@ -26,13 +26,28 @@ export async function sendSignupAlert(info: { name?: string | null; email: strin
   }
 }
 
-export async function sendPlanAlert(info: { name: string | null; email: string | null; plan: string; amount: number }) {
-  const token = process.env.TELEGRAM_BOT_TOKEN;
+// Paying customers only — goes to the separate "sales" bot.
+export async function sendPlanAlert(info: {
+  name: string | null; email: string | null; plan: string; amount: number;
+  ip?: string | null; country?: string | null;
+}) {
+  const token = process.env.TELEGRAM_SALES_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_OWNER_CHAT_ID || process.env.TELEGRAM_CHAT_ID;
   if (!token || !chatId) return;
-  const time = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata", dateStyle: "medium", timeStyle: "short" });
-  const text = `💎 <b>Plan purchased</b>\n👤 Name: ${esc(info.name ?? "unknown")}\n📧 ${esc(info.email ?? "unknown")} — ✅ ${esc(info.plan)} ($${info.amount})\n🕒 ${esc(time)} IST`;
+  const time = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata", dateStyle: "medium", timeStyle: "medium" });
+  const text =
+    `💎 <b>New paid subscription</b>\n` +
+    `👤 Name: ${esc(info.name ?? "unknown")}\n` +
+    `📧 ${esc(info.email ?? "unknown")} — ✅ ${esc(info.plan)} ($${info.amount})\n` +
+    `🌐 IP: <code>${esc(info.ip ?? "unknown")}</code>\n` +
+    `🏳️ Country: ${esc(info.country ?? "unknown")}\n` +
+    `🕒 ${esc(time)} IST`;
   try {
-    await fetch(`https://api.telegram.org/bot${token}/sendMessage`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ chat_id: chatId, text, parse_mode: "HTML" }), signal: AbortSignal.timeout(4000) });
+    const r = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: chatId, text, parse_mode: "HTML", disable_web_page_preview: true }),
+      signal: AbortSignal.timeout(4000),
+    });
+    if (!r.ok) console.error("Sales alert failed", r.status);
   } catch { /* ignore */ }
 }

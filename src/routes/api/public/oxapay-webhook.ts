@@ -39,9 +39,12 @@ export const Route = createFileRoute("/api/public/oxapay-webhook")({
             expires_at: days ? new Date(Date.now() + days * 86400000).toISOString() : null,
           });
           await supabaseAdmin.from("profiles").update({ subscription_status: "active", plan_id: plan.id }).eq("id", order.user_id);
-          const { data: u } = await supabaseAdmin.from("profiles").select("name, email").eq("id", order.user_id).maybeSingle();
+          const { data: u } = await supabaseAdmin.from("profiles").select("name, email, last_ip, signup_ip, last_country, signup_country").eq("id", order.user_id).maybeSingle();
           const { sendPlanAlert } = await import("@/lib/telegram-notify.server");
-          await sendPlanAlert({ name: u?.name ?? null, email: u?.email ?? null, plan: plan.name, amount: Number(order.amount) });
+          await sendPlanAlert({
+            name: u?.name ?? null, email: u?.email ?? null, plan: plan.name, amount: Number(order.amount),
+            ip: u?.last_ip ?? u?.signup_ip ?? null, country: u?.last_country ?? u?.signup_country ?? null,
+          });
         }
         return new Response("ok");
       },
