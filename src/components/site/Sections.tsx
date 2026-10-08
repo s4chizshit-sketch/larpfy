@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
 import {
-  ArrowRight, BarChart3, CalendarRange, Check, Globe2, Heart, Instagram, LayoutDashboard, Music2, Play, Save, Sparkles,
+  ArrowRight, BarChart3, CalendarRange, Check, Globe2, Heart, Instagram, LayoutDashboard, Lock, Music2, Play, Save, Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -214,7 +214,7 @@ export function PricingGrid() {
     <>
       <div className="pricing-gate mx-auto max-w-xl rounded-[28px] p-8 text-center sm:p-10">
         <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-border/60 bg-foreground/5">
-          <Lock className="h-5 w-5 text-brand-glow" aria-hidden />
+          <Lock className="h-5 w-5 text-primary" aria-hidden />
         </div>
         <h3 className="font-display text-2xl font-bold tracking-tight">Plans for Instagram &amp; TikTok</h3>
         <p className="mx-auto mt-3 max-w-sm text-muted-foreground">
