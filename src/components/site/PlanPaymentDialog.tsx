@@ -213,7 +213,7 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
                       <span role="listitem" className="payment-app-chip" title="BHIM UPI"><img src={bhimLogo.url} alt="BHIM" draggable={false} /></span>
                     </div>
                   </div>
-                  <div className="payment-countdown" role="timer" aria-label={`Payment time remaining ${countdown}`}>
+                  <div ref={timerRef} className="payment-countdown" role="timer" aria-label={`Payment time remaining ${countdown}`}>
                     <div className="payment-countdown-line"><span><Timer className="size-4" />Time remaining</span><strong>{countdown}</strong></div>
                     <progress value={secondsLeft} max={PAYMENT_WINDOW_SECONDS} aria-label="Payment time remaining" />
                   </div>
