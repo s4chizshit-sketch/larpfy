@@ -696,6 +696,8 @@
 .payment-apps-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 9px; }
 .payment-app-chip { display: grid; place-items: center; flex: 1 1 0; min-width: 0; padding: 8px 6px; border-radius: 9px; background: #ffffff; box-shadow: 0 3px 10px -5px rgb(0 0 0 / 0.6); }
 .payment-app-chip img { display: block; max-width: 100%; height: 22px; width: auto; object-fit: contain; }
+.payment-app-chip:hover { background: var(--foreground); outline: 1px solid var(--glow); }
+.payment-app-chip:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
 .payment-scan-label { margin-top: 16px; text-align: center; font-family: "Sora", var(--font-display, sans-serif); font-size: 16px; font-weight: 650; letter-spacing: 0; }
 .payment-upi-copy { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 11px; padding: 10px 10px 10px 13px; border: 1px solid var(--border); border-radius: 12px; background: color-mix(in oklab, var(--card) 76%, transparent); }
 .payment-upi-copy span { display: grid; min-width: 0; }
