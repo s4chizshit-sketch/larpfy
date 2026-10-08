@@ -32,10 +32,14 @@ export const recordVisit = createServerFn({ method: "POST" })
     const ip = clientIp();
     const country = await clientCountry(ip);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data: p } = await supabaseAdmin.from("profiles").select("signup_ip, visit_count").eq("id", context.userId).maybeSingle();
+    const { data: p } = await supabaseAdmin.from("profiles").select("signup_ip, visit_count, email").eq("id", context.userId).maybeSingle();
     const patch: { last_ip: string | null; last_country: string | null; last_seen_at: string; visit_count: number; signup_ip?: string | null; signup_country?: string | null } = { last_ip: ip, last_country: country, last_seen_at: new Date().toISOString(), visit_count: (p?.visit_count ?? 0) + 1 };
     if (!p?.signup_ip) { patch.signup_ip = ip; patch.signup_country = country; }
     await supabaseAdmin.from("profiles").update(patch).eq("id", context.userId);
+    if (!p?.signup_ip) {
+      const { sendSignupAlert } = await import("./telegram-notify.server");
+      await sendSignupAlert({ email: p?.email ?? null, ip, country });
+    }
     return { ok: true };
   });
 
