@@ -4,7 +4,6 @@ import { PageHeader, StatCard } from "@/components/app/AppShell";
 import { NewProjectButton, ProjectGrid } from "@/components/app/ProjectGrid";
 import { useProfile } from "@/lib/auth";
 import { useProjects } from "@/lib/projects";
-import { useAffiliateStats } from "@/lib/affiliate";
 
 export const Route = createFileRoute("/_authenticated/dashboard/")({
   component: Overview,
@@ -13,17 +12,15 @@ export const Route = createFileRoute("/_authenticated/dashboard/")({
 function Overview() {
   const { data } = useProfile();
   const { data: projects } = useProjects();
-  const { data: aff } = useAffiliateStats();
   const plan = (data?.profile as any)?.plans?.name ?? "Free";
   const status = data?.profile?.subscription_status ?? "free";
   return (
     <>
       <PageHeader title={`Welcome${data?.profile?.name ? `, ${data.profile.name.split(" ")[0]}` : ""}`} sub="Here's what's happening in your workspace." action={<NewProjectButton />} />
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
         <StatCard label="Current plan" value={plan} />
         <StatCard label="Subscription" value={<span className="capitalize">{status}</span>} />
         <StatCard label="Projects created" value={projects?.length ?? "—"} />
-        <StatCard label="Affiliate earnings" value={`$${(aff?.earned ?? 0).toFixed(2)}`} />
       </div>
       <h2 className="mb-4 mt-10 text-lg font-semibold">Quick launch</h2>
       <div className="grid gap-4 sm:grid-cols-2">

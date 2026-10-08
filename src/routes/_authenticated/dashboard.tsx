@@ -1,5 +1,5 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { CreditCard, FolderKanban, Gift, Instagram, LayoutGrid, Music2, Settings } from "lucide-react";
+import { CreditCard, FolderKanban, Instagram, LayoutGrid, Music2, Settings } from "lucide-react";
 import { AppShell, type NavItem } from "@/components/app/AppShell";
 
 const nav: NavItem[] = [
@@ -8,7 +8,6 @@ const nav: NavItem[] = [
   { to: "/dashboard/tiktok", label: "TikTok Editor", icon: Music2 },
   { to: "/dashboard/projects", label: "My Projects", icon: FolderKanban },
   { to: "/dashboard/billing", label: "Pricing / Subscription", icon: CreditCard },
-  { to: "/dashboard/affiliate", label: "Affiliate", icon: Gift },
   { to: "/dashboard/settings", label: "Settings", icon: Settings },
 ];
 
