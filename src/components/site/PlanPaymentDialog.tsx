@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
-import { Check, Copy, Landmark, LoaderCircle, QrCode, WalletCards } from "lucide-react";
+import { Check, Copy, Download, Landmark, LoaderCircle, QrCode, WalletCards } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
-import qrAsset from "@/assets/larp-insight-upi-qr.png.asset.json";
+import qrAsset from "@/assets/larp-insight-upi-qr-clean.png.asset.json";
+import gpayLogo from "@/assets/pay-gpay.png.asset.json";
+import phonepeLogo from "@/assets/pay-phonepe.png.asset.json";
+import paytmLogo from "@/assets/pay-paytm.png.asset.json";
+import bhimLogo from "@/assets/pay-bhim.png.asset.json";
 
 type SelectedPlan = {
   name: string;
@@ -96,13 +100,34 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
               ) : (
                 <div className="payment-qr-reveal">
                   <div className="payment-amount"><span>Scan to pay</span><strong>₹{amount.toLocaleString("en-IN")}</strong></div>
-                  <div className="payment-qr-shell">
-                    <img src={qrAsset.url} alt={`UPI QR code to pay ₹${amount.toLocaleString("en-IN")}`} draggable={false} />
+                  <div className="payment-qr-wrap">
+                    <div className="payment-qr-shell">
+                      <img src={qrAsset.url} alt={`UPI QR code to pay ₹${amount.toLocaleString("en-IN")}`} draggable={false} />
+                    </div>
+                    <a
+                      className="payment-download"
+                      href={qrAsset.url}
+                      download="larp-insight-upi-qr.png"
+                      aria-label="Download QR code"
+                      title="Download QR code"
+                      onClick={() => toast.success("QR code downloading…")}
+                    >
+                      <Download />
+                    </a>
                   </div>
                   <p className="payment-scan-label">Scan Payment · ₹{amount.toLocaleString("en-IN")}</p>
                   <div className="payment-upi-copy">
                     <span><small>UPI ID</small><strong>{UPI_ID}</strong></span>
                     <Button type="button" variant="ghost" size="icon" onClick={copyUpiId} aria-label="Copy UPI ID" title="Copy UPI ID"><Copy /></Button>
+                  </div>
+                  <div className="payment-apps" role="list" aria-label="Supported UPI apps">
+                    <span className="payment-apps-label">Pay with any UPI app</span>
+                    <div className="payment-apps-row">
+                      <span role="listitem" className="payment-app-chip" title="Google Pay"><img src={gpayLogo.url} alt="Google Pay" draggable={false} /></span>
+                      <span role="listitem" className="payment-app-chip" title="PhonePe"><img src={phonepeLogo.url} alt="PhonePe" draggable={false} /></span>
+                      <span role="listitem" className="payment-app-chip" title="Paytm"><img src={paytmLogo.url} alt="Paytm" draggable={false} /></span>
+                      <span role="listitem" className="payment-app-chip" title="BHIM UPI"><img src={bhimLogo.url} alt="BHIM" draggable={false} /></span>
+                    </div>
                   </div>
                 </div>
               )}
