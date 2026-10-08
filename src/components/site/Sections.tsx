@@ -11,6 +11,7 @@ import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { Reveal } from "./Reveal";
 import { InstagramVideoShowcase } from "./InstagramVideoShowcase";
+import { InstagramMark, TiktokMark, InstagramGlyph, TiktokGlyph } from "./BrandMarks";
 import { TiktokVideoShowcase } from "./TiktokVideoShowcase";
 import { CustomizeVideoSeries } from "./CustomizeVideoSeries";
 import { TiktokCustomizeVideoSeries } from "./TiktokCustomizeVideoSeries";
@@ -118,8 +119,8 @@ export function PlatformSection({ platform, reverse }: { platform: "instagram" |
       <div className={`grid items-center gap-12 lg:grid-cols-2 ${reverse ? "lg:[&>*:first-child]:order-2" : ""}`}>
         <Reveal>
           <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary backdrop-blur-sm">
-              {ig ? <Instagram className="h-3.5 w-3.5" /> : <Music2 className="h-3.5 w-3.5" />} {ig ? "Instagram" : "TikTok"}
+            <span className="inline-flex items-center gap-3 rounded-full border border-border/70 bg-card/50 px-5 py-2.5 backdrop-blur-md">
+              {ig ? <InstagramMark /> : <TiktokMark />}
             </span>
             <h2 className="title-gradient mt-5 font-sans text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl">
               {titleLead} {titleAccent}
@@ -323,9 +324,18 @@ export function DemoVideos() {
 
 export function PlatformBadge({ p }: { p: string }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-accent/60 px-2.5 py-0.5 text-[11px] font-medium">
-      {p === "tiktok" ? <Music2 className="h-3 w-3" /> : <Instagram className="h-3 w-3" />}
-      {p === "tiktok" ? "TikTok" : "Instagram"}
+    <span className="inline-flex items-center gap-2 rounded-full border border-border bg-accent/60 px-3 py-1">
+      {p === "tiktok" ? (
+        <>
+          <TiktokGlyph className="h-4 w-4" />
+          <span className="word-tt text-sm font-semibold leading-none">TikTok</span>
+        </>
+      ) : (
+        <>
+          <InstagramGlyph className="h-4 w-4" />
+          <span className="word-ig text-lg leading-none">Instagram</span>
+        </>
+      )}
     </span>
   );
 }
