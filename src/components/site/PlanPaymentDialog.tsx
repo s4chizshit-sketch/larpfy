@@ -67,6 +67,35 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
     return () => window.clearInterval(interval);
   }, [open, deadline]);
 
+  // One-time gentle "peek" scroll after the QR appears, hinting there is more below.
+  useEffect(() => {
+    if (!open) return;
+    if (method !== "upi" || loadingQr || peekedRef.current) return;
+    peekedRef.current = true;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const el = scrollRef.current;
+    if (!el || el.scrollHeight <= el.clientHeight + 60) return;
+    const start = el.scrollTop;
+    const max = Math.min(110, el.scrollHeight - el.clientHeight - start);
+    if (max <= 8) return;
+    const t1 = window.setTimeout(() => el.scrollTo({ top: start + max, behavior: "smooth" }), 700);
+    const t2 = window.setTimeout(() => el.scrollTo({ top: start, behavior: "smooth" }), 1600);
+    return () => { window.clearTimeout(t1); window.clearTimeout(t2); };
+  }, [open, method, loadingQr]);
+
+  // Show a scroll hint chip while the timer / UPI ID sit below the fold.
+  useEffect(() => {
+    if (!open || method !== "upi" || loadingQr) { setShowScrollHint(false); return; }
+    const measure = () => {
+      const el = scrollRef.current;
+      if (!el) return;
+      setShowScrollHint(el.scrollHeight > el.clientHeight + 60 && el.scrollTop + el.clientHeight < el.scrollHeight - 80);
+    };
+    measure();
+    const t = window.setTimeout(measure, 600);
+    return () => window.clearTimeout(t);
+  }, [open, method, loadingQr, plan]);
+
   if (!plan) return null;
 
   const amount = inrAmount(plan.price);
@@ -93,7 +122,12 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="payment-dialog max-h-[92vh] w-[calc(100%-24px)] max-w-md overflow-y-auto p-0">
+      <DialogContent ref={scrollRef} className="payment-dialog max-h-[92vh] w-[calc(100%-24px)] max-w-md overflow-y-auto p-0"
+        onScroll={() => {
+          const el = scrollRef.current;
+          if (!el) return;
+          if (el.scrollTop + el.clientHeight >= el.scrollHeight - 80) setShowScrollHint(false);
+        }}>
         <div className="payment-dialog-head">
           <p className="payment-kicker">Secure payment</p>
           <DialogTitle className="payment-title">{expired ? "Send your payment screenshot" : "Choose how to pay"}</DialogTitle>
