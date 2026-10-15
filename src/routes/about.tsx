@@ -40,7 +40,7 @@ function AboutPage() {
               className="about-social-card group"
             >
               <img
-                src={telegramLogo.url}
+                src={telegramLogo}
                 alt="Telegram logo"
                 draggable={false}
                 className="about-social-logo about-logo-telegram"
@@ -58,7 +58,7 @@ function AboutPage() {
               className="about-social-card group"
             >
               <img
-                src={instagramLogo.url}
+                src={instagramLogo}
                 alt="Instagram logo"
                 draggable={false}
                 className="about-social-logo about-logo-instagram"

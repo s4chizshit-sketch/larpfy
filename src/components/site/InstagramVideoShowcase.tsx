@@ -18,13 +18,13 @@ import reelsVideo from "@/assets/instagram-reels.mp4";
 import reelsWebm from "@/assets/instagram-reels.webm";
 
 const recordings = [
-  { label: "Home interface", url: homeVideo.url, webm: homeWebm.url },
-  { label: "Scrolling feed", url: feedVideo.url, webm: feedWebm.url },
-  { label: "Profile", url: profileVideo.url, webm: profileWebm.url },
-  { label: "View insight", url: insightVideo.url, webm: insightWebm.url },
-  { label: "Professional dashboard", url: dashboardVideo.url, webm: dashboardWebm.url },
-  { label: "Share", url: shareVideo.url, webm: shareWebm.url },
-  { label: "Reels tab", url: reelsVideo.url, webm: reelsWebm.url },
+  { label: "Home interface", url: homeVideo, webm: homeWebm },
+  { label: "Scrolling feed", url: feedVideo, webm: feedWebm },
+  { label: "Profile", url: profileVideo, webm: profileWebm },
+  { label: "View insight", url: insightVideo, webm: insightWebm },
+  { label: "Professional dashboard", url: dashboardVideo, webm: dashboardWebm },
+  { label: "Share", url: shareVideo, webm: shareWebm },
+  { label: "Reels tab", url: reelsVideo, webm: reelsWebm },
 ];
 
 export function InstagramVideoShowcase() {

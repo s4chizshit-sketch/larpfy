@@ -45,8 +45,8 @@ export function PlatformPlans() {
   if (!data?.length) return <p className="text-center text-muted-foreground">Plans are coming soon.</p>;
 
   const platforms = [
-    { name: "Instagram", logo: instagramLogo.url, wordClass: "word-ig", glowClass: "glyph-ig" },
-    { name: "TikTok", logo: tiktokLogo.url, wordClass: "word-tt", glowClass: "glyph-tt" },
+    { name: "Instagram", logo: instagramLogo, wordClass: "word-ig", glowClass: "glyph-ig" },
+    { name: "TikTok", logo: tiktokLogo, wordClass: "word-tt", glowClass: "glyph-tt" },
   ];
 
   return (
