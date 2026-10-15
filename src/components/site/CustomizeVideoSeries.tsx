@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { BatteryFull, Play, Signal, Wifi } from "lucide-react";
-import clip1 from "@/assets/customize-1.mp4.asset.json";
-import clip2 from "@/assets/customize-2.mp4.asset.json";
-import clip3 from "@/assets/customize-3.mp4.asset.json";
-import clip4 from "@/assets/customize-4.mp4.asset.json";
-import clip5 from "@/assets/customize-5.mp4.asset.json";
-import clip6 from "@/assets/customize-6.mp4.asset.json";
-import clip7 from "@/assets/customize-7.mp4.asset.json";
-import clip8 from "@/assets/customize-8.mp4.asset.json";
-import clip9 from "@/assets/customize-9.mp4.asset.json";
-import clip10 from "@/assets/customize-10-replacement.mp4.asset.json";
+import clip1 from "@/assets/customize-1.mp4";
+import clip2 from "@/assets/customize-2.mp4";
+import clip3 from "@/assets/customize-3.mp4";
+import clip4 from "@/assets/customize-4.mp4";
+import clip5 from "@/assets/customize-5.mp4";
+import clip6 from "@/assets/customize-6.mp4";
+import clip7 from "@/assets/customize-7.mp4";
+import clip8 from "@/assets/customize-8.mp4";
+import clip9 from "@/assets/customize-9.mp4";
+import clip10 from "@/assets/customize-10-replacement.mp4";
 
 export interface CustomizeClip {
   url: string;
@@ -20,16 +20,16 @@ export interface CustomizeClip {
 // Add further clips here in order (with their length in seconds); they play back-to-back
 // as if they were one recording, and the seek bar spans the combined length.
 const instagramClipList: CustomizeClip[] = [
-  { url: clip1.url, duration: 53.08, caption: "Enter your Instagram account username and clone it." },
-  { url: clip2.url, duration: 68.76, caption: "Go to the profile, open any Reel insight, and customize the insights according to your preferences." },
-  { url: clip3.url, duration: 65.12, caption: "Click Reel Insights, activate Edit Mode, and customize it your way." },
-  { url: clip4.url, duration: 79.23, caption: "Click Reel Insights, activate Edit Mode, and customize it your way." },
-  { url: clip5.url, duration: 63.3, caption: "Click Reel Insights, activate Edit Mode, and customize it your way." },
-  { url: clip6.url, duration: 58.63, caption: "Go to Edit Profile and customize your Followers, Following, Dark Mode, Story, Notes, Bio, and Link." },
-  { url: clip7.url, duration: 57.67, caption: "Press and hold the search icon for 2 seconds to activate Dark Mode." },
-  { url: clip8.url, duration: 66.83, caption: "Press and hold Professional Dashboard to customize it, then tap Insight to edit its content." },
-  { url: clip9.url, duration: 83, caption: "Repeat the same steps to customize another Reel." },
-  { url: clip10.url, duration: 46.5, caption: "To clone another account, tap the Instagram logo, enter your username, and continue." },
+  { url: clip1, duration: 53.08, caption: "Enter your Instagram account username and clone it." },
+  { url: clip2, duration: 68.76, caption: "Go to the profile, open any Reel insight, and customize the insights according to your preferences." },
+  { url: clip3, duration: 65.12, caption: "Click Reel Insights, activate Edit Mode, and customize it your way." },
+  { url: clip4, duration: 79.23, caption: "Click Reel Insights, activate Edit Mode, and customize it your way." },
+  { url: clip5, duration: 63.3, caption: "Click Reel Insights, activate Edit Mode, and customize it your way." },
+  { url: clip6, duration: 58.63, caption: "Go to Edit Profile and customize your Followers, Following, Dark Mode, Story, Notes, Bio, and Link." },
+  { url: clip7, duration: 57.67, caption: "Press and hold the search icon for 2 seconds to activate Dark Mode." },
+  { url: clip8, duration: 66.83, caption: "Press and hold Professional Dashboard to customize it, then tap Insight to edit its content." },
+  { url: clip9, duration: 83, caption: "Repeat the same steps to customize another Reel." },
+  { url: clip10, duration: 46.5, caption: "To clone another account, tap the Instagram logo, enter your username, and continue." },
 ];
 
 function fmt(sec: number) {

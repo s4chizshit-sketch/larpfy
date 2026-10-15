@@ -6,7 +6,7 @@ import { Logo } from "@/components/site/Logo";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useProfile } from "@/lib/auth";
-import telegramLogo from "@/assets/telegram-about.png.asset.json";
+import telegramLogo from "@/assets/telegram-about.png";
 
 const TELEGRAM_URL = "https://t.me/+HAwfutUg1gNlZDZl";
 
@@ -61,7 +61,7 @@ export function AppShell({ nav, children, title, secondary }: { nav: NavItem[]; 
           onClick={() => setOpen(false)}
           className="side-telegram mt-4"
         >
-          <img src={telegramLogo.url} alt="Telegram logo" draggable={false} className="side-telegram-logo" />
+          <img src={telegramLogo} alt="Telegram logo" draggable={false} className="side-telegram-logo" />
           <span className="min-w-0 flex-1">
             <span className="side-telegram-title">Telegram Updates</span>
             <span className="side-telegram-sub">New feature drops and UI updates.</span>

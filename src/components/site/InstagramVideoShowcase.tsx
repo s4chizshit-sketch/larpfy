@@ -2,29 +2,29 @@ import { useEffect, useRef, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { BatteryFull, Signal, Wifi } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import homeVideo from "@/assets/instagram-home.mp4.asset.json";
-import profileVideo from "@/assets/instagram-profile.mp4.asset.json";
-import homeWebm from "@/assets/instagram-home.webm.asset.json";
-import profileWebm from "@/assets/instagram-profile.webm.asset.json";
-import feedVideo from "@/assets/instagram-feed.mp4.asset.json";
-import feedWebm from "@/assets/instagram-feed.webm.asset.json";
-import insightVideo from "@/assets/instagram-insight.mp4.asset.json";
-import insightWebm from "@/assets/instagram-insight.webm.asset.json";
-import dashboardVideo from "@/assets/instagram-dashboard.mp4.asset.json";
-import dashboardWebm from "@/assets/instagram-dashboard.webm.asset.json";
-import shareVideo from "@/assets/instagram-share.mp4.asset.json";
-import shareWebm from "@/assets/instagram-share.webm.asset.json";
-import reelsVideo from "@/assets/instagram-reels.mp4.asset.json";
-import reelsWebm from "@/assets/instagram-reels.webm.asset.json";
+import homeVideo from "@/assets/instagram-home.mp4";
+import profileVideo from "@/assets/instagram-profile.mp4";
+import homeWebm from "@/assets/instagram-home.webm";
+import profileWebm from "@/assets/instagram-profile.webm";
+import feedVideo from "@/assets/instagram-feed.mp4";
+import feedWebm from "@/assets/instagram-feed.webm";
+import insightVideo from "@/assets/instagram-insight.mp4";
+import insightWebm from "@/assets/instagram-insight.webm";
+import dashboardVideo from "@/assets/instagram-dashboard.mp4";
+import dashboardWebm from "@/assets/instagram-dashboard.webm";
+import shareVideo from "@/assets/instagram-share.mp4";
+import shareWebm from "@/assets/instagram-share.webm";
+import reelsVideo from "@/assets/instagram-reels.mp4";
+import reelsWebm from "@/assets/instagram-reels.webm";
 
 const recordings = [
-  { label: "Home interface", url: homeVideo.url, webm: homeWebm.url },
-  { label: "Scrolling feed", url: feedVideo.url, webm: feedWebm.url },
-  { label: "Profile", url: profileVideo.url, webm: profileWebm.url },
-  { label: "View insight", url: insightVideo.url, webm: insightWebm.url },
-  { label: "Professional dashboard", url: dashboardVideo.url, webm: dashboardWebm.url },
-  { label: "Share", url: shareVideo.url, webm: shareWebm.url },
-  { label: "Reels tab", url: reelsVideo.url, webm: reelsWebm.url },
+  { label: "Home interface", url: homeVideo, webm: homeWebm },
+  { label: "Scrolling feed", url: feedVideo, webm: feedWebm },
+  { label: "Profile", url: profileVideo, webm: profileWebm },
+  { label: "View insight", url: insightVideo, webm: insightWebm },
+  { label: "Professional dashboard", url: dashboardVideo, webm: dashboardWebm },
+  { label: "Share", url: shareVideo, webm: shareWebm },
+  { label: "Reels tab", url: reelsVideo, webm: reelsWebm },
 ];
 
 export function InstagramVideoShowcase() {

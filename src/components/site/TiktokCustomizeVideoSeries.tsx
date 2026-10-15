@@ -1,19 +1,19 @@
 import { Sparkles } from "lucide-react";
 import { CustomizeSeriesPlayer, type CustomizeClip } from "./CustomizeVideoSeries";
-import tiktokCustomize1 from "@/assets/tiktok-customize-1.mp4.asset.json";
-import tiktokCustomize2 from "@/assets/tiktok-customize-2.mp4.asset.json";
-import tiktokCustomize3 from "@/assets/tiktok-customize-3.mp4.asset.json";
-import tiktokCustomize4 from "@/assets/tiktok-customize-4.mp4.asset.json";
-import tiktokCustomize5 from "@/assets/tiktok-customize-5.mp4.asset.json";
+import tiktokCustomize1 from "@/assets/tiktok-customize-1.mp4";
+import tiktokCustomize2 from "@/assets/tiktok-customize-2.mp4";
+import tiktokCustomize3 from "@/assets/tiktok-customize-3.mp4";
+import tiktokCustomize4 from "@/assets/tiktok-customize-4.mp4";
+import tiktokCustomize5 from "@/assets/tiktok-customize-5.mp4";
 
 // TikTok customize-series clips — appended in order as recordings arrive
 // (with their length in seconds and the caption shown below the seek bar).
 const tiktokClipList: CustomizeClip[] = [
-  { url: tiktokCustomize1.url, duration: 49.807, caption: "Click Edit, enter the username of any TikTok account, and click Clone." },
-  { url: tiktokCustomize2.url, duration: 78.933, caption: "Open More Insights on any TikTok video, then customize the Video Analytics as needed." },
-  { url: tiktokCustomize3.url, duration: 65.4, caption: "Click Video Analytics, then activate Edit Mode and continue customizing the analytics." },
-  { url: tiktokCustomize4.url, duration: 81.367, caption: "Customize all sections according to your preferences." },
-  { url: tiktokCustomize5.url, duration: 61.733, caption: "Customize all sections according to your preferences." },
+  { url: tiktokCustomize1, duration: 49.807, caption: "Click Edit, enter the username of any TikTok account, and click Clone." },
+  { url: tiktokCustomize2, duration: 78.933, caption: "Open More Insights on any TikTok video, then customize the Video Analytics as needed." },
+  { url: tiktokCustomize3, duration: 65.4, caption: "Click Video Analytics, then activate Edit Mode and continue customizing the analytics." },
+  { url: tiktokCustomize4, duration: 81.367, caption: "Customize all sections according to your preferences." },
+  { url: tiktokCustomize5, duration: 61.733, caption: "Customize all sections according to your preferences." },
 ];
 
 export function TiktokCustomizeVideoSeries() {

@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { usePlans } from "@/lib/content";
 import { PlanPaymentDialog } from "@/components/site/PlanPaymentDialog";
-import instagramLogo from "@/assets/instagram-plan.png.asset.json";
-import tiktokLogo from "@/assets/tiktok-plan.png.asset.json";
+import instagramLogo from "@/assets/instagram-plan.png";
+import tiktokLogo from "@/assets/tiktok-plan.png";
 
 export function PlatformPlans() {
   const { data, isLoading, error } = usePlans();
@@ -45,8 +45,8 @@ export function PlatformPlans() {
   if (!data?.length) return <p className="text-center text-muted-foreground">Plans are coming soon.</p>;
 
   const platforms = [
-    { name: "Instagram", logo: instagramLogo.url, wordClass: "word-ig", glowClass: "glyph-ig" },
-    { name: "TikTok", logo: tiktokLogo.url, wordClass: "word-tt", glowClass: "glyph-tt" },
+    { name: "Instagram", logo: instagramLogo, wordClass: "word-ig", glowClass: "glyph-ig" },
+    { name: "TikTok", logo: tiktokLogo, wordClass: "word-tt", glowClass: "glyph-tt" },
   ];
 
   return (
