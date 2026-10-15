@@ -6,7 +6,7 @@ import { Logo } from "@/components/site/Logo";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useProfile } from "@/lib/auth";
-import telegramLogo from "@/assets/telegram-about.png.asset.json";
+import telegramLogo from "@/assets/telegram-about.png";
 
 const TELEGRAM_URL = "https://t.me/+HAwfutUg1gNlZDZl";
 

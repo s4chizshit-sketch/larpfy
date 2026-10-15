@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import markAsset from "@/assets/larp-mark.png.asset.json";
-import logoAsset from "@/assets/larp-logo-original.png.asset.json";
+import markAsset from "@/assets/larp-mark.png";
+import logoAsset from "@/assets/larp-logo-original.png";
 
 export function LogoMark({ className = "h-8 w-8" }: { className?: string }) {
   return <img src={markAsset.url} alt="" className={`${className} object-contain`} aria-hidden />;

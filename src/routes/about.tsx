@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { PublicLayout, SectionHeading } from "@/components/site/Sections";
-import instagramLogo from "@/assets/instagram-about.png.asset.json";
-import telegramLogo from "@/assets/telegram-about.png.asset.json";
+import instagramLogo from "@/assets/instagram-about.png";
+import telegramLogo from "@/assets/telegram-about.png";
 
 // TODO(user): Instagram link pending — user will provide the real profile URL.
 const INSTAGRAM_URL = "https://www.instagram.com/";

@@ -1,10 +1,10 @@
 import { Sparkles } from "lucide-react";
 import { CustomizeSeriesPlayer, type CustomizeClip } from "./CustomizeVideoSeries";
-import tiktokCustomize1 from "@/assets/tiktok-customize-1.mp4.asset.json";
-import tiktokCustomize2 from "@/assets/tiktok-customize-2.mp4.asset.json";
-import tiktokCustomize3 from "@/assets/tiktok-customize-3.mp4.asset.json";
-import tiktokCustomize4 from "@/assets/tiktok-customize-4.mp4.asset.json";
-import tiktokCustomize5 from "@/assets/tiktok-customize-5.mp4.asset.json";
+import tiktokCustomize1 from "@/assets/tiktok-customize-1.mp4";
+import tiktokCustomize2 from "@/assets/tiktok-customize-2.mp4";
+import tiktokCustomize3 from "@/assets/tiktok-customize-3.mp4";
+import tiktokCustomize4 from "@/assets/tiktok-customize-4.mp4";
+import tiktokCustomize5 from "@/assets/tiktok-customize-5.mp4";
 
 // TikTok customize-series clips — appended in order as recordings arrive
 // (with their length in seconds and the caption shown below the seek bar).

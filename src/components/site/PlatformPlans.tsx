@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { usePlans } from "@/lib/content";
 import { PlanPaymentDialog } from "@/components/site/PlanPaymentDialog";
-import instagramLogo from "@/assets/instagram-plan.png.asset.json";
-import tiktokLogo from "@/assets/tiktok-plan.png.asset.json";
+import instagramLogo from "@/assets/instagram-plan.png";
+import tiktokLogo from "@/assets/tiktok-plan.png";
 
 export function PlatformPlans() {
   const { data, isLoading, error } = usePlans();

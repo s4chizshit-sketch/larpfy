@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { BatteryFull, Play, Signal, Wifi } from "lucide-react";
-import clip1 from "@/assets/customize-1.mp4.asset.json";
-import clip2 from "@/assets/customize-2.mp4.asset.json";
-import clip3 from "@/assets/customize-3.mp4.asset.json";
-import clip4 from "@/assets/customize-4.mp4.asset.json";
-import clip5 from "@/assets/customize-5.mp4.asset.json";
-import clip6 from "@/assets/customize-6.mp4.asset.json";
-import clip7 from "@/assets/customize-7.mp4.asset.json";
-import clip8 from "@/assets/customize-8.mp4.asset.json";
-import clip9 from "@/assets/customize-9.mp4.asset.json";
-import clip10 from "@/assets/customize-10-replacement.mp4.asset.json";
+import clip1 from "@/assets/customize-1.mp4";
+import clip2 from "@/assets/customize-2.mp4";
+import clip3 from "@/assets/customize-3.mp4";
+import clip4 from "@/assets/customize-4.mp4";
+import clip5 from "@/assets/customize-5.mp4";
+import clip6 from "@/assets/customize-6.mp4";
+import clip7 from "@/assets/customize-7.mp4";
+import clip8 from "@/assets/customize-8.mp4";
+import clip9 from "@/assets/customize-9.mp4";
+import clip10 from "@/assets/customize-10-replacement.mp4";
 
 export interface CustomizeClip {
   url: string;
