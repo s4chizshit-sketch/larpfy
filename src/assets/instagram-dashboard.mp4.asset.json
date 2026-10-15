@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "7c8b695f-5948-4ba6-a44c-7563f221e854",
-  "project_id": "ba8808a4-20c5-4714-875b-f128738133c3",
-  "url": "/__l5e/assets-v1/7c8b695f-5948-4ba6-a44c-7563f221e854/instagram-dashboard.mp4",
-  "r2_key": "a/v1/ba8808a4-20c5-4714-875b-f128738133c3/7c8b695f-5948-4ba6-a44c-7563f221e854/instagram-dashboard.mp4",
-  "original_filename": "instagram-dashboard.mp4",
-  "size": 2484047,
   "content_type": "video/mp4",
-  "created_at": "2026-10-07T06:33:05Z"
+  "created_at": "2026-10-07T06:33:05Z",
+  "original_filename": "instagram-dashboard.mp4",
+  "project_id": "692e2714-3906-4cf1-b16b-f3423228442a",
+  "r2_key": "a/v1/692e2714-3906-4cf1-b16b-f3423228442a/7c8b695f-5948-4ba6-a44c-7563f221e854/instagram-dashboard.mp4",
+  "size": 2484047,
+  "url": "/__l5e/assets-v1/7c8b695f-5948-4ba6-a44c-7563f221e854/instagram-dashboard.mp4",
+  "version": 1
 }

@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "ca44702d-014c-4d0b-b0be-2d00d62d3c04",
-  "project_id": "ba8808a4-20c5-4714-875b-f128738133c3",
-  "url": "/__l5e/assets-v1/ca44702d-014c-4d0b-b0be-2d00d62d3c04/tiktok-profile-reels.webm",
-  "r2_key": "a/v1/ba8808a4-20c5-4714-875b-f128738133c3/ca44702d-014c-4d0b-b0be-2d00d62d3c04/tiktok-profile-reels.webm",
-  "original_filename": "tiktok-profile-reels.webm",
-  "size": 6064479,
   "content_type": "video/webm",
-  "created_at": "2026-10-07T09:58:20Z"
+  "created_at": "2026-10-07T09:58:20Z",
+  "original_filename": "tiktok-profile-reels.webm",
+  "project_id": "692e2714-3906-4cf1-b16b-f3423228442a",
+  "r2_key": "a/v1/692e2714-3906-4cf1-b16b-f3423228442a/ca44702d-014c-4d0b-b0be-2d00d62d3c04/tiktok-profile-reels.webm",
+  "size": 6064479,
+  "url": "/__l5e/assets-v1/ca44702d-014c-4d0b-b0be-2d00d62d3c04/tiktok-profile-reels.webm",
+  "version": 1
 }

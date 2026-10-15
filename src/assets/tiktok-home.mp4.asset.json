@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "ac67a026-8a64-4b77-81ab-a2ca8383cba6",
-  "project_id": "ba8808a4-20c5-4714-875b-f128738133c3",
-  "url": "/__l5e/assets-v1/ac67a026-8a64-4b77-81ab-a2ca8383cba6/tiktok-home.mp4",
-  "r2_key": "a/v1/ba8808a4-20c5-4714-875b-f128738133c3/ac67a026-8a64-4b77-81ab-a2ca8383cba6/tiktok-home.mp4",
-  "original_filename": "tiktok-home.mp4",
-  "size": 4036290,
   "content_type": "video/mp4",
-  "created_at": "2026-10-07T09:43:09Z"
+  "created_at": "2026-10-07T09:43:09Z",
+  "original_filename": "tiktok-home.mp4",
+  "project_id": "692e2714-3906-4cf1-b16b-f3423228442a",
+  "r2_key": "a/v1/692e2714-3906-4cf1-b16b-f3423228442a/ac67a026-8a64-4b77-81ab-a2ca8383cba6/tiktok-home.mp4",
+  "size": 4036290,
+  "url": "/__l5e/assets-v1/ac67a026-8a64-4b77-81ab-a2ca8383cba6/tiktok-home.mp4",
+  "version": 1
 }

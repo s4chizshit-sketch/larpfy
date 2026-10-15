@@ -1,55 +1,5 @@
 {
   "version": "7",
   "dialect": "postgresql",
-  "entries": [
-    {
-      "idx": 0,
-      "version": "7",
-      "when": 1791424442033,
-      "tag": "0000_profile_signup_tracking",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1791450608522,
-      "tag": "0001_owner_admin_and_visit_time",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1791453203773,
-      "tag": "0002_migration",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1791453388705,
-      "tag": "0003_plan_purchases_history",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1791460123171,
-      "tag": "0004_custom_day_plans",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1791479080973,
-      "tag": "0005_oxapay_orders",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "7",
-      "when": 1791481847579,
-      "tag": "0006_admin_analytics",
-      "breakpoints": true
-    }
-  ]
+  "entries": []
 }
