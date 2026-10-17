@@ -31,14 +31,11 @@ export const recordVisit = createServerFn({ method: "POST" })
   .handler(async ({ context }) => {
     const ip = clientIp();
     const country = await clientCountry(ip);
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data: p } = await supabaseAdmin.from("profiles").select("signup_ip, visit_count, email, name").eq("id", context.userId).maybeSingle();
-    const patch: { last_ip: string | null; last_country: string | null; last_seen_at: string; visit_count: number; signup_ip?: string | null; signup_country?: string | null } = { last_ip: ip, last_country: country, last_seen_at: new Date().toISOString(), visit_count: (p?.visit_count ?? 0) + 1 };
-    if (!p?.signup_ip) { patch.signup_ip = ip; patch.signup_country = country; }
-    await supabaseAdmin.from("profiles").update(patch).eq("id", context.userId);
-    if (!p?.signup_ip) {
+    const { data } = await context.supabase.rpc("record_my_visit", { _ip: ip ?? "", _country: country ?? "" });
+    const r = data as { first?: boolean; name?: string; email?: string } | null;
+    if (r?.first) {
       const { sendSignupAlert } = await import("./telegram-notify.server");
-      await sendSignupAlert({ name: p?.name ?? null, email: p?.email ?? null, ip, country });
+      await sendSignupAlert({ name: r.name ?? null, email: r.email ?? null, ip, country });
     }
     return { ok: true };
   });
@@ -46,7 +43,7 @@ export const recordVisit = createServerFn({ method: "POST" })
 // Anonymous visitor counter: one row per browser session, country only (no IP stored).
 export const trackSiteVisit = createServerFn({ method: "POST" }).handler(async () => {
   const country = await clientCountry(clientIp());
-  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-  await supabaseAdmin.from("site_visits").insert({ country });
+  const { publicDb } = await import("./public-db.server");
+  await publicDb().rpc("track_site_visit", { _country: country ?? "" });
   return { ok: true };
 });
