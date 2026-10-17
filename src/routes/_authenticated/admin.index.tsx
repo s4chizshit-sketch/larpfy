@@ -9,7 +9,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { PageHeader, StatCard } from "@/components/app/AppShell";
 import { supabase } from "@/integrations/supabase/client";
-import { ProSubscribersAdmin } from "@/components/app/ProSubscribersAdmin";
 import { countryInfo } from "@/lib/country";
 
 export const Route = createFileRoute("/_authenticated/admin/")({
@@ -132,8 +131,6 @@ function UsersAdmin() {
           ) : <p className="text-sm text-muted-foreground">No visits recorded yet.</p>}
         </section>
       </div>
-
-      <ProSubscribersAdmin />
 
       <div className="relative mt-8 max-w-sm">
         <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
