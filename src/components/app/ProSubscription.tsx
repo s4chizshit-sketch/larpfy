@@ -2,17 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { BadgeCheck, Send } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
-
-function telegramLink(planName: string, billingPeriod: string) {
-  const n = planName.toLowerCase();
-  const platform = n.includes("tiktok") ? "TikTok" : n.includes("instagram") ? "Instagram" : "";
-  const p = `${billingPeriod} ${n}`.toLowerCase();
-  const period = p.includes("once") || p.includes("life") ? "Lifetime" : "Monthly";
-  const label = [platform, period].filter(Boolean).join(" ");
-  return `https://t.me/larpinght?text=${encodeURIComponent(
-    `Hi, I purchased the ${label} Plan. My payment is complete.`,
-  )}`;
-}
+import { purchaseTelegramLink } from "@/lib/purchase-message";
 
 /** Paid purchases for the signed-in user; polls so the card appears right after OxaPay confirms. */
 export function usePaidPurchases() {
@@ -22,8 +12,9 @@ export function usePaidPurchases() {
     enabled: !!user,
     refetchInterval: 15000,
     queryFn: async () => {
+      if (!user) return [];
       const { data, error } = await supabase
-        .from("plan_purchases").select("*").eq("user_id", user!.id)
+        .from("plan_purchases").select("*").eq("user_id", user.id)
         .order("started_at", { ascending: false });
       if (error) throw error;
       return data ?? [];
@@ -45,7 +36,7 @@ export function ProSubscriptionCard() {
           <p className="pro-sub-text">Payment confirmed. Send your payment screenshot on Telegram to receive your APK and Access API Key.</p>
         </div>
       </div>
-      <a href={telegramLink(active.plan_name, active.billing_period)} target="_blank" rel="noopener noreferrer" className="pro-sub-tg">
+      <a href={purchaseTelegramLink(active.plan_name)} target="_blank" rel="noopener noreferrer" className="pro-sub-tg">
         <Send className="size-4" /> Send screenshot on Telegram
       </a>
     </section>

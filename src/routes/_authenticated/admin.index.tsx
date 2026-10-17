@@ -46,7 +46,7 @@ function UsersAdmin() {
 
   const stats = useQuery({
     queryKey: ["admin", "stats"],
-    refetchInterval: 15000,
+    refetchInterval: 60000,
     queryFn: async () => {
       const { data, error } = await supabase.rpc("admin_stats" as never);
       if (error) throw error;
@@ -62,7 +62,7 @@ function UsersAdmin() {
 
   const list = useQuery({
     queryKey: ["admin", "users", term, page],
-    refetchInterval: 15000,
+    refetchInterval: 60000,
     placeholderData: keepPreviousData,
     queryFn: async () => {
       let qy = supabase.from("profiles").select("*", { count: "estimated" }).order("created_at", { ascending: false }).range(page * PAGE, page * PAGE + PAGE - 1);
@@ -90,7 +90,7 @@ function UsersAdmin() {
 
   return (
     <>
-      <PageHeader title="Users & Analytics" sub="Live overview — refreshes every 15 seconds." />
+      <PageHeader title="Users & Analytics" />
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <StatCard label="Total users" value={v(s?.total_users)} />
         <StatCard label="New today" value={v(s?.signups_today)} />
@@ -105,6 +105,7 @@ function UsersAdmin() {
         <StatCard label="Active today" value={v(s?.active_today)} />
         <StatCard label="Projects" value={v(s?.projects)} />
       </div>
+      {(stats.isError || list.isError) && <p role="alert" className="mt-4 text-sm text-destructive">Unable to load current account data. Please refresh.</p>}
 
       <div className="mt-8 grid gap-4 lg:grid-cols-2">
         <section className="rounded-2xl border border-border p-5">
