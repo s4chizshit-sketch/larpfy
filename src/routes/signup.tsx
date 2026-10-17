@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AuthShell, FieldError } from "@/components/AuthShell";
 import { supabase } from "@/integrations/supabase/client";
+import { accountDestination } from "@/lib/account-destination";
 
 export const Route = createFileRoute("/signup")({
   head: () => ({
@@ -15,6 +16,8 @@ export const Route = createFileRoute("/signup")({
       { name: "description", content: "Create your LARP Insight account in seconds." },
       { property: "og:title", content: "Create Account — LARP Insight" },
       { property: "og:description", content: "Create your LARP Insight account in seconds." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   validateSearch: (s: Record<string, unknown>): { redirect?: "billing" } => (s.redirect === "billing" ? { redirect: "billing" } : {}),
@@ -58,12 +61,16 @@ function Signup() {
     const { data, error } = await supabase.auth.signUp({
       email: r.data.email.trim().toLowerCase(),
       password: r.data.password,
-      options: { emailRedirectTo: `${window.location.origin}/dashboard`, data: { name: r.data.name, ...(ref ? { ref } : {}) } },
+      options: { emailRedirectTo: window.location.origin, data: { name: r.data.name, ...(ref ? { ref } : {}) } },
     });
     setLoading(false);
     if (error) return setServerError(/registered|exists/i.test(error.message) ? "An account with this email already exists. Please log in." : error.message);
     if (data.user && data.user.identities?.length === 0) return setServerError("An account with this email already exists. Please log in.");
-    if (data.session) return navigate({ to: redirect === "billing" ? "/dashboard/billing" : "/dashboard" });
+    if (data.session && data.user) {
+      const { data: roles, error: roleError } = await supabase.from("user_roles").select("role").eq("user_id", data.user.id);
+      if (roleError) return setServerError("Account created. Please log in to continue.");
+      return navigate({ to: accountDestination(!!roles?.some((role) => role.role === "admin"), redirect) });
+    }
     setDone(true);
   };
 

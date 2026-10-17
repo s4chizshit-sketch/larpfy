@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { AuthShell, FieldError } from "@/components/AuthShell";
 import { supabase } from "@/integrations/supabase/client";
+import { accountDestination } from "@/lib/account-destination";
 
 export const Route = createFileRoute("/login")({
   head: () => ({
@@ -15,6 +16,8 @@ export const Route = createFileRoute("/login")({
       { name: "description", content: "Log in to your LARP Insight account." },
       { property: "og:title", content: "Login — LARP Insight" },
       { property: "og:description", content: "Log in to your LARP Insight account." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   validateSearch: (s: Record<string, unknown>): { redirect?: "billing" } => (s.redirect === "billing" ? { redirect: "billing" } : {}),
@@ -51,9 +54,12 @@ function Login() {
         const m = error?.message ?? "";
         return setServerError(/invalid login/i.test(m) ? "Incorrect email or password." : /fetch|network/i.test(m) ? "Network issue — please check your connection and try again." : m || "Login failed, please try again.");
       }
-      if (redirect === "billing") return navigate({ to: "/dashboard/billing" });
-      const { data: roles } = await supabase.from("user_roles").select("role").eq("user_id", signIn.user.id);
-      navigate({ to: roles?.some((x) => x.role === "admin") ? "/" : "/dashboard" });
+      const { data: roles, error: roleError } = await supabase.from("user_roles").select("role").eq("user_id", signIn.user.id);
+      if (roleError) {
+        setLoading(false);
+        return setServerError("Unable to load your account access. Please try again.");
+      }
+      navigate({ to: accountDestination(!!roles?.some((x) => x.role === "admin"), redirect) });
     } catch {
       setLoading(false);
       setServerError("Network issue — please check your connection and try again.");

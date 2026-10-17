@@ -1,5 +1,5 @@
 import { createFileRoute, Navigate, Outlet } from "@tanstack/react-router";
-import { CreditCard, LayoutGrid, Settings, FileText, Film, Loader2, Tags, Users } from "lucide-react";
+import { FileText, Film, Loader2, Tags, Users } from "lucide-react";
 import { AppShell, type NavItem } from "@/components/app/AppShell";
 import { useEffect } from "react";
 import { useServerFn } from "@tanstack/react-start";
@@ -11,12 +11,6 @@ const nav: NavItem[] = [
   { to: "/admin/videos", label: "Demo Videos", icon: Film },
   { to: "/admin/pricing", label: "Pricing", icon: Tags },
   { to: "/admin/content", label: "Website Content", icon: FileText },
-];
-
-const workspace: NavItem[] = [
-  { to: "/dashboard", label: "Overview", icon: LayoutGrid, exact: true },
-  { to: "/dashboard/billing", label: "Pricing / Subscription", icon: CreditCard },
-  { to: "/dashboard/settings", label: "Settings", icon: Settings },
 ];
 
 export const Route = createFileRoute("/_authenticated/admin")({
@@ -33,7 +27,7 @@ function AdminLayout() {
   if (isLoading) return <div className="flex min-h-screen items-center justify-center"><Loader2 className="h-6 w-6 animate-spin text-primary" /></div>;
   if (!data?.isAdmin) return <Navigate to="/dashboard" replace />;
   return (
-    <AppShell nav={nav} title="Admin" secondary={{ title: "Workspace", nav: workspace }}>
+    <AppShell nav={nav} title="Admin">
       <Outlet />
     </AppShell>
   );

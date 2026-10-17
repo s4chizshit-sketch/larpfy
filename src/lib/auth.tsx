@@ -57,10 +57,13 @@ export function useProfile() {
     queryKey: ["profile", user?.id],
     enabled: !!user,
     queryFn: async () => {
-      const [{ data: profile }, { data: roles }] = await Promise.all([
-        supabase.from("profiles").select("*, plans(*)").eq("id", user!.id).maybeSingle(),
-        supabase.from("user_roles").select("role").eq("user_id", user!.id),
+      if (!user) throw new Error("Sign in to load your profile.");
+      const [{ data: profile, error: profileError }, { data: roles, error: rolesError }] = await Promise.all([
+        supabase.from("profiles").select("*, plans(*)").eq("id", user.id).maybeSingle(),
+        supabase.from("user_roles").select("role").eq("user_id", user.id),
       ]);
+      if (profileError) throw profileError;
+      if (rolesError) throw rolesError;
       return { profile, isAdmin: !!roles?.some((r) => r.role === "admin") };
     },
   });
