@@ -19,4 +19,5 @@
 - [x] Timeout box: short English heading replaces "Send your payment screenshot"; compact premium layout, verified on phone and desktop.
 - [x] Add amount-prefilled Android UPI payment links for all four payment app logos with Google Play fallbacks; verify generated links (real-device payment approval remains unverified).
 - [ ] OxaPay USD/crypto checkout: waiting for the user's merchant API key.
-- [ ] Set up the requested owner login and verify admin-only navigation; email confirmation may require the owner.
+- [x] Route admin login and workspace links to the admin panel; destination tests pass.
+- [ ] Create owner account and verify signed-in admin navigation (blocked: requested password rejected by password protection; owner must choose a stronger password).
