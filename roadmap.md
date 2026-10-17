@@ -21,3 +21,6 @@
 - [ ] OxaPay USD/crypto checkout: waiting for the user's merchant API key.
 - [x] Route admin login and workspace links to the admin panel; destination tests pass.
 - [ ] Create owner account and verify signed-in admin navigation (blocked: requested password rejected by password protection; owner must choose a stronger password).
+- [ ] Diagnose and fix signup/existing login without weakening password protection.
+- [ ] Verify paid-plan Telegram messages, payment activation, admin data and bot delivery.
+- [ ] Apply bounded performance improvements and verify real flows; 100k-user load remains a hosting/load-test concern.
