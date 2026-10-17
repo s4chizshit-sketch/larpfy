@@ -13,7 +13,7 @@ function clientIp() {
 
 // Returns an ISO-2 country code (cheap header first, lookup fallback).
 async function clientCountry(ip: string | null) {
-  const h = getRequestHeader("cf-ipcountry");
+  const h = getRequestHeader("cf-ipcountry") || getRequestHeader("x-vercel-ip-country");
   if (h && h !== "XX" && h !== "T1") return h.toUpperCase();
   if (!ip) return null;
   try {
