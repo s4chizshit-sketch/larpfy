@@ -209,6 +209,24 @@ export type Database = {
         }
         Relationships: []
       }
+      private_config: {
+        Row: {
+          key: string
+          updated_at: string
+          value: string
+        }
+        Insert: {
+          key: string
+          updated_at?: string
+          value: string
+        }
+        Update: {
+          key?: string
+          updated_at?: string
+          value?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           created_at: string
@@ -407,6 +425,7 @@ export type Database = {
     Functions: {
       add_visit_time: { Args: { _seconds: number }; Returns: undefined }
       admin_stats: { Args: never; Returns: Json }
+      create_payment_order: { Args: { _plan_id: string }; Returns: Json }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -414,7 +433,21 @@ export type Database = {
         }
         Returns: boolean
       }
+      oxapay_mark_paid: {
+        Args: { _key_hash: string; _order_id: string; _track_id?: string }
+        Returns: Json
+      }
+      record_my_visit: {
+        Args: { _country: string; _ip: string }
+        Returns: Json
+      }
+      set_order_track: {
+        Args: { _order_id: string; _track: string }
+        Returns: undefined
+      }
+      set_oxapay_key_hash: { Args: { _hash: string }; Returns: undefined }
       track_referral_click: { Args: { _code: string }; Returns: undefined }
+      track_site_visit: { Args: { _country: string }; Returns: undefined }
       update_my_name: { Args: { _name: string }; Returns: undefined }
     }
     Enums: {
