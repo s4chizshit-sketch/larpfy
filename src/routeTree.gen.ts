@@ -28,6 +28,7 @@ import { Route as RCodeRouteImport } from './routes/r.$code'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin.index'
 import { Route as AuthenticatedAdminContentRouteImport } from './routes/_authenticated/admin.content'
 import { Route as AuthenticatedAdminPricingRouteImport } from './routes/_authenticated/admin.pricing'
+import { Route as AuthenticatedAdminSubscriptionsRouteImport } from './routes/_authenticated/admin.subscriptions'
 import { Route as AuthenticatedAdminVideosRouteImport } from './routes/_authenticated/admin.videos'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
 import { Route as AuthenticatedDashboardBillingRouteImport } from './routes/_authenticated/dashboard.billing'
@@ -134,6 +135,12 @@ const AuthenticatedAdminPricingRoute =
     path: '/pricing',
     getParentRoute: () => AuthenticatedAdminRoute,
   } as any)
+const AuthenticatedAdminSubscriptionsRoute =
+  AuthenticatedAdminSubscriptionsRouteImport.update({
+    id: '/subscriptions',
+    path: '/subscriptions',
+    getParentRoute: () => AuthenticatedAdminRoute,
+  } as any)
 const AuthenticatedAdminVideosRoute =
   AuthenticatedAdminVideosRouteImport.update({
     id: '/videos',
@@ -206,6 +213,7 @@ export interface FileRoutesByFullPath {
   '/r/$code': typeof RCodeRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
   '/admin/pricing': typeof AuthenticatedAdminPricingRoute
+  '/admin/subscriptions': typeof AuthenticatedAdminSubscriptionsRoute
   '/admin/videos': typeof AuthenticatedAdminVideosRoute
   '/dashboard/billing': typeof AuthenticatedDashboardBillingRoute
   '/dashboard/instagram': typeof AuthenticatedDashboardInstagramRoute
@@ -233,6 +241,7 @@ export interface FileRoutesByTo {
   '/r/$code': typeof RCodeRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
   '/admin/pricing': typeof AuthenticatedAdminPricingRoute
+  '/admin/subscriptions': typeof AuthenticatedAdminSubscriptionsRoute
   '/admin/videos': typeof AuthenticatedAdminVideosRoute
   '/dashboard/billing': typeof AuthenticatedDashboardBillingRoute
   '/dashboard/instagram': typeof AuthenticatedDashboardInstagramRoute
@@ -264,6 +273,7 @@ export interface FileRoutesById {
   '/r/$code': typeof RCodeRoute
   '/_authenticated/admin/content': typeof AuthenticatedAdminContentRoute
   '/_authenticated/admin/pricing': typeof AuthenticatedAdminPricingRoute
+  '/_authenticated/admin/subscriptions': typeof AuthenticatedAdminSubscriptionsRoute
   '/_authenticated/admin/videos': typeof AuthenticatedAdminVideosRoute
   '/_authenticated/dashboard/billing': typeof AuthenticatedDashboardBillingRoute
   '/_authenticated/dashboard/instagram': typeof AuthenticatedDashboardInstagramRoute
@@ -295,6 +305,7 @@ export interface FileRouteTypes {
     | '/r/$code'
     | '/admin/content'
     | '/admin/pricing'
+    | '/admin/subscriptions'
     | '/admin/videos'
     | '/dashboard/billing'
     | '/dashboard/instagram'
@@ -322,6 +333,7 @@ export interface FileRouteTypes {
     | '/r/$code'
     | '/admin/content'
     | '/admin/pricing'
+    | '/admin/subscriptions'
     | '/admin/videos'
     | '/dashboard/billing'
     | '/dashboard/instagram'
@@ -352,6 +364,7 @@ export interface FileRouteTypes {
     | '/r/$code'
     | '/_authenticated/admin/content'
     | '/_authenticated/admin/pricing'
+    | '/_authenticated/admin/subscriptions'
     | '/_authenticated/admin/videos'
     | '/_authenticated/dashboard/billing'
     | '/_authenticated/dashboard/instagram'
@@ -517,6 +530,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminPricingRouteImport
       parentRoute: typeof AuthenticatedAdminRoute
     }
+    '/_authenticated/admin/subscriptions': {
+      id: '/_authenticated/admin/subscriptions'
+      path: '/subscriptions'
+      fullPath: '/admin/subscriptions'
+      preLoaderRoute: typeof AuthenticatedAdminSubscriptionsRouteImport
+      parentRoute: typeof AuthenticatedAdminRoute
+    }
     '/_authenticated/admin/videos': {
       id: '/_authenticated/admin/videos'
       path: '/videos'
@@ -586,6 +606,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedAdminRouteChildren {
   AuthenticatedAdminContentRoute: typeof AuthenticatedAdminContentRoute
   AuthenticatedAdminPricingRoute: typeof AuthenticatedAdminPricingRoute
+  AuthenticatedAdminSubscriptionsRoute: typeof AuthenticatedAdminSubscriptionsRoute
   AuthenticatedAdminVideosRoute: typeof AuthenticatedAdminVideosRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
 }
@@ -593,6 +614,7 @@ interface AuthenticatedAdminRouteChildren {
 const AuthenticatedAdminRouteChildren: AuthenticatedAdminRouteChildren = {
   AuthenticatedAdminContentRoute: AuthenticatedAdminContentRoute,
   AuthenticatedAdminPricingRoute: AuthenticatedAdminPricingRoute,
+  AuthenticatedAdminSubscriptionsRoute: AuthenticatedAdminSubscriptionsRoute,
   AuthenticatedAdminVideosRoute: AuthenticatedAdminVideosRoute,
   AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
 }

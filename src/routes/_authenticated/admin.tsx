@@ -1,5 +1,5 @@
 import { createFileRoute, Navigate, Outlet } from "@tanstack/react-router";
-import { FileText, Film, Loader2, Tags, Users } from "lucide-react";
+import { BadgeCheck, FileText, Film, Loader2, Tags, Users } from "lucide-react";
 import { AppShell, type NavItem } from "@/components/app/AppShell";
 import { useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
@@ -8,6 +8,7 @@ import { syncOxapayKey } from "@/lib/oxapay.functions";
 
 const nav: NavItem[] = [
   { to: "/admin", label: "Users", icon: Users, exact: true },
+  { to: "/admin/subscriptions", label: "Subscriptions", icon: BadgeCheck },
   { to: "/admin/videos", label: "Demo Videos", icon: Film },
   { to: "/admin/pricing", label: "Pricing", icon: Tags },
   { to: "/admin/content", label: "Website Content", icon: FileText },
