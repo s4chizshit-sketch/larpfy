@@ -1,7 +1,10 @@
 import { createFileRoute, Navigate, Outlet } from "@tanstack/react-router";
 import { CreditCard, LayoutGrid, Settings, FileText, Film, Loader2, Tags, Users } from "lucide-react";
 import { AppShell, type NavItem } from "@/components/app/AppShell";
+import { useEffect } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { useProfile } from "@/lib/auth";
+import { syncOxapayKey } from "@/lib/oxapay.functions";
 
 const nav: NavItem[] = [
   { to: "/admin", label: "Users", icon: Users, exact: true },
@@ -23,6 +26,10 @@ export const Route = createFileRoute("/_authenticated/admin")({
 
 function AdminLayout() {
   const { data, isLoading } = useProfile();
+  const sync = useServerFn(syncOxapayKey);
+  const isAdmin = !!data?.isAdmin;
+  // Keeps the payment webhook verification in sync with this host's OxaPay key.
+  useEffect(() => { if (isAdmin) sync().catch(() => {}); }, [isAdmin, sync]);
   if (isLoading) return <div className="flex min-h-screen items-center justify-center"><Loader2 className="h-6 w-6 animate-spin text-primary" /></div>;
   if (!data?.isAdmin) return <Navigate to="/dashboard" replace />;
   return (

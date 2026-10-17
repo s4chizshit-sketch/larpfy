@@ -22,3 +22,5 @@
 - Manual UPI checkout uses an absolute client deadline and a Telegram draft link after expiry; countdown expiry never verifies payment or activates access.
 - Payment dialogs use native vertical overflow for touch swipes, mouse wheels and scrollbar dragging; no automatic scrolling competes with the user's gestures.
 - Android payment-app launches use package-targeted UPI intents with the selected plan amount and Google Play browser fallbacks; launching an app never verifies payment or activates access.
+- Server code never uses the service-role key: privileged writes (orders, payment activation, visit tracking) go through SECURITY DEFINER SQL functions called with the publishable key or the user's session, so any host (Vercel) works with only OXAPAY_MERCHANT_API_KEY set.
+- OxaPay webhook activation is authorized by a SHA-256 fingerprint of the host's OxaPay key stored in `private_config`; the admin layout re-syncs it on every admin visit, so payments activate only after the admin has opened the admin panel once on that host.
