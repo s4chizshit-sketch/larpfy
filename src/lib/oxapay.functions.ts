@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import { getRequestUrl } from "@tanstack/react-start/server";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 export const createOxapayInvoice = createServerFn({ method: "POST" })
@@ -8,6 +9,11 @@ export const createOxapayInvoice = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     const key = process.env.OXAPAY_MERCHANT_API_KEY;
     if (!key) throw new Error("USDT payments are not configured yet.");
+    const requestOrigin = getRequestUrl().origin;
+    if (new URL(data.origin).origin !== requestOrigin) throw new Error("Invalid checkout address.");
+    const { sha256Hex } = await import("./public-db.server");
+    const { data: ready, error: readyError } = await context.supabase.rpc("oxapay_is_ready", { _key_hash: await sha256Hex(key) });
+    if (readyError || !ready) throw new Error("Checkout is temporarily unavailable. The owner must finish payment setup.");
     const { data: order, error: oe } = await context.supabase.rpc("create_payment_order", { _plan_id: data.planId });
     const o = order as { id?: string; amount?: number; name?: string } | null;
     if (oe || !o?.id) throw new Error("Plan not available.");
@@ -21,9 +27,10 @@ export const createOxapayInvoice = createServerFn({ method: "POST" })
         lifetime: 60,
         order_id: o.id,
         description: `Larp Insight - ${o.name ?? "Plan"}`.slice(0, 100),
-        callback_url: `${data.origin}/api/public/oxapay-webhook`,
-        return_url: `${data.origin}/dashboard/billing`,
+        callback_url: `${requestOrigin}/api/public/oxapay-webhook`,
+        return_url: `${requestOrigin}/dashboard/billing`,
       }),
+      signal: AbortSignal.timeout(15000),
     });
     const json = (await res.json().catch(() => null)) as
       | { data?: { track_id?: string; payment_url?: string }; message?: string } | null;
@@ -32,7 +39,10 @@ export const createOxapayInvoice = createServerFn({ method: "POST" })
       console.error("OxaPay invoice failed", res.status, json);
       throw new Error("Payment gateway error. Please try again.");
     }
-    await context.supabase.rpc("set_order_track", { _order_id: o.id, _track: String(json!.data!.track_id ?? "") });
+    const track = json?.data?.track_id;
+    if (track == null) throw new Error("Payment reference missing. Please try again.");
+    const { error: trackError } = await context.supabase.rpc("set_order_track", { _order_id: o.id, _track: String(track) });
+    if (trackError) throw new Error("Could not save payment reference. Please try again.");
     return { url };
   });
 

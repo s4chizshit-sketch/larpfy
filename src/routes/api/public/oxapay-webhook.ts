@@ -28,13 +28,16 @@ export const Route = createFileRoute("/api/public/oxapay-webhook")({
           console.error("OxaPay activation failed", error.message);
           return new Response("activation failed", { status: 500 });
         }
-        const r = data as { already?: boolean; name?: string; email?: string; plan?: string; amount?: number; ip?: string; country?: string } | null;
-        if (r && !r.already && r.plan) {
+        const r = data as { notify?: boolean; name?: string; email?: string; plan?: string; amount?: number; ip?: string; country?: string } | null;
+        if (r?.notify && r.plan) {
           const { sendPlanAlert } = await import("@/lib/telegram-notify.server");
-          await sendPlanAlert({
+          const delivered = await sendPlanAlert({
             name: r.name ?? null, email: r.email ?? null, plan: r.plan, amount: Number(r.amount ?? 0),
             ip: r.ip ?? null, country: r.country ?? null,
           });
+          if (!delivered) return new Response("alert pending", { status: 503 });
+          const { error: ackError } = await publicDb().rpc("oxapay_ack_alert", { _order_id: body.order_id, _key_hash: await sha256Hex(key) });
+          if (ackError) return new Response("alert pending", { status: 503 });
         }
         return new Response("ok");
       },

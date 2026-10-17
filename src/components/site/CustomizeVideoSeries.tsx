@@ -81,13 +81,8 @@ export function CustomizeSeriesPlayer({ title, subtitle, clipList }: { title: st
   // Smooth progress while playing.
   useEffect(() => {
     if (!playing) return;
-    let raf = 0;
-    const tick = () => {
-      syncTime();
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    const timer = window.setInterval(syncTime, 250);
+    return () => window.clearInterval(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playing]);
 
@@ -208,7 +203,7 @@ export function CustomizeSeriesPlayer({ title, subtitle, clipList }: { title: st
                   src={clips[slots[slot]]}
                   aria-label="How to customize your Larp Insight"
                   playsInline
-                  preload="auto"
+                  preload={playing ? "auto" : "metadata"}
                   style={{ opacity: active === slot ? 1 : 0, pointerEvents: "none" }}
                   onPlay={() => { if (slot === activeRef.current) setPlaying(true); }}
                   onLoadedMetadata={() => handleLoadedMetadata(slot)}

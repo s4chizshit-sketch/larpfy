@@ -4,7 +4,7 @@ const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replac
 export async function sendSignupAlert(info: { name?: string | null; email: string | null; ip: string | null; country: string | null }) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_OWNER_CHAT_ID || process.env.TELEGRAM_CHAT_ID;
-  if (!token || !chatId) return;
+  if (!token || !chatId) return false;
   const time = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata", dateStyle: "medium", timeStyle: "medium" });
   const text =
     `🆕 <b>New account</b>\n` +
@@ -20,9 +20,11 @@ export async function sendSignupAlert(info: { name?: string | null; email: strin
       body: JSON.stringify({ chat_id: chatId, text, parse_mode: "HTML", disable_web_page_preview: true }),
       signal: AbortSignal.timeout(4000),
     });
-    if (!r.ok) console.error("Telegram alert failed", r.status);
+    const result = await r.json() as { ok?: boolean };
+    return r.ok && result.ok === true;
   } catch (e) {
-    console.error("Telegram alert error", e instanceof Error ? e.message : "unknown");
+    console.error("Telegram alert unavailable");
+    return false;
   }
 }
 
@@ -33,7 +35,7 @@ export async function sendPlanAlert(info: {
 }) {
   const token = process.env.TELEGRAM_SALES_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_OWNER_CHAT_ID || process.env.TELEGRAM_CHAT_ID;
-  if (!token || !chatId) return;
+  if (!token || !chatId) return false;
   const time = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata", dateStyle: "medium", timeStyle: "medium" });
   const text =
     `💎 <b>New paid subscription</b>\n` +
@@ -48,6 +50,7 @@ export async function sendPlanAlert(info: {
       body: JSON.stringify({ chat_id: chatId, text, parse_mode: "HTML", disable_web_page_preview: true }),
       signal: AbortSignal.timeout(4000),
     });
-    if (!r.ok) console.error("Sales alert failed", r.status);
-  } catch { /* ignore */ }
+    const result = await r.json() as { ok?: boolean };
+    return r.ok && result.ok === true;
+  } catch { return false; }
 }

@@ -1,7 +1,5 @@
-import { useQuery } from "@tanstack/react-query";
 import { History, Infinity as InfinityIcon } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/lib/auth";
+import { usePaidPurchases } from "./ProSubscription";
 
 const DAY = 86400000;
 
@@ -10,20 +8,7 @@ function fmtDate(d: string | Date) {
 }
 
 export function PlanHistory() {
-  const { user } = useAuth();
-  const { data } = useQuery({
-    queryKey: ["plan-purchases", user?.id],
-    enabled: !!user,
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from("plan_purchases")
-        .select("*")
-        .eq("user_id", user!.id)
-        .order("started_at", { ascending: false });
-      if (error) throw error;
-      return data ?? [];
-    },
-  });
+  const { data } = usePaidPurchases();
 
   // Only users who have purchased at least one plan see this section.
   if (!data?.length) return null;
@@ -50,7 +35,7 @@ export function PlanHistory() {
                 <div>
                   <p className="font-semibold">{p.plan_name}</p>
                   <p className="mt-0.5 text-xs text-muted-foreground">
-                    ${Number(p.price)} · {lifetime ? "one-time" : "per month"} · bought {fmtDate(p.started_at)}
+                    ${Number(p.price)} · {lifetime ? "one-time" : p.billing_period} · bought {fmtDate(p.started_at)}
                   </p>
                 </div>
                 <span
@@ -83,8 +68,8 @@ export function PlanHistory() {
                 {lifetime
                   ? "Your lifetime access never expires."
                   : expired
-                    ? `Ended on ${fmtDate(p.expires_at!)}`
-                    : `${used} of ${total} days used · ends on ${fmtDate(p.expires_at!)}`}
+                    ? `Ended on ${fmtDate(p.expires_at ?? p.started_at)}`
+                    : `${used} of ${total} days used · ends on ${fmtDate(p.expires_at ?? p.started_at)}`}
               </p>
             </div>
           );

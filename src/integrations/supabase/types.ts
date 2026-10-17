@@ -76,6 +76,7 @@ export type Database = {
           paid_at: string | null
           plan_id: string
           status: string
+          telegram_notified_at: string | null
           track_id: string | null
           user_id: string
         }
@@ -86,6 +87,7 @@ export type Database = {
           paid_at?: string | null
           plan_id: string
           status?: string
+          telegram_notified_at?: string | null
           track_id?: string | null
           user_id: string
         }
@@ -96,6 +98,7 @@ export type Database = {
           paid_at?: string | null
           plan_id?: string
           status?: string
+          telegram_notified_at?: string | null
           track_id?: string | null
           user_id?: string
         }
@@ -433,6 +436,11 @@ export type Database = {
         }
         Returns: boolean
       }
+      oxapay_ack_alert: {
+        Args: { _key_hash: string; _order_id: string }
+        Returns: undefined
+      }
+      oxapay_is_ready: { Args: { _key_hash: string }; Returns: boolean }
       oxapay_mark_paid: {
         Args: { _key_hash: string; _order_id: string; _track_id?: string }
         Returns: Json
