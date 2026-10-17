@@ -55,8 +55,8 @@ export function Navbar() {
           <div className="hidden items-center gap-2 lg:flex">
             {user ? (
               <Button asChild className="rounded-full bg-brand shadow-glow">
-                <Link to="/dashboard" className="gap-2">
-                  Dashboard <ArrowRight className="h-4 w-4" />
+                <Link to={isAdmin ? "/admin" : "/dashboard"} className="gap-2">
+                  {isAdmin ? "Admin panel" : "Dashboard"} <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
             ) : (
@@ -95,7 +95,7 @@ export function Navbar() {
             <div className="mt-5 grid gap-3">
               {user ? (
                 <Button asChild size="lg" className="rounded-full bg-brand">
-                  <Link to="/dashboard" onClick={() => setOpen(false)}>Dashboard</Link>
+                  <Link to={isAdmin ? "/admin" : "/dashboard"} onClick={() => setOpen(false)}>{isAdmin ? "Admin panel" : "Dashboard"}</Link>
                 </Button>
               ) : (
                 <>
