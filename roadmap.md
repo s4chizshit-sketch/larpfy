@@ -8,7 +8,7 @@
 - [x] Fix oversized public header logos caused by the global media height override; verify mobile/desktop sizing and menu interaction.
 - [x] Plan boxes: soft 24px rounded corners, narrower card, hover lift, lit hairline top edge, refined tier divider (diagonal light-cut sweep removed at the user's request; Get Plan shine kept).
 - [x] "How to Get Subscription (Plan)" glass box on the Pricing/Subscription page with the four steps; the Current plan / Status / Price cards above it removed and the box made compact (2×2 grid on desktop).
-- [ ] Add the show/hide password eye toggle to the login page (waiting on user's go-ahead).
+- [x] Add the show/hide password eye toggle to the login page.
 - [ ] Put the real Instagram link on the About page (placeholder used until then).
 - [ ] Confirm the admin price editor saves correctly (needs one price changed and saved by the user).
 - [ ] Remove or re-link the affiliate program wording still left in Terms.
@@ -18,9 +18,11 @@
 - [x] Add a 02:00 QR countdown and show Telegram screenshot submission only after expiry; verify the transition.
 - [x] Timeout box: short English heading replaces "Send your payment screenshot"; compact premium layout, verified on phone and desktop.
 - [x] Add amount-prefilled Android UPI payment links for all four payment app logos with Google Play fallbacks; verify generated links (real-device payment approval remains unverified).
-- [ ] OxaPay USD/crypto checkout: waiting for the user's merchant API key.
+- [ ] Finish OxaPay activation setup (owner account must open admin panel to synchronize the host merchant key).
 - [x] Route admin login and workspace links to the admin panel; destination tests pass.
 - [ ] Create owner account and verify signed-in admin navigation (blocked: requested password rejected by password protection; owner must choose a stronger password).
-- [ ] Diagnose and fix signup/existing login without weakening password protection.
-- [ ] Verify paid-plan Telegram messages, payment activation, admin data and bot delivery.
-- [ ] Apply bounded performance improvements and verify real flows; 100k-user load remains a hosting/load-test concern.
+- [x] Fix signup/existing login without weakening password protection; real signup, logout and repeat login verified, missing account profiles/roles repaired.
+- [x] Preserve purchased plan names in Telegram drafts; paginate subscription admin history and surface read failures.
+- [ ] Verify real paid activation and bot delivery (blocked: no owner/admin account or payment key sync; both configured Telegram tokens rejected by Telegram).
+- [x] Reduce video decoding/preload work, progress renders, heartbeat frequency and redundant query requests; video playback verified.
+- [ ] Validate capacity for 100k users (requires deployed hosting capacity and a controlled load test, not verified by local functional checks).
