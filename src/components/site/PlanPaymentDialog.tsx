@@ -46,7 +46,7 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
           <div className="checkout-summary">
             <div className="checkout-row"><span>Plan</span><strong>{plan.name}</strong></div>
             <div className="checkout-row"><span>Billing</span><strong>{period}</strong></div>
-            <div className="checkout-row"><span>Network fee</span><strong>Included</strong></div>
+            <div className="checkout-row"><span>Network fee</span><strong>Shown at checkout</strong></div>
             <div className="checkout-total"><span>Total due</span><strong>${plan.price}<small>USD</small></strong></div>
           </div>
 
