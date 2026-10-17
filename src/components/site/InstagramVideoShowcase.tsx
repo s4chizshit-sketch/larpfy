@@ -46,6 +46,15 @@ export function RecordingVideoShowcase({ title, platform, recordings }: {
 
   // Once the user swipes or taps a dot, auto-advance stays off so they can watch the chosen video.
   const userControlled = useRef(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const node = sectionRef.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { rootMargin: "100px" });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!carouselApi) return;
@@ -53,7 +62,7 @@ export function RecordingVideoShowcase({ title, platform, recordings }: {
     const stop = () => window.clearTimeout(timer);
     const schedule = () => {
       stop();
-      if (userControlled.current) return;
+      if (userControlled.current || !visible || document.hidden) return;
       timer = window.setTimeout(() => {
         if (userControlled.current) return;
         if (carouselApi.canScrollNext()) carouselApi.scrollNext();
@@ -76,10 +85,10 @@ export function RecordingVideoShowcase({ title, platform, recordings }: {
       carouselApi.off("settle", schedule);
       carouselApi.off("reInit", reinitialize);
     };
-  }, [carouselApi]);
+  }, [carouselApi, visible]);
 
   return (
-    <div className="min-w-0 py-4">
+    <div ref={sectionRef} className="min-w-0 py-4">
       <h3 className="title-gradient mb-7 text-center font-sans text-2xl font-extrabold leading-tight tracking-tight sm:text-3xl">
         {title}
       </h3>
@@ -102,17 +111,23 @@ export function RecordingVideoShowcase({ title, platform, recordings }: {
                   <div className="instagram-iphone-recording">
                 <video
                   aria-label={`${recording.label} screen recording`}
-                  autoPlay
+                  autoPlay={active === index && visible}
                   muted
                   loop
                   playsInline
-                  preload="auto"
+                  preload="none"
                   disablePictureInPicture
-                  onCanPlay={(event) => { void event.currentTarget.play().catch(() => undefined); }}
+                  ref={(video) => {
+                    if (!video) return;
+                    if (active === index && visible) void video.play().catch(() => undefined);
+                    else video.pause();
+                  }}
                    className="pointer-events-none"
                 >
-                  <source src={recording.webm} type="video/webm" />
-                  <source src={recording.url} type="video/mp4" />
+                  {(visible && Math.abs(active - index) <= 1) && <>
+                    <source src={recording.webm} type="video/webm" />
+                    <source src={recording.url} type="video/mp4" />
+                  </>}
                 </video>
                   </div>
                   <div className="instagram-iphone-home" aria-hidden="true" />

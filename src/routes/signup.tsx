@@ -53,6 +53,7 @@ function Signup() {
     }
     setErrors({});
     setLoading(true);
+    try {
     let ref: string | undefined;
     try {
       const saved = JSON.parse(localStorage.getItem("larp_ref") ?? "null");
@@ -72,6 +73,11 @@ function Signup() {
       return navigate({ to: accountDestination(!!roles?.some((role) => role.role === "admin"), redirect) });
     }
     setDone(true);
+    } catch {
+      setServerError("Connection interrupted. If your account was created, try logging in; otherwise try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (done)

@@ -30,10 +30,13 @@ function Forgot() {
     if (!z.string().email().safeParse(email.trim()).success) return setErr("Enter a valid email");
     setErr("");
     setLoading(true);
-    const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), { redirectTo: `${window.location.origin}/reset-password` });
-    setLoading(false);
-    if (error) return setErr(error.message);
-    setSent(true);
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email.trim().toLowerCase(), { redirectTo: `${window.location.origin}/reset-password` });
+      if (error) return setErr(error.message);
+      setSent(true);
+    } catch {
+      setErr("Connection interrupted. Please try again.");
+    } finally { setLoading(false); }
   };
   return (
     <AuthShell

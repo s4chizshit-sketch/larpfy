@@ -33,11 +33,14 @@ function Reset() {
     if (pw !== confirm) return setErr("Passwords don't match");
     setErr("");
     setLoading(true);
-    const { error } = await supabase.auth.updateUser({ password: pw });
-    setLoading(false);
-    if (error) return setErr(error.message.includes("session") ? "This reset link is invalid or expired. Request a new one." : error.message);
-    toast.success("Password updated");
-    navigate({ to: "/dashboard" });
+    try {
+      const { error } = await supabase.auth.updateUser({ password: pw });
+      if (error) return setErr(error.message.includes("session") ? "This reset link is invalid or expired. Request a new one." : error.message);
+      toast.success("Password updated");
+      navigate({ to: "/dashboard" });
+    } catch {
+      setErr("Connection interrupted. Please try again.");
+    } finally { setLoading(false); }
   };
 
   const pwField = (k: "pw" | "c", id: string, label: string, value: string, set: (v: string) => void, auto: string, placeholder: string) => {
