@@ -6,10 +6,27 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
+// Public (publishable) backend connection values. Safe to ship in code.
+// Used as a build-time fallback so self-hosted builds (e.g. Vercel) work
+// without setting these env vars manually.
+const PUBLIC_BACKEND_URL = "https://kxsqiannkfzsfqpqioly.supabase.co";
+const PUBLIC_BACKEND_KEY = "sb_publishable_ByviDC8YrMhLPfLFAtQXKA_8J2mfZHC";
+
+const fallbackDefine: Record<string, string> = {};
+if (!process.env.VITE_SUPABASE_URL) {
+  fallbackDefine["import.meta.env.VITE_SUPABASE_URL"] = JSON.stringify(PUBLIC_BACKEND_URL);
+}
+if (!process.env.VITE_SUPABASE_PUBLISHABLE_KEY) {
+  fallbackDefine["import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY"] = JSON.stringify(PUBLIC_BACKEND_KEY);
+}
+
 export default defineConfig({
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
+  },
+  vite: {
+    define: fallbackDefine,
   },
 });
