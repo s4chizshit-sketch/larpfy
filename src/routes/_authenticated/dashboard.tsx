@@ -1,6 +1,7 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute, Navigate, Outlet } from "@tanstack/react-router";
 import { CreditCard, FolderKanban, Instagram, LayoutGrid, Music2, Settings } from "lucide-react";
 import { AppShell, type NavItem } from "@/components/app/AppShell";
+import { useProfile } from "@/lib/auth";
 
 const nav: NavItem[] = [
   { to: "/dashboard", label: "Overview", icon: LayoutGrid, exact: true },
@@ -13,9 +14,17 @@ const nav: NavItem[] = [
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({ meta: [{ title: "Dashboard — LARP Insight" }, { name: "robots", content: "noindex" }] }),
-  component: () => (
+  component: DashboardLayout,
+});
+
+function DashboardLayout() {
+  const { data, isLoading, error } = useProfile();
+  if (isLoading) return <div role="status" className="p-8 text-muted-foreground">Loading account…</div>;
+  if (error) return <div role="alert" className="p-8 text-destructive">Unable to load account access. Please reload.</div>;
+  if (data?.isAdmin) return <Navigate to="/admin" replace />;
+  return (
     <AppShell nav={nav} title="Workspace">
       <Outlet />
     </AppShell>
-  ),
-});
+  );
+}
