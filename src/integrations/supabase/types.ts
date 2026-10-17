@@ -440,6 +440,7 @@ export type Database = {
         Args: { _key_hash: string; _order_id: string }
         Returns: undefined
       }
+      oxapay_is_ready: { Args: { _key_hash: string }; Returns: boolean }
       oxapay_mark_paid: {
         Args: { _key_hash: string; _order_id: string; _track_id?: string }
         Returns: Json

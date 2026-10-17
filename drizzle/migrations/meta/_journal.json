@@ -22,6 +22,13 @@
       "when": 1792265936458,
       "tag": "0002_retryable_payment_alerts",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1792266061761,
+      "tag": "0003_checkout_readiness_guard",
+      "breakpoints": true
     }
   ]
 }
