@@ -11,6 +11,9 @@ export const createOxapayInvoice = createServerFn({ method: "POST" })
     if (!key) throw new Error("USDT payments are not configured yet.");
     const requestOrigin = getRequestUrl().origin;
     if (new URL(data.origin).origin !== requestOrigin) throw new Error("Invalid checkout address.");
+    const { sha256Hex } = await import("./public-db.server");
+    const { data: ready, error: readyError } = await context.supabase.rpc("oxapay_is_ready", { _key_hash: await sha256Hex(key) });
+    if (readyError || !ready) throw new Error("Checkout is temporarily unavailable. The owner must finish payment setup.");
     const { data: order, error: oe } = await context.supabase.rpc("create_payment_order", { _plan_id: data.planId });
     const o = order as { id?: string; amount?: number; name?: string } | null;
     if (oe || !o?.id) throw new Error("Plan not available.");

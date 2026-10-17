@@ -516,4 +516,9 @@ begin
 end $$;
 revoke execute on function public.oxapay_ack_alert(uuid,text) from public;
 grant execute on function public.oxapay_ack_alert(uuid,text) to anon,authenticated;
-create index if not exists payment_orders_paid_idx on public.payment_orders(paid_at desc) where status='paid';
+create index if not exists payment_orders_paid_idx on public.payment_orders(paid_at desc) where status='paid';create or replace function public.oxapay_is_ready(_key_hash text)
+returns boolean language sql stable security definer set search_path=public as $$
+  select auth.uid() is not null and exists(select 1 from public.private_config where key='oxapay_key_hash' and value=lower(_key_hash));
+$$;
+revoke execute on function public.oxapay_is_ready(text) from public,anon;
+grant execute on function public.oxapay_is_ready(text) to authenticated;
