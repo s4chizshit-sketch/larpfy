@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import { Eye, EyeOff, Loader2, MailCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -45,6 +45,12 @@ function Signup() {
   const [shown, setShown] = useState<Record<string, boolean>>({});
   const [celebrating, setCelebrating] = useState(false);
   const [pendingNav, setPendingNav] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!celebrating || !pendingNav) return;
+    const t = setTimeout(() => navigate({ to: pendingNav }), 2800);
+    return () => clearTimeout(t);
+  }, [celebrating, pendingNav, navigate]);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -132,7 +138,9 @@ function Signup() {
   };
 
   return (
-    <AuthShell
+    <>
+      {celebrating && <SignupCelebration name={form.name.trim()} />}
+      <AuthShell
       title="Create your account"
       sub={
         <>
