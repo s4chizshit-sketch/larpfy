@@ -115,7 +115,7 @@ export function RecordingVideoShowcase({ title, platform, recordings }: {
                   muted
                   loop
                   playsInline
-                  preload="none"
+                  preload="metadata"
                   disablePictureInPicture
                   ref={(video) => {
                     if (!video) return;
