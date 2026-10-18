@@ -29,6 +29,13 @@
       "when": 1792266061761,
       "tag": "0003_checkout_readiness_guard",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1792296671138,
+      "tag": "0004_owner_admin_extipsguide",
+      "breakpoints": true
     }
   ]
 }
