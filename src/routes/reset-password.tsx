@@ -29,7 +29,7 @@ function Reset() {
   const [shown, setShown] = useState<Record<string, boolean>>({});
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (pw.length < 8 || !/[0-9]/.test(pw) || !/[A-Za-z]/.test(pw)) return setErr("At least 8 characters with a letter and a number");
+    if (pw.length < 6 || pw.length > 72) return setErr("At least 6 characters — numbers, letters or symbols");
     if (pw !== confirm) return setErr("Passwords don't match");
     setErr("");
     setLoading(true);
@@ -83,7 +83,7 @@ function Reset() {
       }
     >
       <form onSubmit={submit} className="space-y-5" noValidate>
-        {pwField("pw", "pw", "New password", pw, setPw, "new-password", "At least 8 characters")}
+        {pwField("pw", "pw", "New password", pw, setPw, "new-password", "At least 6 characters")}
         <div>
           {pwField("c", "c", "Confirm password", confirm, setConfirm, "new-password", "Repeat your password")}
           <FieldError msg={err} />
