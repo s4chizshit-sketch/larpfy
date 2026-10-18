@@ -28,7 +28,7 @@ function Settings() {
     toast.success("Profile updated");
   };
   const changePw = async () => {
-    if (pw.next.length < 8 || !/[0-9]/.test(pw.next) || !/[A-Za-z]/.test(pw.next)) return toast.error("New password needs 8+ characters with a letter and a number");
+    if (pw.next.length < 6 || pw.next.length > 72) return toast.error("New password needs at least 6 characters");
     const { error } = await supabase.auth.updateUser({ password: pw.next, current_password: pw.current } as any);
     if (error) return toast.error(error.message);
     setPw({ current: "", next: "" });
