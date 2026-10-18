@@ -1,4 +1,5 @@
 // Sends private admin alerts to the owner's chat with the bot. Never throws.
+const flag = (c?: string | null) => c && /^[A-Z]{2}$/i.test(c) ? String.fromCodePoint(...[...c.toUpperCase()].map((x) => 127397 + x.charCodeAt(0))) + " " : "";
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 export async function sendSignupAlert(info: { name?: string | null; email: string | null; ip: string | null; country: string | null }) {
@@ -11,7 +12,7 @@ export async function sendSignupAlert(info: { name?: string | null; email: strin
     `👤 Name: ${esc(info.name ?? "unknown")}\n` +
     `📧 ${esc(info.email ?? "unknown")} — ❌ No subscription\n` +
     `🌐 IP: <code>${esc(info.ip ?? "unknown")}</code>\n` +
-    `🏳️ Country: ${esc(info.country ?? "unknown")}\n` +
+    `🏳️ Country: ${flag(info.country)}${esc(info.country ?? "unknown")}\n` +
     `🕒 ${esc(time)} IST`;
   try {
     const r = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
@@ -42,7 +43,7 @@ export async function sendPlanAlert(info: {
     `👤 Name: ${esc(info.name ?? "unknown")}\n` +
     `📧 ${esc(info.email ?? "unknown")} — ✅ ${esc(info.plan)} ($${info.amount})\n` +
     `🌐 IP: <code>${esc(info.ip ?? "unknown")}</code>\n` +
-    `🏳️ Country: ${esc(info.country ?? "unknown")}\n` +
+    `🏳️ Country: ${flag(info.country)}${esc(info.country ?? "unknown")}\n` +
     `🕒 ${esc(time)} IST`;
   try {
     const r = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
