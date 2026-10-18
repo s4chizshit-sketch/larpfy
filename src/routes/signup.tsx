@@ -73,7 +73,9 @@ function Signup() {
     if (data.session && data.user) {
       const { data: roles, error: roleError } = await supabase.from("user_roles").select("role").eq("user_id", data.user.id);
       if (roleError) return setServerError("Account created. Please log in to continue.");
-      return navigate({ to: accountDestination(!!roles?.some((role) => role.role === "admin"), redirect) });
+      setPendingNav(accountDestination(!!roles?.some((role) => role.role === "admin"), redirect));
+      setCelebrating(true);
+      return;
     }
     setDone(true);
     } catch {
