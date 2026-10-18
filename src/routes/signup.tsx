@@ -171,6 +171,7 @@ function Signup() {
           By continuing you agree to our <Link to="/terms">Terms</Link> and <Link to="/privacy">Privacy Policy</Link>.
         </p>
       </form>
-    </AuthShell>
+      </AuthShell>
+    </>
   );
 }
