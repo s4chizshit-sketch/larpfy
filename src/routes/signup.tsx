@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { z } from "zod";
 import { Eye, EyeOff, Loader2, MailCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { AuthShell, FieldError } from "@/components/AuthShell";
 import { supabase } from "@/integrations/supabase/client";
 import { accountDestination } from "@/lib/account-destination";
+import { SignupCelebration } from "@/components/SignupCelebration";
 
 export const Route = createFileRoute("/signup")({
   head: () => ({
@@ -42,6 +43,14 @@ function Signup() {
   const [done, setDone] = useState(false);
   const [serverError, setServerError] = useState("");
   const [shown, setShown] = useState<Record<string, boolean>>({});
+  const [celebrating, setCelebrating] = useState(false);
+  const [pendingNav, setPendingNav] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!celebrating || !pendingNav) return;
+    const t = setTimeout(() => navigate({ to: pendingNav }), 2800);
+    return () => clearTimeout(t);
+  }, [celebrating, pendingNav, navigate]);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -70,7 +79,9 @@ function Signup() {
     if (data.session && data.user) {
       const { data: roles, error: roleError } = await supabase.from("user_roles").select("role").eq("user_id", data.user.id);
       if (roleError) return setServerError("Account created. Please log in to continue.");
-      return navigate({ to: accountDestination(!!roles?.some((role) => role.role === "admin"), redirect) });
+      setPendingNav(accountDestination(!!roles?.some((role) => role.role === "admin"), redirect));
+      setCelebrating(true);
+      return;
     }
     setDone(true);
     } catch {
@@ -127,7 +138,9 @@ function Signup() {
   };
 
   return (
-    <AuthShell
+    <>
+      {celebrating && <SignupCelebration name={form.name.trim()} />}
+      <AuthShell
       title="Create your account"
       sub={
         <>
@@ -158,6 +171,7 @@ function Signup() {
           By continuing you agree to our <Link to="/terms">Terms</Link> and <Link to="/privacy">Privacy Policy</Link>.
         </p>
       </form>
-    </AuthShell>
+      </AuthShell>
+    </>
   );
 }
