@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { AuthShell, FieldError } from "@/components/AuthShell";
 import { supabase } from "@/integrations/supabase/client";
 import { accountDestination } from "@/lib/account-destination";
+import { SignupCelebration } from "@/components/SignupCelebration";
 
 export const Route = createFileRoute("/signup")({
   head: () => ({
@@ -42,6 +43,8 @@ function Signup() {
   const [done, setDone] = useState(false);
   const [serverError, setServerError] = useState("");
   const [shown, setShown] = useState<Record<string, boolean>>({});
+  const [celebrating, setCelebrating] = useState(false);
+  const [pendingNav, setPendingNav] = useState<string | null>(null);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
