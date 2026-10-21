@@ -1,4 +1,4 @@
-- [ ] Add Shopify Monthly $25 and Lifetime $30 alongside existing plans, verify admin price saving, and replace the showcase icon with the official Shopify logo.
+- [x] Add Shopify Monthly $25 and Lifetime $30 alongside existing plans and replace the showcase icon with the official Shopify logo; price tests and public logo checks pass.
 - [x] Replace old plan presentation with two premium Instagram/TikTok swipe boxes.
 - [x] Fit Shopify recordings edge-to-edge inside an iPhone shell without cropping or empty margins; add a laptop shell around the Shopify dashboard; all three videos played and fit verified at 375px, 507px and 1280px widths.
 - [x] Add a Shopify Dashboard Insights showcase below the existing platform sections, with App UI and notification demo imagery.
@@ -13,7 +13,7 @@
 - [x] "How to Get Subscription (Plan)" glass box on the Pricing/Subscription page with the four steps; the Current plan / Status / Price cards above it removed and the box made compact (2×2 grid on desktop).
 - [x] Add the show/hide password eye toggle to the login page.
 - [ ] Put the real Instagram link on the About page (placeholder used until then).
-- [ ] Confirm the admin price editor saves correctly (needs one price changed and saved by the user).
+- [ ] Confirm the admin price editor saves correctly, including Shopify (blocked: no authorized preview admin session; owner must sign in for the end-to-end check).
 - [ ] Remove or re-link the affiliate program wording still left in Terms.
 - [x] Add plan checkout choices for UPI/INR and upcoming USD payments, with the uploaded QR and copyable UPI ID.
 
