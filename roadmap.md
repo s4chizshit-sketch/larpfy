@@ -1,4 +1,5 @@
 - [x] Replace old plan presentation with two premium Instagram/TikTok swipe boxes.
+- [x] Fit Shopify recordings edge-to-edge inside an iPhone shell without cropping or empty margins; add a laptop shell around the Shopify dashboard; all three videos played and fit verified at 375px, 507px and 1280px widths.
 - [x] Add a Shopify Dashboard Insights showcase below the existing platform sections, with App UI and notification demo imagery.
 - [x] Store new prices, add PNG logos, and verify pricing and touch interaction.
 - [x] Match the View Pricing box style and animation to the Get Plan pill.

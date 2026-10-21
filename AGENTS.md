@@ -15,7 +15,8 @@
 - New-signup profile creation depends on the `on_auth_user_created` trigger on `auth.users` calling `public.handle_new_user()` — if new accounts get no profile/Telegram alert, check that trigger exists.
 - Platform recording carousels use Embla for touch dragging and snapping; automatic advancement stops after manual interaction so the selected recording stays visible.
 - The shared showcase device shell replaces only the recordings' system-bar margins with device chrome, preserving uploaded app content and playback.
-- Full-recording showcase mode is opt-in for Shopify; it uses the source recording ratio and contain fitting without altering other platform shells or playback.
+- Full-recording showcase mode is opt-in for Shopify; fit the shell to the source ratio and reuse the recording's own iOS status/navigation chrome rather than adding duplicate bars, preserving all pixels and playback without affecting other platform shells.
+- The Shopify dashboard image is contained at its intrinsic ratio inside a CSS laptop lid and base; device chrome scales with its container so the full demo remains visible on phones and desktops.
 - Platform pricing uses a shared Embla carousel grouping plans by their platform name prefix; this keeps homepage and pricing offers synchronized with admin-editable plan rows.
 - Non-admin platform workspace pages reuse the homepage showcase and tutorial players for their own platform; this keeps recordings, captions, and playback presentation synchronized without duplicating media.
 - Workspace navigation uses role-filtered items and project presentation checks from the existing profile role query; this hides admin-only project UI without changing data permissions.

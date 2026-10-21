@@ -87,6 +87,8 @@
   --device-highlight: oklch(0.8 0.004 260 / 40%);
   --device-ink: oklch(0.98 0 0);
   --device-camera: oklch(0.22 0.035 250);
+  --device-silver: oklch(0.74 0.007 260);
+  --gradient-laptop-base: linear-gradient(180deg, var(--device-silver), var(--device-highlight) 42%, var(--device-edge));
   --shadow-device: 0 20px 40px -14px oklch(0 0 0 / 70%), inset 0 0 0 1px var(--device-highlight), 0 0 0 1px var(--device-edge);
 }
 
@@ -498,13 +500,68 @@
 .full-recording-showcase .instagram-iphone-recording {
   aspect-ratio: 590 / 1278;
 }
+.full-recording-showcase .instagram-video-phone {
+  container-type: inline-size;
+  border-radius: 11% / 5.1%;
+}
+.full-recording-showcase .instagram-iphone-screen {
+  border-radius: 8cqw;
+}
 .full-recording-showcase .instagram-iphone-recording video {
-  inset: 0;
+  position: static;
   width: 100%;
-  height: 100%;
-  aspect-ratio: auto;
+  height: auto;
+  aspect-ratio: 590 / 1278;
   object-fit: contain;
   object-position: center;
+}
+.shopify-laptop {
+  width: 100%;
+  container-type: inline-size;
+}
+.shopify-laptop-lid {
+  position: relative;
+  width: 91%;
+  margin-inline: auto;
+  padding: 2.6% 1.2% 1.5%;
+  border: 1px solid var(--device-edge);
+  border-radius: 2cqw 2cqw 0.7cqw 0.7cqw;
+  background: var(--device-screen);
+  box-shadow: var(--shadow-device);
+}
+.shopify-laptop-camera {
+  position: absolute;
+  top: 1.1cqw;
+  left: calc(50% - 0.35cqw);
+  width: 0.7cqw;
+  height: 0.7cqw;
+  border-radius: 50%;
+  background: var(--device-camera);
+  box-shadow: 0 0 0 1px var(--device-edge);
+}
+.shopify-laptop-display {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 984 / 736;
+  border-radius: 0.4cqw;
+  user-select: none;
+}
+.shopify-laptop-base {
+  position: relative;
+  height: 2.8cqw;
+  border: 1px solid var(--device-edge);
+  border-radius: 0.3cqw 0.3cqw 5cqw 5cqw;
+  background: var(--gradient-laptop-base);
+}
+.shopify-laptop-base span {
+  position: absolute;
+  top: 0;
+  left: 40%;
+  width: 20%;
+  height: 0.8cqw;
+  border-radius: 0 0 1cqw 1cqw;
+  background: var(--device-metal);
 }
 .instagram-iphone-home::after {
   content: "";

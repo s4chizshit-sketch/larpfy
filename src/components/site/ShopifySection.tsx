@@ -4,13 +4,16 @@ import phoneShot from "@/assets/shopify-phone.jpg";
 import shopify1 from "@/assets/shopify-1.mp4";
 import shopify2 from "@/assets/shopify-2.mp4";
 import shopify3 from "@/assets/shopify-3.mp4";
+import shopify1Webm from "@/assets/shopify-1.webm";
+import shopify2Webm from "@/assets/shopify-2.webm";
+import shopify3Webm from "@/assets/shopify-3.webm";
 import { RecordingVideoShowcase } from "./InstagramVideoShowcase";
 import { Reveal } from "./Reveal";
 
 const recordings = [
-  { label: "Dashboard", url: shopify1 },
-  { label: "Notifications", url: shopify2 },
-  { label: "Customize", url: shopify3 },
+  { label: "Dashboard", url: shopify1, webm: shopify1Webm },
+  { label: "Notifications", url: shopify2, webm: shopify2Webm },
+  { label: "Customize", url: shopify3, webm: shopify3Webm },
 ];
 
 const bullets = [
@@ -23,16 +26,22 @@ const bullets = [
 
 function LaptopFrame() {
   return (
-    <img
+    <div className="shopify-laptop" role="img" aria-label="Laptop showing a demo Shopify dashboard">
+      <div className="shopify-laptop-lid">
+        <span className="shopify-laptop-camera" aria-hidden="true" />
+        <img
       src={laptopScreen}
-      alt="Laptop showing a demo Shopify dashboard"
+      alt="Shopify demo store dashboard"
       draggable={false}
       width={984}
       height={736}
       loading="lazy"
       decoding="async"
-      className="block h-auto w-full select-none"
+      className="shopify-laptop-display"
     />
+      </div>
+      <div className="shopify-laptop-base" aria-hidden="true"><span /></div>
+    </div>
   );
 }
 
