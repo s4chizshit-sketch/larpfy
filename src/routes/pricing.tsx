@@ -6,7 +6,7 @@ export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
       { title: "Pricing — LARP Insight" },
-      { name: "description", content: "Simple plans for creating customizable Instagram and TikTok insight demos." },
+      { name: "description", content: "Simple plans for creating customizable Instagram, TikTok and Shopify insight demos." },
       { property: "og:title", content: "Pricing — LARP Insight" },
       { property: "og:description", content: "Choose the LARP Insight plan that fits your workflow." },
       { property: "og:type", content: "website" },
@@ -26,7 +26,7 @@ function PricingPage() {
     <PublicLayout>
       <section className="hero-bg">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow="Pricing" title="Instagram & TikTok Plans" />
+          <SectionHeading eyebrow="Pricing" title="Instagram, TikTok & Shopify Plans" />
           <div className="mt-14 scroll-mt-28" id="plans"><PricingGrid /></div>
         </div>
       </section>

@@ -7,6 +7,7 @@ import { usePlans } from "@/lib/content";
 import { PlanPaymentDialog } from "@/components/site/PlanPaymentDialog";
 import instagramLogo from "@/assets/instagram-plan.png";
 import tiktokLogo from "@/assets/tiktok-plan.png";
+import shopifyLogo from "@/assets/shopify-logo.svg";
 
 export function PlatformPlans() {
   const { data, isLoading, error } = usePlans();
@@ -47,10 +48,11 @@ export function PlatformPlans() {
   const platforms = [
     { name: "Instagram", logo: instagramLogo, wordClass: "word-ig", glowClass: "glyph-ig" },
     { name: "TikTok", logo: tiktokLogo, wordClass: "word-tt", glowClass: "glyph-tt" },
+    { name: "Shopify", logo: shopifyLogo, wordClass: "font-display font-semibold", glowClass: "" },
   ];
 
   return (
-    <div className="mx-auto max-w-4xl" aria-label="Instagram and TikTok plans">
+    <div className="mx-auto max-w-4xl" aria-label="Instagram, TikTok and Shopify plans">
       <div ref={viewportRef} className="platform-plans-window"
         onPointerDown={(event) => { pointerStart.current = { x: event.clientX, y: event.clientY }; }}
         onPointerMove={(event) => {
@@ -95,7 +97,7 @@ export function PlatformPlans() {
           })}
         </div>
       </div>
-      <div className="mt-5 flex justify-center gap-2 md:hidden">
+      <div className="mt-5 flex justify-center gap-2">
         {platforms.map((platform, index) => (
           <Button key={platform.name} variant="ghost" size="icon" aria-label={`Show ${platform.name} plans`} aria-pressed={selected === index} onClick={() => { stop(); carousel?.scrollTo(index); }} className="h-8 w-8 rounded-full">
             <span className={`h-2 rounded-full transition-all duration-300 ${selected === index ? "w-5 bg-glow" : "w-2 bg-muted-foreground/40"}`} />
