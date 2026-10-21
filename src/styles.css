@@ -495,6 +495,17 @@
   align-items: center;
   justify-content: center;
 }
+.full-recording-showcase .instagram-iphone-recording {
+  aspect-ratio: 590 / 1278;
+}
+.full-recording-showcase .instagram-iphone-recording video {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: contain;
+  object-position: center;
+}
 .instagram-iphone-home::after {
   content: "";
   width: 36%;
