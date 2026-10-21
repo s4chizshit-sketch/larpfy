@@ -35,6 +35,7 @@ import { Route as AuthenticatedDashboardBillingRouteImport } from './routes/_aut
 import { Route as AuthenticatedDashboardInstagramRouteImport } from './routes/_authenticated/dashboard.instagram'
 import { Route as AuthenticatedDashboardProjectsRouteImport } from './routes/_authenticated/dashboard.projects'
 import { Route as AuthenticatedDashboardSettingsRouteImport } from './routes/_authenticated/dashboard.settings'
+import { Route as AuthenticatedDashboardShopifyRouteImport } from './routes/_authenticated/dashboard.shopify'
 import { Route as AuthenticatedDashboardTiktokRouteImport } from './routes/_authenticated/dashboard.tiktok'
 import { Route as ApiPublicOxapayWebhookRouteImport } from './routes/api/public/oxapay-webhook'
 import { Route as AuthenticatedDashboardEditorIdRouteImport } from './routes/_authenticated/dashboard.editor.$id'
@@ -177,6 +178,12 @@ const AuthenticatedDashboardSettingsRoute =
     path: '/settings',
     getParentRoute: () => AuthenticatedDashboardRoute,
   } as any)
+const AuthenticatedDashboardShopifyRoute =
+  AuthenticatedDashboardShopifyRouteImport.update({
+    id: '/shopify',
+    path: '/shopify',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
 const AuthenticatedDashboardTiktokRoute =
   AuthenticatedDashboardTiktokRouteImport.update({
     id: '/tiktok',
@@ -219,6 +226,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/instagram': typeof AuthenticatedDashboardInstagramRoute
   '/dashboard/projects': typeof AuthenticatedDashboardProjectsRoute
   '/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
+  '/dashboard/shopify': typeof AuthenticatedDashboardShopifyRoute
   '/dashboard/tiktok': typeof AuthenticatedDashboardTiktokRoute
   '/api/public/oxapay-webhook': typeof ApiPublicOxapayWebhookRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
@@ -247,6 +255,7 @@ export interface FileRoutesByTo {
   '/dashboard/instagram': typeof AuthenticatedDashboardInstagramRoute
   '/dashboard/projects': typeof AuthenticatedDashboardProjectsRoute
   '/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
+  '/dashboard/shopify': typeof AuthenticatedDashboardShopifyRoute
   '/dashboard/tiktok': typeof AuthenticatedDashboardTiktokRoute
   '/api/public/oxapay-webhook': typeof ApiPublicOxapayWebhookRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
@@ -279,6 +288,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/instagram': typeof AuthenticatedDashboardInstagramRoute
   '/_authenticated/dashboard/projects': typeof AuthenticatedDashboardProjectsRoute
   '/_authenticated/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
+  '/_authenticated/dashboard/shopify': typeof AuthenticatedDashboardShopifyRoute
   '/_authenticated/dashboard/tiktok': typeof AuthenticatedDashboardTiktokRoute
   '/api/public/oxapay-webhook': typeof ApiPublicOxapayWebhookRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
@@ -311,6 +321,7 @@ export interface FileRouteTypes {
     | '/dashboard/instagram'
     | '/dashboard/projects'
     | '/dashboard/settings'
+    | '/dashboard/shopify'
     | '/dashboard/tiktok'
     | '/api/public/oxapay-webhook'
     | '/admin/'
@@ -339,6 +350,7 @@ export interface FileRouteTypes {
     | '/dashboard/instagram'
     | '/dashboard/projects'
     | '/dashboard/settings'
+    | '/dashboard/shopify'
     | '/dashboard/tiktok'
     | '/api/public/oxapay-webhook'
     | '/admin'
@@ -370,6 +382,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/instagram'
     | '/_authenticated/dashboard/projects'
     | '/_authenticated/dashboard/settings'
+    | '/_authenticated/dashboard/shopify'
     | '/_authenticated/dashboard/tiktok'
     | '/api/public/oxapay-webhook'
     | '/_authenticated/admin/'
@@ -579,6 +592,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardSettingsRouteImport
       parentRoute: typeof AuthenticatedDashboardRoute
     }
+    '/_authenticated/dashboard/shopify': {
+      id: '/_authenticated/dashboard/shopify'
+      path: '/shopify'
+      fullPath: '/dashboard/shopify'
+      preLoaderRoute: typeof AuthenticatedDashboardShopifyRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
     '/_authenticated/dashboard/tiktok': {
       id: '/_authenticated/dashboard/tiktok'
       path: '/tiktok'
@@ -627,6 +647,7 @@ interface AuthenticatedDashboardRouteChildren {
   AuthenticatedDashboardInstagramRoute: typeof AuthenticatedDashboardInstagramRoute
   AuthenticatedDashboardProjectsRoute: typeof AuthenticatedDashboardProjectsRoute
   AuthenticatedDashboardSettingsRoute: typeof AuthenticatedDashboardSettingsRoute
+  AuthenticatedDashboardShopifyRoute: typeof AuthenticatedDashboardShopifyRoute
   AuthenticatedDashboardTiktokRoute: typeof AuthenticatedDashboardTiktokRoute
   AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
   AuthenticatedDashboardEditorIdRoute: typeof AuthenticatedDashboardEditorIdRoute
@@ -638,6 +659,7 @@ const AuthenticatedDashboardRouteChildren: AuthenticatedDashboardRouteChildren =
     AuthenticatedDashboardInstagramRoute: AuthenticatedDashboardInstagramRoute,
     AuthenticatedDashboardProjectsRoute: AuthenticatedDashboardProjectsRoute,
     AuthenticatedDashboardSettingsRoute: AuthenticatedDashboardSettingsRoute,
+    AuthenticatedDashboardShopifyRoute: AuthenticatedDashboardShopifyRoute,
     AuthenticatedDashboardTiktokRoute: AuthenticatedDashboardTiktokRoute,
     AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
     AuthenticatedDashboardEditorIdRoute: AuthenticatedDashboardEditorIdRoute,
