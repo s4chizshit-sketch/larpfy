@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Instagram, Music2 } from "lucide-react";
+import { PlatformLogo, PlatformName } from "@/components/app/PlatformBrand";
 import { PageHeader, StatCard } from "@/components/app/AppShell";
 import { NewProjectButton, ProjectGrid } from "@/components/app/ProjectGrid";
 import { useProfile } from "@/lib/auth";
@@ -35,12 +35,16 @@ function Overview() {
       <h2 className="mb-4 mt-10 text-lg font-semibold">Quick launch</h2>
       <div className="grid gap-4 sm:grid-cols-2">
         <Link to="/dashboard/instagram" className="flex items-center gap-4 rounded-2xl border border-border bg-card/60 p-5 hover:border-primary/40">
-          <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent text-primary"><Instagram className="h-5 w-5" /></span>
-          <div><p className="font-semibold">Instagram Editor</p><p className="text-sm text-muted-foreground">Customize Instagram insight demos</p></div>
+          <PlatformLogo platform="instagram" className="h-11 w-11" />
+          <div className="min-w-0"><p className="flex flex-wrap items-baseline gap-x-2 font-semibold"><PlatformName platform="instagram" />Editor</p><p className="text-sm text-muted-foreground">Customize Instagram insight demos</p></div>
         </Link>
         <Link to="/dashboard/tiktok" className="flex items-center gap-4 rounded-2xl border border-border bg-card/60 p-5 hover:border-primary/40">
-          <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent text-primary"><Music2 className="h-5 w-5" /></span>
-          <div><p className="font-semibold">TikTok Editor</p><p className="text-sm text-muted-foreground">Customize TikTok insight demos</p></div>
+          <PlatformLogo platform="tiktok" className="h-11 w-11" />
+          <div className="min-w-0"><p className="flex flex-wrap items-baseline gap-x-2 font-semibold"><PlatformName platform="tiktok" />Editor</p><p className="text-sm text-muted-foreground">Customize TikTok insight demos</p></div>
+        </Link>
+        <Link to="/dashboard/shopify" className="flex items-center gap-4 rounded-2xl border border-border bg-card/60 p-5 hover:border-primary/40">
+          <PlatformLogo platform="shopify" className="h-11 w-11" />
+          <div className="min-w-0"><p className="flex flex-wrap items-baseline gap-x-2 font-semibold"><PlatformName platform="shopify" />Editor</p><p className="text-sm text-muted-foreground">Customize Shopify dashboard demos</p></div>
         </Link>
       </div>
       {data?.isAdmin && <><div className="mb-4 mt-10 flex items-center justify-between">

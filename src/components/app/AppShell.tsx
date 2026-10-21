@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
-import { useState, type ReactNode } from "react";
+import { useState, type ReactNode, type ComponentType } from "react";
 import { ArrowUpRight, Globe, LogOut, Menu, Shield, X, type LucideIcon } from "lucide-react";
 import { Logo } from "@/components/site/Logo";
 import { Button } from "@/components/ui/button";
@@ -10,7 +10,7 @@ import telegramLogo from "@/assets/telegram-about.png";
 
 const TELEGRAM_URL = "https://t.me/+HAwfutUg1gNlZDZl";
 
-export type NavItem = { to: string; label: string; icon: LucideIcon; exact?: boolean; adminOnly?: boolean };
+export type NavItem = { to: string; label: string; icon: ComponentType<{ className?: string }>; exact?: boolean; adminOnly?: boolean };
 
 export function AppShell({ nav, children, title, secondary }: { nav: NavItem[]; children: ReactNode; title: string; secondary?: { title: string; nav: NavItem[] } }) {
   const [open, setOpen] = useState(false);
