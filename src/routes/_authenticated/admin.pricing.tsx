@@ -14,6 +14,14 @@ import { EmptyState, PageHeader } from "@/components/app/AppShell";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/_authenticated/admin/pricing")({
+  head: () => ({ meta: [
+    { title: "Manage Plan Prices | LARP Insight" },
+    { name: "description", content: "Manage Instagram, TikTok and Shopify subscription plans and prices." },
+    { property: "og:title", content: "Manage Plan Prices | LARP Insight" },
+    { property: "og:description", content: "Edit and save LARP Insight subscription plans." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
+  ] }),
   component: PricingAdmin,
 });
 
@@ -93,7 +101,7 @@ function PricingAdmin() {
           <DialogHeader><DialogTitle>{edit?.id ? "Edit plan" : "New plan"}</DialogTitle></DialogHeader>
           {edit && (
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="sm:col-span-2"><Label>Plan name</Label><p className="mt-1 text-xs text-muted-foreground">Start with "Instagram" or "TikTok" so it shows in that platform box, e.g. "Instagram 10 Day Plan".</p><Input className="mt-2" value={edit.name} onChange={(e) => setEdit({ ...edit, name: e.target.value })} /></div>
+              <div className="sm:col-span-2"><Label>Plan name</Label><p className="mt-1 text-xs text-muted-foreground">Start with "Instagram", "TikTok" or "Shopify" so it shows in that platform box, e.g. "Shopify 10 Day Plan".</p><Input className="mt-2" value={edit.name} onChange={(e) => setEdit({ ...edit, name: e.target.value })} /></div>
               <div><Label>Price (USD)</Label><Input type="number" min={0} step="0.01" className="mt-2" value={edit.price} onChange={(e) => setEdit({ ...edit, price: Number(e.target.value) })} /></div>
               <div><Label>Plan length</Label>
                 <select className="mt-2 h-10 w-full rounded-md border border-input bg-background px-3 text-sm" value={/days?$/.test(edit.billing_period) ? "days" : edit.billing_period} onChange={(e) => setEdit({ ...edit, billing_period: e.target.value === "days" ? "10 days" : e.target.value })}>

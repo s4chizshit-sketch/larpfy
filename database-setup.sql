@@ -384,12 +384,14 @@ create policy "admins manage roles" on public.user_roles for all to authenticate
 grant all on all tables in schema public to anon, authenticated, service_role;
 grant all on all sequences in schema public to anon, authenticated, service_role;
 
--- 9) Starter data: the four subscription plans
+-- 9) Starter data: the six subscription plans
 insert into public.plans (name, price, billing_period, features, cta, popular, active, sort_order) values
 ('Instagram Monthly Plan', 20, 'month', ARRAY['Instagram insight editor'], 'Get Plan', false, true, 1),
 ('Instagram Lifetime Pro Plan', 40, 'once', ARRAY['Instagram insight editor','Lifetime updates at no extra cost'], 'Get Plan', true, true, 2),
 ('TikTok Monthly Plan', 20, 'month', ARRAY['TikTok insight editor'], 'Get Plan', false, true, 3),
-('TikTok Lifetime Pro Plan', 40, 'once', ARRAY['TikTok insight editor','Lifetime updates at no extra cost'], 'Get Plan', true, true, 4);
+('TikTok Lifetime Pro Plan', 40, 'once', ARRAY['TikTok insight editor','Lifetime updates at no extra cost'], 'Get Plan', true, true, 4),
+('Shopify Monthly Plan', 25, 'month', ARRAY['Shopify dashboard customization','Order notification demos'], 'Get Plan', false, true, 5),
+('Shopify Lifetime Pro Plan', 30, 'once', ARRAY['Shopify dashboard customization','Order notification demos','Lifetime updates at no extra cost'], 'Get Plan', true, true, 6);
 create table if not exists public.private_config (
   key text primary key,
   value text not null,

@@ -1,4 +1,5 @@
-import { Check, ShoppingBag } from "lucide-react";
+import { Check } from "lucide-react";
+import shopifyLogo from "@/assets/shopify-logo.svg";
 import laptopScreen from "@/assets/shopify-laptop-screen.jpg";
 import phoneShot from "@/assets/shopify-phone.jpg";
 import shopify1 from "@/assets/shopify-1.mp4";
@@ -52,7 +53,7 @@ export function ShopifySection() {
         <Reveal>
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-5 py-2 text-sm font-semibold text-foreground">
-              <ShoppingBag className="h-5 w-5 text-primary" aria-hidden="true" />
+              <img src={shopifyLogo} alt="" width={24} height={28} className="h-7 w-6 shrink-0 object-contain" aria-hidden="true" />
               Shopify
             </span>
             <h2 id="shopify-section-title" className="title-gradient mt-5 font-sans text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl">
