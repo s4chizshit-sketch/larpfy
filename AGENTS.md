@@ -9,6 +9,7 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 - Editable site content (hero, FAQ, announcement, affiliate %) lives in the site_content table keyed by name; pricing in plans — never hardcode them in the frontend, so admins can edit live.
+- The homepage Shopify showcase is a presentation-only section with bundled demo imagery; do not imply a live Shopify connection or offer checkout without implemented plans.
 - All media (videos, logos, payment images) lives as real files in `src/assets/` and is bundled by Vite — never use Lovable asset pointers (`.asset.json`) or `/__l5e/` URLs; the app is hosted on Vercel, not Lovable.
 - `database-setup.sql` at the project root recreates the full database (schema, RLS, functions, triggers, plan seed) in any fresh Supabase project — keep it in sync when the schema changes; the backend is self-owned Supabase via env keys, not Lovable Cloud.
 - New-signup profile creation depends on the `on_auth_user_created` trigger on `auth.users` calling `public.handle_new_user()` — if new accounts get no profile/Telegram alert, check that trigger exists.
