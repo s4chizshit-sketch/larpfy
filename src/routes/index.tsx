@@ -4,6 +4,7 @@ import {
   CtaBand, FaqList, Masthead, PlatformSection, PublicLayout, SectionHeading,
 } from "@/components/site/Sections";
 import { useSiteContent } from "@/lib/content";
+import { ShopifySection } from "@/components/site/ShopifySection";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -26,6 +27,7 @@ function Index() {
       <Masthead />
       <PlatformSection platform="instagram" />
       <PlatformSection platform="tiktok" reverse />
+      <ShopifySection />
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
         <Reveal>
           <SectionHeading eyebrow="Questions" title="What people ask us" />

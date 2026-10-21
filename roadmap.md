@@ -1,4 +1,5 @@
 - [x] Replace old plan presentation with two premium Instagram/TikTok swipe boxes.
+- [x] Add a Shopify Dashboard Insights showcase below the existing platform sections, with App UI and notification demo imagery.
 - [x] Store new prices, add PNG logos, and verify pricing and touch interaction.
 - [x] Match the View Pricing box style and animation to the Get Plan pill.
 - [x] Show the matching homepage App UI recordings and customization tutorials on each non-admin platform Editor page.
