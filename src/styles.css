@@ -1138,13 +1138,3 @@ img, video { max-width: 100%; }
 .pro-sub-tg:hover { filter: brightness(1.1); }
 
 /* Shopify 3D laptop */
-.laptop3d-stage { perspective: 1400px; cursor: grab; user-select: none; padding: 6% 0 14%; }
-.laptop3d-stage:active { cursor: grabbing; }
-.laptop3d { position: relative; width: 100%; aspect-ratio: 984 / 736; transform-style: preserve-3d; transition: transform 80ms linear; will-change: transform; }
-.laptop3d-lid { position: absolute; inset: 0; transform-style: preserve-3d; }
-.laptop3d-lid-front, .laptop3d-lid-back { position: absolute; inset: 0; border-radius: 14px; backface-visibility: hidden; }
-.laptop3d-lid-front { background: oklch(0.12 0.005 270); padding: 3%; border: 2px solid oklch(0.4 0.005 270); }
-.laptop3d-lid-front img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 4px; pointer-events: none; }
-.laptop3d-lid-back { transform: rotateY(180deg); background: linear-gradient(145deg, oklch(0.55 0.005 270), oklch(0.32 0.005 270)); }
-.laptop3d-base { position: absolute; left: -6%; right: -6%; top: 100%; height: 70%; transform-origin: top center; transform: rotateX(90deg); border-radius: 0 0 16px 16px; background: linear-gradient(180deg, oklch(0.5 0.005 270), oklch(0.36 0.005 270)); padding: 6% 10%; }
-.laptop3d-keyboard { width: 100%; height: 62%; border-radius: 6px; background: repeating-linear-gradient(90deg, oklch(0.2 0.005 270) 0 6%, oklch(0.28 0.005 270) 6% 7%), oklch(0.2 0.005 270); }

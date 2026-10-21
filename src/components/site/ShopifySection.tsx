@@ -1,5 +1,4 @@
-import { useRef, useState } from "react";
-import { Check, Move3d, ShoppingBag } from "lucide-react";
+import { Check, ShoppingBag } from "lucide-react";
 import laptopScreen from "@/assets/shopify-laptop-screen.jpg";
 import phoneShot from "@/assets/shopify-phone.jpg";
 import shopify1 from "@/assets/shopify-1.mp4";
@@ -22,42 +21,18 @@ const bullets = [
   "Save and share your customized demo visuals",
 ];
 
-function Laptop3D() {
-  const [rot, setRot] = useState({ x: -8, y: -18 });
-  const drag = useRef<{ x: number; y: number; rx: number; ry: number } | null>(null);
+function LaptopFrame() {
   return (
-    <div
-      className="laptop3d-stage"
-      style={{ touchAction: "none" }}
-      onPointerDown={(e) => {
-        e.currentTarget.setPointerCapture(e.pointerId);
-        drag.current = { x: e.clientX, y: e.clientY, rx: rot.x, ry: rot.y };
-      }}
-      onPointerMove={(e) => {
-        const d = drag.current;
-        if (!d) return;
-        setRot({
-          x: Math.max(-60, Math.min(40, d.rx - (e.clientY - d.y) * 0.4)),
-          y: d.ry + (e.clientX - d.x) * 0.5,
-        });
-      }}
-      onPointerUp={() => { drag.current = null; }}
-      onPointerCancel={() => { drag.current = null; }}
-      role="img"
-      aria-label="3D laptop showing a demo Shopify dashboard. Drag to rotate."
-    >
-      <div className="laptop3d" style={{ transform: `rotateX(${rot.x}deg) rotateY(${rot.y}deg)` }}>
-        <div className="laptop3d-lid">
-          <div className="laptop3d-lid-front">
-            <img src={laptopScreen} alt="" draggable={false} width={984} height={736} />
-          </div>
-          <div className="laptop3d-lid-back" />
-        </div>
-        <div className="laptop3d-base">
-          <div className="laptop3d-keyboard" />
-        </div>
-      </div>
-    </div>
+    <img
+      src={laptopScreen}
+      alt="Laptop showing a demo Shopify dashboard"
+      draggable={false}
+      width={984}
+      height={736}
+      loading="lazy"
+      decoding="async"
+      className="block h-auto w-full select-none"
+    />
   );
 }
 
@@ -92,13 +67,13 @@ export function ShopifySection() {
             </ul>
           </div>
         </Reveal>
-        <RecordingVideoShowcase title="Shopify Dashboard Insights App UI" platform="Shopify" recordings={recordings} />
+        <RecordingVideoShowcase title="Shopify Dashboard Insights App UI" platform="Shopify" recordings={recordings} withSound />
       </div>
 
       <Reveal>
         <figure className="mx-auto mt-16 max-w-5xl">
           <div className="flex items-center justify-center gap-4 sm:gap-8">
-            <div className="min-w-0 flex-[3]"><Laptop3D /></div>
+            <div className="min-w-0 flex-[3]"><LaptopFrame /></div>
             <img
               src={phoneShot}
               alt="Phone showing sample Shopify order notifications"
@@ -109,8 +84,8 @@ export function ShopifySection() {
               className="block h-auto min-w-0 flex-1 max-w-[180px]"
             />
           </div>
-          <figcaption className="mt-4 flex items-center justify-center gap-2 text-center text-xs text-muted-foreground">
-            <Move3d className="h-4 w-4" aria-hidden="true" /> Drag the laptop to rotate it in 3D · Demo preview, not live store data.
+          <figcaption className="mt-4 text-center text-xs text-muted-foreground">
+            Demo preview, not live store data.
           </figcaption>
         </figure>
       </Reveal>

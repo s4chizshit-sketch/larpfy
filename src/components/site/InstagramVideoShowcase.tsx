@@ -31,10 +31,11 @@ export function InstagramVideoShowcase() {
   return <RecordingVideoShowcase title="Instagram Larp Insight App UI" platform="Instagram" recordings={recordings} />;
 }
 
-export function RecordingVideoShowcase({ title, platform, recordings }: {
+export function RecordingVideoShowcase({ title, platform, recordings, withSound = false }: {
   title: string;
   platform: string;
   recordings: { label: string; url: string; webm?: string }[];
+  withSound?: boolean;
 }) {
   const [active, setActive] = useState(0);
   const [carouselRef, carouselApi] = useEmblaCarousel({
@@ -112,17 +113,26 @@ export function RecordingVideoShowcase({ title, platform, recordings }: {
                 <video
                   aria-label={`${recording.label} screen recording`}
                   autoPlay={active === index && visible}
-                  muted
+                  muted={!withSound}
                   loop
                   playsInline
                   preload="metadata"
                   disablePictureInPicture
                   ref={(video) => {
                     if (!video) return;
-                    if (active === index && visible) void video.play().catch(() => undefined);
-                    else video.pause();
+                    if (active === index && visible) {
+                      void video.play().catch(() => {
+                        if (!withSound) return;
+                        // Browsers block unmuted autoplay until the user touches the page.
+                        // Retry once on the next interaction so the original sound can play.
+                        const retry = () => {
+                          video.play().catch(() => undefined);
+                        };
+                        window.addEventListener("pointerdown", retry, { once: true });
+                      });
+                    } else video.pause();
                   }}
-                   className="pointer-events-none"
+                  className="pointer-events-none"
                 >
                   {(visible && Math.abs(active - index) <= 1) && <>
                     {recording.webm && <source src={recording.webm} type="video/webm" />}
