@@ -19,6 +19,7 @@
 - The Shopify dashboard image is contained at its intrinsic ratio inside a CSS laptop lid and base; device chrome scales with its container so the full demo remains visible on phones and desktops.
 - Platform pricing uses a shared Embla carousel grouping Instagram, TikTok and Shopify plans by their platform name prefix, with navigation visible at all sizes; this keeps all offers synchronized with admin-editable plan rows and makes offscreen plans reachable.
 - Non-admin platform workspace pages reuse the homepage showcase and tutorial players for their own platform; this keeps recordings, captions, and playback presentation synchronized without duplicating media.
+- Workspace quick launch and sidebar share bundled platform logo components; Shopify opens its own authenticated showcase route without implying a live store connection.
 - Workspace navigation uses role-filtered items and project presentation checks from the existing profile role query; this hides admin-only project UI without changing data permissions.
 - Account destinations use a shared role-based helper; the dashboard layout redirects admins to the admin layout, preserving database-enforced permissions while separating workspace presentation.
 - Paid Telegram drafts preserve the purchase's stored plan name, so custom billing periods remain accurate.

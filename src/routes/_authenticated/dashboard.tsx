@@ -1,12 +1,14 @@
 import { createFileRoute, Navigate, Outlet } from "@tanstack/react-router";
-import { CreditCard, FolderKanban, Instagram, LayoutGrid, Music2, Settings } from "lucide-react";
+import { CreditCard, FolderKanban, LayoutGrid, Settings } from "lucide-react";
+import { InstagramIcon, TiktokIcon, ShopifyIcon } from "@/components/app/PlatformBrand";
 import { AppShell, type NavItem } from "@/components/app/AppShell";
 import { useProfile } from "@/lib/auth";
 
 const nav: NavItem[] = [
   { to: "/dashboard", label: "Overview", icon: LayoutGrid, exact: true },
-  { to: "/dashboard/instagram", label: "Instagram Editor", icon: Instagram },
-  { to: "/dashboard/tiktok", label: "TikTok Editor", icon: Music2 },
+  { to: "/dashboard/instagram", label: "Instagram Editor", icon: InstagramIcon },
+  { to: "/dashboard/tiktok", label: "TikTok Editor", icon: TiktokIcon },
+  { to: "/dashboard/shopify", label: "Shopify Editor", icon: ShopifyIcon },
   { to: "/dashboard/projects", label: "My Projects", icon: FolderKanban, adminOnly: true },
   { to: "/dashboard/billing", label: "Pricing / Subscription", icon: CreditCard },
   { to: "/dashboard/settings", label: "Settings", icon: Settings },
