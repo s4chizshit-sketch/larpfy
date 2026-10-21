@@ -50,13 +50,38 @@ export function RecordingVideoShowcase({ title, platform, recordings, withSound 
   const userControlled = useRef(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const visibleRef = useRef(false);
   useEffect(() => {
     const node = sectionRef.current;
     if (!node) return;
-    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { rootMargin: "100px" });
+    // Sound sections only count as visible when a real part is on screen, so audio stops as soon as the user leaves.
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const isVisible = withSound ? entry.intersectionRatio >= 0.25 : entry.isIntersecting;
+        visibleRef.current = isVisible;
+        setVisible(isVisible);
+        if (!isVisible) node.querySelectorAll("video").forEach((v) => v.pause());
+      },
+      withSound ? { threshold: [0, 0.25, 0.5] } : { rootMargin: "100px" },
+    );
     observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
+    const onHide = () => { if (document.hidden) node.querySelectorAll("video").forEach((v) => v.pause()); };
+    document.addEventListener("visibilitychange", onHide);
+    return () => { observer.disconnect(); document.removeEventListener("visibilitychange", onHide); };
+  }, [withSound]);
+
+  // Browsers block sound until the first tap/click/key; afterwards visibility alone controls audio.
+  useEffect(() => {
+    if (!withSound) return;
+    const unlock = () => {
+      if (!visibleRef.current) return;
+      const video = sectionRef.current?.querySelector<HTMLVideoElement>(".is-active video");
+      if (video) { video.muted = false; void video.play().catch(() => undefined); }
+    };
+    const events = ["pointerdown", "touchstart", "keydown"] as const;
+    events.forEach((e) => window.addEventListener(e, unlock, { passive: true }));
+    return () => events.forEach((e) => window.removeEventListener(e, unlock));
+  }, [withSound]);
 
   useEffect(() => {
     if (!carouselApi) return;
@@ -128,15 +153,8 @@ export function RecordingVideoShowcase({ title, platform, recordings, withSound 
                       video.load();
                     }
                     if (active === index && visible) {
-                      void video.play().catch(() => {
-                        if (!withSound) return;
-                        // Browsers block unmuted autoplay until the user touches the page.
-                        // Retry once on the next interaction so the original sound can play.
-                        const retry = () => {
-                          video.play().catch(() => undefined);
-                        };
-                        window.addEventListener("pointerdown", retry, { once: true });
-                      });
+                      if (withSound && video.paused) video.currentTime = 0;
+                      void video.play().catch(() => undefined);
                     } else video.pause();
                   }}
                   className="pointer-events-none"
