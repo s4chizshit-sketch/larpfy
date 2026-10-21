@@ -1,3 +1,4 @@
+- [ ] Add Shopify to workspace quick launch and navigation with official platform logos and wordmarks; verify the destination on mobile and desktop.
 - [x] Add Shopify Monthly $25 and Lifetime $30 alongside existing plans and replace the showcase icon with the official Shopify logo; price tests and public logo checks pass.
 - [x] Replace old plan presentation with two premium Instagram/TikTok swipe boxes.
 - [x] Fit Shopify recordings edge-to-edge inside an iPhone shell without cropping or empty margins; add a laptop shell around the Shopify dashboard; all three videos played and fit verified at 375px, 507px and 1280px widths.
