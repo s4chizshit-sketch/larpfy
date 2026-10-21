@@ -31,11 +31,12 @@ export function InstagramVideoShowcase() {
   return <RecordingVideoShowcase title="Instagram Larp Insight App UI" platform="Instagram" recordings={recordings} />;
 }
 
-export function RecordingVideoShowcase({ title, platform, recordings, withSound = false }: {
+export function RecordingVideoShowcase({ title, platform, recordings, withSound = false, preserveFullRecording = false }: {
   title: string;
   platform: string;
   recordings: { label: string; url: string; webm?: string }[];
   withSound?: boolean;
+  preserveFullRecording?: boolean;
 }) {
   const [active, setActive] = useState(0);
   const [carouselRef, carouselApi] = useEmblaCarousel({
@@ -89,7 +90,7 @@ export function RecordingVideoShowcase({ title, platform, recordings, withSound 
   }, [carouselApi, visible]);
 
   return (
-    <div ref={sectionRef} className="min-w-0 py-4">
+    <div ref={sectionRef} className={`min-w-0 py-4${preserveFullRecording ? " full-recording-showcase" : ""}`}>
       <h3 className="title-gradient mb-7 text-center font-sans text-2xl font-extrabold leading-tight tracking-tight sm:text-3xl">
         {title}
       </h3>

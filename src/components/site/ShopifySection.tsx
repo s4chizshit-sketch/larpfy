@@ -67,7 +67,7 @@ export function ShopifySection() {
             </ul>
           </div>
         </Reveal>
-        <RecordingVideoShowcase title="Shopify Dashboard Insights App UI" platform="Shopify" recordings={recordings} withSound />
+        <RecordingVideoShowcase title="Shopify Dashboard Insights App UI" platform="Shopify" recordings={recordings} withSound preserveFullRecording />
       </div>
 
       <Reveal>
