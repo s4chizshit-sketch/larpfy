@@ -23,16 +23,22 @@ const bullets = [
 
 function LaptopFrame() {
   return (
-    <img
+    <div className="shopify-laptop" role="img" aria-label="Laptop showing a demo Shopify dashboard">
+      <div className="shopify-laptop-lid">
+        <span className="shopify-laptop-camera" aria-hidden="true" />
+        <img
       src={laptopScreen}
-      alt="Laptop showing a demo Shopify dashboard"
+      alt="Shopify demo store dashboard"
       draggable={false}
       width={984}
       height={736}
       loading="lazy"
       decoding="async"
-      className="block h-auto w-full select-none"
+      className="shopify-laptop-display"
     />
+      </div>
+      <div className="shopify-laptop-base" aria-hidden="true"><span /></div>
+    </div>
   );
 }
 

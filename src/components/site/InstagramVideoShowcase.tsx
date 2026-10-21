@@ -105,11 +105,11 @@ export function RecordingVideoShowcase({ title, platform, recordings, withSound 
                 <span aria-hidden="true" className="instagram-iphone-button volume-down" />
                 <span aria-hidden="true" className="instagram-iphone-button power" />
                 <div className="instagram-iphone-screen">
-                  <div className="instagram-iphone-status" aria-hidden="true">
+                  {!preserveFullRecording && <div className="instagram-iphone-status" aria-hidden="true">
                     <span>9:41</span>
                     <span className="instagram-iphone-island" />
                     <span className="instagram-iphone-status-icons"><Signal /><Wifi /><BatteryFull /></span>
-                  </div>
+                  </div>}
                   <div className="instagram-iphone-recording">
                 <video
                   aria-label={`${recording.label} screen recording`}
@@ -121,6 +121,12 @@ export function RecordingVideoShowcase({ title, platform, recordings, withSound 
                   disablePictureInPicture
                   ref={(video) => {
                     if (!video) return;
+                    // Sources are mounted lazily; explicitly load them when they first appear.
+                    const source = video.querySelector("source")?.getAttribute("src");
+                    if (source && video.dataset.loadedSource !== source) {
+                      video.dataset.loadedSource = source;
+                      video.load();
+                    }
                     if (active === index && visible) {
                       void video.play().catch(() => {
                         if (!withSound) return;
@@ -141,7 +147,7 @@ export function RecordingVideoShowcase({ title, platform, recordings, withSound 
                   </>}
                 </video>
                   </div>
-                  <div className="instagram-iphone-home" aria-hidden="true" />
+                  {!preserveFullRecording && <div className="instagram-iphone-home" aria-hidden="true" />}
                 </div>
               </div>
             </figure>
