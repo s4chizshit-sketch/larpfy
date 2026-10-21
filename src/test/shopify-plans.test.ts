@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
-const setup = readFileSync(new URL("../../database-setup.sql", import.meta.url), "utf8");
+const setup = readFileSync("database-setup.sql", "utf8");
 
 describe("Shopify starter plans", () => {
   it("starts the monthly plan at $25 with monthly billing", () => {
