@@ -34,7 +34,7 @@ export function InstagramVideoShowcase() {
 export function RecordingVideoShowcase({ title, platform, recordings }: {
   title: string;
   platform: string;
-  recordings: { label: string; url: string; webm: string }[];
+  recordings: { label: string; url: string; webm?: string }[];
 }) {
   const [active, setActive] = useState(0);
   const [carouselRef, carouselApi] = useEmblaCarousel({
@@ -125,7 +125,7 @@ export function RecordingVideoShowcase({ title, platform, recordings }: {
                    className="pointer-events-none"
                 >
                   {(visible && Math.abs(active - index) <= 1) && <>
-                    <source src={recording.webm} type="video/webm" />
+                    {recording.webm && <source src={recording.webm} type="video/webm" />}
                     <source src={recording.url} type="video/mp4" />
                   </>}
                 </video>
