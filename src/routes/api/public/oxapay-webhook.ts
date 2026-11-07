@@ -10,7 +10,7 @@ export const Route = createFileRoute("/api/public/oxapay-webhook")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const key = process.env.OXAPAY_MERCHANT_API_KEY;
+        const key = process.env.OXAPAY_MERCHANT_API_KEY?.trim();
         if (!key) return new Response("not configured", { status: 500 });
         const raw = await request.text();
         const sent = (request.headers.get("hmac") ?? "").toLowerCase();
