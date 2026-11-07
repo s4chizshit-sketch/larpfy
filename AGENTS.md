@@ -14,6 +14,7 @@
 - `database-setup.sql` at the project root recreates the full database (schema, RLS, functions, triggers, plan seed) in any fresh Supabase project — keep it in sync when the schema changes; the backend is self-owned Supabase via env keys, not Lovable Cloud.
 - New-signup profile creation depends on the `on_auth_user_created` trigger on `auth.users` calling `public.handle_new_user()` — if new accounts get no profile/Telegram alert, check that trigger exists.
 - Platform recording carousels use Embla for touch dragging and snapping; automatic advancement stops after manual interaction so the selected recording stays visible.
+- Recording previews use bundled first-frame posters, nearby-only source loading and post-commit playback effects so slow connections show real content without decoding all recordings at once.
 - The shared showcase device shell replaces only the recordings' system-bar margins with device chrome, preserving uploaded app content and playback.
 - Full-recording showcase mode is opt-in for Shopify; fit the shell to the source ratio and reuse the recording's own iOS status/navigation chrome rather than adding duplicate bars, preserving all pixels and playback without affecting other platform shells.
 - The Shopify dashboard image is contained at its intrinsic ratio inside a CSS laptop lid and base; device chrome scales with its container so the full demo remains visible on phones and desktops.

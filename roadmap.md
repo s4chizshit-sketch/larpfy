@@ -1,3 +1,4 @@
+- [x] Repair recording startup with post-commit playback and nearby-only loading; bundled actual-frame previews remain visible with video downloads blocked; Instagram/TikTok/Shopify playback verified at 375px and 861px, four regression tests passed. Real-visitor speed data unavailable; high-traffic capacity remains unverified.
 - [x] Soften the light palette: white homepage, muted coral emphasis and soft charcoal text; content/layout preserved, phone and desktop checks passed without page errors.
 - [x] Rebrand to LARPIFY with a new logo, white/coral light colors and updated app icons only; existing content, layout, sections, videos and business behavior preserved; desktop/mobile homepage and login navigation checked, seven regression tests passed.
 - [x] Remix setup: disabled Telegram bot reporting; account/payment information stays in protected /admin, with IP/country included in paid-subscription history; payment callback test passes without Telegram credentials.

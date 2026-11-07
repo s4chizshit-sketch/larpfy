@@ -16,15 +16,22 @@ import shareVideo from "@/assets/instagram-share.mp4";
 import shareWebm from "@/assets/instagram-share.webm";
 import reelsVideo from "@/assets/instagram-reels.mp4";
 import reelsWebm from "@/assets/instagram-reels.webm";
+import homePoster from "@/assets/instagram-home-poster.jpg";
+import feedPoster from "@/assets/instagram-feed-poster.jpg";
+import profilePoster from "@/assets/instagram-profile-poster.jpg";
+import insightPoster from "@/assets/instagram-insight-poster.jpg";
+import dashboardPoster from "@/assets/instagram-dashboard-poster.jpg";
+import sharePoster from "@/assets/instagram-share-poster.jpg";
+import reelsPoster from "@/assets/instagram-reels-poster.jpg";
 
 const recordings = [
-  { label: "Home interface", url: homeVideo, webm: homeWebm },
-  { label: "Scrolling feed", url: feedVideo, webm: feedWebm },
-  { label: "Profile", url: profileVideo, webm: profileWebm },
-  { label: "View insight", url: insightVideo, webm: insightWebm },
-  { label: "Professional dashboard", url: dashboardVideo, webm: dashboardWebm },
-  { label: "Share", url: shareVideo, webm: shareWebm },
-  { label: "Reels tab", url: reelsVideo, webm: reelsWebm },
+  { label: "Home interface", url: homeVideo, webm: homeWebm, poster: homePoster },
+  { label: "Scrolling feed", url: feedVideo, webm: feedWebm, poster: feedPoster },
+  { label: "Profile", url: profileVideo, webm: profileWebm, poster: profilePoster },
+  { label: "View insight", url: insightVideo, webm: insightWebm, poster: insightPoster },
+  { label: "Professional dashboard", url: dashboardVideo, webm: dashboardWebm, poster: dashboardPoster },
+  { label: "Share", url: shareVideo, webm: shareWebm, poster: sharePoster },
+  { label: "Reels tab", url: reelsVideo, webm: reelsWebm, poster: reelsPoster },
 ];
 
 export function InstagramVideoShowcase() {
@@ -34,7 +41,7 @@ export function InstagramVideoShowcase() {
 export function RecordingVideoShowcase({ title, platform, recordings, withSound = false, preserveFullRecording = false }: {
   title: string;
   platform: string;
-  recordings: { label: string; url: string; webm?: string }[];
+  recordings: { label: string; url: string; webm?: string; poster?: string }[];
   withSound?: boolean;
   preserveFullRecording?: boolean;
 }) {
@@ -51,6 +58,16 @@ export function RecordingVideoShowcase({ title, platform, recordings, withSound 
   const sectionRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const visibleRef = useRef(false);
+  const [nearby, setNearby] = useState(false);
+  useEffect(() => {
+    const node = sectionRef.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { setNearby(true); observer.disconnect(); }
+    }, { rootMargin: "600px" });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
   useEffect(() => {
     const node = sectionRef.current;
     if (!node) return;
@@ -69,6 +86,32 @@ export function RecordingVideoShowcase({ title, platform, recordings, withSound 
     document.addEventListener("visibilitychange", onHide);
     return () => { observer.disconnect(); document.removeEventListener("visibilitychange", onHide); };
   }, [withSound]);
+
+  // Run after React has attached sources, not during the element ref commit.
+  useEffect(() => {
+    const node = sectionRef.current;
+    if (!node) return;
+    const syncPlayback = () => {
+      node.querySelectorAll("video").forEach((video, index) => {
+        const source = video.querySelector("source")?.getAttribute("src");
+        if (source && video.dataset.loadedSource !== source) {
+          video.dataset.loadedSource = source;
+          video.load();
+        }
+        if (index !== active || !visible || document.hidden) { video.pause(); return; }
+        if (withSound && video.paused) video.currentTime = 0;
+        void video.play().catch(() => {
+          if (withSound) {
+            video.muted = true;
+            void video.play().catch(() => undefined);
+          }
+        });
+      });
+    };
+    syncPlayback();
+    document.addEventListener("visibilitychange", syncPlayback);
+    return () => document.removeEventListener("visibilitychange", syncPlayback);
+  }, [active, visible, nearby, withSound]);
 
   // Browsers block sound until the first tap/click/key; afterwards visibility alone controls audio.
   useEffect(() => {
@@ -142,24 +185,12 @@ export function RecordingVideoShowcase({ title, platform, recordings, withSound 
                   muted={!withSound}
                   loop
                   playsInline
-                  preload="metadata"
+                  poster={nearby ? recording.poster : undefined}
+                  preload={active === index ? "auto" : "metadata"}
                   disablePictureInPicture
-                  ref={(video) => {
-                    if (!video) return;
-                    // Sources are mounted lazily; explicitly load them when they first appear.
-                    const source = video.querySelector("source")?.getAttribute("src");
-                    if (source && video.dataset.loadedSource !== source) {
-                      video.dataset.loadedSource = source;
-                      video.load();
-                    }
-                    if (active === index && visible) {
-                      if (withSound && video.paused) video.currentTime = 0;
-                      void video.play().catch(() => undefined);
-                    } else video.pause();
-                  }}
                   className="pointer-events-none"
                 >
-                  {(visible && Math.abs(active - index) <= 1) && <>
+                  {(nearby && Math.abs(active - index) <= 1) && <>
                     {recording.webm && <source src={recording.webm} type="video/webm" />}
                     <source src={recording.url} type="video/mp4" />
                   </>}
