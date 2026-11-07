@@ -1,5 +1,7 @@
-- [ ] Remix setup: disable Telegram bot reporting; keep account/payment information in protected /admin; defer OxaPay key entry until the owner provides it.
-- [ ] Restore a clean empty post-remix migration baseline without changing live database data.
+- [x] Remix setup: disabled Telegram bot reporting; account/payment information stays in protected /admin, with IP/country included in paid-subscription history; payment callback test passes without Telegram credentials.
+- [x] Restore a clean empty post-remix migration baseline without changing live database data; empty journal and removed inherited files verified.
+- [ ] Remix OxaPay setup (blocked: owner will provide merchant key later).
+- [ ] Verify remixed /admin with real account/payment records (blocked: remixed backend has no auth users; owner must sign up first, and a real paid transaction needs the merchant key).
 - [x] Add Shopify to workspace quick launch and navigation using bundled platform logos and styled brand names; destination and account routing tests pass.
 - [ ] Verify signed-in Shopify quick launch appearance on mobile and desktop (blocked: no authorized user preview session; owner must sign in).
 - [x] Add Shopify Monthly $25 and Lifetime $30 alongside existing plans and replace the showcase icon with the official Shopify logo; price tests and public logo checks pass.

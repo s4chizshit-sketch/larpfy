@@ -15,7 +15,7 @@ const nav: NavItem[] = [
 ];
 
 export const Route = createFileRoute("/_authenticated/admin")({
-  head: () => ({ meta: [{ title: "Admin — LARP Insight" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Admin — LARP Insight" }, { name: "description", content: "Manage LARP Insight accounts, payments, subscriptions and website content." }, { property: "og:title", content: "Admin — LARP Insight" }, { property: "og:description", content: "Private account and payment management for LARP Insight." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }, { name: "robots", content: "noindex" }] }),
   component: AdminLayout,
 });
 

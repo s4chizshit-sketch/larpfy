@@ -23,7 +23,7 @@
 - Workspace navigation uses role-filtered items and project presentation checks from the existing profile role query; this hides admin-only project UI without changing data permissions.
 - Account destinations use a shared role-based helper; the dashboard layout redirects admins to the admin layout, preserving database-enforced permissions while separating workspace presentation.
 - Paid Telegram drafts preserve the purchase's stored plan name, so custom billing periods remain accurate.
-- Payment alert delivery is acknowledged separately on its order; repeated signed callbacks retry undelivered alerts without granting a second purchase. Delivery is at-least-once, not exactly-once.
+- Account and payment reporting uses the protected admin pages, not Telegram bots; successful payment callbacks acknowledge database activation independently of external messaging.
 - Checkout callback origins must match the server request origin, and payment activation must match the stored provider reference.
 - Checkout verifies the host key fingerprint before creating an invoice, preventing payments while automatic activation is not configured.
 - Global media rules must not override component-defined heights; explicit logo dimensions prevent header overflow and layout shifts.
