@@ -11,7 +11,7 @@ afterEach(() => { vi.unstubAllEnvs(); vi.unstubAllGlobals(); vi.clearAllMocks();
 describe("Admin-only payment reporting", () => {
   it("accepts a confirmed payment without Telegram tokens or external messages", async () => {
     vi.stubGlobal("crypto", webcrypto);
-    vi.stubEnv("OXAPAY_MERCHANT_API_KEY", "test-only-merchant-key");
+    vi.stubEnv("OXAPAY_MERCHANT_API_KEY", "  test-only-merchant-key\n");
     vi.stubEnv("TELEGRAM_BOT_TOKEN", "");
     vi.stubEnv("TELEGRAM_SALES_BOT_TOKEN", "");
     const fetchSpy = vi.fn();

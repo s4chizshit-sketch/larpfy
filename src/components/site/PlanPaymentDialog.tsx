@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { useServerFn } from "@tanstack/react-start";
 import { createOxapayInvoice } from "@/lib/oxapay.functions";
+import { useNavigate } from "@tanstack/react-router";
+import { checkoutSession } from "@/lib/checkout-session";
 
 type SelectedPlan = { id?: string; name: string; price: number; billingPeriod: string };
 
@@ -15,6 +17,7 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
 }) {
   const [loading, setLoading] = useState(false);
   const createInvoice = useServerFn(createOxapayInvoice);
+  const navigate = useNavigate();
 
   useEffect(() => { if (!open) setLoading(false); }, [open]);
   if (!plan) return null;
@@ -25,10 +28,25 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
     if (!plan.id) return;
     setLoading(true);
     try {
+      const session = await checkoutSession();
+      if (!session) {
+        onOpenChange(false);
+        await navigate({ to: "/login", search: { redirect: "billing" } });
+        toast.info("Please log in to continue your payment.");
+        return;
+      }
       const { url } = await createInvoice({ data: { planId: plan.id, origin: window.location.origin } });
       window.location.assign(url);
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Could not start payment");
+      const message = e instanceof Error ? e.message : "Could not start payment";
+      if (/unauthorized|invalid token/i.test(message)) {
+        onOpenChange(false);
+        await navigate({ to: "/login", search: { redirect: "billing" } });
+        toast.error("Your login has expired. Please log in again to pay.");
+      } else {
+        toast.error(message);
+      }
+    } finally {
       setLoading(false);
     }
   };
