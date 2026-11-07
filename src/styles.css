@@ -50,37 +50,37 @@
 :root {
   --radius: 0.875rem;
   --background: #ffffff;
-  --foreground: #29252b;
+  --foreground: oklch(0.23 0.015 265);
   --card: #ffffff;
-  --card-foreground: #29252b;
+  --card-foreground: var(--foreground);
   --popover: #ffffff;
-  --popover-foreground: #29252b;
-  --primary: #b83e2d;
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.59 0.19 30);
   --primary-foreground: oklch(0.99 0 0);
-  --secondary: #fff0ec;
-  --secondary-foreground: #29252b;
-  --muted: #f5f4f5;
-  --muted-foreground: #666168;
-  --accent: #fff0ec;
-  --accent-foreground: #29252b;
+  --secondary: oklch(0.98 0.004 250);
+  --secondary-foreground: var(--foreground);
+  --muted: oklch(0.965 0.006 250);
+  --muted-foreground: oklch(0.47 0.018 265);
+  --accent: oklch(0.95 0.023 175);
+  --accent-foreground: oklch(0.37 0.07 175);
   --destructive: oklch(0.64 0.21 22);
   --destructive-foreground: oklch(0.99 0 0);
   --success: oklch(0.75 0.17 155);
-  --border: #e5e1e3;
-  --input: #d5ced2;
+  --border: oklch(0.91 0.009 250);
+  --input: oklch(0.84 0.012 250);
   --ring: #ed6047;
-  --glow: #b83e2d;
+  --glow: var(--primary);
   --brand-coral: #ed6047;
-  --sidebar: #faf8f8;
-  --sidebar-foreground: #29252b;
-  --sidebar-primary: #b83e2d;
+  --sidebar: var(--secondary);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
   --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: #fff0ec;
-  --sidebar-accent-foreground: #29252b;
-  --sidebar-border: #e5e1e3;
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
   --sidebar-ring: #ed6047;
   --gradient-brand: linear-gradient(135deg, var(--primary), var(--glow));
-  --shadow-glow: 0 8px 24px -14px color-mix(in oklab, var(--brand-coral) 30%, transparent);
+  --shadow-glow: 0 8px 24px -14px color-mix(in oklab, var(--foreground) 16%, transparent);
   --shadow-phone: 0 16px 48px -18px var(--primary);
   --device-screen: oklch(0 0 0);
   --device-metal: oklch(0.24 0.004 260);
@@ -104,12 +104,9 @@
   background-clip: text;
   color: transparent;
 }
-/* Screenshot-style headline: white fading into bright blue, top to bottom */
+/* Clear ink headings; brand emphasis is applied only to the masthead ending. */
 @utility title-gradient {
-  background: linear-gradient(180deg, var(--foreground), var(--foreground));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--foreground);
 }
 @utility bg-brand {
   background: var(--gradient-brand);
@@ -1226,4 +1223,8 @@ img, video { max-width: 100%; }
 .platform-plan-card { background: var(--card); border-color: var(--border); box-shadow: none; }
 .payment-dialog, .howto-box { background: var(--card); border-color: var(--border); box-shadow: var(--shadow-glow); }
 .brand-logo-name { letter-spacing: 0; }
+.masthead-in.title-gradient > span:last-child:not(:first-child) { color: var(--primary); }
+.masthead-in.rounded-full { color: var(--primary); border-color: color-mix(in oklab, var(--brand-coral) 24%, var(--border)); background: var(--card); }
+.platform-plan-card:hover { border-color: var(--primary); }
+.howto-icon { color: var(--accent-foreground); background: var(--accent); border-color: color-mix(in oklab, var(--accent-foreground) 24%, var(--border)); box-shadow: none; }
 @media (max-width: 1023px) { header .brand-logo-name { display: none; } }
