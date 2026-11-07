@@ -59,6 +59,18 @@ export function RecordingVideoShowcase({ title, platform, recordings, withSound 
   const [visible, setVisible] = useState(false);
   const visibleRef = useRef(false);
   const [nearby, setNearby] = useState(false);
+  // Sources stay attached once loaded, so revisiting a slide never reloads it into a black frame.
+  const [loaded, setLoaded] = useState<ReadonlySet<number>>(() => new Set());
+  useEffect(() => {
+    if (!nearby) return;
+    setLoaded((prev) => {
+      const wanted = [active - 1, active, active + 1].filter((i) => i >= 0 && i < recordings.length && !prev.has(i));
+      if (!wanted.length) return prev;
+      const next = new Set(prev);
+      wanted.forEach((i) => next.add(i));
+      return next;
+    });
+  }, [active, nearby, recordings.length]);
   useEffect(() => {
     const node = sectionRef.current;
     if (!node) return;
@@ -111,7 +123,7 @@ export function RecordingVideoShowcase({ title, platform, recordings, withSound 
     syncPlayback();
     document.addEventListener("visibilitychange", syncPlayback);
     return () => document.removeEventListener("visibilitychange", syncPlayback);
-  }, [active, visible, nearby, withSound]);
+  }, [active, visible, loaded, withSound]);
 
   // Browsers block sound until the first tap/click/key; afterwards visibility alone controls audio.
   useEffect(() => {
@@ -179,18 +191,19 @@ export function RecordingVideoShowcase({ title, platform, recordings, withSound 
                     <span className="instagram-iphone-status-icons"><Signal /><Wifi /><BatteryFull /></span>
                   </div>}
                   <div className="instagram-iphone-recording">
+                {recording.poster && <img src={recording.poster} alt="" aria-hidden="true" className="recording-poster" loading="lazy" decoding="async" draggable={false} />}
                 <video
                   aria-label={`${recording.label} screen recording`}
                   autoPlay={active === index && visible}
                   muted={!withSound}
                   loop
                   playsInline
-                  poster={nearby ? recording.poster : undefined}
+                  poster={recording.poster}
                   preload={active === index ? "auto" : "metadata"}
                   disablePictureInPicture
                   className="pointer-events-none"
                 >
-                  {(nearby && Math.abs(active - index) <= 1) && <>
+                  {loaded.has(index) && <>
                     {recording.webm && <source src={recording.webm} type="video/webm" />}
                     <source src={recording.url} type="video/mp4" />
                   </>}
