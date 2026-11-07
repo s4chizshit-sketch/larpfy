@@ -8,6 +8,8 @@ export const Route = createFileRoute("/terms")({
       { name: "description", content: "Terms governing the use of LARPIFY." },
       { property: "og:title", content: "Terms of Service — LARPIFY" },
       { property: "og:description", content: "Terms governing the use of LARPIFY." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: () => (

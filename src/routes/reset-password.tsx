@@ -15,6 +15,8 @@ export const Route = createFileRoute("/reset-password")({
       { name: "description", content: "Choose a new password for your LARPIFY account." },
       { property: "og:title", content: "Reset Password — LARPIFY" },
       { property: "og:description", content: "Choose a new password for your LARPIFY account." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Reset,

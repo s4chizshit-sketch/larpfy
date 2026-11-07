@@ -15,6 +15,8 @@ export const Route = createFileRoute("/forgot-password")({
       { name: "description", content: "Reset your LARPIFY password." },
       { property: "og:title", content: "Forgot Password — LARPIFY" },
       { property: "og:description", content: "Reset your LARPIFY password." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Forgot,

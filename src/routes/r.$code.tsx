@@ -9,6 +9,8 @@ export const Route = createFileRoute("/r/$code")({
       { name: "description", content: "Join LARPIFY and start customizing social insight demos." },
       { property: "og:title", content: "You're invited to LARPIFY" },
       { property: "og:description", content: "Customize Instagram and TikTok insight demo visuals." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   ssr: false,

@@ -9,6 +9,8 @@ export const Route = createFileRoute("/faq")({
       { name: "description", content: "Answers about LARPIFY, customization, saving projects, and platform affiliation." },
       { property: "og:title", content: "FAQ — LARPIFY" },
       { property: "og:description", content: "Frequently asked questions about LARPIFY." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: () => (
