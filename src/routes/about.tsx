@@ -11,10 +11,10 @@ const TELEGRAM_URL = "https://t.me/+HAwfutUg1gNlZDZl";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — LARP Insight" },
-      { name: "description", content: "Learn about LARP Insight and follow us on Telegram and Instagram." },
-      { property: "og:title", content: "About — LARP Insight" },
-      { property: "og:description", content: "Learn about LARP Insight and follow us on Telegram and Instagram." },
+      { title: "About — LARPIFY" },
+      { name: "description", content: "Learn about LARPIFY and follow us on Telegram and Instagram." },
+      { property: "og:title", content: "About — LARPIFY" },
+      { property: "og:description", content: "Learn about LARPIFY and follow us on Telegram and Instagram." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -29,7 +29,7 @@ function AboutPage() {
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
           <SectionHeading
             eyebrow="About"
-            title="Larp Insight"
+            title="LARPIFY"
             sub="Premium insight demo editors for Instagram and TikTok. Follow us on our official channels for updates, tips and new features."
           />
           <div className="mx-auto mt-14 grid max-w-3xl gap-5 sm:grid-cols-2">

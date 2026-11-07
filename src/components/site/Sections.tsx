@@ -50,7 +50,7 @@ export function Masthead() {
       <div className="mx-auto max-w-4xl px-4 pb-16 pt-16 text-center sm:px-6 sm:pb-24 sm:pt-24">
         <span className="masthead-in inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.32em] text-muted-foreground">
           <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-          Larp Insight
+          LARPIFY
         </span>
         <h1
           className="title-gradient masthead-in mt-7 font-sans text-5xl font-extrabold leading-[1.06] tracking-tight sm:text-7xl"
@@ -63,7 +63,7 @@ export function Masthead() {
           className="masthead-in mx-auto mt-8 max-w-2xl font-premium text-2xl leading-[1.4] text-foreground/80 sm:text-[30px]"
           style={{ animationDelay: "180ms" }}
         >
-          {hero.description}
+          {hero.description.replace(/Larp Insight/gi, "LARPIFY")}
         </p>
       </div>
     </section>
@@ -154,7 +154,7 @@ export function PlatformSection({ platform, reverse }: { platform: "instagram" |
               <div className="group relative mt-8 inline-flex">
                 <div
                   className="absolute -inset-2 rounded-full opacity-40 blur-xl transition-opacity duration-300 group-hover:opacity-70"
-                  style={{ background: "linear-gradient(100deg, #0a7bff, #5ec8ff)" }}
+                  style={{ background: "var(--primary)" }}
                   aria-hidden="true"
                 />
                 <Link
@@ -185,7 +185,7 @@ export function PlatformSection({ platform, reverse }: { platform: "instagram" |
 }
 
 const steps = [
-  ["01", "Create Account", "Create your LARP Insight account in seconds."],
+  ["01", "Create Account", "Create your LARPIFY account in seconds."],
   ["02", "Choose Platform", "Choose Instagram or TikTok."],
   ["03", "Customize", "Edit supported insight fields, metrics, graphs, countries, and other available visual elements."],
   ["04", "Save & Showcase", "Save your customized demo and use it for presentations, content, entertainment, or showcasing."],
@@ -224,7 +224,7 @@ export function PricingGrid() {
           <div className="group relative mt-8 inline-flex">
             <div
               className="absolute -inset-2 rounded-full opacity-40 blur-xl transition-opacity duration-300 group-hover:opacity-70"
-              style={{ background: "linear-gradient(100deg, #0a7bff, #5ec8ff)" }}
+              style={{ background: "var(--primary)" }}
               aria-hidden="true"
             />
             {user ? (
@@ -293,7 +293,7 @@ export function DemoVideos() {
   const [main, ...rest] = data ?? [];
   return (
     <section id="demo" className="mx-auto max-w-7xl scroll-mt-24 px-4 py-20 sm:px-6">
-      <SectionHeading eyebrow="Product demo" title="See LARP Insight in Action" sub="Watch how a demo insight goes from default values to a finished, presentation-ready visual." />
+      <SectionHeading eyebrow="Product demo" title="See LARPIFY in Action" sub="Watch how a demo insight goes from default values to a finished, presentation-ready visual." />
       <div className="mt-12">
         {isLoading ? (
           <Skeleton className="aspect-video rounded-3xl" />

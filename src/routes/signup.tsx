@@ -13,10 +13,10 @@ import { SignupCelebration } from "@/components/SignupCelebration";
 export const Route = createFileRoute("/signup")({
   head: () => ({
     meta: [
-      { title: "Create Account — LARP Insight" },
-      { name: "description", content: "Create your LARP Insight account in seconds." },
-      { property: "og:title", content: "Create Account — LARP Insight" },
-      { property: "og:description", content: "Create your LARP Insight account in seconds." },
+      { title: "Create Account — LARPIFY" },
+      { name: "description", content: "Create your LARPIFY account in seconds." },
+      { property: "og:title", content: "Create Account — LARPIFY" },
+      { property: "og:description", content: "Create your LARPIFY account in seconds." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],

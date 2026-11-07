@@ -9,10 +9,10 @@ import { ShopifySection } from "@/components/site/ShopifySection";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Larp Insight — Your Social Analytics, Your Way" },
-      { name: "description", content: "Powerful tools by Larp Insight to customize, manage, and transform your social media insights." },
-      { property: "og:title", content: "Larp Insight — Your Social Analytics, Your Way" },
-      { property: "og:description", content: "Powerful tools by Larp Insight to customize, manage, and transform your social media insights." },
+      { title: "LARPIFY — Your Social Analytics, Your Way" },
+      { name: "description", content: "Powerful tools by LARPIFY to customize, manage, and transform your social media insights." },
+      { property: "og:title", content: "LARPIFY — Your Social Analytics, Your Way" },
+      { property: "og:description", content: "Powerful tools by LARPIFY to customize, manage, and transform your social media insights." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
