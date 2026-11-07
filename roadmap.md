@@ -5,7 +5,8 @@
 - [x] Rebrand to LARPIFY with a new logo, white/coral light colors and updated app icons only; existing content, layout, sections, videos and business behavior preserved; desktop/mobile homepage and login navigation checked, seven regression tests passed.
 - [x] Remix setup: disabled Telegram bot reporting; account/payment information stays in protected /admin, with IP/country included in paid-subscription history; payment callback test passes without Telegram credentials.
 - [x] Restore a clean empty post-remix migration baseline without changing live database data; empty journal and removed inherited files verified.
-- [ ] Remix OxaPay setup (blocked: owner will provide merchant key later).
+- [ ] Verify real OxaPay checkout on the user's host (key passes provider authorization validation here; blocked: preview backend has no auth users for signed-in checkout verification).
+- [x] Handle missing/expired checkout sessions before invoice creation; separate provider authorization errors from login errors and trim merchant keys consistently for invoices and key sync.
 - [ ] Verify remixed /admin with real account/payment records (blocked: remixed backend has no auth users; owner must sign up first, and a real paid transaction needs the merchant key).
 - [x] Add Shopify to workspace quick launch and navigation using bundled platform logos and styled brand names; destination and account routing tests pass.
 - [ ] Verify signed-in Shopify quick launch appearance on mobile and desktop (blocked: no authorized user preview session; owner must sign in).

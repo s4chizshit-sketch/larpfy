@@ -27,6 +27,7 @@
 - Account and payment reporting uses the protected admin pages, not Telegram bots; successful payment callbacks acknowledge database activation independently of external messaging.
 - Checkout callback origins must match the server request origin, and payment activation must match the stored provider reference.
 - Checkout verifies the host key fingerprint before creating an invoice, preventing payments while automatic activation is not configured.
+- Checkout refreshes an expiring browser session before invoice creation and sends missing/invalid sessions to login; never retry invoice creation automatically, to avoid duplicate orders.
 - Global media rules must not override component-defined heights; explicit logo dimensions prevent header overflow and layout shifts.
 - Shared logo assets, root light-theme tokens and installable-app icons define site branding; keep media/device rendering and database-backed content independent so branding changes do not alter behavior.
 - Plan checkout is a shared presentation component opened from database-backed plan rows, so editable prices remain synchronized with the displayed payment amount.
