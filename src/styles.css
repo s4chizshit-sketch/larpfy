@@ -50,25 +50,26 @@
 :root {
   --radius: 0.875rem;
   --background: #ffffff;
-  --foreground: oklch(0.23 0.015 265);
+  --foreground: oklch(0.32 0.005 30);
   --card: #ffffff;
   --card-foreground: var(--foreground);
   --popover: #ffffff;
   --popover-foreground: var(--foreground);
-  --primary: oklch(0.59 0.19 30);
+  --primary: oklch(0.55 0.105 30);
+  --brand-emphasis: oklch(0.62 0.095 30);
   --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.98 0.004 250);
+  --secondary: oklch(0.985 0.002 30);
   --secondary-foreground: var(--foreground);
-  --muted: oklch(0.965 0.006 250);
-  --muted-foreground: oklch(0.47 0.018 265);
-  --accent: oklch(0.95 0.023 175);
-  --accent-foreground: oklch(0.37 0.07 175);
+  --muted: oklch(0.975 0.002 30);
+  --muted-foreground: oklch(0.50 0.006 30);
+  --accent: oklch(0.965 0.012 30);
+  --accent-foreground: var(--primary);
   --destructive: oklch(0.64 0.21 22);
   --destructive-foreground: oklch(0.99 0 0);
   --success: oklch(0.75 0.17 155);
-  --border: oklch(0.91 0.009 250);
-  --input: oklch(0.84 0.012 250);
-  --ring: #ed6047;
+  --border: oklch(0.93 0.004 30);
+  --input: oklch(0.86 0.004 30);
+  --ring: var(--brand-emphasis);
   --glow: var(--primary);
   --brand-coral: #ed6047;
   --sidebar: var(--secondary);
@@ -78,7 +79,7 @@
   --sidebar-accent: var(--accent);
   --sidebar-accent-foreground: var(--accent-foreground);
   --sidebar-border: var(--border);
-  --sidebar-ring: #ed6047;
+  --sidebar-ring: var(--ring);
   --gradient-brand: linear-gradient(135deg, var(--primary), var(--glow));
   --shadow-glow: 0 8px 24px -14px color-mix(in oklab, var(--foreground) 16%, transparent);
   --shadow-phone: 0 16px 48px -18px var(--primary);
@@ -115,7 +116,7 @@
   box-shadow: var(--shadow-glow);
 }
 @utility hero-bg {
-  background: var(--secondary);
+  background: var(--background);
 }
 
 @layer base {
@@ -1223,7 +1224,7 @@ img, video { max-width: 100%; }
 .platform-plan-card { background: var(--card); border-color: var(--border); box-shadow: none; }
 .payment-dialog, .howto-box { background: var(--card); border-color: var(--border); box-shadow: var(--shadow-glow); }
 .brand-logo-name { letter-spacing: 0; }
-.masthead-in.title-gradient > span:last-child:not(:first-child) { color: var(--primary); }
+.masthead-in.title-gradient > span:last-child:not(:first-child) { color: var(--brand-emphasis); }
 .masthead-in.rounded-full { color: var(--primary); border-color: color-mix(in oklab, var(--brand-coral) 24%, var(--border)); background: var(--card); }
 .platform-plan-card:hover { border-color: var(--primary); }
 .howto-icon { color: var(--accent-foreground); background: var(--accent); border-color: color-mix(in oklab, var(--accent-foreground) 24%, var(--border)); box-shadow: none; }

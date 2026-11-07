@@ -1,3 +1,4 @@
+- [ ] Soften the light palette: remove vivid red emphasis and blue-grey page tint; preserve all content, layout and behavior.
 - [x] Rebrand to LARPIFY with a new logo, white/coral light colors and updated app icons only; existing content, layout, sections, videos and business behavior preserved; desktop/mobile homepage and login navigation checked, seven regression tests passed.
 - [x] Remix setup: disabled Telegram bot reporting; account/payment information stays in protected /admin, with IP/country included in paid-subscription history; payment callback test passes without Telegram credentials.
 - [x] Restore a clean empty post-remix migration baseline without changing live database data; empty journal and removed inherited files verified.
