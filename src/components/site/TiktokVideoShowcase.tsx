@@ -7,12 +7,16 @@ import profileVideo from "@/assets/tiktok-profile-reels.mp4";
 import profileWebm from "@/assets/tiktok-profile-reels.webm";
 import analysisVideo from "@/assets/tiktok-analysis.mp4";
 import analysisWebm from "@/assets/tiktok-analysis.webm";
+import homePoster from "@/assets/tiktok-home-poster.jpg";
+import inboxPoster from "@/assets/tiktok-inbox-poster.jpg";
+import profilePoster from "@/assets/tiktok-profile-reels-poster.jpg";
+import analysisPoster from "@/assets/tiktok-analysis-poster.jpg";
 
 const recordings = [
-  { label: "Open app home feed", url: homeVideo, webm: homeWebm },
-  { label: "inbox", url: inboxVideo, webm: inboxWebm },
-  { label: "Profile/reels", url: profileVideo, webm: profileWebm },
-  { label: "Video analysis", url: analysisVideo, webm: analysisWebm },
+  { label: "Open app home feed", url: homeVideo, webm: homeWebm, poster: homePoster },
+  { label: "inbox", url: inboxVideo, webm: inboxWebm, poster: inboxPoster },
+  { label: "Profile/reels", url: profileVideo, webm: profileWebm, poster: profilePoster },
+  { label: "Video analysis", url: analysisVideo, webm: analysisWebm, poster: analysisPoster },
 ];
 
 export function TiktokVideoShowcase() {

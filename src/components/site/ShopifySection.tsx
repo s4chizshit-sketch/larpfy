@@ -8,13 +8,16 @@ import shopify3 from "@/assets/shopify-3.mp4";
 import shopify1Webm from "@/assets/shopify-1.webm";
 import shopify2Webm from "@/assets/shopify-2.webm";
 import shopify3Webm from "@/assets/shopify-3.webm";
+import dashboardPoster from "@/assets/shopify-1-poster.jpg";
+import notificationsPoster from "@/assets/shopify-2-poster.jpg";
+import customizePoster from "@/assets/shopify-3-poster.jpg";
 import { RecordingVideoShowcase } from "./InstagramVideoShowcase";
 import { Reveal } from "./Reveal";
 
 const recordings = [
-  { label: "Dashboard", url: shopify1, webm: shopify1Webm },
-  { label: "Notifications", url: shopify2, webm: shopify2Webm },
-  { label: "Customize", url: shopify3, webm: shopify3Webm },
+  { label: "Dashboard", url: shopify1, webm: shopify1Webm, poster: dashboardPoster },
+  { label: "Notifications", url: shopify2, webm: shopify2Webm, poster: notificationsPoster },
+  { label: "Customize", url: shopify3, webm: shopify3Webm, poster: customizePoster },
 ];
 
 const bullets = [
