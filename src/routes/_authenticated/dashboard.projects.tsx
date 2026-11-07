@@ -5,10 +5,10 @@ import { useProfile } from "@/lib/auth";
 
 export const Route = createFileRoute("/_authenticated/dashboard/projects")({
   head: () => ({ meta: [
-    { title: "My Projects — LARPIFY" },
-    { name: "description", content: "Manage saved LARPIFY demo projects." },
-    { property: "og:title", content: "My Projects — LARPIFY" },
-    { property: "og:description", content: "Manage saved LARPIFY demo projects." },
+    { title: "My Projects — LARPFY" },
+    { name: "description", content: "Manage saved LARPFY demo projects." },
+    { property: "og:title", content: "My Projects — LARPFY" },
+    { property: "og:description", content: "Manage saved LARPFY demo projects." },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary" },
   ] }),

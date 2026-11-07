@@ -5,9 +5,9 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/r/$code")({
   head: () => ({
     meta: [
-      { title: "You're invited — LARPIFY" },
-      { name: "description", content: "Join LARPIFY and start customizing social insight demos." },
-      { property: "og:title", content: "You're invited to LARPIFY" },
+      { title: "You're invited — LARPFY" },
+      { name: "description", content: "Join LARPFY and start customizing social insight demos." },
+      { property: "og:title", content: "You're invited to LARPFY" },
       { property: "og:description", content: "Customize Instagram and TikTok insight demo visuals." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

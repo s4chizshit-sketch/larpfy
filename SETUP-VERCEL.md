@@ -1,4 +1,4 @@
-# Larp Insight — Vercel + apna Supabase setup (Lovable ke bina)
+# LARPFY — Vercel + apna Supabase setup (Lovable ke bina)
 
 ## Step 1 — Naya Supabase account (free)
 1. https://supabase.com par jao → Sign up (aapka Gmail use kar sakte ho).
@@ -36,9 +36,15 @@ Phir **Deployments** → latest → **Redeploy** (bina redeploy keys kaam nahi k
 
 ## Step 5 — OxaPay
 Dashboard → Merchant: Accepted currencies me sirf **USDT**, aur
-Callback URL: `https://www.extipsinghtpro.store/api/public/oxapay-webhook`
+Callback URL: `https://larpfy.store/api/public/oxapay-webhook`
 
 ## Important
 - **Purane users nahi aayenge** — naye database me pehle ke accounts khaali hain (remix me data reset ho chuka tha). Sabko dobara signup karna hoga; `workparsnoluse@gmail.com` se signup karte hi admin ban jayega.
 - Saari videos/logo ab is repo ke andar hain (compressed, total ~150MB) — Vercel khud serve karega, Lovable ki zaroorat nahi.
 - Lovable ko band karne se pehle ek test payment zaroor karna (USDT se ek plan lena) taaki webhook, plan activation aur Telegram alerts confirm ho jayein.
+
+## New domain: larpfy.store
+- Add `larpfy.store` in Vercel → Settings → Domains, then add the DNS records Vercel shows at your registrar.
+- Keep payment callback and return URLs on the same hostname as checkout; the app derives them from the current request origin.
+- Add `https://larpfy.store` and `https://larpfy.store/reset-password` to your existing authentication allowed redirect URLs.
+- Redeploy the connected project to update the LARPFY branding.

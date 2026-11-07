@@ -12,7 +12,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { countryInfo } from "@/lib/country";
 
 export const Route = createFileRoute("/_authenticated/admin/")({
-  head: () => ({ meta: [{ title: "Admin Users — LARPIFY" }, { name: "description", content: "Review LARPIFY accounts, signup details, country statistics and payment totals." }, { property: "og:title", content: "Admin Users — LARPIFY" }, { property: "og:description", content: "Private customer account and payment analytics." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Admin Users — LARPFY" }, { name: "description", content: "Review LARPFY accounts, signup details, country statistics and payment totals." }, { property: "og:title", content: "Admin Users — LARPFY" }, { property: "og:description", content: "Private customer account and payment analytics." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }, { name: "robots", content: "noindex" }] }),
   component: UsersAdmin,
 });
 

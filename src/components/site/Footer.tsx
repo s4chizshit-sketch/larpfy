@@ -35,12 +35,12 @@ export function Footer() {
       <div className="border-t border-border">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-8 sm:flex-row sm:items-end sm:justify-between sm:px-6">
           <p className="max-w-3xl text-xs leading-relaxed text-muted-foreground">
-            LARPIFY is an independent third-party tool. It is not affiliated with, endorsed by, or officially
+            LARPFY is an independent third-party tool. It is not affiliated with, endorsed by, or officially
             connected to Instagram, TikTok, Meta, or ByteDance. Customized visuals are intended for demonstration,
             presentation, entertainment, and creative purposes and should not be represented as authentic platform
             analytics.
           </p>
-          <p className="shrink-0 text-xs text-muted-foreground">© {new Date().getFullYear()} LARPIFY</p>
+          <p className="shrink-0 text-xs text-muted-foreground">© {new Date().getFullYear()} LARPFY</p>
         </div>
       </div>
     </footer>

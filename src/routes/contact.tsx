@@ -5,10 +5,10 @@ import { PublicLayout, SectionHeading } from "@/components/site/Sections";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — LARPIFY" },
-      { name: "description", content: "Get in touch with the LARPIFY team." },
-      { property: "og:title", content: "Contact — LARPIFY" },
-      { property: "og:description", content: "Get in touch with the LARPIFY team." },
+      { title: "Contact — LARPFY" },
+      { name: "description", content: "Get in touch with the LARPFY team." },
+      { property: "og:title", content: "Contact — LARPFY" },
+      { property: "og:description", content: "Get in touch with the LARPFY team." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],

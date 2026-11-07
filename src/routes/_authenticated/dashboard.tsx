@@ -15,7 +15,7 @@ const nav: NavItem[] = [
 ];
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
-  head: () => ({ meta: [{ title: "Dashboard — LARPIFY" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Dashboard — LARPFY" }, { name: "robots", content: "noindex" }] }),
   component: DashboardLayout,
 });
 

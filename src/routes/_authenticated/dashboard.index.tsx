@@ -8,10 +8,10 @@ import { ProSubscriptionCard } from "@/components/app/ProSubscription";
 
 export const Route = createFileRoute("/_authenticated/dashboard/")({
   head: () => ({ meta: [
-    { title: "Your Workspace — LARPIFY" },
-    { name: "description", content: "Your LARPIFY subscription and platform workspace." },
-    { property: "og:title", content: "Your Workspace — LARPIFY" },
-    { property: "og:description", content: "Your LARPIFY subscription and platform workspace." },
+    { title: "Your Workspace — LARPFY" },
+    { name: "description", content: "Your LARPFY subscription and platform workspace." },
+    { property: "og:title", content: "Your Workspace — LARPFY" },
+    { property: "og:description", content: "Your LARPFY subscription and platform workspace." },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary" },
   ] }),
