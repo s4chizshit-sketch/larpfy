@@ -1,41 +1,5 @@
 {
   "version": "7",
   "dialect": "postgresql",
-  "entries": [
-    {
-      "idx": 0,
-      "version": "7",
-      "when": 1792065938968,
-      "tag": "0000_migration",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1792259260722,
-      "tag": "0001_self_host_payment_functions",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1792265936458,
-      "tag": "0002_retryable_payment_alerts",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1792266061761,
-      "tag": "0003_checkout_readiness_guard",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1792296671138,
-      "tag": "0004_owner_admin_extipsguide",
-      "breakpoints": true
-    }
-  ]
+  "entries": []
 }
