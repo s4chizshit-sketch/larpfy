@@ -15,10 +15,10 @@ import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/_authenticated/admin/pricing")({
   head: () => ({ meta: [
-    { title: "Manage Plan Prices | LARP Insight" },
+    { title: "Manage Plan Prices | LARPIFY" },
     { name: "description", content: "Manage Instagram, TikTok and Shopify subscription plans and prices." },
-    { property: "og:title", content: "Manage Plan Prices | LARP Insight" },
-    { property: "og:description", content: "Edit and save LARP Insight subscription plans." },
+    { property: "og:title", content: "Manage Plan Prices | LARPIFY" },
+    { property: "og:description", content: "Edit and save LARPIFY subscription plans." },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
   ] }),

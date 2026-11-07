@@ -5,10 +5,10 @@ import { CtaBand, FaqList, PublicLayout, SectionHeading } from "@/components/sit
 export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
-      { title: "FAQ — LARP Insight" },
-      { name: "description", content: "Answers about LARP Insight, customization, saving projects, and platform affiliation." },
-      { property: "og:title", content: "FAQ — LARP Insight" },
-      { property: "og:description", content: "Frequently asked questions about LARP Insight." },
+      { title: "FAQ — LARPIFY" },
+      { name: "description", content: "Answers about LARPIFY, customization, saving projects, and platform affiliation." },
+      { property: "og:title", content: "FAQ — LARPIFY" },
+      { property: "og:description", content: "Frequently asked questions about LARPIFY." },
     ],
   }),
   component: () => (

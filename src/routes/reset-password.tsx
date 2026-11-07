@@ -11,10 +11,10 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/reset-password")({
   head: () => ({
     meta: [
-      { title: "Reset Password — LARP Insight" },
-      { name: "description", content: "Choose a new password for your LARP Insight account." },
-      { property: "og:title", content: "Reset Password — LARP Insight" },
-      { property: "og:description", content: "Choose a new password for your LARP Insight account." },
+      { title: "Reset Password — LARPIFY" },
+      { name: "description", content: "Choose a new password for your LARPIFY account." },
+      { property: "og:title", content: "Reset Password — LARPIFY" },
+      { property: "og:description", content: "Choose a new password for your LARPIFY account." },
     ],
   }),
   component: Reset,
