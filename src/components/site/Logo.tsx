@@ -7,9 +7,9 @@ export function LogoMark({ className = "h-8 w-8" }: { className?: string }) {
 
 export function Logo({ to = "/" as const }: { to?: "/" | "/dashboard" | "/admin" }) {
   return (
-    <Link to={to} className="brand-logo flex shrink-0 items-center gap-2" aria-label="LARPIFY home">
+    <Link to={to} className="brand-logo flex shrink-0 items-center gap-2" aria-label="LARPFY home">
       <img src={logoAsset} alt="" width={56} height={56} className="h-14 w-14 rounded-lg object-contain" />
-      <span className="brand-logo-name font-display text-lg font-bold">LARPIFY</span>
+      <span className="brand-logo-name font-display text-lg font-bold">LARPFY</span>
     </Link>
   );
 }

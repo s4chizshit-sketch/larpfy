@@ -69,7 +69,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "LARPIFY — Customizable Social Insight Demos" },
+      { title: "LARPFY — Customizable Social Insight Demos" },
       { name: "description", content: "Create customizable Instagram and TikTok insight demo visuals." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -77,7 +77,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-status-bar-style", content: "default" },
-      { name: "apple-mobile-web-app-title", content: "LARPIFY" },
+      { name: "apple-mobile-web-app-title", content: "LARPFY" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },

@@ -5,10 +5,10 @@ import { FaqList, PricingGrid, PublicLayout, SectionHeading } from "@/components
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Pricing — LARPIFY" },
+      { title: "Pricing — LARPFY" },
       { name: "description", content: "Simple plans for creating customizable Instagram, TikTok and Shopify insight demos." },
-      { property: "og:title", content: "Pricing — LARPIFY" },
-      { property: "og:description", content: "Choose the LARPIFY plan that fits your workflow." },
+      { property: "og:title", content: "Pricing — LARPFY" },
+      { property: "og:description", content: "Choose the LARPFY plan that fits your workflow." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

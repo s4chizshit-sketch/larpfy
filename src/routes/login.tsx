@@ -12,10 +12,10 @@ import { accountDestination } from "@/lib/account-destination";
 export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
-      { title: "Login — LARPIFY" },
-      { name: "description", content: "Log in to your LARPIFY account." },
-      { property: "og:title", content: "Login — LARPIFY" },
-      { property: "og:description", content: "Log in to your LARPIFY account." },
+      { title: "Login — LARPFY" },
+      { name: "description", content: "Log in to your LARPFY account." },
+      { property: "og:title", content: "Login — LARPFY" },
+      { property: "og:description", content: "Log in to your LARPFY account." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],

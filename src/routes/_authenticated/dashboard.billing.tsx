@@ -9,9 +9,9 @@ import { ProSubscriptionCard } from "@/components/app/ProSubscription";
 
 export const Route = createFileRoute("/_authenticated/dashboard/billing")({
   head: () => ({ meta: [
-    { title: "Pricing & Subscription | LARPIFY" },
-    { name: "description", content: "Choose your LARPIFY plan and view subscription history and payment options." },
-    { property: "og:title", content: "Pricing & Subscription | LARPIFY" },
+    { title: "Pricing & Subscription | LARPFY" },
+    { name: "description", content: "Choose your LARPFY plan and view subscription history and payment options." },
+    { property: "og:title", content: "Pricing & Subscription | LARPFY" },
     { property: "og:description", content: "Instagram and TikTok plans, subscription history, and automatic USDT payment." },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },

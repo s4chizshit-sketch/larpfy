@@ -4,9 +4,9 @@ import { CtaBand, HowItWorks, PlatformSection, PublicLayout } from "@/components
 export const Route = createFileRoute("/features")({
   head: () => ({
     meta: [
-      { title: "Features — LARPIFY" },
+      { title: "Features — LARPFY" },
       { name: "description", content: "Instagram and TikTok insight editors, audience country, engagement, graph and date customization." },
-      { property: "og:title", content: "Features — LARPIFY" },
+      { property: "og:title", content: "Features — LARPFY" },
       { property: "og:description", content: "Every tool you need to customize Instagram and TikTok insight demo visuals." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

@@ -4,10 +4,10 @@ import { LegalPage } from "@/components/site/LegalPage";
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Privacy Policy — LARPIFY" },
-      { name: "description", content: "How LARPIFY collects and uses your data." },
-      { property: "og:title", content: "Privacy Policy — LARPIFY" },
-      { property: "og:description", content: "How LARPIFY collects and uses your data." },
+      { title: "Privacy Policy — LARPFY" },
+      { name: "description", content: "How LARPFY collects and uses your data." },
+      { property: "og:title", content: "Privacy Policy — LARPFY" },
+      { property: "og:description", content: "How LARPFY collects and uses your data." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -19,7 +19,7 @@ export const Route = createFileRoute("/privacy")({
       <h2>How we use it</h2>
       <p>To run your account, save your work, process subscriptions and affiliate payouts, and send essential account emails such as password resets.</p>
       <h2>Sharing</h2>
-      <p>We don't sell personal data. We share it only with service providers required to operate LARPIFY.</p>
+      <p>We don't sell personal data. We share it only with service providers required to operate LARPFY.</p>
       <h2>Your choices</h2>
       <p>You can update your name in Settings, delete your projects at any time, and contact us to delete your account.</p>
     </LegalPage>

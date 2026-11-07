@@ -1,3 +1,5 @@
+- [x] Align site and installed-app branding to LARPFY for larpfy.store; phone/desktop homepage checked and six account/payment regression tests passed.
+- [ ] Connect larpfy.store on Vercel and verify live auth/payment redirects (blocked: domain has no answering nameservers; owner must finish registrar and Vercel setup).
 - [x] Repair recording startup with post-commit playback and nearby-only loading; bundled actual-frame previews remain visible with video downloads blocked; Instagram/TikTok/Shopify playback verified at 375px and 861px, four regression tests passed. Real-visitor speed data unavailable; high-traffic capacity remains unverified.
 - [x] Soften the light palette: white homepage, muted coral emphasis and soft charcoal text; content/layout preserved, phone and desktop checks passed without page errors.
 - [x] Rebrand to LARPIFY with a new logo, white/coral light colors and updated app icons only; existing content, layout, sections, videos and business behavior preserved; desktop/mobile homepage and login navigation checked, seven regression tests passed.
