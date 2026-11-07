@@ -7,7 +7,7 @@ export type Hero = { title: string; description: string; cta: string };
 export const DEFAULT_HERO: Hero = {
   title: "Your Social Analytics, Your Way",
   description:
-    "Powerful tools by Larp Insight to customize, manage, and transform your social media insights.",
+    "Powerful tools by LARPIFY to customize, manage, and transform your social media insights.",
   cta: "Get Started",
 };
 

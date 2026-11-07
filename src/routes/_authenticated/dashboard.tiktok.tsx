@@ -7,9 +7,9 @@ import { useProfile } from "@/lib/auth";
 
 export const Route = createFileRoute("/_authenticated/dashboard/tiktok")({
   head: () => ({ meta: [
-    { title: "TikTok App UI & Customization — LARP Insight" },
-    { name: "description", content: "Watch TikTok demo recordings and customization tutorials in your LARP Insight workspace." },
-    { property: "og:title", content: "TikTok App UI & Customization — LARP Insight" },
+    { title: "TikTok App UI & Customization — LARPIFY" },
+    { name: "description", content: "Watch TikTok demo recordings and customization tutorials in your LARPIFY workspace." },
+    { property: "og:title", content: "TikTok App UI & Customization — LARPIFY" },
     { property: "og:description", content: "TikTok app UI recordings and customization tutorials." },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },

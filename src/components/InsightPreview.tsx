@@ -71,7 +71,7 @@ export const InsightPreview = forwardRef<HTMLDivElement, { data: InsightData; pl
               </div>
             </div>
           )}
-          <div className="mt-3 text-center text-[8px] uppercase tracking-[0.2em] opacity-40">Demo visual · LARP Insight</div>
+          <div className="mt-3 text-center text-[8px] uppercase tracking-[0.2em] opacity-40">Demo visual · LARPIFY</div>
         </div>
       </div>
     );

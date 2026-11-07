@@ -49,37 +49,38 @@
 
 :root {
   --radius: 0.875rem;
-  --background: oklch(0.14 0.025 275);
-  --foreground: oklch(0.97 0.005 270);
-  --card: oklch(0.18 0.03 275);
-  --card-foreground: oklch(0.97 0.005 270);
-  --popover: oklch(0.18 0.03 275);
-  --popover-foreground: oklch(0.97 0.005 270);
-  --primary: oklch(0.66 0.19 285);
+  --background: #ffffff;
+  --foreground: #29252b;
+  --card: #ffffff;
+  --card-foreground: #29252b;
+  --popover: #ffffff;
+  --popover-foreground: #29252b;
+  --primary: #b83e2d;
   --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.23 0.035 275);
-  --secondary-foreground: oklch(0.97 0.005 270);
-  --muted: oklch(0.22 0.03 275);
-  --muted-foreground: oklch(0.7 0.03 275);
-  --accent: oklch(0.25 0.05 280);
-  --accent-foreground: oklch(0.97 0.005 270);
+  --secondary: #fff0ec;
+  --secondary-foreground: #29252b;
+  --muted: #f5f4f5;
+  --muted-foreground: #666168;
+  --accent: #fff0ec;
+  --accent-foreground: #29252b;
   --destructive: oklch(0.64 0.21 22);
   --destructive-foreground: oklch(0.99 0 0);
   --success: oklch(0.75 0.17 155);
-  --border: oklch(1 0 0 / 9%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: oklch(0.66 0.19 285);
-  --glow: oklch(0.68 0.16 250);
-  --sidebar: oklch(0.16 0.028 275);
-  --sidebar-foreground: oklch(0.97 0.005 270);
-  --sidebar-primary: oklch(0.66 0.19 285);
+  --border: #e5e1e3;
+  --input: #d5ced2;
+  --ring: #ed6047;
+  --glow: #b83e2d;
+  --brand-coral: #ed6047;
+  --sidebar: #faf8f8;
+  --sidebar-foreground: #29252b;
+  --sidebar-primary: #b83e2d;
   --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.23 0.035 275);
-  --sidebar-accent-foreground: oklch(0.97 0.005 270);
-  --sidebar-border: oklch(1 0 0 / 8%);
-  --sidebar-ring: oklch(0.66 0.19 285);
+  --sidebar-accent: #fff0ec;
+  --sidebar-accent-foreground: #29252b;
+  --sidebar-border: #e5e1e3;
+  --sidebar-ring: #ed6047;
   --gradient-brand: linear-gradient(135deg, var(--primary), var(--glow));
-  --shadow-glow: 0 10px 40px -10px oklch(0.66 0.19 285 / 55%);
+  --shadow-glow: 0 8px 24px -14px color-mix(in oklab, var(--brand-coral) 30%, transparent);
   --shadow-phone: 0 16px 48px -18px var(--primary);
   --device-screen: oklch(0 0 0);
   --device-metal: oklch(0.24 0.004 260);
@@ -93,7 +94,7 @@
 }
 
 @utility glass {
-  background: oklch(0.2 0.03 275 / 55%);
+  background: color-mix(in oklab, var(--card) 94%, transparent);
   backdrop-filter: blur(14px);
   border: 1px solid var(--border);
 }
@@ -105,7 +106,7 @@
 }
 /* Screenshot-style headline: white fading into bright blue, top to bottom */
 @utility title-gradient {
-  background: linear-gradient(180deg, #ffffff 0%, #e9f2ff 32%, #a9d0ff 64%, #4da3ff 100%);
+  background: linear-gradient(180deg, var(--foreground), var(--foreground));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -117,9 +118,7 @@
   box-shadow: var(--shadow-glow);
 }
 @utility hero-bg {
-  background:
-    radial-gradient(60% 50% at 50% 0%, oklch(0.4 0.16 285 / 45%), transparent 70%),
-    radial-gradient(40% 40% at 90% 20%, oklch(0.45 0.12 250 / 25%), transparent 70%);
+  background: var(--secondary);
 }
 
 @layer base {
@@ -127,7 +126,7 @@
     border-color: var(--color-border);
   }
   html {
-    color-scheme: dark;
+    color-scheme: light;
   }
   body {
     background-color: var(--color-background);
@@ -1206,3 +1205,25 @@ img, video { max-width: 100%; }
 .pro-sub-tg:hover { filter: brightness(1.1); }
 
 /* Shopify 3D laptop */
+
+/* LARPIFY light branding: surface/color changes only; device geometry stays untouched. */
+.nav-shell, .caption-glass, .pricing-gate, .auth-card, .pro-panel, .about-social-card {
+  background: var(--card);
+  border-color: var(--border);
+  box-shadow: var(--shadow-glow);
+}
+.nav-brand-text { color: var(--foreground); text-shadow: none; }
+.nav-brand-dot { background: var(--brand-coral); box-shadow: none; }
+.nav-link::after { background: var(--brand-coral); }
+.btn-plan, .checkout-pay { background: var(--primary); color: var(--primary-foreground); box-shadow: var(--shadow-glow); }
+.btn-plan:hover { box-shadow: var(--shadow-glow); }
+.auth-shell { background: var(--secondary); }
+.auth-bloom { display: none; }
+.auth-card::before { background: var(--brand-coral); box-shadow: none; }
+.auth-field { background: var(--background); box-shadow: none; }
+.word-tt { color: var(--foreground); }
+.glyph-ig, .glyph-tt, .word-ig { filter: none; }
+.platform-plan-card { background: var(--card); border-color: var(--border); box-shadow: none; }
+.payment-dialog, .howto-box { background: var(--card); border-color: var(--border); box-shadow: var(--shadow-glow); }
+.brand-logo-name { letter-spacing: 0; }
+@media (max-width: 1023px) { header .brand-logo-name { display: none; } }

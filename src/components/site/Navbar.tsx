@@ -31,7 +31,7 @@ export function Navbar() {
           <Logo />
           <span className="nav-brand-text lg:hidden">
             <span className="nav-brand-dot" />
-            Larp Insight
+            LARPIFY
           </span>
           <div className="hidden items-center gap-1 lg:flex">
             {links.map((l) => (

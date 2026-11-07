@@ -7,9 +7,9 @@ import { useProfile } from "@/lib/auth";
 
 export const Route = createFileRoute("/_authenticated/dashboard/instagram")({
   head: () => ({ meta: [
-    { title: "Instagram App UI & Customization — LARP Insight" },
-    { name: "description", content: "Watch Instagram demo recordings and customization tutorials in your LARP Insight workspace." },
-    { property: "og:title", content: "Instagram App UI & Customization — LARP Insight" },
+    { title: "Instagram App UI & Customization — LARPIFY" },
+    { name: "description", content: "Watch Instagram demo recordings and customization tutorials in your LARPIFY workspace." },
+    { property: "og:title", content: "Instagram App UI & Customization — LARPIFY" },
     { property: "og:description", content: "Instagram app UI recordings and customization tutorials." },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
