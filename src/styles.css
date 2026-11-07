@@ -479,7 +479,8 @@
   aspect-ratio: 1732 / 3580;
   overflow: hidden;
 }
-.instagram-iphone-recording video {
+.instagram-iphone-recording video,
+.instagram-iphone-recording .recording-poster {
   position: absolute;
   top: -4.5%;
   left: 0;
@@ -504,8 +505,24 @@
 .full-recording-showcase .instagram-iphone-screen {
   border-radius: 8cqw;
 }
+.instagram-iphone-recording .recording-poster {
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+}
+.instagram-iphone-recording video {
+  z-index: 1;
+  background: transparent;
+}
+.full-recording-showcase .instagram-iphone-recording .recording-poster {
+  position: absolute;
+  inset: 0;
+  top: 0;
+  height: 100%;
+  object-fit: contain;
+}
 .full-recording-showcase .instagram-iphone-recording video {
-  position: static;
+  position: relative;
   width: 100%;
   height: auto;
   aspect-ratio: 590 / 1278;
