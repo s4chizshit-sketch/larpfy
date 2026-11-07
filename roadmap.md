@@ -1,3 +1,4 @@
+- [ ] Rebrand to LARPIFY with a new logo, white/coral light theme, full-width site sections, updated app icons and consistent page branding; preserve business behavior and recording fit.
 - [x] Remix setup: disabled Telegram bot reporting; account/payment information stays in protected /admin, with IP/country included in paid-subscription history; payment callback test passes without Telegram credentials.
 - [x] Restore a clean empty post-remix migration baseline without changing live database data; empty journal and removed inherited files verified.
 - [ ] Remix OxaPay setup (blocked: owner will provide merchant key later).
