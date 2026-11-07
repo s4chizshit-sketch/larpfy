@@ -31,13 +31,8 @@ export const recordVisit = createServerFn({ method: "POST" })
   .handler(async ({ context }) => {
     const ip = clientIp();
     const country = await clientCountry(ip);
-    const { data, error } = await context.supabase.rpc("record_my_visit", { _ip: ip ?? "", _country: country ?? "" });
+    const { error } = await context.supabase.rpc("record_my_visit", { _ip: ip ?? "", _country: country ?? "" });
     if (error) throw new Error("Could not record account visit.");
-    const r = data as { first?: boolean; name?: string; email?: string } | null;
-    if (r?.first) {
-      const { sendSignupAlert } = await import("./telegram-notify.server");
-      await sendSignupAlert({ name: r.name ?? null, email: r.email ?? null, ip, country });
-    }
     return { ok: true };
   });
 

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight, Crown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
+import { countryInfo } from "@/lib/country";
 
 /** Admin list of accounts with a confirmed paid purchase. */
 export function ProSubscribersAdmin() {
@@ -16,10 +17,10 @@ export function ProSubscribersAdmin() {
       const { data: buys, error, count } = await supabase.from("plan_purchases").select("*", { count: "exact" }).order("started_at", { ascending: false }).order("id").range(page * size, (page + 1) * size - 1);
       if (error) throw error;
       const ids = [...new Set((buys ?? []).map((b) => b.user_id))];
-      const { data: profiles, error: profileError } = ids.length ? await supabase.from("profiles").select("id,email,name").in("id", ids) : { data: [], error: null };
+      const { data: profiles, error: profileError } = ids.length ? await supabase.from("profiles").select("id,email,name,signup_ip,signup_country").in("id", ids) : { data: [], error: null };
       if (profileError) throw profileError;
       const map = new Map((profiles ?? []).map((p) => [p.id, p]));
-      return { count: count ?? 0, rows: (buys ?? []).map((b) => ({ ...b, email: map.get(b.user_id)?.email ?? "—", name: map.get(b.user_id)?.name })) };
+      return { count: count ?? 0, rows: (buys ?? []).map((b) => ({ ...b, email: map.get(b.user_id)?.email ?? "—", name: map.get(b.user_id)?.name, ip: map.get(b.user_id)?.signup_ip, country: map.get(b.user_id)?.signup_country })) };
     },
   });
   return (
@@ -29,7 +30,7 @@ export function ProSubscribersAdmin() {
       <div className="overflow-x-auto rounded-2xl border border-border">
         <table className="w-full text-sm">
           <thead className="text-left text-xs uppercase tracking-wider text-muted-foreground">
-            <tr className="border-b border-border"><th className="p-3">Gmail</th><th className="p-3">Plan</th><th className="p-3">Paid</th><th className="p-3">Purchased</th><th className="p-3">Expires</th><th className="p-3">Status</th></tr>
+            <tr className="border-b border-border"><th className="p-3">Gmail</th><th className="p-3">IP</th><th className="p-3">Country</th><th className="p-3">Plan</th><th className="p-3">Paid</th><th className="p-3">Purchased</th><th className="p-3">Expires</th><th className="p-3">Status</th></tr>
           </thead>
           <tbody>
             {data?.rows.map((p) => {
@@ -37,6 +38,8 @@ export function ProSubscribersAdmin() {
               return (
                 <tr key={p.id} className="border-b border-border/60 last:border-0">
                   <td className="p-3"><p className="font-medium">{p.email}</p>{p.name && <p className="text-xs text-muted-foreground">{p.name}</p>}</td>
+                  <td className="p-3 font-mono text-xs">{p.ip || "—"}</td>
+                  <td className="whitespace-nowrap p-3">{countryInfo(p.country ?? null).flag} {countryInfo(p.country ?? null).name}</td>
                   <td className="p-3">{p.plan_name}</td>
                   <td className="p-3">${Number(p.price)}</td>
                   <td className="whitespace-nowrap p-3 text-muted-foreground">{new Date(p.started_at).toLocaleString()}</td>
@@ -45,7 +48,7 @@ export function ProSubscribersAdmin() {
                 </tr>
               );
             })}
-            {!isError && !data?.rows.length && <tr><td colSpan={6} className="p-8 text-center text-muted-foreground">{isLoading ? "Loading subscriptions…" : "No paid subscriptions yet."}</td></tr>}
+            {!isError && !data?.rows.length && <tr><td colSpan={8} className="p-8 text-center text-muted-foreground">{isLoading ? "Loading subscriptions…" : "No paid subscriptions yet."}</td></tr>}
           </tbody>
         </table>
       </div>
