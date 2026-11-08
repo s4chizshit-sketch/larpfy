@@ -1,4 +1,4 @@
-- [ ] Replace OxaPay merchant key through secure form at user's request.
+- [x] Replace OxaPay merchant key through secure form at user's request; stored securely. Open admin on deployed host to synchronize payment verification after replacement.
 - [x] Answer OxaPay merchant form callback/return URL question: lifetime-payment callback and dashboard/billing return, USDT only; key already securely configured.
 - [x] Complete standalone delivery: nonsecret history, verified-owner no-store key retrieval, replay-safe fulfillment and terminal verification; separate product pages with matching demos/how-to, shorter-plan links and owner drafts; mobile checkout checked. 15 disposable PostgreSQL tests and 21 payment/link tests pass; 60 general regression tests pass.
 - [x] Standalone supplied-key delivery: privately imported 100 Instagram and 100 TikTok keys; reserve matching stock and combined 100 slots atomically, verify OxaPay on server, assign once, and show buyer history without a bot. Supplied license validity not independently tested.
