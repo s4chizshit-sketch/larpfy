@@ -525,6 +525,7 @@ $$;
 revoke execute on function public.oxapay_is_ready(text) from public,anon;
 grant execute on function public.oxapay_is_ready(text) to authenticated;
 -- Lifetime-only website catalog; historical plan seed retained for existing records.
+insert into storage.buckets(id,name,public) values ('lifetime-apks','lifetime-apks',false) on conflict (id) do update set public=false;
 CREATE VIEW public.lifetime_editor_catalog WITH (security_invoker = true) AS
 SELECT 'c752255b-bfe6-4de8-8c02-99fe314f0221'::uuid AS id, 'instagram'::text AS product, 'Instagram Editor'::text AS name, 25::numeric AS price, 'once'::text AS billing_period, ARRAY['Lifetime access — no expiry','Product-compatible access key','Instagram APK download','Existing device limits apply']::text[] AS features, 'Get lifetime access'::text AS cta, 1 AS sort_order
 UNION ALL
