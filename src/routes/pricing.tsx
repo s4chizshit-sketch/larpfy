@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { FaqList, PricingGrid, PublicLayout, SectionHeading } from "@/components/site/Sections";
+import { FaqList, PublicLayout, SectionHeading } from "@/components/site/Sections";
+import { PlatformPlans } from "@/components/site/PlatformPlans";
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
       { title: "Pricing — LARPFY" },
-      { name: "description", content: "Simple plans for creating customizable Instagram, TikTok and Shopify insight demos." },
+      { name: "description", content: "Instagram Editor and TikTok Editor lifetime access for $25 each, with no expiry." },
       { property: "og:title", content: "Pricing — LARPFY" },
       { property: "og:description", content: "Choose the LARPFY plan that fits your workflow." },
       { property: "og:type", content: "website" },
@@ -26,8 +27,8 @@ function PricingPage() {
     <PublicLayout>
       <section className="hero-bg">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-          <SectionHeading eyebrow="Pricing" title="Instagram, TikTok & Shopify Plans" />
-          <div className="mt-14 scroll-mt-28" id="plans"><PricingGrid /></div>
+          <SectionHeading eyebrow="Pricing" title="Instagram & TikTok Lifetime Access" />
+          <div className="mt-14 scroll-mt-28" id="plans"><PlatformPlans /></div>
         </div>
       </section>
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">

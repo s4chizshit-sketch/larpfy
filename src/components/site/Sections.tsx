@@ -217,7 +217,7 @@ export function PricingGrid() {
           <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-border/60 bg-foreground/5">
             <Lock className="h-5 w-5 text-primary" aria-hidden />
           </div>
-          <h3 className="font-display text-2xl font-bold tracking-tight">Plans for Instagram, TikTok &amp; Shopify</h3>
+          <h3 className="font-display text-2xl font-bold tracking-tight">Instagram &amp; TikTok Lifetime Access</h3>
           <p className="mx-auto mt-3 max-w-sm text-muted-foreground">
             Plan prices are shown inside your account. Sign up or log in to view them.
           </p>

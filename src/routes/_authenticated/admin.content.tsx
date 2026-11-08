@@ -14,6 +14,7 @@ import { DEFAULT_HERO, useSiteContent, type FaqItem, type Hero } from "@/lib/con
 import type { Json } from "@/integrations/supabase/types";
 
 export const Route = createFileRoute("/_authenticated/admin/content")({
+  head: () => ({ meta: [{ title: "Manage Website Content — LARPFY" }, { name: "description", content: "Private LARPFY website content management." }, { property: "og:title", content: "Manage Website Content — LARPFY" }, { property: "og:description", content: "Manage LARPFY site content securely." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: ContentAdmin,
 });
 

@@ -7,7 +7,6 @@ import { usePlans } from "@/lib/content";
 import { PlanPaymentDialog } from "@/components/site/PlanPaymentDialog";
 import instagramLogo from "@/assets/instagram-plan.png";
 import tiktokLogo from "@/assets/tiktok-plan.png";
-import shopifyLogo from "@/assets/shopify-logo.svg";
 
 export function PlatformPlans() {
   const { data, isLoading, error } = usePlans();
@@ -48,11 +47,10 @@ export function PlatformPlans() {
   const platforms = [
     { name: "Instagram", logo: instagramLogo, wordClass: "word-ig", glowClass: "glyph-ig" },
     { name: "TikTok", logo: tiktokLogo, wordClass: "word-tt", glowClass: "glyph-tt" },
-    { name: "Shopify", logo: shopifyLogo, wordClass: "font-display font-semibold", glowClass: "" },
   ];
 
   return (
-    <div className="mx-auto max-w-4xl" aria-label="Instagram, TikTok and Shopify plans">
+    <div className="mx-auto max-w-4xl" aria-label="Instagram and TikTok lifetime plans">
       <div ref={viewportRef} className="platform-plans-window"
         onPointerDown={(event) => { pointerStart.current = { x: event.clientX, y: event.clientY }; }}
         onPointerMove={(event) => {
@@ -105,6 +103,7 @@ export function PlatformPlans() {
         ))}
       </div>
       <PlanPaymentDialog plan={paymentPlan} open={paymentPlan !== null} onOpenChange={(open) => { if (!open) setPaymentPlan(null); }} />
+      <p className="mt-6 text-center text-sm text-muted-foreground">Daily, weekly or monthly plans: <a className="text-primary underline" href="https://t.me/Insightseditorall_bot" target="_blank" rel="noopener noreferrer">Insights Editor bot</a> · <a className="text-primary underline" href="https://t.me/TheDanielBrooks" target="_blank" rel="noopener noreferrer">Contact owner</a></p>
     </div>
   );
 }

@@ -16,6 +16,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { mediaUrl } from "@/lib/content";
 
 export const Route = createFileRoute("/_authenticated/admin/videos")({
+  head: () => ({ meta: [{ title: "Manage Demo Videos — LARPFY" }, { name: "description", content: "Private LARPFY demo video management." }, { property: "og:title", content: "Manage Demo Videos — LARPFY" }, { property: "og:description", content: "Manage LARPFY recording demonstrations securely." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: VideosAdmin,
 });
 
