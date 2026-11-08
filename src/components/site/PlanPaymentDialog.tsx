@@ -57,7 +57,7 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
         <div className="checkout-head">
           <span className="checkout-secure"><Lock /> Secure checkout</span>
           <DialogTitle className="checkout-title">Complete your order</DialogTitle>
-          <DialogDescription className="checkout-sub">Pay with USDT. Your plan activates automatically.</DialogDescription>
+          <DialogDescription className="checkout-sub">Lifetime access · No expiry · Pay with USDT.</DialogDescription>
         </div>
 
         <div className="checkout-body">
@@ -81,11 +81,11 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
           </Button>
 
           <ul className="checkout-trust">
-            <li><Zap /> Instant activation</li>
+            <li><Zap /> Verified fulfillment</li>
             <li><ShieldCheck /> Encrypted</li>
             <li><Clock /> 60 min window</li>
           </ul>
-          <p className="checkout-foot">After payment, a Telegram button appears on your Billing page to send your screenshot and receive your APK & Access API Key.</p>
+          <p className="checkout-foot">After payment verification, your product's access key and APK appear in your purchase history. Existing device limits apply.</p>
         </div>
       </DialogContent>
     </Dialog>

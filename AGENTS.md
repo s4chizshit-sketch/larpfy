@@ -26,7 +26,7 @@
 - Paid Telegram drafts preserve the purchase's stored plan name, so custom billing periods remain accurate.
 - Account and payment reporting uses the protected admin pages, not Telegram bots; successful payment callbacks acknowledge database activation independently of external messaging.
 - Checkout callback origins must match the server request origin, and payment activation must match the stored provider reference.
-- Checkout verifies the host key fingerprint before creating an invoice, preventing payments while automatic activation is not configured.
+- Lifetime checkout uses the authenticated editor bridge and refuses invoice creation without its capability check; legacy key sync is retained only for existing orders.
 - Checkout refreshes an expiring browser session before invoice creation and sends missing/invalid sessions to login; never retry invoice creation automatically, to avoid duplicate orders.
 - Global media rules must not override component-defined heights; explicit logo dimensions prevent header overflow and layout shifts.
 - Shared logo assets, root light-theme tokens and installable-app icons define site branding; keep media/device rendering and database-backed content independent so branding changes do not alter behavior.
@@ -38,3 +38,4 @@
 - OxaPay webhook activation is authorized by a SHA-256 fingerprint of the host's OxaPay key stored in `private_config`; the admin layout re-syncs it on every admin visit, so payments activate only after the admin has opened the admin panel once on that host.
 - On Vercel, server auth/database calls use the browser's build-time backend URL and publishable key (`alignServerBackend`); a mismatched host SUPABASE_URL made every signed-in request fail as an expired login.
 - Showcase recordings are H.264 MP4s capped at 720px wide with faststart, listed before WebM fallbacks, and covered by their still image until frames are playing; this keeps phone decoders light and avoids black screens.
+- Website lifetime offers use an additive catalog view; old plans and purchase records stay untouched. The bot authority owns atomic capacity reservations, provider verification and real license issuance; website adapters fail closed and downloads proxy authenticated product-specific APK bytes without exposing provider URLs.

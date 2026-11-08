@@ -27,15 +27,14 @@ export function useSiteContent() {
 
 export function usePlans() {
   return useQuery({
-    queryKey: ["plans", "public"],
+    queryKey: ["plans", "lifetime", "public"],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from("plans")
+        .from("lifetime_editor_catalog")
         .select("*")
-        .eq("active", true)
         .order("sort_order");
       if (error) throw error;
-      return data;
+      return (data ?? []).map((p) => ({ ...p, id: p.id ?? "", name: p.name ?? "", price: p.price ?? 25, billing_period: "once", features: p.features ?? [], cta: p.cta ?? "Get lifetime access" }));
     },
   });
 }

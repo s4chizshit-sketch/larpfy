@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "@/components/app/AppShell";
 import { PlatformPlans } from "@/components/site/PlatformPlans";
 import { useProfile } from "@/lib/auth";
-import { PlanPriceEditor } from "@/components/app/PlanPriceEditor";
+import { LifetimePurchases } from "@/components/app/LifetimePurchases";
 import { PlanHistory } from "@/components/app/PlanHistory";
 import { HowToGetPlan } from "@/components/app/HowToGetPlan";
 import { ProSubscriptionCard } from "@/components/app/ProSubscription";
@@ -26,11 +26,11 @@ function Billing() {
       <PageHeader title="Pricing / Subscription" sub="Your current plan and available upgrades." />
       <ProSubscriptionCard />
       <HowToGetPlan />
+      <LifetimePurchases />
       <PlanHistory />
-      {data?.isAdmin && <PlanPriceEditor />}
       <h2 className="pro-title mb-6 mt-12 text-xl">Available plans</h2>
       <PlatformPlans />
-      <p className="billing-payment-note">Pay with USDT — your plan activates automatically after payment.</p>
+      <p className="billing-payment-note">Lifetime access is delivered only after payment verification.</p>
     </>
   );
 }
