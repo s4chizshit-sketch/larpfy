@@ -10,7 +10,7 @@ const nav: NavItem[] = [
   { to: "/dashboard/tiktok", label: "TikTok Editor", icon: TiktokIcon },
   { to: "/dashboard/shopify", label: "Shopify Editor", icon: ShopifyIcon },
   { to: "/dashboard/projects", label: "My Projects", icon: FolderKanban, adminOnly: true },
-  { to: "/dashboard/billing", label: "Pricing / Subscription", icon: CreditCard },
+  { to: "/dashboard/billing", label: "Purchases & Access", icon: CreditCard },
   { to: "/dashboard/settings", label: "Settings", icon: Settings },
 ];
 
