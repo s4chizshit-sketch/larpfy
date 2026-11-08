@@ -423,7 +423,19 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      lifetime_editor_catalog: {
+        Row: {
+          billing_period: string | null
+          cta: string | null
+          features: string[] | null
+          id: string | null
+          name: string | null
+          price: number | null
+          product: string | null
+          sort_order: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       add_visit_time: { Args: { _seconds: number }; Returns: undefined }
