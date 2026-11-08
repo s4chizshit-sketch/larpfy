@@ -10,6 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { accountDestination } from "@/lib/account-destination";
 
 export const Route = createFileRoute("/login")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Login — LARPFY" },

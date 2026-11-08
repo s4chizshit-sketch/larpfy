@@ -7,6 +7,7 @@ import { useSiteContent } from "@/lib/content";
 import { ShopifySection } from "@/components/site/ShopifySection";
 
 export const Route = createFileRoute("/")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "LARPFY — Your Social Analytics, Your Way" },

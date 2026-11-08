@@ -8,6 +8,7 @@ import { ProSubscriptionCard } from "@/components/app/ProSubscription";
 import { LifetimePurchases } from "@/components/app/LifetimePurchases";
 
 export const Route = createFileRoute("/_authenticated/dashboard/")({
+  staticData: { sitemap: false },
   head: () => ({ meta: [
     { title: "Your Workspace — LARPFY" },
     { name: "description", content: "Your LARPFY subscription and platform workspace." },

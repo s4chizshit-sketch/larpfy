@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { CtaBand, HowItWorks, PlatformSection, PublicLayout } from "@/components/site/Sections";
 
 export const Route = createFileRoute("/features")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Features — LARPFY" },

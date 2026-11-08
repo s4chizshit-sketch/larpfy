@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { PublicLayout, SectionHeading } from "@/components/site/Sections";
 import { PlatformPlans } from "@/components/site/PlatformPlans";
 export const Route = createFileRoute("/instagram")({
+  staticData: { sitemap: true },
   head: () => ({ meta: [
     { title: "Instagram Editor Lifetime — LARPFY" },
     { name: "description", content: "Instagram Editor lifetime access for $25, with a matching APK and private product key after verified payment." },

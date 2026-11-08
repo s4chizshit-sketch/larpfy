@@ -8,6 +8,7 @@ import { EditorProductInfo } from "@/components/site/EditorProductInfo";
 import { PlatformPlans } from "@/components/site/PlatformPlans";
 
 export const Route = createFileRoute("/_authenticated/dashboard/tiktok")({
+  staticData: { sitemap: false },
   head: () => ({ meta: [
     { title: "TikTok App UI & Customization — LARPFY" },
     { name: "description", content: "Watch TikTok demo recordings and customization tutorials in your LARPFY workspace." },

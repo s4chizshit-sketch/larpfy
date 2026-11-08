@@ -8,6 +8,7 @@ import { EditorProductInfo } from "@/components/site/EditorProductInfo";
 import { PlatformPlans } from "@/components/site/PlatformPlans";
 
 export const Route = createFileRoute("/_authenticated/dashboard/instagram")({
+  staticData: { sitemap: false },
   head: () => ({ meta: [
     { title: "Instagram App UI & Customization — LARPFY" },
     { name: "description", content: "Watch Instagram demo recordings and customization tutorials in your LARPFY workspace." },

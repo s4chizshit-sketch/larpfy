@@ -4,6 +4,7 @@ import { FaqList, PublicLayout, SectionHeading } from "@/components/site/Section
 import { PlatformPlans } from "@/components/site/PlatformPlans";
 
 export const Route = createFileRoute("/pricing")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Pricing — LARPFY" },

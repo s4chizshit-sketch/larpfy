@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 
-export const Route = createFileRoute("/api/public/lifetime-payment")({ server: { handlers: { POST: async ({ request }) => {
+export const Route = createFileRoute("/api/public/lifetime-payment")({
+  staticData: { sitemap: false }, server: { handlers: { POST: async ({ request }) => {
   const key = process.env["OXAPAY_MERCHANT_API_KEY"]?.trim();
   const signature = request.headers.get("hmac");
   if (!key || !signature || !/^[a-f0-9]{128}$/i.test(signature)) return new Response("Invalid signature", { status: 401 });

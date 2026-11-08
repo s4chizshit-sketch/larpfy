@@ -9,6 +9,7 @@ const INSTAGRAM_URL = "https://www.instagram.com/";
 const TELEGRAM_URL = "https://t.me/+HAwfutUg1gNlZDZl";
 
 export const Route = createFileRoute("/about")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "About — LARPFY" },

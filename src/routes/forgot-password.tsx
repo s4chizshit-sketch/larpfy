@@ -9,8 +9,10 @@ import { AuthShell, FieldError } from "@/components/AuthShell";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/forgot-password")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
+      { name: "robots", content: "noindex" },
       { title: "Forgot Password — LARPFY" },
       { name: "description", content: "Reset your LARPFY password." },
       { property: "og:title", content: "Forgot Password — LARPFY" },

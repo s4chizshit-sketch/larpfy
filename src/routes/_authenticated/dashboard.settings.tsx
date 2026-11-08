@@ -10,6 +10,7 @@ import { useProfile } from "@/lib/auth";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/_authenticated/dashboard/settings")({
+  staticData: { sitemap: false },
   head: () => ({ meta: [{ title: "Account Settings — LARPFY" }, { name: "description", content: "Manage your private LARPFY account settings." }, { property: "og:title", content: "Account Settings — LARPFY" }, { property: "og:description", content: "Your LARPFY profile and account settings." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: Settings,
 });

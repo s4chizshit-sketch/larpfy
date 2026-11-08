@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/r/$code")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "You're invited — LARPFY" },

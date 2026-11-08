@@ -7,6 +7,7 @@ import { HowToGetPlan } from "@/components/app/HowToGetPlan";
 import { ProSubscriptionCard } from "@/components/app/ProSubscription";
 
 export const Route = createFileRoute("/_authenticated/dashboard/billing")({
+  staticData: { sitemap: false },
   head: () => ({ meta: [
     { title: "Pricing & Subscription | LARPFY" },
     { name: "description", content: "Buy Instagram or TikTok lifetime access and view your own keys, APKs and purchase history." },
