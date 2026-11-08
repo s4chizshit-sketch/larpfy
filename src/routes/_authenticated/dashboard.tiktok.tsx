@@ -4,6 +4,8 @@ import { NewProjectButton, ProjectGrid } from "@/components/app/ProjectGrid";
 import { TiktokVideoShowcase } from "@/components/site/TiktokVideoShowcase";
 import { TiktokCustomizeVideoSeries } from "@/components/site/TiktokCustomizeVideoSeries";
 import { useProfile } from "@/lib/auth";
+import { EditorProductInfo } from "@/components/site/EditorProductInfo";
+import { PlatformPlans } from "@/components/site/PlatformPlans";
 
 export const Route = createFileRoute("/_authenticated/dashboard/tiktok")({
   head: () => ({ meta: [
@@ -28,6 +30,8 @@ function TiktokPage() {
           <TiktokCustomizeVideoSeries />
         </div>
       )}
+      <EditorProductInfo product="tiktok" />
+      <div className="mt-10"><PlatformPlans /></div>
     </>
   );
 }

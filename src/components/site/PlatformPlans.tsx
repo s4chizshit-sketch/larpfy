@@ -7,6 +7,7 @@ import { usePlans } from "@/lib/content";
 import { PlanPaymentDialog } from "@/components/site/PlanPaymentDialog";
 import instagramLogo from "@/assets/instagram-plan.png";
 import tiktokLogo from "@/assets/tiktok-plan.png";
+import { EditorProductInfo } from "./EditorProductInfo";
 
 export function PlatformPlans() {
   const { data, isLoading, error } = usePlans();
@@ -90,6 +91,7 @@ export function PlatformPlans() {
                     </div>
                   ))}
                 </div>
+                <EditorProductInfo product={platform.name === "Instagram" ? "instagram" : "tiktok"} />
               </article>
             );
           })}

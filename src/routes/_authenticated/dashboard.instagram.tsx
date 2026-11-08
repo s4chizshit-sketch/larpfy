@@ -4,6 +4,8 @@ import { NewProjectButton, ProjectGrid } from "@/components/app/ProjectGrid";
 import { InstagramVideoShowcase } from "@/components/site/InstagramVideoShowcase";
 import { CustomizeVideoSeries } from "@/components/site/CustomizeVideoSeries";
 import { useProfile } from "@/lib/auth";
+import { EditorProductInfo } from "@/components/site/EditorProductInfo";
+import { PlatformPlans } from "@/components/site/PlatformPlans";
 
 export const Route = createFileRoute("/_authenticated/dashboard/instagram")({
   head: () => ({ meta: [
@@ -28,6 +30,8 @@ function InstagramPage() {
           <CustomizeVideoSeries />
         </div>
       )}
+      <EditorProductInfo product="instagram" />
+      <div className="mt-10"><PlatformPlans /></div>
     </>
   );
 }
