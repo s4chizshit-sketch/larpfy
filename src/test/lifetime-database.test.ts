@@ -26,7 +26,7 @@ describe.skipIf(!enabled)("Standalone SQL on disposable PostgreSQL (synthetic fi
     await sql`INSERT INTO public.lifetime_key_stock(product,key_code,order_id) VALUES ('instagram','SYNTHETIC-IG-FIXTURE',${oid}),('tiktok','SYNTHETIC-TT-FIXTURE',null)`;
   });
   afterAll(async () => { await sql.end(); });
-  const fulfill = (patch: unknown[] = []) => sql`SELECT public.fulfill_lifetime_order(${oid},${patch[0] ?? 'local-fixture'},'fixture-track',${patch.length > 1 ? patch[1] : 25},${patch.length > 2 ? patch[2] : 'USD'},${patch.length > 3 ? patch[3] : 'paid'},${patch.length > 4 ? patch[4] : oid}) as result`;
+  const fulfill = (patch: (string | number | null)[] = []) => sql`SELECT public.fulfill_lifetime_order(${oid},${patch[0] ?? 'local-fixture'},'fixture-track',${patch.length > 1 ? patch[1] : 25},${patch.length > 2 ? patch[2] : 'USD'},${patch.length > 3 ? patch[3] : 'paid'},${patch.length > 4 ? patch[4] : oid}) as result`;
   it("rejects unpaid status", async () => { await expect(fulfill(['local-fixture',25,'USD','pending'])).rejects.toThrow('Payment mismatch'); });
   it("rejects a forged authorization fingerprint", async () => { await expect(fulfill(['wrong'])).rejects.toThrow('forbidden'); });
   it("rejects mismatched amount", async () => { await expect(fulfill(['local-fixture',24])).rejects.toThrow('Payment mismatch'); });
@@ -69,7 +69,7 @@ describe.skipIf(!enabled)("Standalone SQL on disposable PostgreSQL (synthetic fi
     expect(new Set(results.map(r=>r[0].result.id)).size).toBe(1);
   });
   it("enforces combined 100 reservation capacity", async () => {
-    await sql.unsafe(`WITH o AS (INSERT INTO public.lifetime_orders(user_id,product) SELECT '${other}'::uuid,'instagram' FROM generate_series(1,98) RETURNING id) INSERT INTO public.lifetime_key_stock(product,key_code,order_id) SELECT 'instagram','SYNTHETIC-'||id::text,id FROM o`);
+    await sql.unsafe(`WITH o AS (INSERT INTO public.lifetime_orders(user_id,product,status) SELECT '${other}'::uuid,'instagram','expired' FROM generate_series(1,98) RETURNING id) INSERT INTO public.lifetime_key_stock(product,key_code,order_id) SELECT 'instagram','SYNTHETIC-'||id::text,id FROM o`);
     await expect(sql.begin(async tx => { await tx`SELECT set_config('test.uid',${other},true)`; return tx`SELECT public.reserve_lifetime_order('tiktok','local-fixture')`; })).rejects.toThrow('Lifetime capacity reached');
   });
 });
