@@ -16,8 +16,8 @@ export const Route = createFileRoute("/api/public/lifetime-apk")({
       const backend = process.env["SUPABASE_URL"];
       if (!key || !backend) return new Response("Not configured", { status: 503 });
       const db = createClient(backend, key, { global: { headers: { Authorization: bearer } }, auth: { persistSession: false } });
-      const { data: receipt } = await db.from("lifetime_orders").select("*").eq("id", input.data.purchaseId).eq("user_id", identity.user.id).maybeSingle();
-      if (receipt?.status !== "fulfilled") return new Response("Download unavailable", { status: 403 });
+      const { data: receipt } = await db.from("lifetime_orders").select("product,status,payment_verified_at").eq("id", input.data.purchaseId).eq("user_id", identity.user.id).maybeSingle();
+      if (receipt?.status !== "fulfilled" || !receipt.payment_verified_at || !["instagram", "tiktok"].includes(receipt.product)) return new Response("Download unavailable", { status: 403 });
       const { data: apk, error: downloadError } = await db.storage.from("lifetime-apks").download(`${receipt.product}.apk`);
       if (downloadError || !apk) return new Response("APK unavailable", { status: 503 });
       return new Response(apk, { headers: {
