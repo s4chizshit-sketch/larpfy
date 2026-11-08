@@ -1,13 +1,13 @@
 import { CreditCard, KeyRound, MousePointerClick, Smartphone } from "lucide-react";
 
 const steps = [
-  { icon: MousePointerClick, t: "Choose a Plan", d: "Select your plan and click Get Plan." },
-  { icon: CreditCard, t: "Complete Payment", d: "Choose your payment method and complete the payment." },
-  { icon: KeyRound, t: "Get Access", d: "Receive your APK & Access API Key after payment." },
+  { icon: MousePointerClick, t: "Choose lifetime access", d: "Select Instagram or TikTok. Shorter plans are sold separately in the Telegram bot." },
+  { icon: CreditCard, t: "Pay securely", d: "Sign in and complete the $25 USDT payment through OxaPay." },
+  { icon: KeyRound, t: "Get verified access", d: "After server verification, reopen purchase history for your matching APK and access key." },
   {
     icon: Smartphone,
     t: "Install the App",
-    d: "Install the APK on your Android/iOS phone, open the app, enter your Access API Key, and start using it. ☺️",
+    d: "Download the matching APK on Android, install it, and enter your access key. Follow your product's how-to video.",
   },
 ];
 
