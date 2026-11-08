@@ -38,6 +38,7 @@ import { Route as AuthenticatedDashboardSettingsRouteImport } from './routes/_au
 import { Route as AuthenticatedDashboardShopifyRouteImport } from './routes/_authenticated/dashboard.shopify'
 import { Route as AuthenticatedDashboardTiktokRouteImport } from './routes/_authenticated/dashboard.tiktok'
 import { Route as ApiPublicLifetimeApkRouteImport } from './routes/api/public/lifetime-apk'
+import { Route as ApiPublicLifetimePaymentRouteImport } from './routes/api/public/lifetime-payment'
 import { Route as ApiPublicOxapayWebhookRouteImport } from './routes/api/public/oxapay-webhook'
 import { Route as AuthenticatedDashboardEditorIdRouteImport } from './routes/_authenticated/dashboard.editor.$id'
 
@@ -196,6 +197,12 @@ const ApiPublicLifetimeApkRoute = ApiPublicLifetimeApkRouteImport.update({
   path: '/api/public/lifetime-apk',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicLifetimePaymentRoute =
+  ApiPublicLifetimePaymentRouteImport.update({
+    id: '/api/public/lifetime-payment',
+    path: '/api/public/lifetime-payment',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicOxapayWebhookRoute = ApiPublicOxapayWebhookRouteImport.update({
   id: '/api/public/oxapay-webhook',
   path: '/api/public/oxapay-webhook',
@@ -235,6 +242,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/shopify': typeof AuthenticatedDashboardShopifyRoute
   '/dashboard/tiktok': typeof AuthenticatedDashboardTiktokRoute
   '/api/public/lifetime-apk': typeof ApiPublicLifetimeApkRoute
+  '/api/public/lifetime-payment': typeof ApiPublicLifetimePaymentRoute
   '/api/public/oxapay-webhook': typeof ApiPublicOxapayWebhookRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
@@ -265,6 +273,7 @@ export interface FileRoutesByTo {
   '/dashboard/shopify': typeof AuthenticatedDashboardShopifyRoute
   '/dashboard/tiktok': typeof AuthenticatedDashboardTiktokRoute
   '/api/public/lifetime-apk': typeof ApiPublicLifetimeApkRoute
+  '/api/public/lifetime-payment': typeof ApiPublicLifetimePaymentRoute
   '/api/public/oxapay-webhook': typeof ApiPublicOxapayWebhookRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
@@ -299,6 +308,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/shopify': typeof AuthenticatedDashboardShopifyRoute
   '/_authenticated/dashboard/tiktok': typeof AuthenticatedDashboardTiktokRoute
   '/api/public/lifetime-apk': typeof ApiPublicLifetimeApkRoute
+  '/api/public/lifetime-payment': typeof ApiPublicLifetimePaymentRoute
   '/api/public/oxapay-webhook': typeof ApiPublicOxapayWebhookRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
@@ -333,6 +343,7 @@ export interface FileRouteTypes {
     | '/dashboard/shopify'
     | '/dashboard/tiktok'
     | '/api/public/lifetime-apk'
+    | '/api/public/lifetime-payment'
     | '/api/public/oxapay-webhook'
     | '/admin/'
     | '/dashboard/'
@@ -363,6 +374,7 @@ export interface FileRouteTypes {
     | '/dashboard/shopify'
     | '/dashboard/tiktok'
     | '/api/public/lifetime-apk'
+    | '/api/public/lifetime-payment'
     | '/api/public/oxapay-webhook'
     | '/admin'
     | '/dashboard'
@@ -396,6 +408,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/shopify'
     | '/_authenticated/dashboard/tiktok'
     | '/api/public/lifetime-apk'
+    | '/api/public/lifetime-payment'
     | '/api/public/oxapay-webhook'
     | '/_authenticated/admin/'
     | '/_authenticated/dashboard/'
@@ -418,6 +431,7 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   RCodeRoute: typeof RCodeRoute
   ApiPublicLifetimeApkRoute: typeof ApiPublicLifetimeApkRoute
+  ApiPublicLifetimePaymentRoute: typeof ApiPublicLifetimePaymentRoute
   ApiPublicOxapayWebhookRoute: typeof ApiPublicOxapayWebhookRoute
 }
 
@@ -626,6 +640,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicLifetimeApkRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/lifetime-payment': {
+      id: '/api/public/lifetime-payment'
+      path: '/api/public/lifetime-payment'
+      fullPath: '/api/public/lifetime-payment'
+      preLoaderRoute: typeof ApiPublicLifetimePaymentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/oxapay-webhook': {
       id: '/api/public/oxapay-webhook'
       path: '/api/public/oxapay-webhook'
@@ -719,6 +740,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   RCodeRoute: RCodeRoute,
   ApiPublicLifetimeApkRoute: ApiPublicLifetimeApkRoute,
+  ApiPublicLifetimePaymentRoute: ApiPublicLifetimePaymentRoute,
   ApiPublicOxapayWebhookRoute: ApiPublicOxapayWebhookRoute,
 }
 export const routeTree = rootRouteImport

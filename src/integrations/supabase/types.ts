@@ -68,6 +68,80 @@ export type Database = {
         }
         Relationships: []
       }
+      lifetime_key_stock: {
+        Row: {
+          id: string
+          imported_at: string
+          key_code: string
+          order_id: string | null
+          product: string
+        }
+        Insert: {
+          id?: string
+          imported_at?: string
+          key_code: string
+          order_id?: string | null
+          product: string
+        }
+        Update: {
+          id?: string
+          imported_at?: string
+          key_code?: string
+          order_id?: string | null
+          product?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lifetime_key_stock_order_id_fkey"
+            columns: ["order_id"]
+            isOneToOne: true
+            referencedRelation: "lifetime_orders"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lifetime_orders: {
+        Row: {
+          access_key: string | null
+          amount: number
+          created_at: string
+          currency: string
+          id: string
+          payment_url: string | null
+          payment_verified_at: string | null
+          product: string
+          status: string
+          track_id: string | null
+          user_id: string
+        }
+        Insert: {
+          access_key?: string | null
+          amount?: number
+          created_at?: string
+          currency?: string
+          id?: string
+          payment_url?: string | null
+          payment_verified_at?: string | null
+          product: string
+          status?: string
+          track_id?: string | null
+          user_id: string
+        }
+        Update: {
+          access_key?: string | null
+          amount?: number
+          created_at?: string
+          currency?: string
+          id?: string
+          payment_url?: string | null
+          payment_verified_at?: string | null
+          product?: string
+          status?: string
+          track_id?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       payment_orders: {
         Row: {
           amount: number
@@ -440,13 +514,37 @@ export type Database = {
     Functions: {
       add_visit_time: { Args: { _seconds: number }; Returns: undefined }
       admin_stats: { Args: never; Returns: Json }
+      attach_lifetime_invoice: {
+        Args: { _order_id: string; _track_id: string; _url: string }
+        Returns: undefined
+      }
       create_payment_order: { Args: { _plan_id: string }; Returns: Json }
+      fulfill_lifetime_order: {
+        Args: {
+          _amount: number
+          _currency: string
+          _key_hash: string
+          _order_id: string
+          _provider_order_id: string
+          _status: string
+          _track_id: string
+        }
+        Returns: Json
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
         Returns: boolean
+      }
+      import_lifetime_stock: {
+        Args: { _keys: string[]; _product: string }
+        Returns: number
+      }
+      lookup_lifetime_callback: {
+        Args: { _key_hash: string; _order_id: string }
+        Returns: Json
       }
       oxapay_ack_alert: {
         Args: { _key_hash: string; _order_id: string }
@@ -459,6 +557,10 @@ export type Database = {
       }
       record_my_visit: {
         Args: { _country: string; _ip: string }
+        Returns: Json
+      }
+      reserve_lifetime_order: {
+        Args: { _key_hash: string; _product: string }
         Returns: Json
       }
       set_order_track: {

@@ -8,6 +8,27 @@
       "when": 1794125107501,
       "tag": "0000_lifetime_editor_catalog",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1794126479111,
+      "tag": "0001_standalone_lifetime_delivery",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794126555085,
+      "tag": "0002_lifetime_callback_lookup",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1794126584154,
+      "tag": "0003_private_lifetime_stock_import",
+      "breakpoints": true
     }
   ]
 }

@@ -16,6 +16,8 @@ import { AuthProvider } from "@/lib/auth";
 import { Toaster } from "@/components/ui/sonner";
 import { ContentGuard } from "@/components/site/ContentGuard";
 import { supabase } from "@/integrations/supabase/client";
+import { recoverModuleLoad, isModuleLoadFailure } from "@/lib/module-recovery";
+import { Button } from "@/components/ui/button";
 
 function NotFoundComponent() {
   return (
@@ -38,6 +40,7 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
+    if (recoverModuleLoad(error, window.sessionStorage, () => window.location.reload())) return;
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
   return (
@@ -46,15 +49,16 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
         <h1 className="text-xl font-semibold tracking-tight text-foreground">This page didn't load</h1>
         <p className="mt-2 text-sm text-muted-foreground">Something went wrong on our end. You can try refreshing or head back home.</p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
-          <button
+          <Button
             onClick={() => {
+              if (isModuleLoadFailure(error)) { window.location.reload(); return; }
               router.invalidate();
               reset();
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
           >
             Try again
-          </button>
+          </Button>
           <a href="/" className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground">
             Go home
           </a>
@@ -112,6 +116,14 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const router = useRouter();
+  useEffect(() => {
+    const handlePreloadError = (event: Event) => {
+      const payload = (event as Event & { payload?: unknown }).payload;
+      if (recoverModuleLoad(payload, window.sessionStorage, () => window.location.reload())) event.preventDefault();
+    };
+    window.addEventListener("vite:preloadError", handlePreloadError);
+    return () => window.removeEventListener("vite:preloadError", handlePreloadError);
+  }, []);
   useEffect(() => {
     const { data } = supabase.auth.onAuthStateChange((event) => {
       if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
