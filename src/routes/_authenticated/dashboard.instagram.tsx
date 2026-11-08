@@ -31,7 +31,7 @@ function InstagramPage() {
         </div>
       )}
       <EditorProductInfo product="instagram" />
-      <div className="mt-10"><PlatformPlans /></div>
+      <div className="mt-10"><PlatformPlans product="instagram" /></div>
     </>
   );
 }

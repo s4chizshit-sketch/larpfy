@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { FaqList, PublicLayout, SectionHeading } from "@/components/site/Sections";
 import { PlatformPlans } from "@/components/site/PlatformPlans";
 
@@ -28,6 +28,7 @@ function PricingPage() {
       <section className="hero-bg">
         <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
           <SectionHeading eyebrow="Pricing" title="Instagram & TikTok Lifetime Access" />
+          <nav className="mt-6 flex flex-wrap justify-center gap-6 text-sm text-primary"><Link to="/instagram" className="underline">Instagram Editor details</Link><Link to="/tiktok" className="underline">TikTok Editor details</Link></nav>
           <div className="mt-14 scroll-mt-28" id="plans"><PlatformPlans /></div>
         </div>
       </section>

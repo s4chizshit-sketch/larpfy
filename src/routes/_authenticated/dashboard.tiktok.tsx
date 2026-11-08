@@ -31,7 +31,7 @@ function TiktokPage() {
         </div>
       )}
       <EditorProductInfo product="tiktok" />
-      <div className="mt-10"><PlatformPlans /></div>
+      <div className="mt-10"><PlatformPlans product="tiktok" /></div>
     </>
   );
 }

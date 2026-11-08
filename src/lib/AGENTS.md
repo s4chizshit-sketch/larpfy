@@ -1,0 +1,2 @@
+- Lifetime history excludes secret columns; keys are retrieved through the verified-owner, no-store delivery RPC into transient component state, not caches or browser storage.
+- OxaPay retries reuse the first transaction's durable reservation claim and never recreate uncertain invoices; issued-invoice stock stays reserved for safely verified late settlement.

@@ -12,7 +12,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { lifetimeAvailability } from "@/lib/lifetime.functions";
 
-export function PlatformPlans() {
+export function PlatformPlans({ product }: { product?: "instagram" | "tiktok" } = {}) {
   const { data, isLoading, error } = usePlans();
   const availabilityFn = useServerFn(lifetimeAvailability);
   const availability = useQuery({ queryKey: ["lifetime-availability"], queryFn: () => availabilityFn(), staleTime: 15000, retry: false });
@@ -53,7 +53,7 @@ export function PlatformPlans() {
   const platforms = [
     { name: "Instagram", logo: instagramLogo, wordClass: "word-ig", glowClass: "glyph-ig" },
     { name: "TikTok", logo: tiktokLogo, wordClass: "word-tt", glowClass: "glyph-tt" },
-  ];
+  ].filter(platform => !product || platform.name.toLowerCase() === product);
 
   return (
     <div className="mx-auto max-w-4xl" aria-label="Instagram and TikTok lifetime plans">
