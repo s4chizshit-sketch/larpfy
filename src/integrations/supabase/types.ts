@@ -531,6 +531,7 @@ export type Database = {
         }
         Returns: Json
       }
+      get_lifetime_delivery: { Args: { _order_id: string }; Returns: Json }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -542,9 +543,20 @@ export type Database = {
         Args: { _keys: string[]; _product: string }
         Returns: number
       }
+      lifetime_availability: { Args: never; Returns: Json }
       lookup_lifetime_callback: {
         Args: { _key_hash: string; _order_id: string }
         Returns: Json
+      }
+      mark_lifetime_terminal: {
+        Args: {
+          _key_hash: string
+          _order_id: string
+          _provider_order_id: string
+          _status: string
+          _track_id: string
+        }
+        Returns: undefined
       }
       oxapay_ack_alert: {
         Args: { _key_hash: string; _order_id: string }

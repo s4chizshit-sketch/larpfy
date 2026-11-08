@@ -7,31 +7,44 @@ function merchantKey() { const key = process.env["OXAPAY_MERCHANT_API_KEY"]?.tri
 export async function verifyCallbackOrder(input: unknown) {
   const order = input as PaymentOrder;
   if (!order?.track_id) throw new Error("Order unavailable");
+  if ((input as { status?: string }).status === "fulfilled") return;
   const key = merchantKey();
   const response = await fetch(`https://api.oxapay.com/v1/payment/${encodeURIComponent(order.track_id)}`, { headers: { merchant_api_key: key }, signal: AbortSignal.timeout(15000) });
   if (!response.ok) throw new Error("Provider unavailable");
   const json = await response.json() as { data?: Record<string, unknown> };
-  if (!json.data || !verifiedLifetimePayment(order,json.data)) throw new Error("Payment mismatch");
+  if (!json.data) throw new Error("Payment verification unavailable");
+  if (await updateTerminalOrder(order, json.data)) return;
+  if (!verifiedLifetimePayment(order,json.data)) throw new Error("Payment mismatch");
   const { error } = await publicDb().rpc("fulfill_lifetime_order", { _order_id: order.id, _key_hash: await sha256Hex(key), _track_id: order.track_id, _amount:25,_currency:"USD",_status:"paid",_provider_order_id:order.id });
   if (error) throw new Error("Delivery unavailable");
 }
 export async function verifyStandaloneOrder(id: string, db: SupabaseClient<Database>) {
-  const { data: order, error } = await db.from("lifetime_orders").select("*").eq("id", id).maybeSingle();
+  const { data: order, error } = await db.from("lifetime_orders").select("id,user_id,product,amount,currency,status,track_id,payment_url,created_at,payment_verified_at").eq("id", id).maybeSingle();
   if (error || !order) throw new Error("Order unavailable.");
   if (order.status === "fulfilled") return order;
-  if (!order.track_id || order.status !== "pending") return order;
+  if (!order.track_id || !["pending", "expired"].includes(order.status)) return order;
   const key = merchantKey();
   const response = await fetch(`https://api.oxapay.com/v1/payment/${encodeURIComponent(order.track_id)}`, { headers: { merchant_api_key: key }, signal: AbortSignal.timeout(15000) });
   if (!response.ok) throw new Error("Payment verification unavailable.");
   const json = await response.json() as { data?: Record<string, unknown> };
   if (!json.data) throw new Error("Payment verification unavailable.");
+  if (await updateTerminalOrder(order, json.data)) return { ...order, status: "expired" };
   if (String(json.data.status).toLowerCase() !== "paid") return order;
   if (!verifiedLifetimePayment(order, json.data)) throw new Error("Payment mismatch.");
   const { error: fulfillError } = await publicDb().rpc("fulfill_lifetime_order", { _order_id: order.id, _key_hash: await sha256Hex(key), _track_id: order.track_id, _amount: Number(json.data.amount), _currency: String(json.data.currency), _status: String(json.data.status), _provider_order_id: String(json.data.order_id) });
   if (fulfillError) throw new Error("Payment delivery unavailable.");
-  const { data: receipt, error: readError } = await db.from("lifetime_orders").select("*").eq("id", id).single();
+  const { data: receipt, error: readError } = await db.from("lifetime_orders").select("id,user_id,product,amount,currency,status,track_id,payment_url,created_at,payment_verified_at").eq("id", id).single();
   if (readError) throw new Error("Purchase unavailable.");
   return receipt;
+}
+
+async function updateTerminalOrder(order: PaymentOrder, data: Record<string, unknown>) {
+  const status = String(data.status).toLowerCase();
+  if (!["expired", "failed"].includes(status)) return false;
+  if (String(data.track_id) !== order.track_id || data.order_id !== order.id || Number(data.amount) !== 25 || String(data.currency).toUpperCase() !== "USD") throw new Error("Payment mismatch");
+  const { error } = await publicDb().rpc("mark_lifetime_terminal", { _order_id: order.id, _key_hash: await sha256Hex(merchantKey()), _track_id: String(order.track_id), _provider_order_id: order.id, _status: status });
+  if (error) throw new Error("Payment verification unavailable");
+  return true;
 }
 
 export async function standaloneCheckout(product: string, origin: string, db: SupabaseClient<Database>) {

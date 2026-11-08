@@ -16,12 +16,14 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as FeaturesRouteImport } from './routes/features'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as InstagramRouteImport } from './routes/instagram'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as TiktokRouteImport } from './routes/tiktok'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as RCodeRouteImport } from './routes/r.$code'
@@ -76,6 +78,11 @@ const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
   path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InstagramRoute = InstagramRouteImport.update({
+  id: '/instagram',
+  path: '/instagram',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -104,6 +111,11 @@ const SignupRoute = SignupRouteImport.update({
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TiktokRoute = TiktokRouteImport.update({
+  id: '/tiktok',
+  path: '/tiktok',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
@@ -222,12 +234,14 @@ export interface FileRoutesByFullPath {
   '/faq': typeof FaqRoute
   '/features': typeof FeaturesRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/instagram': typeof InstagramRoute
   '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
+  '/tiktok': typeof TiktokRoute
   '/admin': typeof AuthenticatedAdminRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRouteWithChildren
   '/r/$code': typeof RCodeRoute
@@ -255,12 +269,14 @@ export interface FileRoutesByTo {
   '/faq': typeof FaqRoute
   '/features': typeof FeaturesRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/instagram': typeof InstagramRoute
   '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
+  '/tiktok': typeof TiktokRoute
   '/r/$code': typeof RCodeRoute
   '/admin/content': typeof AuthenticatedAdminContentRoute
   '/admin/pricing': typeof AuthenticatedAdminPricingRoute
@@ -288,12 +304,14 @@ export interface FileRoutesById {
   '/faq': typeof FaqRoute
   '/features': typeof FeaturesRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/instagram': typeof InstagramRoute
   '/login': typeof LoginRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
   '/terms': typeof TermsRoute
+  '/tiktok': typeof TiktokRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteWithChildren
   '/r/$code': typeof RCodeRoute
@@ -323,12 +341,14 @@ export interface FileRouteTypes {
     | '/faq'
     | '/features'
     | '/forgot-password'
+    | '/instagram'
     | '/login'
     | '/pricing'
     | '/privacy'
     | '/reset-password'
     | '/signup'
     | '/terms'
+    | '/tiktok'
     | '/admin'
     | '/dashboard'
     | '/r/$code'
@@ -356,12 +376,14 @@ export interface FileRouteTypes {
     | '/faq'
     | '/features'
     | '/forgot-password'
+    | '/instagram'
     | '/login'
     | '/pricing'
     | '/privacy'
     | '/reset-password'
     | '/signup'
     | '/terms'
+    | '/tiktok'
     | '/r/$code'
     | '/admin/content'
     | '/admin/pricing'
@@ -388,12 +410,14 @@ export interface FileRouteTypes {
     | '/faq'
     | '/features'
     | '/forgot-password'
+    | '/instagram'
     | '/login'
     | '/pricing'
     | '/privacy'
     | '/reset-password'
     | '/signup'
     | '/terms'
+    | '/tiktok'
     | '/_authenticated/admin'
     | '/_authenticated/dashboard'
     | '/r/$code'
@@ -423,12 +447,14 @@ export interface RootRouteChildren {
   FaqRoute: typeof FaqRoute
   FeaturesRoute: typeof FeaturesRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
+  InstagramRoute: typeof InstagramRoute
   LoginRoute: typeof LoginRoute
   PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   SignupRoute: typeof SignupRoute
   TermsRoute: typeof TermsRoute
+  TiktokRoute: typeof TiktokRoute
   RCodeRoute: typeof RCodeRoute
   ApiPublicLifetimeApkRoute: typeof ApiPublicLifetimeApkRoute
   ApiPublicLifetimePaymentRoute: typeof ApiPublicLifetimePaymentRoute
@@ -486,6 +512,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ForgotPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/instagram': {
+      id: '/instagram'
+      path: '/instagram'
+      fullPath: '/instagram'
+      preLoaderRoute: typeof InstagramRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -526,6 +559,13 @@ declare module '@tanstack/react-router' {
       path: '/terms'
       fullPath: '/terms'
       preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tiktok': {
+      id: '/tiktok'
+      path: '/tiktok'
+      fullPath: '/tiktok'
+      preLoaderRoute: typeof TiktokRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin': {
@@ -732,12 +772,14 @@ const rootRouteChildren: RootRouteChildren = {
   FaqRoute: FaqRoute,
   FeaturesRoute: FeaturesRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
+  InstagramRoute: InstagramRoute,
   LoginRoute: LoginRoute,
   PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   SignupRoute: SignupRoute,
   TermsRoute: TermsRoute,
+  TiktokRoute: TiktokRoute,
   RCodeRoute: RCodeRoute,
   ApiPublicLifetimeApkRoute: ApiPublicLifetimeApkRoute,
   ApiPublicLifetimePaymentRoute: ApiPublicLifetimePaymentRoute,

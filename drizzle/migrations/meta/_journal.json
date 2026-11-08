@@ -29,6 +29,13 @@
       "when": 1794126584154,
       "tag": "0003_private_lifetime_stock_import",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1794126984582,
+      "tag": "0004_harden_lifetime_delivery",
+      "breakpoints": true
     }
   ]
 }
