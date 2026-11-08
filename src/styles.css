@@ -49,29 +49,35 @@
 
 :root {
   --radius: 0.875rem;
-  --background: oklch(0.965 0.018 30);
-  --foreground: oklch(0.32 0.005 30);
-  --card: #ffffff;
+  --background: oklch(0.972 0.018 230);
+  --foreground: oklch(0.29 0.025 240);
+  --card: oklch(1 0 0);
   --card-foreground: var(--foreground);
-  --popover: #ffffff;
+  --popover: var(--card);
   --popover-foreground: var(--foreground);
-  --primary: oklch(0.55 0.105 30);
-  --brand-emphasis: oklch(0.62 0.095 30);
+  --primary: oklch(0.49 0.105 235);
+  --brand-emphasis: oklch(0.53 0.11 235);
   --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.985 0.002 30);
+  --secondary: oklch(0.985 0.009 230);
   --secondary-foreground: var(--foreground);
-  --muted: oklch(0.975 0.002 30);
-  --muted-foreground: oklch(0.50 0.006 30);
-  --accent: oklch(0.965 0.012 30);
+  --muted: oklch(0.953 0.019 230);
+  --muted-foreground: oklch(0.46 0.026 240);
+  --accent: oklch(0.931 0.037 230);
   --accent-foreground: var(--primary);
   --destructive: oklch(0.64 0.21 22);
   --destructive-foreground: oklch(0.99 0 0);
   --success: oklch(0.75 0.17 155);
-  --border: oklch(0.93 0.004 30);
-  --input: oklch(0.86 0.004 30);
+  --border: oklch(0.886 0.027 230);
+  --input: oklch(0.79 0.038 230);
   --ring: var(--brand-emphasis);
   --glow: var(--primary);
-  --brand-coral: #ed6047;
+  --brand-mark: oklch(0.73 0.105 230);
+  --surface-edge: oklch(0.85 0.034 230);
+  --shadow-ink: oklch(0.45 0.07 235 / 13%);
+  --gradient-surface: linear-gradient(165deg, var(--card) 40%, var(--secondary));
+  --gradient-action: linear-gradient(180deg, color-mix(in oklab, var(--primary) 90%, var(--brand-mark)), var(--primary));
+  --shadow-raised: inset 0 1px 0 var(--card), 0 3px 0 var(--surface-edge), 0 12px 24px -12px var(--shadow-ink);
+  --shadow-action: inset 0 1px 0 color-mix(in oklab, var(--card) 35%, transparent), 0 3px 0 color-mix(in oklab, var(--primary) 80%, var(--foreground)), 0 10px 18px -10px var(--shadow-ink);
   --sidebar: var(--secondary);
   --sidebar-foreground: var(--foreground);
   --sidebar-primary: var(--primary);
@@ -81,7 +87,7 @@
   --sidebar-border: var(--border);
   --sidebar-ring: var(--ring);
   --gradient-brand: linear-gradient(135deg, var(--primary), var(--glow));
-  --shadow-glow: 0 8px 24px -14px color-mix(in oklab, var(--foreground) 16%, transparent);
+  --shadow-glow: inset 0 1px 0 var(--card), 0 5px 0 -2px var(--surface-edge), 0 18px 36px -20px var(--shadow-ink);
   --shadow-phone: 0 16px 48px -18px var(--primary);
   --device-screen: oklch(0 0 0);
   --device-metal: oklch(0.24 0.004 260);
@@ -130,11 +136,13 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
   h1, h2, h3, h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
+    text-wrap: balance;
   }
 }
 
@@ -1226,28 +1234,41 @@ img, video { max-width: 100%; }
 
 /* Shopify 3D laptop */
 
-/* LARPIFY light branding: surface/color changes only; device geometry stays untouched. */
+/* Shared light dimensional presentation; media and device geometry stay untouched. */
 .nav-shell, .caption-glass, .pricing-gate, .auth-card, .pro-panel, .about-social-card {
-  background: var(--card);
+  background: var(--gradient-surface);
   border-color: var(--border);
   box-shadow: var(--shadow-glow);
 }
-.nav-brand-text { color: var(--foreground); text-shadow: none; }
-.nav-brand-dot { background: var(--brand-coral); box-shadow: none; }
-.nav-link::after { background: var(--brand-coral); }
-.btn-plan, .checkout-pay { background: var(--primary); color: var(--primary-foreground); box-shadow: var(--shadow-glow); }
-.btn-plan:hover { box-shadow: var(--shadow-glow); }
-.auth-shell { background: var(--secondary); }
+.nav-brand-text { color: var(--foreground); text-shadow: none; font-weight: 800; letter-spacing: 0; }
+.nav-brand-dot { background: var(--brand-mark); box-shadow: none; }
+.nav-link::after { background: var(--brand-mark); }
+.nav-link, .footer-link, .side-link { font-weight: 650; letter-spacing: 0; }
+.btn-plan, .checkout-pay { background: var(--gradient-action); color: var(--primary-foreground); box-shadow: var(--shadow-action); letter-spacing: 0; }
+.btn-plan:hover { box-shadow: var(--shadow-action); }
+.auth-shell { background: var(--background); }
 .auth-bloom { display: none; }
-.auth-card::before { background: var(--brand-coral); box-shadow: none; }
+.auth-card::before { background: var(--brand-mark); box-shadow: none; }
 .auth-field { background: var(--background); box-shadow: none; }
 .word-tt { color: var(--foreground); }
 .glyph-ig, .glyph-tt, .word-ig { filter: none; }
-.platform-plan-card { background: var(--card); border-color: var(--border); box-shadow: none; }
+.platform-plan-card { background: var(--gradient-surface); border-color: var(--border); box-shadow: var(--shadow-glow); }
 .payment-dialog, .howto-box { background: var(--card); border-color: var(--border); box-shadow: var(--shadow-glow); }
-.brand-logo-name { letter-spacing: 0; }
+.brand-logo-name { letter-spacing: 0; font-weight: 800; }
+.title-gradient { font-family: var(--font-display); letter-spacing: 0; line-height: 1.15; text-shadow: 0 2px 0 var(--card); }
+.auth-title, .pro-title, .howto-title, .side-telegram-title { letter-spacing: 0; font-weight: 750; }
+.masthead-in.title-gradient { font-family: var(--font-display); }
+.masthead-in.title-gradient > span { overflow-wrap: anywhere; }
 .masthead-in.title-gradient > span:last-child:not(:first-child) { color: var(--brand-emphasis); }
-.masthead-in.rounded-full { color: var(--primary); border-color: color-mix(in oklab, var(--brand-coral) 24%, var(--border)); background: var(--card); }
-.platform-plan-card:hover { border-color: var(--primary); }
+.masthead-in.rounded-full { color: var(--primary); border-color: var(--border); background: var(--card); box-shadow: var(--shadow-raised); letter-spacing: 0; }
+.platform-plan-card:hover { border-color: var(--primary); box-shadow: var(--shadow-glow); }
+.platform-plan-card p { text-wrap: pretty; }
+.platform-plan-card h4 { font-weight: 750; }
+.platform-plan-card .plan-tier > p { margin-top: 16px; line-height: 1.8; }
+.ds-button { font-weight: 700; letter-spacing: 0; }
+.ds-button[data-variant="default"] { background: var(--gradient-action); box-shadow: var(--shadow-action); }
+.ds-button[data-variant="outline"], .ds-button[data-variant="secondary"] { background: var(--gradient-surface); box-shadow: var(--shadow-raised); }
+.ds-button[data-variant="outline"]:hover, .ds-button[data-variant="secondary"]:hover { background: var(--accent); }
+.ds-button:active:not(:disabled) { translate: 0 1px; }
 .howto-icon { color: var(--accent-foreground); background: var(--accent); border-color: color-mix(in oklab, var(--accent-foreground) 24%, var(--border)); box-shadow: none; }
 @media (max-width: 1023px) { header .brand-logo-name { display: none; } }
