@@ -1,3 +1,4 @@
+- [ ] Answer OxaPay merchant form callback/return URL question; secure key replacement only if requested.
 - [ ] Complete standalone delivery: tighten owner-only key retrieval, invoice/state verification and duplicate callbacks; add product demo/how-to, shorter-plan links and support drafts; test transactions and mobile UI; private APK upload and real paid testing separately.
 - [x] Standalone supplied-key delivery: privately imported 100 Instagram and 100 TikTok keys; reserve matching stock and combined 100 slots atomically, verify OxaPay on server, assign once, and show buyer history without a bot. Supplied license validity not independently tested.
 - [ ] Upload Instagram.apk and TikTok.apk through protected Admin → Pricing → Matching APK (blocker: available upload tool requires a public bucket; private upload needs owner admin session, none exists here). Checkout refuses invoices until the matching APK exists.
