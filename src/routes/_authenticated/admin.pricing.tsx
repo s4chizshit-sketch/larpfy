@@ -16,6 +16,7 @@ import { PlatformPlans } from "@/components/site/PlatformPlans";
 import { LifetimeStockAdmin } from "@/components/app/LifetimeStockAdmin";
 
 export const Route = createFileRoute("/_authenticated/admin/pricing")({
+  staticData: { sitemap: false },
   head: () => ({ meta: [
     { title: "Manage Plan Prices | LARPFY" },
     { name: "description", content: "Manage Instagram, TikTok and Shopify subscription plans and prices." },

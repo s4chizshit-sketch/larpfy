@@ -11,6 +11,7 @@ import { accountDestination } from "@/lib/account-destination";
 import { SignupCelebration } from "@/components/SignupCelebration";
 
 export const Route = createFileRoute("/signup")({
+  staticData: { sitemap: false },
   head: () => ({
     meta: [
       { title: "Create Account — LARPFY" },

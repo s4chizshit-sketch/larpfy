@@ -3,6 +3,7 @@ import { Mail } from "lucide-react";
 import { PublicLayout, SectionHeading } from "@/components/site/Sections";
 
 export const Route = createFileRoute("/contact")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "Contact — LARPFY" },

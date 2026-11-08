@@ -4,6 +4,7 @@ import { NewProjectButton, ProjectGrid } from "@/components/app/ProjectGrid";
 import { useProfile } from "@/lib/auth";
 
 export const Route = createFileRoute("/_authenticated/dashboard/projects")({
+  staticData: { sitemap: false },
   head: () => ({ meta: [
     { title: "My Projects — LARPFY" },
     { name: "description", content: "Manage saved LARPFY demo projects." },

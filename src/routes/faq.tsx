@@ -3,6 +3,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { CtaBand, FaqList, PublicLayout, SectionHeading } from "@/components/site/Sections";
 
 export const Route = createFileRoute("/faq")({
+  staticData: { sitemap: true },
   head: () => ({
     meta: [
       { title: "FAQ — LARPFY" },

@@ -7,6 +7,7 @@ async function hmacSha512Hex(key: string, body: string) {
 }
 
 export const Route = createFileRoute("/api/public/oxapay-webhook")({
+  staticData: { sitemap: false },
   server: {
     handlers: {
       POST: async ({ request }) => {

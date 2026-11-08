@@ -15,6 +15,7 @@ const nav: NavItem[] = [
 ];
 
 export const Route = createFileRoute("/_authenticated/admin")({
+  staticData: { sitemap: false },
   head: () => ({ meta: [{ title: "Admin — LARPFY" }, { name: "description", content: "Manage LARPFY accounts, payments, subscriptions and website content." }, { property: "og:title", content: "Admin — LARPFY" }, { property: "og:description", content: "Private account and payment management for LARPFY." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }, { name: "robots", content: "noindex" }] }),
   component: AdminLayout,
 });

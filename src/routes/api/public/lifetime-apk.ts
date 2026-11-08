@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 
 export const Route = createFileRoute("/api/public/lifetime-apk")({
+  staticData: { sitemap: false },
   server: { handlers: { POST: async ({ request }) => {
     const bearer = request.headers.get("authorization");
     if (!bearer?.startsWith("Bearer ")) return new Response("Unauthorized", { status: 401 });
