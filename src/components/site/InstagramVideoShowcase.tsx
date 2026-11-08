@@ -202,10 +202,15 @@ export function RecordingVideoShowcase({ title, platform, recordings, withSound 
                   preload={active === index ? "auto" : "metadata"}
                   disablePictureInPicture
                   className="pointer-events-none"
+                  // The still image covers the video until real frames are painting, so a
+                  // released decoder (screenshots, app switches, low memory) never shows black.
+                  onPlaying={(e) => e.currentTarget.parentElement?.setAttribute("data-playing", "")}
+                  onPause={(e) => e.currentTarget.parentElement?.removeAttribute("data-playing")}
+                  onEmptied={(e) => e.currentTarget.parentElement?.removeAttribute("data-playing")}
                 >
                   {loaded.has(index) && <>
-                    {recording.webm && <source src={recording.webm} type="video/webm" />}
                     <source src={recording.url} type="video/mp4" />
+                    {recording.webm && <source src={recording.webm} type="video/webm" />}
                   </>}
                 </video>
                   </div>

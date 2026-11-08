@@ -506,9 +506,14 @@
   border-radius: 8cqw;
 }
 .instagram-iphone-recording .recording-poster {
+  z-index: 2;
   object-fit: cover;
   pointer-events: none;
   user-select: none;
+  transition: opacity 180ms ease-out;
+}
+.instagram-iphone-recording[data-playing] .recording-poster {
+  opacity: 0;
 }
 .instagram-iphone-recording video {
   z-index: 1;

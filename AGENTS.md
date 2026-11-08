@@ -36,3 +36,5 @@
 - Android payment-app launches use package-targeted UPI intents with the selected plan amount and Google Play browser fallbacks; launching an app never verifies payment or activates access.
 - Server code never uses the service-role key: privileged writes (orders, payment activation, visit tracking) go through SECURITY DEFINER SQL functions called with the publishable key or the user's session, so any host (Vercel) works with only OXAPAY_MERCHANT_API_KEY set.
 - OxaPay webhook activation is authorized by a SHA-256 fingerprint of the host's OxaPay key stored in `private_config`; the admin layout re-syncs it on every admin visit, so payments activate only after the admin has opened the admin panel once on that host.
+- On Vercel, server auth/database calls use the browser's build-time backend URL and publishable key (`alignServerBackend`); a mismatched host SUPABASE_URL made every signed-in request fail as an expired login.
+- Showcase recordings are H.264 MP4s capped at 720px wide with faststart, listed before WebM fallbacks, and covered by their still image until frames are playing; this keeps phone decoders light and avoids black screens.

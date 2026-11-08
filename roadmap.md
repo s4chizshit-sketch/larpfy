@@ -1,3 +1,4 @@
+- [x] Fix live-site "login expired" on payment (server now checks logins against the same account server as the browser) and shrink recordings to 720px H.264 with still-image cover against black screens; local playback verified on phone size, live payment needs Vercel redeploy.
 - [x] Align site and installed-app branding to LARPFY for larpfy.store; phone/desktop homepage checked and six account/payment regression tests passed.
 - [ ] Connect larpfy.store on Vercel and verify live auth/payment redirects (blocked: domain has no answering nameservers; owner must finish registrar and Vercel setup).
 - [x] Repair recording startup with post-commit playback and nearby-only loading; bundled actual-frame previews remain visible with video downloads blocked; Instagram/TikTok/Shopify playback verified at 375px and 861px, four regression tests passed. Real-visitor speed data unavailable; high-traffic capacity remains unverified.
