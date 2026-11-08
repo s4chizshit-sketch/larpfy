@@ -538,6 +538,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      lookup_lifetime_callback: {
+        Args: { _key_hash: string; _order_id: string }
+        Returns: Json
+      }
       oxapay_ack_alert: {
         Args: { _key_hash: string; _order_id: string }
         Returns: undefined
