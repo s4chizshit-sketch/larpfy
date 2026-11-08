@@ -18,6 +18,7 @@ describe.skipIf(!enabled)("Standalone SQL on disposable PostgreSQL (synthetic fi
     CREATE FUNCTION public.has_role(uuid,text) RETURNS boolean LANGUAGE sql AS $$ SELECT false $$;`);
     await sql.unsafe(readFileSync("drizzle/migrations/0001_standalone_lifetime_delivery.sql", "utf8"));
     await sql.unsafe(readFileSync("drizzle/migrations/0004_harden_lifetime_delivery.sql", "utf8"));
+    await sql.unsafe('GRANT USAGE ON SCHEMA auth,storage TO authenticated; GRANT SELECT ON storage.objects TO authenticated; ALTER TABLE storage.objects ENABLE ROW LEVEL SECURITY;');
     await sql`INSERT INTO auth.users VALUES (${owner},now()),(${other},now())`;
     await sql`INSERT INTO public.profiles VALUES (${owner},'active'),(${other},'active')`;
     await sql`INSERT INTO public.private_config VALUES ('oxapay_key_hash','local-fixture')`;
@@ -67,6 +68,18 @@ describe.skipIf(!enabled)("Standalone SQL on disposable PostgreSQL (synthetic fi
     const results = await Promise.all(Array.from({length:8}, reserve));
     expect(results.filter(r=>r[0].result.invoice_claim)).toHaveLength(1);
     expect(new Set(results.map(r=>r[0].result.id)).size).toBe(1);
+  });
+  it("TikTok delivery assigns the TikTok key and owner-only matching APK", async () => {
+    const orders=await sql`SELECT id FROM public.lifetime_orders WHERE product='tiktok' AND user_id=${owner}`;
+    const tid=orders[0].id as string;
+    await sql`UPDATE public.lifetime_orders SET track_id='tiktok-track',status='pending' WHERE id=${tid}`;
+    await sql`SELECT public.fulfill_lifetime_order(${tid},'local-fixture','tiktok-track',25,'USD','paid',${tid})`;
+    const receipt=await sql`SELECT access_key FROM public.lifetime_orders WHERE id=${tid}`;
+    expect(receipt[0].access_key).toBe('SYNTHETIC-TT-FIXTURE');
+    const files=await sql.begin(async tx => { await tx`SELECT set_config('test.uid',${owner},true)`; await tx.unsafe('SET LOCAL ROLE authenticated'); return tx`SELECT name FROM storage.objects ORDER BY name`; });
+    expect(files.map(f=>f.name)).toEqual(['instagram.apk','tiktok.apk']);
+    const denied=await sql.begin(async tx => { await tx`SELECT set_config('test.uid',${other},true)`; await tx.unsafe('SET LOCAL ROLE authenticated'); return tx`SELECT name FROM storage.objects`; });
+    expect(denied).toHaveLength(0);
   });
   it("enforces combined 100 reservation capacity", async () => {
     await sql.unsafe(`WITH o AS (INSERT INTO public.lifetime_orders(user_id,product,status) SELECT '${other}'::uuid,'instagram','expired' FROM generate_series(1,98) RETURNING id) INSERT INTO public.lifetime_key_stock(product,key_code,order_id) SELECT 'instagram','SYNTHETIC-'||id::text,id FROM o`);
