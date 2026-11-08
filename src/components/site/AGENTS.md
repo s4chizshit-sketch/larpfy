@@ -1,0 +1,1 @@
+- Use the shared editor product catalog for demos and Telegram drafts before and after purchase; this prevents swapped platform guides or support messages containing private keys.
