@@ -9,11 +9,11 @@ export const Route = createFileRoute("/api/public/lifetime-payment")({ server: {
   const imported = await crypto.subtle.importKey("raw", new TextEncoder().encode(key), { name: "HMAC", hash: "SHA-512" }, false, ["verify"]);
   const bytes = new Uint8Array(signature.match(/.{2}/g)?.map((s) => parseInt(s,16)) ?? []);
   if (!await crypto.subtle.verify("HMAC", imported, bytes, new TextEncoder().encode(raw))) return new Response("Invalid signature", { status: 401 });
-  const body = z.object({ order_id: z.string().uuid() }).safeParse(JSON.parse(raw));
+  let parsed: unknown; try { parsed=JSON.parse(raw); } catch { return new Response("Invalid body",{status:400}); }
+  const body = z.object({ order_id: z.string().uuid() }).safeParse(parsed);
   if (!body.success) return new Response("Invalid order", { status: 400 });
   try {
     const { publicDb } = await import("@/lib/public-db.server");
-    const { verifyStandaloneOrder } = await import("@/lib/standalone-lifetime.server");
     // Anonymous order reads are unavailable: a narrowly fingerprint-authorized lookup supplies the immutable order.
     const db = publicDb();
     const { sha256Hex } = await import("@/lib/public-db.server");

@@ -1,9 +1,20 @@
-import { verifiedLifetimePayment } from "./standalone-payment";
+import { verifiedLifetimePayment, type PaymentOrder } from "./standalone-payment";
 import { publicDb, sha256Hex } from "./public-db.server";
 import type { Database } from "@/integrations/supabase/types";
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 function merchantKey() { const key = process.env["OXAPAY_MERCHANT_API_KEY"]?.trim(); if (!key) throw new Error("Payments are not configured."); return key; }
+export async function verifyCallbackOrder(input: unknown) {
+  const order = input as PaymentOrder;
+  if (!order?.track_id) throw new Error("Order unavailable");
+  const key = merchantKey();
+  const response = await fetch(`https://api.oxapay.com/v1/payment/${encodeURIComponent(order.track_id)}`, { headers: { merchant_api_key: key }, signal: AbortSignal.timeout(15000) });
+  if (!response.ok) throw new Error("Provider unavailable");
+  const json = await response.json() as { data?: Record<string, unknown> };
+  if (!json.data || !verifiedLifetimePayment(order,json.data)) throw new Error("Payment mismatch");
+  const { error } = await publicDb().rpc("fulfill_lifetime_order", { _order_id: order.id, _key_hash: await sha256Hex(key), _track_id: order.track_id, _amount:25,_currency:"USD",_status:"paid",_provider_order_id:order.id });
+  if (error) throw new Error("Delivery unavailable");
+}
 export async function verifyStandaloneOrder(id: string, db: SupabaseClient<Database>) {
   const { data: order, error } = await db.from("lifetime_orders").select("*").eq("id", id).maybeSingle();
   if (error || !order) throw new Error("Order unavailable.");
@@ -26,9 +37,10 @@ export async function verifyStandaloneOrder(id: string, db: SupabaseClient<Datab
 export async function standaloneCheckout(product: string, origin: string, db: SupabaseClient<Database>) {
   const key = merchantKey();
   const { data, error } = await db.rpc("reserve_lifetime_order", { _product: product, _key_hash: await sha256Hex(key) });
-  const order = data as { id?: string; payment_url?: string; status?: string } | null;
+  const order = data as { id?: string; payment_url?: string; status?: string; invoice_claim?: boolean } | null;
   if (error || !order?.id) throw new Error(error?.message ?? "Checkout unavailable.");
   if (order.payment_url) return { url: order.payment_url };
+  if (!order.invoice_claim) throw new Error("Pending checkout needs owner review. No duplicate invoice was created.");
   // A recovered reservation without an invoice requires reconciliation, never a second invoice.
   const created = await db.from("lifetime_orders").select("created_at").eq("id", order.id).single();
   if (created.data && Date.now() - Date.parse(created.data.created_at) > 10000) throw new Error("A pending checkout needs owner review. No duplicate payment was created.");
