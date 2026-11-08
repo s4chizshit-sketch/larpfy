@@ -12,6 +12,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { EmptyState, PageHeader } from "@/components/app/AppShell";
 import { supabase } from "@/integrations/supabase/client";
+import { PlatformPlans } from "@/components/site/PlatformPlans";
 
 export const Route = createFileRoute("/_authenticated/admin/pricing")({
   head: () => ({ meta: [
@@ -22,8 +23,12 @@ export const Route = createFileRoute("/_authenticated/admin/pricing")({
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
   ] }),
-  component: PricingAdmin,
+  component: LifetimeCatalogAdmin,
 });
+
+function LifetimeCatalogAdmin() {
+  return <><PageHeader title="Lifetime products" sub="Instagram and TikTok lifetime access. Previous plan purchases remain in Subscriptions." /><PlatformPlans /></>;
+}
 
 type Plan = { id?: string; name: string; price: number; billing_period: string; features: string[]; cta: string; popular: boolean; active: boolean; sort_order: number };
 

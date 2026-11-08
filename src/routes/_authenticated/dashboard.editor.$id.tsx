@@ -16,6 +16,7 @@ import { defaultInsight, type InsightData } from "@/lib/insight";
 import type { Json } from "@/integrations/supabase/types";
 
 export const Route = createFileRoute("/_authenticated/dashboard/editor/$id")({
+  head: () => ({ meta: [{ title: "Project Editor — LARPFY" }, { name: "description", content: "Edit your private LARPFY insight project." }, { property: "og:title", content: "Project Editor — LARPFY" }, { property: "og:description", content: "Your private LARPFY project workspace." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }] }),
   component: Editor,
 });
 
