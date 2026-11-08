@@ -2,7 +2,6 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { saveApk } from "@/lib/apk-download";
 afterEach(() => { vi.restoreAllMocks(); vi.useRealTimers(); });
 describe("Explicit APK downloads", () => {
-  it("does not download without an explicit save call", () => { const click = vi.spyOn(HTMLAnchorElement.prototype,"click").mockImplementation(() => {}); expect(click).not.toHaveBeenCalled(); });
   for (const product of ["instagram","tiktok"] as const) {
     it(`downloads only the selected ${product} APK and cleans up`, () => {
       vi.useFakeTimers();
