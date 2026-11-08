@@ -7,7 +7,7 @@ import { usePlans } from "@/lib/content";
 import { PlanPaymentDialog } from "@/components/site/PlanPaymentDialog";
 import instagramLogo from "@/assets/instagram-plan.png";
 import tiktokLogo from "@/assets/tiktok-plan.png";
-import { EditorProductInfo } from "./EditorProductInfo";
+import { ProductVideo, ShorterPlans } from "./EditorProductInfo";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { lifetimeAvailability } from "@/lib/lifetime.functions";
@@ -78,26 +78,30 @@ export function PlatformPlans({ product }: { product?: "instagram" | "tiktok" } 
                   <img src={platform.logo} alt={`${platform.name} logo`} draggable={false} className={`h-14 w-14 shrink-0 object-contain ${platform.glowClass}`} />
                   <h3 className={`${platform.wordClass} text-3xl leading-tight`}>{platform.name}</h3>
                 </header>
-                <div className="mt-7 plan-tiers">
+                <ProductVideo product={platform.name === "Instagram" ? "instagram" : "tiktok"} />
+                <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Edited analytics change presentation only—not real views, engagement or earnings.</p>
+                <div className="mt-7 border-t border-border pt-5 plan-tiers">
                   {plans.map((plan) => (
                     <div key={plan.id} className="plan-tier py-6 first:pt-0 last:pb-0">
                       <div className="flex flex-wrap items-center justify-between gap-3">
-                        <h4 className="font-display text-lg font-semibold">{plan.name.replace(new RegExp(`^${platform.name}\\s*`, "i"), "")}</h4>
+                        <h4 className="font-display text-lg font-semibold">Lifetime access</h4>
                         <p className="flex items-baseline gap-1 font-display">
                           <span className="title-gradient text-4xl font-extrabold">${Number(plan.price)}</span>
                           <span className="text-xs text-muted-foreground">{plan.billing_period === "once" ? "/ lifetime" : `/ ${plan.billing_period}`}</span>
                         </p>
                       </div>
+                      <p className="mt-2 text-xs font-medium text-primary">Website purchase · One-time payment · No expiry</p>
                       <ul className="mt-4 space-y-2">
                         {plan.features.map((feature) => <li key={feature} className="flex items-start gap-2 text-sm font-medium text-foreground/80"><Check className="mt-0.5 h-4 w-4 shrink-0 text-glow" />{feature}</li>)}
                       </ul>
                       <Button type="button" disabled={!available} className="btn-plan mt-5 h-10 px-5 text-xs font-bold" onClick={() => setPaymentPlan({ id: plan.id, name: plan.name, price: Number(plan.price), billingPeriod: plan.billing_period })}>
                         {available ? plan.cta : availability.isPending ? "Checking availability…" : "Lifetime delivery unavailable"}<ArrowRight />
                       </Button>
+                      <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Pay with USDT through OxaPay. After server verification, your matching APK and one access key appear automatically in your website purchase history. No owner approval or bot connection is required.</p>
                     </div>
                   ))}
                 </div>
-                <EditorProductInfo product={platform.name === "Instagram" ? "instagram" : "tiktok"} />
+                <ShorterPlans product={platform.name === "Instagram" ? "instagram" : "tiktok"} />
               </article>
             );
           })}
