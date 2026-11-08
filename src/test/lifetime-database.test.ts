@@ -9,6 +9,8 @@ const other = "10000000-0000-4000-8000-000000000002";
 const oid = "20000000-0000-4000-8000-000000000001";
 describe.skipIf(!enabled)("Standalone SQL on disposable PostgreSQL (synthetic fixtures, not paid tests)", () => {
   beforeAll(async () => {
+    // Explicitly isolated connection above; reset only this disposable fixture database.
+    await sql.unsafe('DROP SCHEMA IF EXISTS public CASCADE; DROP SCHEMA IF EXISTS auth CASCADE; DROP SCHEMA IF EXISTS storage CASCADE; DROP ROLE IF EXISTS anon; DROP ROLE IF EXISTS authenticated; DROP ROLE IF EXISTS service_role; CREATE SCHEMA public;');
     await sql.unsafe(`CREATE ROLE anon; CREATE ROLE authenticated; CREATE ROLE service_role; CREATE SCHEMA auth; CREATE SCHEMA storage;
     CREATE FUNCTION auth.uid() RETURNS uuid LANGUAGE sql AS $$ SELECT nullif(current_setting('test.uid',true),'')::uuid $$;
     CREATE TABLE auth.users(id uuid PRIMARY KEY,email_confirmed_at timestamptz);
