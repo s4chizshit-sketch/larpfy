@@ -14,7 +14,7 @@ export const Route = createFileRoute("/api/public/lifetime-apk")({
     try {
       const { bridgeRequest } = await import("@/lib/lifetime-bridge.server");
       const body = { website_user_id: identity.user.id };
-      const receipt = checkedReceipt(await (await bridgeRequest(`purchases/${input.data.purchaseId}/verify`, body)).json(), identity.user.id);
+      const receipt = checkedReceipt(await (await bridgeRequest(`purchases/${input.data.purchaseId}/verify`, body)).json(), identity.user.id, undefined, input.data.purchaseId);
       if (receipt.status !== "fulfilled") return new Response("Download unavailable", { status: 403 });
       const apk = await bridgeRequest(`purchases/${receipt.id}/apk`, body);
       if (apk.headers.get("x-apk-product") !== receipt.product || apk.headers.get("content-type")?.split(";")[0] !== "application/vnd.android.package-archive") return new Response("Invalid APK", { status: 502 });

@@ -17,5 +17,5 @@ export const recheckLifetimePurchase = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     const { bridgeRequest } = await import("./lifetime-bridge.server");
     const response = await bridgeRequest(`purchases/${data.purchaseId}/verify`, { website_user_id: context.userId });
-    return checkedReceipt(await response.json(), context.userId);
+    return checkedReceipt(await response.json(), context.userId, undefined, data.purchaseId);
   });

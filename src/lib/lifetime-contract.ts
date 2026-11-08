@@ -34,11 +34,13 @@ export const lifetimeReceipt = z.object({
 });
 export type LifetimeReceipt = z.infer<typeof lifetimeReceipt>;
 
-export function checkedReceipt(input: unknown, userId: string, product?: "instagram" | "tiktok") {
+export function checkedReceipt(input: unknown, userId: string, product?: "instagram" | "tiktok", purchaseId?: string) {
   const receipt = lifetimeReceipt.parse(input);
   if (receipt.website_user_id !== userId) throw new Error("Order unavailable.");
+  if (purchaseId && receipt.id !== purchaseId) throw new Error("Invoice identity mismatch.");
   if (product && receipt.product !== product) throw new Error("Product mismatch.");
   if (receipt.apk_product !== receipt.product) throw new Error("APK product mismatch.");
+  if (receipt.status === "paid" && !receipt.payment_verified_at) throw new Error("Payment verification required.");
   if (receipt.status === "fulfilled") {
     if (!receipt.payment_verified_at || !receipt.license_registered || !receipt.access_key || receipt.license_product !== receipt.product) {
       throw new Error("Verified product license unavailable.");
