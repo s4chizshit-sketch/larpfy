@@ -1,4 +1,6 @@
-# LARPFY lifetime purchases — connection required
+# Archived optional bot bridge — NOT required for current delivery
+
+The owner superseded this proposal: website now delivers supplied keys from private stock through standalone OxaPay checkout. No bot connection is required. The remaining original contract below is historical, not an active setup instruction. Private APKs must be uploaded in Admin → Pricing; do not publish them or license stock in source files.
 
 ## Inspection result
 
