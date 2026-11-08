@@ -8,6 +8,13 @@
       "when": 1794125107501,
       "tag": "0000_lifetime_editor_catalog",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1794126479111,
+      "tag": "0001_standalone_lifetime_delivery",
+      "breakpoints": true
     }
   ]
 }
