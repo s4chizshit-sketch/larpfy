@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
-import { checkedReceipt } from "@/lib/lifetime-contract";
 
 export const Route = createFileRoute("/api/public/lifetime-apk")({
   server: { handlers: { POST: async ({ request }) => {
@@ -12,13 +11,16 @@ export const Route = createFileRoute("/api/public/lifetime-apk")({
     const input = z.object({ purchaseId: z.string().uuid() }).safeParse(await request.json().catch(() => null));
     if (!input.success) return new Response("Invalid order", { status: 400 });
     try {
-      const { bridgeRequest } = await import("@/lib/lifetime-bridge.server");
-      const body = { website_user_id: identity.user.id };
-      const receipt = checkedReceipt(await (await bridgeRequest(`purchases/${input.data.purchaseId}/verify`, body)).json(), identity.user.id, undefined, input.data.purchaseId);
-      if (receipt.status !== "fulfilled") return new Response("Download unavailable", { status: 403 });
-      const apk = await bridgeRequest(`purchases/${receipt.id}/apk`, body);
-      if (apk.headers.get("x-apk-product") !== receipt.product || apk.headers.get("content-type")?.split(";")[0] !== "application/vnd.android.package-archive") return new Response("Invalid APK", { status: 502 });
-      return new Response(apk.body, { headers: {
+      const { createClient } = await import("@supabase/supabase-js");
+      const key = process.env["SUPABASE_PUBLISHABLE_KEY"];
+      const backend = process.env["SUPABASE_URL"];
+      if (!key || !backend) return new Response("Not configured", { status: 503 });
+      const db = createClient(backend, key, { global: { headers: { Authorization: bearer } }, auth: { persistSession: false } });
+      const { data: receipt } = await db.from("lifetime_orders").select("*").eq("id", input.data.purchaseId).eq("user_id", identity.user.id).maybeSingle();
+      if (receipt?.status !== "fulfilled") return new Response("Download unavailable", { status: 403 });
+      const { data: apk, error: downloadError } = await db.storage.from("lifetime-apks").download(`${receipt.product}.apk`);
+      if (downloadError || !apk) return new Response("APK unavailable", { status: 503 });
+      return new Response(apk, { headers: {
         "Content-Type": "application/vnd.android.package-archive",
         "Content-Disposition": `attachment; filename="${receipt.product}-editor.apk"`,
         "Cache-Control": "private, no-store", "X-Content-Type-Options": "nosniff",
