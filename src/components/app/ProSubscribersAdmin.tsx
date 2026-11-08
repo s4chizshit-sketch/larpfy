@@ -14,8 +14,13 @@ export function ProSubscribersAdmin() {
     placeholderData: keepPreviousData,
     refetchInterval: 60000,
     queryFn: async () => {
-      const { data: buys, error, count } = await supabase.from("plan_purchases").select("*", { count: "exact" }).order("started_at", { ascending: false }).order("id").range(page * size, (page + 1) * size - 1);
+      const { data: legacy, error } = await supabase.from("plan_purchases").select("*").order("started_at", { ascending: false });
       if (error) throw error;
+      const { data: lifetime, error: lifetimeError } = await supabase.from("lifetime_orders").select("id,user_id,product,amount,payment_verified_at,status").in("status",["fulfilled","revoked"]);
+      if(lifetimeError) throw lifetimeError;
+      const all=[...(legacy??[]),...(lifetime??[]).map(p=>({id:p.id,user_id:p.user_id,plan_name:`${p.product === "instagram"?"Instagram":"TikTok"} Editor Lifetime`,price:p.amount,started_at:p.payment_verified_at??"",expires_at:p.status==="revoked"?"1970-01-01T00:00:00Z":null}))].sort((a,b)=>Date.parse(b.started_at)-Date.parse(a.started_at));
+      const count=all.length;
+      const buys=all.slice(page*size,(page+1)*size);
       const ids = [...new Set((buys ?? []).map((b) => b.user_id))];
       const { data: profiles, error: profileError } = ids.length ? await supabase.from("profiles").select("id,email,name,signup_ip,signup_country").in("id", ids) : { data: [], error: null };
       if (profileError) throw profileError;
