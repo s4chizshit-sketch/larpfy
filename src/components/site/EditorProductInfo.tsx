@@ -18,11 +18,11 @@ export function ProductVideo({ product, howTo = false }: { product: EditorProduc
   </div>;
 }
 export function ShorterPlans({ product }: { product: EditorProduct }) {
-  return <section className="mt-7 border-t border-border pt-5">
-    <div className="flex flex-wrap items-center justify-between gap-2"><h4 className="font-semibold">Need shorter access?</h4><span className="text-xs font-medium text-primary">Buy on Telegram</span></div>
-    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">Need shorter access? Get daily, weekly or monthly plans from our Telegram bot, or contact the owner.</p>
+  return <section className="mt-8 border-t border-border pt-7">
+    <div className="space-y-2"><h4 className="text-lg font-bold">Need shorter access?</h4><span className="block text-sm font-bold text-primary">Buy on Telegram</span></div>
+    <p className="mt-4 text-sm leading-relaxed text-muted-foreground">Need shorter access? Get daily, weekly or monthly plans from our Telegram bot, or contact the owner.</p>
     <p className="mt-4 text-xs font-semibold uppercase text-muted-foreground">Telegram bot plans · {EDITOR_DETAILS[product].name}</p>
-    <div className="mt-3 divide-y divide-border">{BOT_PLANS.map(p => <div key={p.name} className="flex items-center justify-between gap-3 py-3"><div className="min-w-0"><p className="text-sm font-semibold">{p.name} <span className="font-normal text-muted-foreground">· {p.days} {p.days === 1 ? "day" : "days"}</span></p><p className="mt-1 text-sm text-muted-foreground">${p.price} · Telegram bot plan</p></div><Button asChild variant="outline" size="sm"><a href={TELEGRAM_BOT} target="_blank" rel="noopener noreferrer" aria-label={`Buy ${EDITOR_DETAILS[product].name} ${p.name} in Telegram bot`}>Buy in bot<ArrowUpRight className="size-4" /></a></Button></div>)}</div>
+    <div className="mt-3 divide-y divide-border">{BOT_PLANS.map(p => <div key={p.name} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 py-5"><div className="min-w-0 space-y-1.5"><p className="text-base font-bold">{p.name}</p><p className="text-sm text-muted-foreground">{p.days} {p.days === 1 ? "day" : "days"}</p><p className="text-base font-bold text-primary">${p.price}</p><p className="text-xs text-muted-foreground">Telegram bot plan</p></div><Button asChild variant="outline" size="sm" className="h-11 px-3"><a href={TELEGRAM_BOT} target="_blank" rel="noopener noreferrer" aria-label={`Buy ${EDITOR_DETAILS[product].name} ${p.name} in Telegram bot`}>Buy in bot<ArrowUpRight className="size-4" /></a></Button></div>)}</div>
     <p className="my-4 text-xs leading-relaxed text-muted-foreground">Choose Instagram or TikTok and purchase in the bot. Bot purchases are not delivered or retrieved by this website.</p>
     <Button asChild className="mb-3"><a href={TELEGRAM_BOT} target="_blank" rel="noopener noreferrer"><ExternalLink className="size-4" />Open Telegram bot</a></Button>
     <p className="mb-2 text-xs text-muted-foreground">Or speak with @TheDanielBrooks</p><OwnerContact message={shorterAccessMessage(product)} />
