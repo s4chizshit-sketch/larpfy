@@ -538,6 +538,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      import_lifetime_stock: {
+        Args: { _keys: string[]; _product: string }
+        Returns: number
+      }
       lookup_lifetime_callback: {
         Args: { _key_hash: string; _order_id: string }
         Returns: Json
