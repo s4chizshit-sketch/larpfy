@@ -1,0 +1,1 @@
+- Every route declares staticData.sitemap; the router-derived sitemap excludes private subtrees so new pages cannot silently expose account URLs.
