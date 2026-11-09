@@ -97,7 +97,7 @@ export function PlatformPlans({ product }: { product?: "instagram" | "tiktok" } 
                       <Button type="button" disabled={!available} className="btn-plan mt-5 h-10 px-5 text-xs font-bold" onClick={() => setPaymentPlan({ id: plan.id, name: plan.name, price: Number(plan.price), billingPeriod: plan.billing_period })}>
                         {available ? plan.cta : availability.isPending ? "Checking availability…" : "Lifetime delivery unavailable"}<ArrowRight />
                       </Button>
-                      <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Pay with USDT through OxaPay. After server verification, your matching APK and one access key appear automatically in your website purchase history. No owner approval or bot connection is required.</p>
+                      <p className="mt-3 text-xs leading-relaxed text-muted-foreground">Pay with crypto through OxaPay. After server verification, your matching APK and one access key appear automatically in your website purchase history. No owner approval or bot connection is required.</p>
                     </div>
                   ))}
                 </div>
