@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ArrowRight, Clock, LoaderCircle, Lock, ShieldCheck, Zap } from "lucide-react";
+import { ArrowRight, Clock, LoaderCircle, Lock, ShieldCheck, Wallet, Zap } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
@@ -57,7 +57,7 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
         <div className="checkout-head">
           <span className="checkout-secure"><Lock /> Secure checkout</span>
           <DialogTitle className="checkout-title">Complete your order</DialogTitle>
-          <DialogDescription className="checkout-sub">Lifetime access · No expiry · Pay with USDT.</DialogDescription>
+          <DialogDescription className="checkout-sub">Lifetime access · No expiry · Pay with Crypto.</DialogDescription>
         </div>
 
         <div className="checkout-body">
@@ -69,14 +69,14 @@ export function PlanPaymentDialog({ plan, open, onOpenChange }: {
           </div>
 
           <div className="checkout-method">
-            <span className="checkout-coin">₮</span>
-            <div className="flex-1"><strong>Tether (USDT)</strong><small>TRC20 · ERC20 · BEP20</small></div>
-            <span className="checkout-chip">Selected</span>
+            <span className="checkout-coin"><Wallet className="size-5" aria-hidden="true" /></span>
+            <div className="flex-1"><strong>Pay with Crypto</strong><small>Secure payment through OxaPay</small></div>
+            <span className="checkout-chip">OxaPay</span>
           </div>
 
           <Button type="button" className="checkout-pay" disabled={loading || !plan.id} onClick={pay}>
             {loading ? <LoaderCircle className="size-4 animate-spin" /> : <Lock className="size-4" />}
-            {loading ? "Opening secure checkout…" : `Pay $${plan.price} with USDT`}
+            {loading ? "Opening secure checkout…" : "Pay with Crypto"}
             {!loading && <ArrowRight className="size-4" />}
           </Button>
 

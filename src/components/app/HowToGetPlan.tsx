@@ -2,7 +2,7 @@ import { CreditCard, KeyRound, MousePointerClick, Smartphone } from "lucide-reac
 
 const steps = [
   { icon: MousePointerClick, t: "Choose lifetime access", d: "Select Instagram or TikTok. Shorter plans are sold separately in the Telegram bot." },
-  { icon: CreditCard, t: "Pay securely", d: "Sign in and complete the $25 USDT payment through OxaPay." },
+  { icon: CreditCard, t: "Pay securely", d: "Sign in and complete your crypto payment through OxaPay." },
   { icon: KeyRound, t: "Get verified access", d: "After server verification, reopen purchase history for your matching APK and access key." },
   {
     icon: Smartphone,
