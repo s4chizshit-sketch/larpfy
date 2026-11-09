@@ -5,8 +5,8 @@ import type { Database } from "@/integrations/supabase/types";
 // Privileged work goes through SECURITY DEFINER database functions,
 // so no secret service key is needed on any host (e.g. Vercel).
 export function publicDb() {
-  const url = process.env["SUPABASE_URL"] || "https://kxsqiannkfzsfqpqioly.supabase.co";
-  const key = process.env["SUPABASE_PUBLISHABLE_KEY"] || "sb_publishable_ByviDC8YrMhLPfLFAtQXKA_8J2mfZHC";
+  const url = process.env["SUPABASE_URL"] || "https://ypvmiwiqxkvhacoczarf.supabase.co";
+  const key = process.env["SUPABASE_PUBLISHABLE_KEY"] || "sb_publishable_wbaBgP7XB3dawItywsbGkg_BgyPRShs";
   return createClient<Database>(url, key, {
     auth: { storage: undefined, persistSession: false, autoRefreshToken: false },
     global: {

@@ -1,7 +1,7 @@
 // Fallback public (publishable) backend values for self-hosted deployments
 // (e.g. Vercel) where env vars are not set. Safe to ship: these are public keys.
-const PUBLIC_BACKEND_URL = "https://kxsqiannkfzsfqpqioly.supabase.co";
-const PUBLIC_BACKEND_KEY = "sb_publishable_ByviDC8YrMhLPfLFAtQXKA_8J2mfZHC";
+const PUBLIC_BACKEND_URL = "https://ypvmiwiqxkvhacoczarf.supabase.co";
+const PUBLIC_BACKEND_KEY = "sb_publishable_wbaBgP7XB3dawItywsbGkg_BgyPRShs";
 
 // The backend the browser signs users into (fixed at build time).
 const CLIENT_BACKEND_URL = (import.meta.env["VITE_SUPABASE_URL"] as string | undefined) || PUBLIC_BACKEND_URL;
