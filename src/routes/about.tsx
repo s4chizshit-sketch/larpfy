@@ -6,7 +6,7 @@ import telegramLogo from "@/assets/telegram-about.png";
 
 // TODO(user): Instagram link pending — user will provide the real profile URL.
 const INSTAGRAM_URL = "https://www.instagram.com/";
-const TELEGRAM_URL = "https://t.me/+HAwfutUg1gNlZDZl";
+const TELEGRAM_URL = "https://t.me/+QrDHfG770Y80ZWZl";
 
 export const Route = createFileRoute("/about")({
   staticData: { sitemap: true },

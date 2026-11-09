@@ -8,7 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useProfile } from "@/lib/auth";
 import telegramLogo from "@/assets/telegram-about.png";
 
-const TELEGRAM_URL = "https://t.me/+HAwfutUg1gNlZDZl";
+const TELEGRAM_URL = "https://t.me/+QrDHfG770Y80ZWZl";
 
 export type NavItem = { to: string; label: string; icon: ComponentType<{ className?: string }>; exact?: boolean; adminOnly?: boolean };
 
