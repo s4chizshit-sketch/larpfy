@@ -9,8 +9,8 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 // Public (publishable) backend connection values. Safe to ship in code.
 // Used as a build-time fallback so self-hosted builds (e.g. Vercel) work
 // without setting these env vars manually.
-const PUBLIC_BACKEND_URL = "https://kxsqiannkfzsfqpqioly.supabase.co";
-const PUBLIC_BACKEND_KEY = "sb_publishable_ByviDC8YrMhLPfLFAtQXKA_8J2mfZHC";
+const PUBLIC_BACKEND_URL = "https://ypvmiwiqxkvhacoczarf.supabase.co";
+const PUBLIC_BACKEND_KEY = "sb_publishable_wbaBgP7XB3dawItywsbGkg_BgyPRShs";
 
 const fallbackDefine: Record<string, string> = {};
 if (!process.env.VITE_SUPABASE_URL) {
